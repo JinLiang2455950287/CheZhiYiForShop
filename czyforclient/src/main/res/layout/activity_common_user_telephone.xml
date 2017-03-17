@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/bg_white"
+    android:layout_height="match_parent">
+
+    <!--客户端消息设置页面-->
+    <include layout="@layout/layout_topbar" />
+
+    <TextView
+        android:layout_marginTop="55px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="应急电话"
+        android:textColor="@color/text_gray"
+        android:layout_marginLeft="30px"
+        android:textSize="@dimen/text_size_middle"
+        ></TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="280px"
+        android:orientation="horizontal"
+        android:layout_marginTop="55px"
+        android:background="@color/white"
+        >
+
+        <RelativeLayout
+            android:layout_width="206px"
+            android:layout_height="200px"
+            android:layout_marginLeft="53px"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/btn_list_accept"
+            >
+
+            <TextView
+                android:id="@+id/tv_110"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="匪警110"
+                android:textColor="@color/white"
+                android:drawableTop="@drawable/my_phone_white_110"
+                android:layout_gravity="center_vertical"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="206px"
+            android:layout_height="200px"
+            android:layout_marginLeft="53px"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/btn_list_accept"
+            >
+
+            <TextView
+                android:id="@+id/tv_122"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="交警122"
+                android:textColor="@color/white"
+                android:drawableTop="@drawable/my_phone_white_122"
+                android:layout_gravity="center_vertical"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="206px"
+            android:layout_height="200px"
+            android:layout_marginLeft="53px"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/btn_list_accept"
+            >
+
+            <TextView
+                android:id="@+id/tv_120"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="急救120"
+                android:textColor="@color/white"
+                android:drawableTop="@drawable/my_phone_white_120"
+                android:layout_gravity="center_vertical"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="206px"
+            android:layout_height="200px"
+            android:layout_marginLeft="53px"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/btn_list_accept"
+            >
+
+            <TextView
+                android:id="@+id/tv_119"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="火警119"
+                android:textColor="@color/white"
+                android:drawableTop="@drawable/my_phone_white_119"
+                android:layout_gravity="center_vertical"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginTop="55px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="常用电话"
+        android:textColor="@color/text_gray"
+        android:layout_marginLeft="30px"
+        android:textSize="@dimen/text_size_middle"
+        ></TextView>
+
+    <View
+    android:layout_width="match_parent"
+    android:layout_height="55px"></View>
+
+    <include layout="@layout/layout_refresh_list_base"/>
+
+</LinearLayout>

@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">快号通开发包</string>
+    <string name="company_name">北京文通科技有限公司</string>
+    <string name="recognize_result">识别结果 :</string>
+    <string name="plate_number">车牌号码</string>
+    <string name="plate_color">车牌颜色</string>
+    <string name="plate_color_code">车牌颜色代码</string>
+    <string name="plate_type_code">车牌类型代码</string>
+    <string name="plate_reliability">整牌可信度</string>
+    <string name="plate_brightness_reviews">亮度评价</string>
+    <string name="plate_move_orientation">车牌运动方向</string>
+    <string name="plate_leftupper_pointX">车牌左上点横坐标</string>
+    <string name="plate_leftupper_pointY">车牌左上点纵坐标</string>
+    <string name="plate_rightdown_pointX">车牌右下点横坐标</string>
+    <string name="plate_rightdown_pointY">车牌右下点纵坐标</string>
+    <string name="plate_elapsed_time">时间</string>
+    <string name="plate_light">车的亮度</string>
+    <string name="plate_car_color">车的颜色</string>
+    <string name="failed_readJPG_error">读jpg图片错误，可能是图片超过1920*1080分辨率</string>
+    <string name="failed_noInit_function">未调用初始化函数</string>
+    <string name="failed_validation_faile">没有激活或激活码校验失败</string>
+    <string name="failed_serial_number_null">指定序列号为null</string>
+    <string name="failed_disconnected_server"> 未连接到服务器</string>
+    <string name="failed_obtain_activation_code"> 获取激活码失败或未连接到服务器</string>
+    <string name="failed_noexist_serial_number"> 授权服务器无此序列号</string>
+    <string name="failed_serial_number_used"> 序列号已使用</string>
+    <string name="failed_unable_create_authfile"> 无法创建授权文件</string>
+    <string name="failed_check_activation_code"> 校验激活码失败</string>
+    <string name="failed_other_errors"> 其他错误</string>
+    <string name="failed_not_active"> 未激活</string>
+    <string name="failed_check_failure"> 激活文件校验失败</string>
+
+    <!-- 授权验证失败 -->
+    <string name="license_verification">授权验证</string>
+    <string name="license_verification_failed">授权验证失败</string>
+    <string name="license_verification_success">授权验证成功</string>
+    <string name="auth_check_service_bind_success">授权验证服务 绑定成功</string>
+</resources>

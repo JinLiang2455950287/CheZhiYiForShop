@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_topbar" />
+
+    <!--<cn.bingoogolapple.refreshlayout.BGARefreshLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg_white"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!--广告轮播控件-->
+                <include layout="@layout/layout_convenient_banner" />
+
+                <View style="@style/divider_horizontal"/>
+
+                <View style="@style/divider_horizontal"
+                    android:layout_marginTop="25px" />
+
+                <!--功能图标-->
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView_function"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <!--汽车快讯-->
+                <include layout="@layout/layout_car_flash_news" />
+
+                <!--限时促销-->
+                <include layout="@layout/layout_time_limit_promotion" />
+
+                <!--活动招募-->
+                <include layout="@layout/layout_activities_to_recruit" />
+
+                <!--猜你喜欢-->
+                <include layout="@layout/layout_guess_you_like" />
+
+            </LinearLayout>
+        </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <!--</cn.bingoogolapple.refreshlayout.BGARefreshLayout>-->
+
+    <include layout="@layout/emptyview_layout"/>
+</LinearLayout>

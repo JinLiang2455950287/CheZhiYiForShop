@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white"
+    android:orientation="vertical">
+    <!--个人详细资料-->
+    <include layout="@layout/layout_topbar" />
+
+    <View
+        style="@style/divider_horizontal"
+        android:layout_marginTop="27px" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_selector_default"
+        android:clickable="true"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="53px"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="53px"
+            android:text="昵称" />
+
+        <TextView
+            android:id="@+id/tv_nick_name"
+            style="@style/widthRatio"
+            android:paddingLeft="130px"
+            android:paddingRight="20dp"
+            android:text="昵称你"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_size_xsmall" />
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal_padding" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_selector_default"
+        android:clickable="true"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="53px"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="53px"
+            android:text="性别" />
+
+        <TextView
+            android:id="@+id/tv_sex"
+            style="@style/widthRatio"
+            android:paddingLeft="130px"
+            android:paddingRight="20dp"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_size_xsmall" />
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal_padding" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_selector_default"
+        android:clickable="true"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="53px"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="53px"
+            android:text="年龄" />
+
+        <TextView
+            android:id="@+id/tv_age"
+            style="@style/widthRatio"
+            android:paddingLeft="130px"
+            android:paddingRight="20dp"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_size_xsmall" />
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal_padding" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_selector_default"
+        android:clickable="true"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="53px"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="53px"
+            android:text="生日" />
+
+        <TextView
+            android:id="@+id/tv_birthday"
+            style="@style/widthRatio"
+            android:paddingLeft="130px"
+            android:paddingRight="20dp"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_size_xsmall" />
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal_padding" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_selector_default"
+        android:clickable="true"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="53px"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="53px"
+            android:text="电话" />
+
+        <TextView
+            android:id="@+id/tv_phone"
+            style="@style/widthRatio"
+            android:paddingLeft="130px"
+            android:paddingRight="20dp"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_size_xsmall" />
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+</LinearLayout>

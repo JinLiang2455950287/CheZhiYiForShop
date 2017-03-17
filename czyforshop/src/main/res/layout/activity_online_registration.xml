@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white"
+    android:orientation="vertical">
+
+    <!--在线报名-->
+    <include layout="@layout/layout_topbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_online_registration"
+            android:text="@string/real_name" />
+
+
+        <EditText
+            android:id="@+id/edit_name"
+            style="@style/edit_text_online_registration" />
+
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_online_registration"
+            android:text="@string/phone" />
+
+
+        <EditText
+            android:id="@+id/edit_phone"
+            style="@style/edit_text_online_registration" />
+
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_online_registration"
+            android:text="@string/registration_num" />
+
+
+        <EditText
+            android:id="@+id/tv_registration_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:paddingLeft="15px"
+            android:paddingRight="27px"
+            android:text="22"
+            android:textColor="@color/theme_color_default"
+            android:textSize="@dimen/text_size_xsmall" />
+
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_online_registration"
+            android:text="@string/remarks_info" />
+
+
+        <EditText
+            android:id="@+id/edit_remarks"
+            style="@style/edit_text_online_registration"
+            android:hint="填写你的特别要求" />
+
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28px"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_online_registration"
+            android:text="@string/registration_price" />
+
+
+        <TextView
+            style="@style/text_black_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="27px"
+            android:paddingRight="15px" />
+
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_total_amount"
+            style="@style/text_online_registration"
+            android:text="@string/total_amount" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="27px"
+            android:paddingRight="15px"
+            android:textColor="@color/text_orange"
+            android:textSize="@dimen/text_size_xsmall" />
+        <!--<EditText style="@style/edit_text_online_registration" />-->
+
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+</LinearLayout>

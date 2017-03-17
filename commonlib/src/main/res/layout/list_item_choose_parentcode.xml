@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="150px"
+        style="@style/text_black_style"
+        android:drawableRight="@drawable/item_selector_refund_application"
+        android:gravity="center_vertical"
+        android:paddingLeft="27px"
+        android:paddingRight="27px" />
+</LinearLayout>

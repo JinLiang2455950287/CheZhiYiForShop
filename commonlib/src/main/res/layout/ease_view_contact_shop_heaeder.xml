@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="420px"
+             android:background="@color/white">
+
+    <com.ruanyun.chezhiyi.commonlib.view.widget.CleanableEditText
+        android:id="@+id/query"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="25px"
+        android:background="@color/bg_white"
+        android:drawableLeft="@drawable/icon_search_normal"
+        android:drawablePadding="25px"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:hint="@string/search"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:singleLine="true"
+        android:textSize="16sp"/>
+
+    <cn.bingoogolapple.badgeview.BGABadgeTextView
+        android:id="@+id/tv_new_friend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="93px"
+        android:layout_marginTop="50px"
+        android:drawablePadding="20px"
+        android:drawableTop="@drawable/inf_ab_nf_store"
+        android:text="@string/new_friends"
+        android:textColor="@color/text_black"/>
+
+    <TextView
+        android:id="@+id/tv_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="450px"
+        android:layout_marginTop="50px"
+        android:drawablePadding="20px"
+        android:drawableTop="@drawable/inf_ab_group_store"
+        android:text="@string/my_groups"
+        android:textColor="@color/text_black"/>
+
+    <TextView
+        android:id="@+id/tv_message_room"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="840px"
+        android:layout_marginTop="50px"
+        android:drawablePadding="20px"
+        android:drawableTop="@drawable/inf_ab_room_store"
+        android:text="@string/metting_room"
+        android:textColor="@color/text_black"/>
+</FrameLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="322px"
+    android:background="@drawable/item_selector_default" >
+
+    <!--<cn.bingoogolapple.badgeview.BGABadgeFrameLayout-->
+    <!--android:id="@+id/bg_number"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:paddingLeft="42px"-->
+    <!--android:paddingRight="42px"-->
+    <!--android:paddingTop="42px"-->
+    <!--&gt;-->
+    <!--</cn.bingoogolapple.badgeview.BGABadgeFrameLayout>-->
+
+    <ImageView
+        android:id="@+id/iv_my_function_photo"
+        android:layout_width="88px"
+        android:layout_height="88px"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="72px"
+        android:src="@drawable/my_adorder" />
+
+    <TextView
+        android:id="@+id/tv_my_function_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="190px"
+        android:layout_gravity="center_horizontal"
+        android:text="function name"
+        android:textColor="@color/text_black"
+        android:textSize="@dimen/text_size_xsmall" />
+
+    <TextView
+        android:id="@+id/tv_my_introduce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="110px"
+        android:text="introduce"
+        android:textColor="@color/text_default"
+        android:textSize="@dimen/text_size_small" />
+
+    <TextView
+        android:id="@+id/bg_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/circle_red"
+        android:text=""
+        android:gravity="center"
+        android:textSize="@dimen/text_size_small"
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="45px"
+        android:textColor="@color/white" />
+
+</FrameLayout>

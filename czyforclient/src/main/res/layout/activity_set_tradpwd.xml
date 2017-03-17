@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_login"
+    android:orientation="vertical">
+    <!--设置交易密码-->
+    <include layout="@layout/layout_topbar" />
+
+    <com.ruanyun.chezhiyi.commonlib.view.widget.CleanableEditText
+        android:id="@+id/input_login_pwd"
+        style="@style/edit_text_password"
+        android:layout_marginTop="210px"
+        android:drawableLeft="@drawable/login_icon_password"
+        android:hint="请输入登录密码" />
+
+    <View style="@style/divider_horizontal_style" />
+
+    <com.ruanyun.chezhiyi.commonlib.view.widget.CleanableEditText
+        android:id="@+id/edit_input_pwd"
+        style="@style/edit_text_password"
+        android:digits="0123456789"
+        android:maxLength="6"
+        android:drawableLeft="@drawable/login_icon_password"
+        android:hint="请输入支付密码" />
+
+    <View style="@style/divider_horizontal_style" />
+
+    <com.ruanyun.chezhiyi.commonlib.view.widget.CleanableEditText
+        android:id="@+id/edit_confirm_passsword"
+        style="@style/edit_text_password"
+        android:digits="0123456789"
+        android:maxLength="6"
+        android:drawableLeft="@drawable/login_icon_password"
+        android:hint="确认支付密码" />
+    <View style="@style/divider_horizontal_style" />
+    <Button
+        android:id="@+id/btn_reset_password"
+        style="@style/button_defaulted"
+        android:layout_marginTop="92px"
+        android:text="@string/confirmed" />
+
+</LinearLayout>

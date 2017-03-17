@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="310px"
+    android:layout_height="wrap_content"
+    android:background="@drawable/item_selector_default"
+    android:paddingLeft="23px"
+    android:paddingRight="23px">
+
+    <ImageView
+        android:id="@+id/iv_promotion"
+        android:layout_width="264px"
+        android:layout_height="264px"
+        android:layout_gravity="center"
+        android:layout_marginTop="25px" />
+
+    <TextView
+        android:id="@+id/tv_purchase_time"
+        android:layout_width="match_parent"
+        android:layout_height="52px"
+        android:layout_above="@+id/tv_news_price"
+        android:layout_alignLeft="@id/iv_promotion"
+        android:layout_alignRight="@id/iv_promotion"
+        android:background="@color/smaller_transparent_black"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="限时购: 08.30-09.03"
+        android:textColor="@color/text_white"
+        android:textSize="9sp" />
+
+    <TextView
+        android:id="@+id/tv_news_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_promotion"
+        android:layout_marginTop="10px"
+        android:gravity="center_horizontal"
+        android:text=""
+        android:textColor="@color/text_orange_deep"
+        android:textSize="@dimen/text_size_middle" />
+
+    <TextView
+        android:id="@+id/tv_old_price"
+        style="@style/text_default"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_news_price"
+        android:layout_marginTop="10px"
+        android:gravity="center_horizontal"
+        android:paddingBottom="20px"
+        android:text="" />
+
+</RelativeLayout>

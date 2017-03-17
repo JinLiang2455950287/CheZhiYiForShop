@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/activity_theme"
+    android:background="@color/bg_white"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_topbar" />
+
+    <View style="@style/divider_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20px"
+        android:orientation="vertical">
+
+        <!--&lt;!&ndash; 订单编号 &ndash;&gt;-->
+        <!--<LinearLayout-->
+            <!--android:id="@+id/ll_order_num"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@color/white"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:padding="10dp">-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/tv_order_num_str"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/order_num"-->
+                <!--android:textColor="@color/text_black" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/tv_order_num"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:gravity="right"-->
+                <!--android:singleLine="true"-->
+                <!--android:text="5345345374534" />-->
+
+        <!--</LinearLayout>-->
+
+        <!--<View style="@style/divider_horizontal" />-->
+
+        <!-- 支付金额 -->
+        <LinearLayout
+            android:id="@+id/ll_pay_sum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tv_pay_sum_str"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pay_sum"
+                android:textColor="@color/text_black" />
+
+            <TextView
+                android:id="@+id/tv_pay_sum"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:singleLine="true"
+                android:text="￥53"
+                android:textColor="@color/text_orange" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:padding="10dp"
+            android:text="@string/select_pay_way"
+            android:textColor="@color/text_default" />
+
+        <View style="@style/divider_horizontal" />
+
+        <!-- 账户余额-->
+        <RelativeLayout
+            android:id="@+id/rl_balance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="10px">
+
+            <ImageView
+                android:id="@+id/image_select_status_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="40px"
+                android:src="@drawable/icon_green_selected"/>
+
+            <ImageView
+                android:id="@+id/image_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="40px"
+                android:src="@drawable/icon_pay_account"/>
+
+            <TextView
+                android:id="@+id/tv_balance_str"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/image_balance"
+                android:padding="10px"
+                android:text="@string/account_balance"
+                android:textColor="@color/text_black" />
+
+            <TextView
+                android:id="@+id/tv_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_balance_str"
+                android:layout_toRightOf="@id/image_balance"
+                android:padding="10px"
+                android:singleLine="true"
+                android:textColor="@color/text_default" />
+
+
+        </RelativeLayout>
+
+        <View style="@style/divider_horizontal" />
+
+        <!-- 支付宝 -->
+        <RelativeLayout
+            android:id="@+id/rl_alipay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="10px">
+
+            <ImageView
+                android:id="@+id/image_select_status_alipay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="40px"
+                android:src="@drawable/icon_green_select"/>
+
+            <ImageView
+                android:id="@+id/image_alipay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="40px"
+                android:src="@drawable/icon_pay_zfb"/>
+
+            <TextView
+                android:id="@+id/tv_alipay_str"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/image_alipay"
+                android:padding="10px"
+                android:text="@string/alipay_pay"
+                android:textColor="@color/text_black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_alipay_str"
+                android:layout_toRightOf="@id/image_alipay"
+                android:padding="10px"
+                android:singleLine="true"
+                android:text="@string/recommend_alipay"
+                android:textColor="@color/text_default" />
+
+        </RelativeLayout>
+
+        <View style="@style/divider_horizontal" />
+
+        <!-- 微信支付-->
+        <RelativeLayout
+            android:id="@+id/rl_wechat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="10px">
+
+            <ImageView
+                android:id="@+id/image_select_status_wechat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="40px"
+                android:src="@drawable/icon_green_select" />
+
+            <ImageView
+                android:id="@+id/image_wechat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="40px"
+                android:src="@drawable/icon_pay_wx"/>
+
+            <TextView
+                android:id="@+id/tv_wechat_str"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/image_wechat"
+                android:padding="10px"
+                android:text="@string/wechat_pay"
+                android:textColor="@color/text_black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_wechat_str"
+                android:layout_toRightOf="@id/image_wechat"
+                android:padding="10px"
+                android:singleLine="true"
+                android:text="@string/recommend_wechat"
+                android:textColor="@color/text_default" />
+
+        </RelativeLayout>
+
+
+        <Button
+            android:id="@+id/btn_to_pay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40px"
+            android:layout_marginRight="40px"
+            android:layout_marginTop="80px"
+            android:background="@color/bottomtext_blue"
+            android:text="@string/sure_to_pay"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_middle" />
+
+    </LinearLayout>
+
+</LinearLayout>

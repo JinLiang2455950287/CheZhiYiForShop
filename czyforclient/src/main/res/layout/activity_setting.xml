@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white"
+    android:orientation="vertical">
+
+    <!--客户端消息设置页面-->
+    <include layout="@layout/layout_topbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30px"
+                android:layout_marginTop="55px"
+                android:text="安全设置"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/text_set"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="290px"
+                android:layout_marginTop="55px"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="30px"
+                        android:text="登录密码"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/text_set_size"/>
+
+                    <LinearLayout
+                        android:id="@+id/ll_modify_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="right">
+
+                        <TextView
+                            android:id="@+id/tv_modify_password"
+                            style="@style/text_set_right"
+                            android:text="修改"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View style="@style/divider_horizontal"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="30px"
+                        android:text="支付密码"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/text_set_size"/>
+
+                    <LinearLayout
+                        android:id="@+id/ll_modify_pay_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="right">
+
+                        <TextView
+                            android:id="@+id/tv_modify_pay_password"
+                            style="@style/text_set_right"
+                            android:text="修改"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View style="@style/divider_horizontal"/>
+
+            </LinearLayout>
+
+            <!--账户绑定  暂时隐藏-->
+            <TextView
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="55px"
+                android:layout_marginLeft="30px"
+                android:layout_marginTop="55px"
+                android:text="账户绑定"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/text_set" />
+
+            <RelativeLayout
+                android:visibility="gone"
+                android:id="@+id/rl_set_wx"
+                android:layout_width="match_parent"
+                android:layout_height="149px"
+                android:background="@color/white">
+
+                <TextView
+
+                    android:drawableLeft="@drawable/icon_set_wx"
+                    style="@style/text_set_left"
+                    android:text="微信" />
+
+                <TextView
+                    android:id="@+id/tv_set_wx"
+                    style="@style/text_set_right"
+                    android:text="绑定"/>
+            </RelativeLayout>
+
+            <View
+                android:visibility="gone"
+                style="@style/divider_horizontal" />
+
+            <RelativeLayout
+                android:visibility="gone"
+                android:id="@+id/rl_set_qq"
+                android:layout_width="match_parent"
+                android:layout_height="149px"
+                android:background="@color/white">
+
+                <TextView
+                    android:drawableLeft="@drawable/icon_set_qq"
+                    style="@style/text_set_left"
+                    android:text="QQ" />
+
+                <TextView
+                    android:id="@+id/tv_set_qq"
+                    style="@style/text_set_right"
+                    android:text="绑定" />
+            </RelativeLayout>
+
+            <View
+                android:visibility="gone"
+                style="@style/divider_horizontal" />
+
+            <RelativeLayout
+                android:visibility="gone"
+                android:id="@+id/rl_set_xl"
+                android:layout_width="match_parent"
+                android:layout_height="149px"
+                android:background="@color/white">
+
+                <TextView
+                    android:drawableLeft="@drawable/icon_set_xl"
+                    style="@style/text_set_left"
+                    android:text="微博" />
+
+                <TextView
+                    android:id="@+id/tv_set_xl"
+                    style="@style/text_set_right"
+                    android:text="绑定"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
+            <View
+                android:visibility="gone"
+                style="@style/divider_horizontal" />
+
+            <LinearLayout
+                android:layout_marginTop="27px"
+                android:layout_width="match_parent"
+                android:layout_height="360px"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.3"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginBottom="5px"
+                            android:layout_marginLeft="30px"
+                            android:text="消息推送"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/text_set" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="30px"
+                            android:layout_marginTop="5px"
+                            android:text="@string/setting_hit_text"
+                            android:textColor="@color/text_gray"
+                            android:textSize="@dimen/text_size_small" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_msg_switch"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="right">
+
+                        <TextView
+                            android:id="@+id/tv_msg_switch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="30px"
+                            android:background="@drawable/ease_switch_button_selector"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View style="@style/divider_horizontal"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="30px"
+                        android:text="清除图片缓存"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/text_set"/>
+
+                    <LinearLayout
+                        android:id="@+id/ll_cache_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="right">
+
+                        <TextView
+                            android:id="@+id/tv_cache_num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="30px"
+                            android:text="0.00M"
+                            android:textColor="@color/text_gray"
+                            android:textSize="@dimen/text_set_size"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_about"
+                android:layout_width="match_parent"
+                android:layout_height="145px"
+                android:layout_marginTop="30px"
+                android:background="@color/white">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="30px"
+                    android:text="关于掌上汽服"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_set"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/bt_quit"
+                style="@style/button_quit"
+                android:layout_marginTop="88px"
+                android:layout_marginBottom="88px"
+                android:text="@string/quit_login" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

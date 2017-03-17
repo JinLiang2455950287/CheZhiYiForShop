@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:id="@+id/rl_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/theme_color_default">
+
+        <com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView
+            android:id="@+id/iv_user_photo"
+            android:layout_width="235px"
+            android:layout_height="235px"
+            android:layout_marginBottom="78px"
+            android:layout_marginLeft="25px"
+            android:layout_marginTop="100px"
+            android:src="@drawable/default_img" />
+
+        <TextView
+            android:id="@+id/tv_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="52px"
+            android:layout_marginLeft="40px"
+            android:layout_marginTop="163px"
+            android:layout_toRightOf="@id/iv_user_photo"
+            android:text="余额"
+            android:textColor="@color/white"
+            android:textSize="47px" />
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_balance"
+            android:layout_marginLeft="40px"
+            android:layout_marginTop="43px"
+            android:layout_toRightOf="@id/iv_user_photo"
+            android:singleLine="true"
+            android:text="dgg"
+            android:textColor="@color/white"
+            android:textSize="40px" />
+
+    </RelativeLayout>
+</merge>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_topbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_white"
+            android:orientation="vertical">
+
+            <!--头像-->
+            <LinearLayout
+                android:id="@+id/ll_photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_selector_default"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/textView_item_account_mangement"
+                    android:text="@string/photo"
+                    android:textColor="@color/text_black" />
+
+                <com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView
+                    android:id="@+id/img_photo"
+                    android:layout_width="122px"
+                    android:layout_height="122px"
+                    android:layout_gravity="center_vertical" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="28px"
+                    android:layout_marginRight="27px"
+                    android:src="@drawable/em_right_arrow_icon" />
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal_spacing" />
+
+            <!--昵称-->
+            <LinearLayout
+                android:id="@+id/ll_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_selector_default"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/textView_item_account_mangement"
+                    android:text="@string/nick_name"
+                    android:textColor="@color/text_black" />
+
+                <TextView
+                    android:id="@+id/tv_nickname"
+                    style="@style/textView_item_account_mangement"
+                    android:drawablePadding="27px"
+                    android:drawableRight="@drawable/em_right_arrow_icon"
+                    android:ellipsize="end"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:textColor="@color/text_default" />
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal_spacing" />
+
+            <!--性别-->
+            <LinearLayout
+                android:id="@+id/ll_sex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_selector_default"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/textView_item_account_mangement"
+                    android:text="@string/sex"
+                    android:textColor="@color/text_black" />
+
+                <TextView
+                    android:id="@+id/tv_sex"
+                    style="@style/textView_item_account_mangement"
+                    android:drawablePadding="27px"
+                    android:drawableRight="@drawable/em_right_arrow_icon"
+                    android:gravity="right"
+                    android:textColor="@color/text_default" />
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal_spacing" />
+
+            <!--出生日期-->
+            <LinearLayout
+                android:id="@+id/ll_bir_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_selector_default"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/textView_item_account_mangement"
+                    android:text="@string/bir_date"
+                    android:textColor="@color/text_black" />
+
+                <TextView
+                    android:id="@+id/tv_bir_date"
+                    style="@style/textView_item_account_mangement"
+                    android:drawablePadding="27px"
+                    android:drawableRight="@drawable/em_right_arrow_icon"
+                    android:gravity="right"
+                    android:textColor="@color/text_default" />
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal_spacing" />
+
+            <!--司机端   的    个性签名-->
+            <LinearLayout
+                android:id="@+id/ll_signature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_selector_default"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="@string/personalized_signature"
+                    android:id="@+id/tv_signature"
+                    style="@style/textView_item_account_mangement"
+                    android:textColor="@color/text_black" />
+
+                <TextView
+                    android:id="@+id/tv_personal_note"
+                    style="@style/textView_item_account_mangement"
+                    android:drawablePadding="27px"
+                    android:drawableRight="@drawable/em_right_arrow_icon"
+                    android:ellipsize="end"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="slfkf"
+                    android:textColor="@color/text_default" />
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal" />
+
+            <!--工作状态-->
+            <Button
+                android:id="@+id/btn_work_state"
+                style="@style/textView_chat_set"
+                android:layout_marginTop="28px"
+                android:layout_marginBottom="28px"
+                android:background="@drawable/rectangle_white_shape"
+                android:drawableRight="@drawable/ease_switch_button_selector"
+                android:text="@string/work_state"
+                android:visibility="gone" />
+
+            <!-- 个人标签  个人爱好  -->
+            <LinearLayout
+                android:id="@+id/ll_personal_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:background="@drawable/rectangle_white_shape"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_personal_label"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:paddingBottom="55px"
+                    android:paddingLeft="27px"
+                    android:paddingRight="27px"
+                    android:paddingTop="55px"
+                    android:layout_weight="1"
+                    android:text="@string/personal_label"
+                    android:textColor="@color/text_black"/>
+
+                <!--<FrameLayout-->
+                    <!--android:paddingBottom="55px"-->
+                    <!--android:paddingLeft="27px"-->
+                    <!--android:paddingRight="27px"-->
+                    <!--android:paddingTop="55px"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content">-->
+                <com.ruanyun.chezhiyi.commonlib.view.widget.FlowLayout
+                    android:id="@+id/flow_view"
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"/>
+                <!--</FrameLayout>-->
+            </LinearLayout>
+
+
+            <!--技师端的个人说明-->
+            <LinearLayout
+                android:id="@+id/ll_signature_technician"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28px"
+                android:background="@color/white"
+                android:clickable="true"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="个人说明"
+                    android:id="@+id/tv_signature_technician"
+                    style="@style/textView_item_account_mangement"
+                    android:textColor="@color/text_black"
+                    />
+
+                <!--个人说明-->
+                <TextView
+                    android:id="@+id/tv_personal_technician_note"
+                    style="@style/textView_item_account_mangement"
+                    android:drawablePadding="27px"
+                    android:ellipsize="end"
+                    android:layout_weight="3"
+                    android:gravity="start"
+                    android:text=""
+                    android:textColor="@color/text_default" />
+            </LinearLayout>
+
+            <!--会员等级-->
+            <LinearLayout
+                android:id="@+id/ll_grade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28px"
+                android:visibility="gone"
+                android:background="@drawable/rectangle_white_shape"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/textView_item_account_mangement"
+                    android:text="@string/grade"
+                    android:textColor="@color/text_black" />
+            </LinearLayout>
+
+            <!--<Button-->
+                <!--android:id="@+id/bt_quit"-->
+                <!--style="@style/button_quit"-->
+                <!--android:layout_marginTop="88px"-->
+                <!--android:text="@string/quit_login" />-->
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

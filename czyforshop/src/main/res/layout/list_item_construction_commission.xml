@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <!--施工提成item-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="35px">
+
+        <TextView
+            android:id="@+id/tv_time"
+            style="@style/text_default"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="25px"
+            android:paddingLeft="27px"
+            android:paddingTop="35px"
+            android:text="09/09 23:00" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="936px"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_time"
+            android:ellipsize="end"
+            android:padding="27px"
+            android:singleLine="true"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_size_middle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:padding="27px"
+            android:text=""
+            android:textColor="@color/text_organge"
+            android:textSize="@dimen/text_size_middle" />
+
+        <TextView
+            android:id="@+id/tv_cars_number"
+            style="@style/text_radius_style"
+            android:layout_below="@+id/tv_title"
+            android:layout_marginLeft="27px"
+            android:layout_marginTop="6px"
+            android:background="@drawable/corner_rectangle_green_shape"
+            android:paddingLeft="29px"
+            android:paddingRight="29px"
+            android:text="皖A88888"
+            android:textColor="@color/theme_color_default" />
+
+        <TextView
+            android:id="@+id/tv_style"
+            style="@style/text_radius_style"
+            android:layout_below="@+id/tv_title"
+            android:layout_marginLeft="35px"
+            android:layout_marginTop="6px"
+            android:layout_toRightOf="@id/tv_cars_number"
+            android:background="@drawable/corner_rectangle_grange_shapr"
+            android:paddingLeft="22px"
+            android:paddingRight="22px"
+            android:text="清洗清洗"
+            android:textColor="@color/text_white" />
+
+    </RelativeLayout>
+
+    <View style="@style/divider_horizontal_spacing" />
+
+</LinearLayout>

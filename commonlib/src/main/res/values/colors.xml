@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="bg_white">#F7F7F7</color>
+    <color name="light_gray">#F0F0F0</color>
+    <color name="transparent">#00000000</color>
+    <color name="half_transparent_black">#33000000</color>
+    <color name="smaller_transparent_black">#66000000</color>
+    <color name="divider">#eeeeee</color>
+    <color name="bg_light_pink">#FFF4F2</color>
+    <color name="bg_login">#424554</color>
+    <color name="bg_verify">#6e707c</color>
+    <color name="bg_divider_horizontal">#828691</color>
+    <color name="border_bg">#a9a9a9</color>
+    <color name="linearlayout_bg_gray">#EEF4F5</color>
+    <!--按钮颜色-->
+    <color name="bt_normal">#e1e1e1</color>
+    <color name="bg_pressed">#d6d7dc</color>
+    <color name="tv_pressed">#eeeeee</color>
+    <color name="tv_gray_lucency">#66666666</color>
+    <color name="tv_gray_lucency_pressed">#99666666</color>
+
+    <color name="bg_orange">#FBBB53</color>
+    <color name="bg_orange_pressed">#c79647</color>
+    <color name="bg_btn_orange">#f3971a</color>
+
+    <color name="bg_red">#FF6969</color>
+    <color name="bg_red_pressed">#e45353</color>
+    <color name="bg_red_circle">#ff0000</color>
+    <color name="bg_tangerine">#ff9772</color>
+    <color name="bg_tangerinedp">#F7FF8572</color>
+
+    <!-- 主题色 包括top_bar等 -->
+    <color name="theme_color_default">#01BDBE</color>
+    <color name="theme_color_default_pressed">#21a6a7</color>
+    <color name="color_gray_line">#d6d7dc</color>
+    <color name="text_comment_gray">#aaaaaa</color>
+    <!-- 默认字体颜色 -->
+    <color name="text_default">#666666</color>
+    <color name="text_gray">#999999</color>
+    <color name="text_black">#333333</color>
+    <color name="font_black">#323232</color>
+    <color name="text_red">#FF6969</color>
+    <color name="text_red_deep">#f9392a</color>
+    <color name="text_orange">#FBBB53</color>//金额常用颜色
+    <color name="bottomtext_blue">#01BDBE</color>
+    <color name="text_orange_deep">#f7921e</color>
+    <color name="text_white">#ffffff</color>
+    <color name="bg_orange_deep">#FF2C07</color>
+    <color name="bg_orange_shallow">#FF9671</color>
+    <color name="bg_oragle">#f3971a</color>
+    <color name="text_hine">#a7a8a3</color>
+    <color name="shallow_blue">#7ecef3</color>
+    <color name="shallow_blue2">#99DADB</color>
+    <color name="progressbar_bg_selected">#ff9772</color>
+    <color name="progressbar_bg">#ffccbb</color>
+    <color name="gray_border">#cbcbcb</color>//灰色边框
+    <color name="text_fleet_orange">#f6b283</color>
+    <color name="text_booking_gray">#777777</color>//预约详情灰色字体
+    <color name="text_organge">#f08809</color>
+
+    <color name="bg_button">#02d9de</color>
+
+    <!--个人资料的灰色昵称-->
+    <color name="text_nick_name_color">#7e7e7e</color>
+    <color name="seckill_bg_gray">#7a7a7a</color>
+    <color name="seckill_boarder_gray">#e6e6e6</color>
+    <!--首页秒杀-->
+    <color name="bg_ms">#f3971a</color>
+    <color name="bg_cx">#e4287d</color>
+    <color name="bg_tg">#38ae72</color>
+    <color name="bg_cp">#ff9772</color>
+    <color name="bg_zc">#eb6876</color>
+
+    <!--加减按钮的线框-->
+    <color name="border_color">#dfdee3</color>
+
+    <color name="bg_commission">#32374b</color>
+    <color name="blue_text">#00b6b7</color>
+    <color name="gray_text">#8d8d8d</color>
+
+
+    <!--推荐项目-->
+    <color name="headline_text_black">#2c2c2c</color>
+    <color name="recommend_title_text_black">#080808</color>
+    <!--首页指示器-->
+    <color name="indicator">#ff9772</color>
+
+    <!--HomeFragment-->
+    <color name="home_yuyue_green">#FF8ED818</color>
+    <color name="home_reback_brown">#FFFF7128</color>
+    <color name="home_wake_blue">#FF047BF5</color>
+    <!--车牌输入-->
+    <color name="mainColor">#FF9671</color>
+    <color name="app_black">#88000000</color>
+    <color name="gray_light">#D0D0D0</color>
+
+</resources>

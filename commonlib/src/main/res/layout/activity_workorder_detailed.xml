@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/bg_white"
+              android:orientation="vertical">
+
+    <include layout="@layout/layout_topbar"/>
+
+    <!--&lt;!&ndash;工单编号&ndash;&gt;-->
+    <!--<TextView-->
+        <!--android:id="@+id/tv_work_order_num"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/white"-->
+        <!--android:layout_marginTop="10px"-->
+        <!--android:paddingLeft="25px"-->
+        <!--android:paddingRight="25px"-->
+        <!--android:paddingTop="5px"-->
+        <!--android:paddingBottom="5px"-->
+        <!--android:textColor="@color/text_black"-->
+        <!--android:text="工单编号："/>-->
+
+    <!--&lt;!&ndash;服务项目&ndash;&gt;-->
+    <!--<TextView-->
+        <!--android:id="@+id/tv_work_order_project"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/white"-->
+        <!--android:paddingLeft="25px"-->
+        <!--android:paddingRight="25px"-->
+        <!--android:paddingTop="5px"-->
+        <!--android:paddingBottom="5px"-->
+        <!--android:textColor="@color/text_gray"-->
+        <!--android:text="服务项目："/>-->
+
+    <!--&lt;!&ndash;服务商品&ndash;&gt;-->
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/white"-->
+        <!--android:orientation="horizontal">-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@color/white"-->
+            <!--android:paddingLeft="25px"-->
+            <!--android:paddingTop="5px"-->
+            <!--android:paddingBottom="5px"-->
+            <!--android:textColor="@color/text_gray"-->
+            <!--android:text="服务商品："/>-->
+
+        <!--&lt;!&ndash;服务商品&ndash;&gt;-->
+        <!--<TextView-->
+            <!--android:id="@+id/tv_work_order_goods"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@color/white"-->
+            <!--android:maxLines="3"-->
+            <!--android:paddingRight="25px"-->
+            <!--android:paddingTop="5px"-->
+            <!--android:paddingBottom="5px"-->
+            <!--android:textColor="@color/text_gray"-->
+            <!--android:text="好过分的话gsdfgdfgdfgsdfgdfdsfgdfsgsdfgdfgsdfgdsf"/>-->
+    <!--</LinearLayout>-->
+
+    <!--&lt;!&ndash;服务工位  &ndash;&gt;-->
+    <!--<TextView-->
+        <!--android:id="@+id/tv_work_order_work_number"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/white"-->
+        <!--android:paddingLeft="25px"-->
+        <!--android:paddingRight="25px"-->
+        <!--android:paddingTop="5px"-->
+        <!--android:paddingBottom="5px"-->
+        <!--android:textColor="@color/text_gray"-->
+        <!--android:text="服务工位："/>-->
+
+      <!--&lt;!&ndash;服务技师  或 服务客户&ndash;&gt;-->
+    <!--<TextView-->
+        <!--android:id="@+id/tv_work_order_body"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/white"-->
+        <!--android:paddingLeft="25px"-->
+        <!--android:paddingRight="25px"-->
+        <!--android:paddingTop="5px"-->
+        <!--android:paddingBottom="5px"-->
+        <!--android:textColor="@color/text_gray"-->
+        <!--android:text="服务技师："/>-->
+
+    <!--&lt;!&ndash;客服备注 技师&ndash;&gt;-->
+    <!--<TextView-->
+        <!--android:id="@+id/tv_work_order_remake"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/white"-->
+        <!--android:paddingLeft="25px"-->
+        <!--android:paddingRight="25px"-->
+        <!--android:paddingTop="5px"-->
+        <!--android:paddingBottom="5px"-->
+        <!--android:textColor="@color/text_gray"-->
+        <!--android:text="客服备注："/>-->
+
+      <!--&lt;!&ndash;工单总价&ndash;&gt;-->
+    <!--<TextView-->
+        <!--android:id="@+id/tv_work_order_all_price"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/white"-->
+        <!--android:paddingLeft="25px"-->
+        <!--android:paddingRight="25px"-->
+        <!--android:paddingTop="5px"-->
+        <!--android:paddingBottom="5px"-->
+        <!--android:textColor="@color/text_gray"-->
+        <!--android:text="工单总价："/>-->
+
+    <!--流水列表-->
+    <ListView
+        android:id="@+id/list"
+        android:divider="@null"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:scrollbarStyle="outsideOverlay"/>
+</LinearLayout>

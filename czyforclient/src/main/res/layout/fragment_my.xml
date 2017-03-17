@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refresh_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="93px"
+                android:background="@color/theme_color_default"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+
+                <ImageView
+                    android:id="@+id/iv_my_set"
+                    android:layout_width="90px"
+                    android:layout_height="63px"
+                    android:src="@drawable/nav_set"/>
+
+                <cn.bingoogolapple.badgeview.BGABadgeImageView
+                    android:id="@+id/bga_my_remind"
+                    android:layout_width="90px"
+                    android:layout_height="63px"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginRight="20px"
+                    android:src="@drawable/nav_remind"/>
+
+                <!--<ImageView-->
+                <!--android:id="@+id/iv_my_remind"-->
+                <!--android:layout_width="90px"-->
+                <!--android:layout_height="63px"-->
+                <!--android:layout_marginRight="20px"-->
+                <!--android:layout_marginLeft="20px"-->
+                <!--android:src="@drawable/nav_remind"/>-->
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_account"
+                android:layout_width="match_parent"
+                android:layout_height="440px"
+                android:background="@color/theme_color_default">
+
+                <com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView
+                    android:id="@+id/iv_my_user_photo"
+                    android:layout_width="236px"
+                    android:layout_height="236px"
+                    android:layout_marginBottom="35px"
+                    android:layout_marginLeft="25px"
+                    android:layout_marginTop="25px"
+                    android:src="@drawable/my_gift"/>
+
+                <TextView
+                    android:id="@+id/tv_my_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="65px"
+                    android:layout_marginBottom="30px"
+                    android:layout_marginLeft="40px"
+                    android:layout_marginTop="80px"
+                    android:layout_toEndOf="@+id/iv_my_user_photo"
+                    android:layout_toRightOf="@+id/iv_my_user_photo"
+                    android:drawablePadding="20px"
+                    android:drawableRight="@drawable/icon_white_male"
+                    android:text="Mr.Yan"
+                    android:textColor="@color/white"
+                    android:textSize="58px"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tv_my_idiograph"
+                    android:layout_width="match_parent"
+                    android:layout_height="60px"
+                    android:layout_alignLeft="@+id/tv_my_user_name"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignStart="@+id/tv_my_user_name"
+                    android:layout_below="@+id/tv_my_user_name"
+                    android:layout_marginTop="12px"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="咬定青山不放松，任尔东西南北风"
+                    android:textColor="@color/white"
+                    android:textSize="44px"/>
+
+                <TextView
+                    android:id="@+id/tv_my_membership"
+                    style="@style/textView_my_info"
+                    android:layout_width="539px"
+                    android:layout_height="144px"
+                    android:layout_below="@+id/iv_my_user_photo"
+                    android:background="@drawable/text_pressed_gray_selector"
+                    android:gravity="center"
+                    android:text="会员卡（0.00元）"/>
+
+                <TextView
+                    android:id="@+id/tv_my_score"
+                    style="@style/textView_my_info"
+                    android:layout_width="539px"
+                    android:layout_height="144px"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@+id/tv_my_membership"
+                    android:background="@drawable/text_pressed_gray_selector"
+                    android:gravity="center"
+                    android:text="积分兑换（0分）"/>
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rcv_my"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28px">
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+    </ScrollView>
+</android.support.v4.widget.SwipeRefreshLayout>
+
+
+    <!--<android.support.design.widget.CoordinatorLayout-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent" >-->
+
+    <!--<android.support.design.widget.AppBarLayout-->
+    <!--android:id="@+id/appBarLayout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" >-->
+
+    <!--<android.support.design.widget.CollapsingToolbarLayout-->
+    <!--android:id="@+id/rl_account"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@color/theme_color_default"-->
+    <!--app:layout_scrollFlags="scroll|exitUntilCollapsed"-->
+    <!--app:expandedTitleGravity="center_vertical" >-->
+
+    <!--<RelativeLayout-->
+    <!--app:layout_collapseMode="parallax"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:background="@color/theme_color_default"-->
+    <!--android:layout_height="wrap_content">-->
+
+    <!--<com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView-->
+    <!--android:id="@+id/iv_my_user_photo"-->
+    <!--android:layout_width="78.67dp"-->
+    <!--android:layout_height="78.67dp"-->
+    <!--android:layout_marginBottom="11.67dp"-->
+    <!--android:layout_marginLeft="8.33dp"-->
+    <!--android:layout_marginTop="35dp"-->
+    <!--android:src="@drawable/my_gift"-->
+    <!--app:layout_collapseMode="parallax"/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv_my_user_name"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="10dp"-->
+    <!--android:layout_marginLeft="110dp"-->
+    <!--android:layout_marginTop="48dp"-->
+    <!--android:drawablePadding="6.67dp"-->
+    <!--android:drawableRight="@drawable/icon_white_male"-->
+    <!--android:text="fdgdsg"-->
+    <!--android:textColor="@color/white" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv_my_score"-->
+    <!--style="@style/textView_my_info"-->
+    <!--android:layout_width="539px"-->
+    <!--android:layout_height="144px"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_alignTop="@+id/tv_my_membership"-->
+    <!--android:layout_gravity="bottom|right"-->
+    <!--android:background="@drawable/text_pressed_gray_selector"-->
+    <!--android:gravity="center"-->
+    <!--android:text="积分兑换（0分）"/>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:orientation="horizontal">-->
+
+    <!--<View-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"/>-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/iv_my_set"-->
+    <!--android:layout_width="90px"-->
+    <!--android:layout_height="63px"-->
+    <!--android:src="@drawable/nav_set"/>-->
+
+    <!--<cn.bingoogolapple.badgeview.BGABadgeImageView-->
+    <!--android:id="@+id/bga_my_remind"-->
+    <!--android:layout_width="90px"-->
+    <!--android:layout_height="63px"-->
+    <!--android:layout_marginLeft="20px"-->
+    <!--android:layout_marginRight="20px"-->
+    <!--android:src="@drawable/nav_remind"/>-->
+    <!--</LinearLayout>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv_my_membership"-->
+    <!--style="@style/textView_my_info"-->
+    <!--android:layout_width="539px"-->
+    <!--android:layout_height="144px"-->
+    <!--android:layout_gravity="bottom"-->
+    <!--android:background="@drawable/text_pressed_gray_selector"-->
+    <!--android:gravity="center"-->
+    <!--android:text="会员卡（0.00元）"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:layout_below="@+id/iv_my_user_photo"/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv_my_idiograph"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="60px"-->
+    <!--android:ellipsize="end"-->
+    <!--android:singleLine="true"-->
+    <!--android:text="咬定青山不放松，任尔东西南北风"-->
+    <!--android:textColor="@color/white"-->
+    <!--android:textSize="44px"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_alignLeft="@+id/tv_my_user_name"-->
+    <!--android:layout_alignStart="@+id/tv_my_user_name"/>-->
+    <!--</RelativeLayout>-->
+
+    <!--<android.support.v7.widget.Toolbar-->
+    <!--android:id="@+id/toolbar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:gravity="top"-->
+    <!--android:minHeight="?attr/actionBarSize"-->
+    <!--android:background="@color/theme_color_default"-->
+    <!--app:layout_collapseMode="pin"-->
+    <!--app:title="我的"-->
+    <!--app:titleTextColor="@color/white"-->
+    <!--/>-->
+
+    <!--</android.support.design.widget.CollapsingToolbarLayout>-->
+    <!--</android.support.design.widget.AppBarLayout>-->
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/rcv_my"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_marginTop="28px"-->
+    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+    <!--</android.support.v7.widget.RecyclerView>-->
+    <!--</android.support.design.widget.CoordinatorLayout>-->

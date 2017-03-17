@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/item_selector_default"
+    android:layout_height="390px">
+
+    <FrameLayout
+        android:id="@+id/fl_image"
+        android:layout_width="320px"
+        android:layout_height="310px"
+        android:layout_marginBottom="40px"
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="40px">
+
+        <ImageView
+            android:id="@+id/iv_image"
+            android:src="@drawable/default_img"
+            android:scaleType="centerCrop"
+            android:layout_width="320px"
+            android:layout_height="310px" />
+
+        <TextView
+            android:id="@+id/tv_sales_volume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginBottom="20px"
+            android:paddingLeft="10px"
+            android:paddingRight="10px"
+            android:paddingTop="5px"
+            android:paddingBottom="5px"
+            android:textSize="@dimen/text_size_small"
+            android:background="@color/smaller_transparent_black"
+            android:text=""
+            android:textColor="@color/white" />
+    </FrameLayout>
+
+
+    <!--  标题  -->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_toRightOf="@id/fl_image"
+        android:layout_alignTop="@id/fl_image"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="20px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/recommend_title_text_black"
+        android:textSize="@dimen/text_size_middle"
+        android:singleLine="true"
+        android:text="" />
+
+    <!--类型   产品  秒杀  -->
+    <TextView
+        android:id="@+id/tv_type"
+        android:layout_toRightOf="@id/fl_image"
+        android:layout_below="@id/tv_title"
+        android:layout_marginLeft="40px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50px"
+        android:background="@drawable/shape_cx_bg"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_small"
+        android:singleLine="true"
+        android:text="秒杀" />
+
+
+    <!--类型   倒计时 计时  -->
+    <TextView
+        android:id="@+id/tv_time_limit"
+        android:layout_toRightOf="@id/tv_type"
+        android:layout_below="@id/tv_title"
+        android:layout_marginLeft="40px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50px"
+        android:background="@drawable/shape_shallow_blue_bg"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_small"
+        android:singleLine="true"
+        android:text="" />
+
+
+    <!--价格 -->
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_toRightOf="@id/fl_image"
+        android:layout_alignBottom="@id/fl_image"
+        android:layout_marginLeft="40px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40px"
+        android:textColor="@color/text_orange"
+        android:textSize="@dimen/text_size_middle"
+        android:singleLine="true"
+        android:text="" />
+
+    <!--旧价格 -->
+    <TextView
+        android:id="@+id/tv_old_price"
+        android:layout_toRightOf="@id/tv_price"
+        android:layout_alignBottom="@id/fl_image"
+        android:layout_marginLeft="40px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40px"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/text_size_middle"
+        android:singleLine="true"
+        android:text="￥900" />
+
+    <!--  评论数  -->
+    <TextView
+        android:id="@+id/tv_comment"
+        android:layout_toRightOf="@id/tv_old_price"
+        android:layout_alignBottom="@id/fl_image"
+        android:layout_marginLeft="40px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40px"
+        android:layout_alignParentRight="true"
+        android:gravity="right"
+        android:paddingRight="40px"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/text_size_xsmall"
+        android:singleLine="true"
+        android:text="" />
+
+
+    <View
+        style="@style/divider_horizontal"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

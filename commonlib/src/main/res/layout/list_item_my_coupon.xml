@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="435px"
+    android:orientation="vertical">
+    <!--优惠券item-->
+    <LinearLayout
+        android:id="@+id/ll_coupon_bg_photo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="25px"
+        android:layout_marginLeft="25px"
+        android:layout_marginRight="25px"
+        android:background="@drawable/coupon_bg_normal"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="307px"
+        android:layout_marginTop="25px"
+        android:layout_marginLeft="25px"
+        android:layout_marginRight="25px"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_discount_price"
+            android:layout_width="371px"
+            android:layout_height="307px"
+            android:text="¥1234"
+            android:gravity="center"
+            android:textColor="@color/theme_color_default"
+            android:textSize="@dimen/text_size_middle" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="123px">
+
+            <TextView
+                android:id="@+id/tv_discount_name"
+                android:layout_width="wrap_content"
+                android:layout_height="125px"
+                android:text="抵用券"
+                android:gravity="bottom"
+                android:textColor="@color/text_fleet_orange"
+                android:textSize="@dimen/text_size_middle" />
+
+            <TextView
+                android:id="@+id/tv_discont_project"
+                style="@style/text_black_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_discount_name"
+                android:paddingTop="50px"
+                android:text="洗车服务一次" />
+            <ImageView
+                android:id="@+id/iv_is_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="30px"
+                android:visibility="gone"
+                android:src="@drawable/coupon_selected"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_use_or_due"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="已过期"
+            android:visibility="gone"
+            android:layout_marginLeft="40px"
+            android:textColor="@color/text_default"
+            android:gravity="center_vertical"
+            android:layout_alignParentBottom="true"
+            android:textSize="@dimen/text_size_small" />
+
+        <TextView
+            android:id="@+id/tv_time_period"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:text="有效期："
+            android:layout_marginRight="40px"
+            android:gravity="center_vertical"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/border_bg"
+            android:textSize="@dimen/text_size_small" />
+
+    </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

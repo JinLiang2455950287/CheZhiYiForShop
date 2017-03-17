@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="180px"
+    android:layout_marginTop="25px"
+    android:layout_marginBottom="25px"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/iv_car_flash"
+        android:layout_width="118px"
+        android:layout_height="113px"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="59px"
+        android:layout_marginRight="31px"
+        android:background="@drawable/icon_hotline" />
+
+    <View
+        android:id="@+id/view"
+        style="@style/divide_vertical"
+        android:layout_toRightOf="@id/iv_car_flash" />
+
+    <com.ruanyun.chezhiyi.commonlib.view.widget.RollableTextView
+        android:id="@+id/rtv_flash_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/iv_car_flash"
+        android:layout_marginLeft="28px"
+        android:layout_marginRight="28px"
+        android:layout_toRightOf="@id/view" />
+
+    <com.ruanyun.chezhiyi.commonlib.view.widget.RollableTextView
+        android:id="@+id/rtv_flash_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/iv_car_flash"
+        android:layout_marginLeft="28px"
+        android:layout_marginRight="28px"
+        android:layout_toRightOf="@id/view" />
+</RelativeLayout>

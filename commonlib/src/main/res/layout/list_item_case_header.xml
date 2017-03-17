@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/item_selector_default"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="53px"
+        android:layout_marginLeft="27px"
+        android:layout_marginTop="53px"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_left_only_one"
+                android:layout_width="331px"
+                android:layout_height="251px"
+                android:layout_centerVertical="true"
+                android:scaleType="centerCrop" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                android:src="@drawable/case_list_video" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="23px" >
+
+            <TextView
+                android:id="@+id/tv_case_context"
+                style="@style/text_black_style"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:maxLines="2"
+                android:paddingBottom="16px"
+                android:paddingLeft="27px"
+                android:paddingRight="27px"
+                android:text="" />
+
+            <!--审核状态-->
+            <TextView
+                android:id="@+id/tv_check_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="27px"
+                android:layout_marginTop="27px"
+                android:layout_marginBottom="27px"
+                android:textSize="@dimen/text_size_small"
+                android:textColor="@color/white"
+                android:background="@drawable/shape_tg_bg"/>
+
+            <!--<include layout="@layout/layout_praise_common" />-->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tv_praise"
+                    style="@style/text_default"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="27px"
+                    android:layout_alignParentRight="true"
+                    android:drawableLeft="@drawable/news_list_zan"
+                    android:drawablePadding="18px"
+                    android:text="222" />
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    style="@style/text_default"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2月10日"
+                    android:layout_marginLeft="27px"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+</LinearLayout>

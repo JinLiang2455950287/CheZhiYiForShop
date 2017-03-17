@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.ruanyun.chezhiyi"
+    android:installLocation="auto">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- 环信权限 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.BIND_VOICE_INTERACTION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <!-- 这个权限用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 关闭该包下的所有应用程序 -->
+    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <!-- 快号通开发包 -->
+    <application
+        android:name=".commonlib.App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="name,icon,label,theme">
+
+        <!-- 引导页 -->
+        <activity
+            android:name=".commonlib.view.ui.common.GuideActivity"
+            android:screenOrientation="portrait" />
+        <!-- 启动页 -->
+        <activity
+            android:name=".commonlib.view.ui.common.SplashActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 登录 -->
+        <activity
+            android:name=".commonlib.view.ui.common.LoginActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <!-- 主界面 -->
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+        <!-- 开单页面 -->
+        <activity
+            android:name=".view.ui.home.OpenOrderActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 系统消息页面 -->
+        <activity
+            android:name=".commonlib.view.ui.common.SystemRemindActivity"
+            android:screenOrientation="portrait" />
+        <!-- 分享商品链接给好友 -->
+        <activity
+            android:name=".commonlib.view.ui.common.Share2HxUsersActivity"
+            android:screenOrientation="portrait" />
+        <!-- 查看大图 -->
+        <activity
+            android:name=".commonlib.view.ui.common.ShowBigImageActivity"
+            android:screenOrientation="portrait" />
+        <!-- 群成员列表 -->
+        <activity
+            android:name=".commonlib.hxchat.ui.GroupMembersActivity"
+            android:screenOrientation="portrait" />
+        <!-- 选取联系人 -->
+        <activity
+            android:name=".commonlib.hxchat.ui.PickContactActivity"
+            android:screenOrientation="portrait" />
+        <!-- 获取分组 -->
+        <activity
+            android:name=".commonlib.hxchat.ui.EaseGroupActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".commonlib.hxchat.ui.EaseFriendRequestActivity"
+            android:screenOrientation="portrait" />
+        <!-- 新好友提醒界面 -->
+        <activity
+            android:name=".commonlib.hxchat.ui.EaseNewFriendsMsgActivity"
+            android:screenOrientation="portrait" />
+        <!-- 群聊天设置 -->
+        <activity
+            android:name=".commonlib.hxchat.ui.EaseGroupChatSettingActivity"
+            android:screenOrientation="portrait" />
+        <!-- 黑名单列表 -->
+        <activity
+            android:name=".commonlib.hxchat.ui.EaseBlackListActivity"
+            android:screenOrientation="portrait" />
+        <!-- 聊天设置 -->
+        <activity
+            android:name=".commonlib.hxchat.ui.ChatSettingActivity"
+            android:screenOrientation="portrait" />
+        <!-- 聊天搜索 -->
+        <activity
+            android:name=".commonlib.hxchat.ui.SearchMsgActivity"
+            android:screenOrientation="portrait" />
+        <!-- 聊天搜索结果展示页 -->
+        <activity
+            android:name=".commonlib.hxchat.ui.SearchMsgResultActivity"
+            android:screenOrientation="portrait" />
+        <!-- 搜索 联系人 -->
+        <activity
+            android:name=".commonlib.hxchat.ui.SeacharAddFriendActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <!-- 文章咨询 -->
+        <activity
+            android:name=".commonlib.view.ui.common.ArticleListActivity"
+            android:screenOrientation="portrait" />
+        <!-- 身份验证 -->
+        <activity
+            android:name=".commonlib.hxchat.ui.EaseIdentityVerificationActivity"
+            android:screenOrientation="portrait" />
+        <!-- 用户信息界面 -->
+        <activity
+            android:name=".commonlib.hxchat.ui.EaseUserProfileActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 用户信息界面 -->
+        <activity
+            android:name=".commonlib.hxchat.ui.UserProfileActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 用户信息界面 -->
+        <activity
+            android:name=".commonlib.hxchat.ui.PersonInfoActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 新建案例  或  修改案例 -->
+        <activity
+            android:name=".view.ui.mine.NewCaseActivity"
+            android:screenOrientation="portrait" />
+        <!-- 企业案例库 -->
+        <activity
+            android:name=".commonlib.view.ui.common.CaseLibActivity"
+            android:screenOrientation="portrait" />
+        <!-- 产品列表界面 -->
+        <activity
+            android:name=".commonlib.view.ui.common.ProductActivity"
+            android:screenOrientation="portrait" />
+        <!-- 快速洗车 -->
+        <activity
+            android:name=".view.ui.workorder.QuickWashCarActivity"
+            android:screenOrientation="portrait" />
+        <!-- 客户接待 -->
+        <activity
+            android:name=".view.ui.workorder.CustomerReceptionActivity"
+            android:screenOrientation="portrait" />
+        <!-- 限时促销列表界面 -->
+        <activity
+            android:name=".commonlib.view.ui.common.PromotionActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 团购列表界面 -->
+        <activity
+            android:name=".commonlib.view.ui.common.GroupPurchaseActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 众筹列表界面 -->
+        <activity
+            android:name=".commonlib.view.ui.common.CrowdFundingActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 用户管理界面 -->
+        <activity
+            android:name=".commonlib.view.ui.common.AccountMangermentActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 秒杀列表界面 -->
+        <activity
+            android:name=".commonlib.view.ui.common.SeckillActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 优惠券管理界面 -->
+        <activity
+            android:name=".view.ui.mine.DiscountCouponActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 赠送优惠券选择好友界面 -->
+        <activity
+            android:name=".view.ui.mine.SendCouponActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 工位等候区详细界面 -->
+        <activity
+            android:name=".view.ui.home.WaitingAreaActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 工位查看界面 -->
+        <activity
+            android:name=".view.ui.home.StationLookActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 添加服务商品界面 -->
+        <activity
+            android:name=".view.ui.home.AddServiceGoodsActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 代下单管理界面 -->
+        <activity
+            android:name=".view.ui.mine.InsteadOrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".commonlib.view.ui.common.MyCaseLibActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 关于界面 -->
+        <activity
+            android:name=".commonlib.view.ui.common.AboutActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 修改昵称 -->
+        <activity
+            android:name=".commonlib.view.ui.common.UpdateNickNameActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 个人说明 -->
+        <activity
+            android:name=".commonlib.view.ui.common.RemarkActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateVisible|stateAlwaysVisible" />
+
+        <!-- 推荐项目 -->
+        <activity
+            android:name=".commonlib.view.ui.common.RecommendListActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 提交订单 -->
+        <activity
+            android:name=".commonlib.view.ui.common.WorkOrderListActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 找回密码 -->
+        <activity
+            android:name=".commonlib.view.ui.common.ForgetPasswordActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 预约详情未进店界面 -->
+        <activity
+            android:name=".view.ui.home.BookingDetailsNotRecrptionActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 预约详情已接待界面 -->
+        <activity
+            android:name=".view.ui.home.BookingDetailsRecrptionActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 选择协助技师 -->
+        <activity
+            android:name=".view.ui.workorder.PickAssistUserActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 在线报名 -->
+        <activity
+            android:name=".commonlib.view.ui.common.ApplyOnlineActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 文章案例公用详情 -->
+        <activity
+            android:name=".commonlib.view.ui.common.ArticleCaseDetailActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 工单详情页 工单流水 -->
+        <activity
+            android:name=".commonlib.view.ui.common.WorkOrderDetailedActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 系统设置 -->
+        <activity
+            android:name=".view.ui.mine.SettingActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 获取手机验证码 -->
+        <activity
+            android:name=".commonlib.view.ui.common.VerifyPhoneActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 通知公告详情页 -->
+        <activity
+            android:name=".commonlib.view.ui.common.ShowContentActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 当天预约 -->
+        <activity
+            android:name=".view.ui.home.DayAppointmentActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 优惠劵 使用情况列表 -->
+        <activity
+            android:name=".view.ui.mine.CouponUserListActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 提成分配 -->
+        <activity
+            android:name=".view.ui.home.DistributionCommissionActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateUnspecified" />
+
+        <!-- 消费记录 -->
+        <activity
+            android:name=".commonlib.view.ui.common.RecordActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- webView -->
+        <activity
+            android:name=".commonlib.view.ui.common.WebViewActivity"
+            android:screenOrientation="portrait" />
+        <!-- imagepicker  start -->
+        <activity
+            android:name="com.ruanyun.imagepicker.ui.ImageCropActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ruanyun.imagepicker.ui.ImagePreviewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ruanyun.imagepicker.ui.ImagesGridActivity"
+            android:screenOrientation="portrait" />
+        <!-- imagepicker  end -->
+
+
+        <!-- 修改群名片 -->
+        <activity
+            android:name=".commonlib.hxchat.ui.EaseModifyGroupNameActivity"
+            android:screenOrientation="portrait" />
+        <!-- 环信功能页面 start -->
+        <activity
+            android:name=".commonlib.hxchat.ui.ChatActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".commonlib.hxchat.ui.ContextMenuActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".commonlib.hxchat.ui.ImageGridActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".commonlib.hxchat.ui.VideoCallActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".commonlib.hxchat.ui.VoiceCallActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hyphenate.easeui.ui.EaseShowNormalFileActivity"
+            android:screenOrientation="portrait" />
+        <!-- 显示下载大图页面 -->
+        <activity
+            android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" />
+        <activity
+            android:name="com.hyphenate.easeui.ui.EaseShowVideoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 环信功能页面 end -->
+
+
+        <!-- shareSDK 分享 -->
+        <activity
+            android:name="com.mob.tools.MobUIShell"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+
+            <!-- QQ和QQ空间分享 QQ登录的回调必须要配置的 -->
+            <intent-filter>
+
+                <!-- 100371282 -->
+                <data android:scheme="tencent1105860056" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <!-- 新浪微博客户端分享回调必须配置 -->
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- 微信分享回调 -->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <!-- 快通车牌识别 -->
+        <service
+            android:name="com.wintone.plateid.AuthService"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="wintone.plateid.authservice" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.wintone.plateid.RecogService"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="wintone.plateid.recogService" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name="com.wintone.demo.plateid.MemoryCameraActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:label="快号通开发包"
+            android:screenOrientation="portrait" />
+
+        <!-- 设置环信应用的appkey -->
+        <meta-data
+            android:name="EASEMOB_APPKEY"
+            android:value="ruanyun#chezhiyi" />
+        <!-- 百度地图api -->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+
+        <!-- 3ecea51f560650b1ed8a4b99808f52e8 -->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="8xLIhS1nyEsucC3V9fKZ2W0ZnpQ0aIsL" />
+
+        <!-- autolayout 所需的声明 -->
+        <meta-data
+            android:name="design_width"
+            android:value="1080" />
+        <meta-data
+            android:name="design_height"
+            android:value="1920" />
+
+        <!-- 主页面的等候区，结算区，质检区 界面 -->
+        <activity
+            android:name=".view.ui.home.WaitAreaActivity"
+            android:screenOrientation="portrait" />
+        <!-- 主页面预约列表界面 -->
+        <activity
+            android:name=".view.ui.home.AppointMentDealActivity"
+            android:screenOrientation="portrait" />
+        <!-- 主页面预约详情界面 -->
+        <activity
+            android:name=".view.ui.home.AppointMentDealDetailActivity"
+            android:screenOrientation="portrait" />
+        <!-- 门店汇总 -->
+        <activity
+            android:name=".view.ui.home.ShopCollectActivity"
+            android:screenOrientation="portrait" />
+        <!-- 退款页面 -->
+        <activity
+            android:name=".view.ui.home.RebackPayActivity"
+            android:screenOrientation="portrait" />
+        <!--退款审核处理界面-->
+        <activity
+            android:name=".view.ui.home.RebackPayDealActivity"
+            android:screenOrientation="portrait" />
+        <!-- 会员查询 -->
+        <activity
+        android:name=".view.ui.home.MemberSearchActivity"
+        android:screenOrientation="portrait" />
+    </application>
+
+</manifest>

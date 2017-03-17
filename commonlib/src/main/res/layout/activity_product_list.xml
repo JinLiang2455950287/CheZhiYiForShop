@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent"
+			  android:background="@color/bg_white"
+	android:orientation="vertical">
+	<!--产品 团购 众筹 限时促销 选择优惠券-->
+	<include layout="@layout/layout_topbar"/>
+	<TextView
+		android:id="@+id/tv_not_usable_coupon"
+		android:layout_width="match_parent"
+		android:layout_height="200px"
+		android:gravity="center"
+		android:visibility="gone"
+		android:textColor="@color/text_default"
+		android:text="无符合条件的优惠券..."/>
+	<include layout="@layout/layout_refresh_list_base"/>
+</LinearLayout>

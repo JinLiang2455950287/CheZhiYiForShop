@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_width="348px"
+			  android:layout_height="wrap_content"
+			  android:paddingTop="34px"
+			  android:id="@+id/ll_popwindow_layout"
+	android:background="@drawable/ease_bg_menu_pop">
+
+	<ListView
+		android:id="@+id/lv_popwindow_menu"
+		android:layout_width="348px"
+		android:layout_height="wrap_content"
+		android:scrollbars="none"></ListView>
+</LinearLayout>

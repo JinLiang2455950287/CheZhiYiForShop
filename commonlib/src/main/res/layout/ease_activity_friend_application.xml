@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--好友申请-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_topbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_user_profile"
+            android:layout_width="match_parent"
+            android:layout_height="234px"
+            android:layout_marginTop="28px"
+            android:background="@drawable/item_selector_default"
+            android:clickable="true"
+            android:orientation="horizontal">
+
+            <com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView
+                android:id="@+id/img_photo"
+                android:layout_width="190px"
+                android:layout_height="190px"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:src="@drawable/em_default_avatar"
+                app:border_color="@color/transparent"
+                app:border_width="0dp" />
+
+            <TextView
+                android:id="@+id/tv_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingBottom="37px"
+                android:paddingTop="37px"
+                android:text="夏日"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_xsmall" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/em_right_arrow_icon" />
+        </LinearLayout>
+
+        <View style="@style/divider_horizontal" />
+
+        <!--附加信息-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_selector_default"
+            android:clickable="true"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="62px"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="62px"
+                android:text="附加信息：" />
+
+            <TextView
+                android:id="@+id/tv_other_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="62px"
+                android:paddingRight="10dp"
+                android:paddingTop="62px"
+                android:text="发红包发红包发红包发红包"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_xsmall" />
+
+        </LinearLayout>
+
+        <View style="@style/divider_horizontal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="105px"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_refuse"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/em_button_bg"
+                android:gravity="center"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:text="拒绝"
+                android:textColor="@color/theme_color_default"
+                android:textSize="@dimen/text_size_xsmall" />
+
+            <Button
+                android:id="@+id/btn_agree"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_selector_default"
+                android:gravity="center"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:text="同意"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/text_size_xsmall" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

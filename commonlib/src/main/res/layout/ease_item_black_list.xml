@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!--黑名单 item-->
+    <LinearLayout
+        android:background="@drawable/item_selector_default"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView
+            android:id="@+id/iv_user_head_avatar"
+            android:layout_width="112px"
+            android:layout_height="110px"
+            android:layout_margin="27px"
+            android:src="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="80dp"
+            android:layout_weight="2"
+            android:paddingLeft="13px"
+            android:text="昵称昵称"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_size_xsmall" />
+
+        <View
+            style="@style/divide_vertical"
+            android:layout_marginBottom="17px"
+            android:layout_marginTop="17px" />
+
+        <TextView
+            android:id="@+id/tv_delete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingLeft="13px"
+            android:text="移除"
+            android:textColor="@color/theme_color_default"
+            android:textSize="@dimen/text_size_xsmall" />
+
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+</LinearLayout>

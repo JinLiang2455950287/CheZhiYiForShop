@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="195px"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="195px"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/tv_company_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="平安保险公司"
+                android:textColor="@color/text_black"
+                android:layout_marginTop="35px"
+                android:layout_marginLeft="53px"
+                android:textSize="@dimen/text_size_middle"
+                ></TextView>
+
+            <TextView
+                android:id="@+id/tv_telephone_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="95512"
+                android:textColor="@color/text_gray"
+                android:layout_marginLeft="53px"
+                android:layout_marginTop="20px"
+                android:layout_marginBottom="20px"
+                android:textSize="@dimen/text_size_middle"
+                ></TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="195px"
+            android:orientation="horizontal"
+            android:gravity="right"
+            >
+
+            <ImageView
+                android:layout_width="75px"
+                android:layout_height="80px"
+                android:layout_marginRight="70px"
+                android:src="@drawable/my_phone"
+                android:layout_gravity="center_vertical"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

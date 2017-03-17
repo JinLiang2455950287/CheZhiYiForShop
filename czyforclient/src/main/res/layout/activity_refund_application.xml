@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/layout_topbar" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/tv"
+                style="@style/text_my_vehicle"
+                android:text="退款金额 :" />
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingRight="27px"
+                android:textColor="@color/text_orange_deep"
+                android:textSize="@dimen/text_size_xsmall" />
+
+        </RelativeLayout>
+
+        <View style="@style/divider_horizontal" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <TextView
+                style="@style/text_my_vehicle"
+                android:text="退款原因 :" />
+
+            <TextView
+                android:id="@+id/tv_choice_reason"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:drawablePadding="28px"
+                android:drawableRight="@drawable/em_right_arrow_icon"
+                android:paddingRight="27px"
+                android:hint="请选择"
+                android:textColorHint="@color/theme_color_default"
+                android:textColor="@color/theme_color_default"
+                android:textSize="@dimen/text_size_xsmall" />
+
+        </RelativeLayout>
+
+        <View style="@style/divider_horizontal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_my_vehicle"
+                android:text="退款备注 :" />
+
+            <EditText
+                android:id="@+id/edit_remarks"
+                style="@style/text_black_style"
+                android:layout_width="match_parent"
+                android:layout_height="150px"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="填写你的其他退款原因"
+                android:paddingLeft="30px"
+                android:paddingRight="27px" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_submit"
+        android:text="提交申请"
+        style="@style/text_style"
+        android:background="@drawable/button_selector_default"
+        android:layout_marginRight="27px"
+        android:layout_marginLeft="27px"
+        android:layout_marginBottom="44px"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="141px" />
+
+</FrameLayout>

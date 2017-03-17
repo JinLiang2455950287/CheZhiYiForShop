@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_topbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--姓名-->
+            <LinearLayout
+                android:id="@+id/ll_name"
+                android:layout_width="match_parent"
+                android:layout_height="148px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="25px"
+                    android:text="您的姓名："
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_size_middle" />
+
+                <EditText
+                    android:id="@+id/edit_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:hint="请输入您的姓名"
+                    android:maxLength="12"
+                    android:textSize="@dimen/text_size_middle" />
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal" />
+
+            <!--联系电话-->
+            <LinearLayout
+                android:id="@+id/ll_phone"
+                android:layout_width="match_parent"
+                android:layout_height="148px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="25px"
+                    android:text="联系电话："
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_size_middle" />
+
+                <EditText
+                    android:id="@+id/edit_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="phone"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:hint="请输入您的电话"
+                    android:maxLength="11"
+                    android:textSize="@dimen/text_size_middle" />
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal" />
+
+            <!--报名人数-->
+            <LinearLayout
+                android:id="@+id/ll_number"
+                android:layout_width="match_parent"
+                android:layout_height="148px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="25px"
+                    android:text="报名人数："
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_size_middle" />
+
+                <EditText
+                    android:id="@+id/edit_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:inputType="number"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:maxLength="3"
+                    android:textColor="@color/theme_color_default"
+                    android:textSize="@dimen/text_size_middle" />
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal" />
+
+            <!--备注信息-->
+            <LinearLayout
+                android:id="@+id/ll_remark"
+                android:layout_width="match_parent"
+                android:layout_height="148px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="25px"
+                    android:text="备注信息："
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_size_middle" />
+
+                <TextView
+                    android:id="@+id/edit_remark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:singleLine="true"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:hint="填写您的特别要求..."
+                    android:textSize="@dimen/text_size_middle" />
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal" />
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginTop="25px" />
+
+            <!--报名费用-->
+            <LinearLayout
+                android:id="@+id/ll_price"
+                android:layout_width="match_parent"
+                android:layout_height="148px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="25px"
+                    android:text="报名费用："
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_size_middle" />
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_size_middle" />
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal" />
+
+            <!--合计金额-->
+            <LinearLayout
+                android:id="@+id/ll_total_price"
+                android:layout_width="match_parent"
+                android:layout_height="148px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="25px"
+                    android:text="合计金额："
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_size_middle" />
+
+                <TextView
+                    android:id="@+id/tv_total_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="#fd9500"
+                    android:textSize="@dimen/text_size_middle" />
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_pay"
+            android:layout_width="match_parent"
+            android:layout_height="140px"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="25px"
+            android:layout_marginLeft="25px"
+            android:layout_marginRight="25px"
+            android:background="@drawable/button_selector_default"
+            android:text="提交并支付"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_middle" />
+    </RelativeLayout>
+
+</LinearLayout>

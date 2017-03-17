@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="161px"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <View style="@style/divider_horizontal" />
+
+    <com.ruanyun.chezhiyi.commonlib.view.widget.BottomLayoutTextView
+        android:id="@+id/tv_home"
+        style="@style/bottom_layout_common"
+        android:layout_marginLeft="0px"
+        android:drawableTop="@drawable/ic_bottom_home"
+        android:text="首页" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="270px">
+
+        <com.ruanyun.chezhiyi.commonlib.view.widget.BottomLayoutTextView
+            android:id="@+id/tv_news"
+            style="@style/bottom_layout_common"
+            android:drawableTop="@drawable/ic_bottom_news"
+            android:text="消息" />
+
+        <TextView
+            android:id="@+id/tv_news_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/tv_news"
+            android:layout_alignRight="@+id/tv_news"
+            android:layout_marginEnd="28dp"
+            android:layout_marginRight="27dp"
+            android:layout_marginTop="10px"
+            android:background="@drawable/circle_red"
+            android:gravity="center"
+            android:paddingLeft="10px"
+            android:paddingRight="10px"
+            android:visibility="gone"
+            android:text="22"
+            android:textColor="@color/text_white"
+            android:textSize="10sp" />
+    </RelativeLayout>
+
+    <com.ruanyun.chezhiyi.commonlib.view.widget.BottomLayoutTextView
+        android:id="@+id/tv_find"
+        style="@style/bottom_layout_common"
+        android:layout_marginLeft="540px"
+        android:drawableTop="@drawable/ic_bottom_find"
+        android:text="发现" />
+
+    <com.ruanyun.chezhiyi.commonlib.view.widget.BottomLayoutTextView
+        android:id="@+id/tv_person"
+        style="@style/bottom_layout_common"
+        android:layout_marginLeft="810px"
+        android:drawableTop="@drawable/ic_bottom_personal"
+        android:text="我的" />
+
+</FrameLayout>

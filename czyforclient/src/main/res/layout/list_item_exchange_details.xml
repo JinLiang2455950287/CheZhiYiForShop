@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <!--积分兑换明细  会员卡充值明细item-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <TextView
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="41px"
+            android:paddingLeft="27px"
+            android:paddingTop="55px"
+            android:text="兑换明细"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_size_xsmall" />
+
+        <TextView
+            android:id="@+id/tv_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingBottom="41px"
+            android:paddingLeft="27px"
+            android:paddingRight="27px"
+            android:paddingTop="55px"
+            android:text="兑换明细"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_size_xsmall" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_residual_integral"
+            style="@style/text_radius_style"
+            android:paddingBottom="52px"
+            android:paddingLeft="27px"
+            android:paddingRight="10px"
+            android:text="剩余积分" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            style="@style/text_radius_style"
+            android:layout_alignParentRight="true"
+            android:paddingBottom="52px"
+            android:paddingLeft="27px"
+            android:paddingRight="27px"
+            android:text="02/09 12:00" />
+
+    </RelativeLayout>
+
+    <View style="@style/divider_horizontal_spacing" />
+</LinearLayout>

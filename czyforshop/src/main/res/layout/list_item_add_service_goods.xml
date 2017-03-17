@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent"
+	android:background="@color/white">
+<RelativeLayout
+	android:layout_width="match_parent"
+	android:layout_height="260px"
+	android:layout_marginLeft="25px"
+	android:layout_marginRight="25px">
+	<ImageView
+		android:id="@+id/iv_photo"
+		android:layout_width="172px"
+		android:layout_height="172px"
+		android:layout_marginTop="44px"
+		android:layout_marginRight="42px"
+		android:background="@drawable/corner_rectangle_gray_border"
+		android:padding="1px"
+		android:scaleType="centerCrop"
+		android:src="@drawable/default_img"/>
+	<TextView
+		android:id="@+id/tv_type"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="55px"
+		android:text="产品"
+		android:layout_marginRight="15px"
+		android:background="@drawable/shape_cp_bg"
+		android:textColor="@color/white"
+		android:textSize="10sp"
+		android:layout_toRightOf="@+id/iv_photo"/>
+	<TextView
+		android:id="@+id/tv_goods_name"
+		style="@style/text_black_style"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="48px"
+		android:singleLine="true"
+		android:layout_toRightOf="@+id/tv_type"
+		android:text="普洗一次普洗一次普洗一次普洗一次普洗一次" />
+
+	<TextView
+		android:id="@+id/tv_money"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="@color/text_orange_deep"
+		android:textSize="@dimen/text_size_xmiddle"
+		android:text="¥69"
+		android:layout_toRightOf="@+id/iv_photo"
+		android:layout_alignBottom="@+id/iv_photo"/>
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignBottom="@+id/iv_photo"
+		android:layout_alignParentRight="true"
+		android:background="@drawable/shape_border_gray"
+		android:orientation="horizontal">
+
+		<ImageButton
+			android:id="@+id/imbtn_sub"
+			android:layout_width="93px"
+			android:layout_height="93px"
+			android:background="@drawable/shape_btn_border_left"
+			android:src="@drawable/order_minus_normal" />
+
+		<View
+			style="@style/divide_vertical"
+			android:layout_width="1dp"
+			android:background="@color/border_color" />
+
+		<TextView
+			android:id="@+id/edit_number"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:background="@color/white"
+			android:gravity="center"
+			android:paddingLeft="50px"
+			android:paddingRight="50px"
+			android:text="0"
+			android:textColor="@color/text_black" />
+
+		<View
+			style="@style/divide_vertical"
+			android:layout_width="1dp"
+			android:background="@color/border_color" />
+
+		<ImageButton
+			android:id="@+id/imbtn_add"
+			android:layout_width="93px"
+			android:layout_height="93px"
+			android:background="@drawable/shape_btn_border_right"
+			android:src="@drawable/order_add_normal" />
+	</LinearLayout>
+</RelativeLayout>
+</LinearLayout>

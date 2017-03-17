@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 白色 背景的圆角矩形 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/corner_rectangle_bg_white_shape"
+          android:state_selected="true" />
+    <item android:drawable="@drawable/corner_rectangle_bg_white_shape"
+          android:state_pressed="true" />
+    <item android:drawable="@drawable/corner_rectangle_white_radius_shape" />
+
+</selector>

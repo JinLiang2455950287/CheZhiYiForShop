@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.ruanyun.chezhiyi.commonlib.view.widget.CleanableEditText
+        android:id="@+id/edit_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:imeOptions="actionSearch"
+        android:layout_marginLeft="150px"
+        android:layout_marginRight="150px"
+        android:background="@drawable/em_seabar_input"
+        android:drawableLeft="@drawable/icon_search_normal"
+        android:drawablePadding="10px"
+        android:padding="23px"
+        android:singleLine="true"
+        android:textSize="@dimen/text_size_xsmall" />
+</RelativeLayout>

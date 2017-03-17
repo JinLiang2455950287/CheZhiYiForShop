@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- topbbar-->
+    <item type="id" name="tv_topbar_title"/>
+    <item name="img_btn_left" type="id" />
+    <item name="img_btn_right" type="id"/>
+    <item name="tv_title_right" type="id"/>
+    <item name="tv_title_left" type="id"/>
+    <!--   toptabbutton -->
+    <item  type="id" name="toptab_left"/>
+    <item  type="id" name="toptab_middle"/>
+    <item  type="id" name="toptab_right"/>
+    <item type="id" name="toptab_middle1"></item>
+    <!--  emptyview -->
+    <item  type="id" name="emptyview_img"/>
+    <item  type="id" name="emptyview_tv_tip"/>
+    <item  type="id" name="emptyview_btn"/>
+</resources>

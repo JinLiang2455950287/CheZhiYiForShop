@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_marginTop="20px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_goods_name"
+            android:singleLine="true"
+            android:textColor="@color/text_default"
+            android:textSize="@dimen/text_size_middle"
+            android:paddingLeft="30px"
+            android:ellipsize="end"
+            android:layout_width="wrap_content"
+            android:layout_height="150px"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="25px"
+            android:layout_toLeftOf="@+id/ratingBar_goods"
+            android:gravity="center_vertical"
+            android:text=""/>
+
+        <RatingBar
+            android:id="@+id/ratingBar_goods"
+            style="@style/RatingBarcom"
+            android:layout_width="wrap_content"
+            android:layout_height="89px"
+            android:progressDrawable="@drawable/ratingbar_drawable"/>
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/edit_appraise_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="220px"
+        android:gravity="start"
+        android:background="@drawable/shape_edit_text_normal"
+        android:layout_marginLeft="25px"
+        android:layout_marginRight="25px"
+        android:padding="30px"
+        android:hint="请输入你对该商品的评价"
+        android:textSize="@dimen/text_size_xsmall"
+        android:textColorHint="@color/text_gray"
+        android:layout_marginBottom="10px"/>
+
+    <View
+         style="@style/divider_horizontal" />
+
+</LinearLayout>

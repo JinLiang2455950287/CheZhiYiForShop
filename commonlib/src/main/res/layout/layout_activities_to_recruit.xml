@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="25px"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="149px">
+
+        <ImageView
+            android:id="@+id/iv_activities_to_recruit"
+            android:layout_width="54px"
+            android:layout_height="54px"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="33px"
+            android:layout_marginRight="33px" />
+
+        <TextView
+            android:id="@+id/tv_activities_to_recruit_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="活动招募" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView_activities_to_recruit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

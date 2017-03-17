@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white"
+    android:orientation="vertical">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/view_addcar_header" />
+
+            <TextView
+                style="@style/text_black_style"
+                android:layout_width="match_parent"
+                android:layout_height="150px"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="27px"
+                android:paddingRight="27px"
+                android:text="@string/essential_information" />
+
+            <View style="@style/divider_horizontal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    style="@style/widthRatio"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/text_black_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="30px"
+                        android:paddingLeft="27px"
+                        android:paddingTop="52px"
+                        android:text="保险开始时间" />
+
+                <!--    <EditText
+                        android:id="@+id/edt"
+                        style="@style/text_black_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:digits="@string/number_digits"
+                        android:hint="请输入里程数"
+                        android:inputType="number"
+                        android:maxLength="9"
+                        android:paddingBottom="40px"
+                        android:paddingLeft="27px"
+                        android:paddingRight="27px"
+                        android:paddingTop="25px" />-->
+
+                    <TextView
+                        android:id="@+id/tv_choose_insurancedate"
+                        style="@style/text_black_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableRight="@drawable/icon_show_selector"
+                        android:hint="请选择保险开始日期"
+                        android:paddingBottom="40px"
+                        android:paddingLeft="27px"
+                        android:paddingRight="27px"
+                        android:paddingTop="25px" />
+
+                </LinearLayout>
+
+                <View style="@style/divide_vertical" />
+
+                <LinearLayout
+                    style="@style/widthRatio"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/text_black_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="30px"
+                        android:paddingLeft="27px"
+                        android:paddingTop="52px"
+                        android:text="@string/vehicle_on_time" />
+
+                    <TextView
+                        android:id="@+id/tv_choose_date"
+                        style="@style/text_black_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableRight="@drawable/icon_show_selector"
+                        android:hint="请选择上牌日期"
+                        android:paddingBottom="40px"
+                        android:paddingLeft="27px"
+                        android:paddingRight="27px"
+                        android:paddingTop="25px" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/text_my_vehicle"
+                    android:text="@string/license_plate" />
+
+                <TextView
+                    android:id="@+id/tv_plate_attr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="150px"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="23px"
+                    android:paddingRight="27px"
+                    android:text="皖"
+                    android:textColor="@color/theme_color_default"
+                    android:textSize="@dimen/text_size_xsmall" />
+
+                <EditText
+                    android:id="@+id/edt_car_platenum"
+                    style="@style/text_black_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="150px"
+                    android:background="@null"
+                    android:digits="@string/digits_plate_num"
+                    android:gravity="center_vertical"
+                    android:hint="请输入车牌号"
+                    android:maxLength="6"
+                    android:maxLines="1"
+                    android:paddingLeft="23px"
+                    android:paddingRight="27px" />
+
+
+            </LinearLayout>
+            <View style="@style/divider_horizontal" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/text_my_vehicle"
+                    android:text="@string/travel_mileage"  />
+
+                <EditText
+                    android:id="@+id/edt_travel_mile"
+                    style="@style/text_black_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="150px"
+                    android:background="@null"
+                    android:inputType="number"
+                    android:maxLength="9"
+                    android:digits="@string/number_digits"
+                    android:gravity="center_vertical"
+                    android:hint="请输入里程数"
+                    android:paddingLeft="23px"
+                    android:paddingRight="27px" />
+
+            </LinearLayout>
+            <View style="@style/divider_horizontal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/text_my_vehicle"
+                    android:text="@string/maintenance_mileage"  />
+
+                <EditText
+                    android:id="@+id/edt_maintenance_mile"
+                    style="@style/text_black_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="150px"
+                    android:background="@null"
+                    android:inputType="number"
+                    android:maxLength="9"
+                    android:digits="@string/number_digits"
+                    android:gravity="center_vertical"
+                    android:hint="请输入保养里程数"
+                    android:paddingLeft="23px"
+                    android:paddingRight="27px" />
+
+            </LinearLayout>
+            <View style="@style/divider_horizontal" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/text_my_vehicle"
+                    android:text="@string/vehicle_color" />
+
+                <TextView
+                    android:id="@+id/tv_car_color"
+                    style="@style/text_black_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="150px"
+                    android:background="@null"
+                    android:drawableRight="@drawable/icon_show_selector"
+                    android:gravity="center_vertical"
+                    android:hint="请选择车辆颜色"
+                    android:paddingLeft="23px"
+                    android:paddingRight="27px" />
+
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal" />
+
+
+            <TextView
+                style="@style/text_black_style"
+                android:layout_width="match_parent"
+                android:layout_height="150px"
+                android:layout_marginTop="28px"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="27px"
+                android:paddingRight="27px"
+                android:text="查违章信息" />
+
+            <View style="@style/divider_horizontal" />
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/text_my_vehicle"
+                    android:text="@string/frame_number" />
+
+                <EditText
+                    android:id="@+id/edt_frame_num"
+                    style="@style/text_black_style"
+                    android:layout_width="0dp"
+                    android:layout_height="150px"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:digits="@string/digits_plate_num"
+                    android:gravity="center_vertical"
+                    android:hint="请输入车架号码"
+                    android:paddingLeft="23px"
+                    android:paddingRight="27px" />
+
+                <ImageView
+                    android:id="@+id/img_help1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="27px"
+                    android:src="@drawable/mycar_sample_picture" />
+
+
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/text_my_vehicle"
+                    android:text="@string/engine_number" />
+
+                <EditText
+                    android:id="@+id/edt_engine_num"
+                    style="@style/text_black_style"
+                    android:layout_width="0dp"
+                    android:layout_height="150px"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:digits="@string/digits_plate_num"
+                    android:gravity="center_vertical"
+                    android:hint="请输入发动机号"
+                    android:paddingLeft="23px"
+                    android:paddingRight="27px" />
+
+                <ImageView
+                    android:id="@+id/img_help2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="27px"
+                    android:src="@drawable/mycar_sample_picture" />
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal" />
+
+            <TextView
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingBottom="30px"
+                android:paddingLeft="27px"
+                android:paddingRight="27px"
+                android:paddingTop="34px"
+                android:text="完善车辆信息可随时查询违章信息哦"
+                android:textSize="@dimen/text_size_small" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <include layout="@layout/layout_topbar"/>
+
+    <Button
+        android:id="@+id/btn_illegal_info"
+        style="@style/text_style"
+        android:layout_width="match_parent"
+        android:layout_height="148px"
+        android:layout_gravity="bottom"
+        android:background="@color/bg_button"
+        android:gravity="center"
+        android:text="@string/query_violation_information"
+        android:visibility="gone" />
+</RelativeLayout>

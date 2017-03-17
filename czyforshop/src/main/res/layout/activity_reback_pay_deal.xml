@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_reback_pay_deal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#14828691"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_topbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="50px"
+        android:layout_marginRight="50px"
+        android:layout_marginTop="30px"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="500px"
+            android:background="@drawable/corner_rectangle_bg_white_shape"
+            android:gravity="top"
+            android:maxLength="100"
+            android:padding="20px" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="140px"
+            android:layout_marginTop="50px"
+            android:background="@drawable/corner_rectangle_green_strok"
+            android:text="同意通过"
+            android:textColor="@color/white" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="140px"
+            android:layout_marginTop="50px"
+            android:background="@drawable/corner_rectangle_orange_strok"
+            android:text="拒绝通过"
+            android:textColor="@color/white" />
+
+
+    </LinearLayout>
+
+    <include layout="@layout/layout_topbar" />
+</LinearLayout>

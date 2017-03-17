@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="900px"
+        android:background="@drawable/mycar_bg"
+        >
+
+        <!--<com.ruanyun.chezhiyi.commonlib.view.widget.Topbar-->
+            <!--android:id="@+id/topbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="150px"/>-->
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="640px"
+            android:layout_marginLeft="88px"
+            android:layout_marginRight="88px"
+            android:layout_marginTop="170px"
+            android:clipChildren="false" />
+
+        <ImageView
+            android:id="@+id/indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:src="@drawable/mycar_triangle" />
+
+        <com.ruanyun.czy.client.view.widget.ViewPagerPointIndicator
+            android:id="@+id/indicator_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40px"
+            android:layout_gravity="bottom|center_horizontal"
+            android:orientation="horizontal" />
+    </FrameLayout>
+</merge>

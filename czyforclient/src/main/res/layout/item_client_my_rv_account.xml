@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_width="360px"
+			  android:layout_height="270px"
+			  android:gravity="center_horizontal"
+			  android:background="@drawable/item_selector_default"
+			  android:orientation="vertical">
+
+
+	<ImageView
+		android:id="@+id/iv_my_account_photo"
+		android:layout_width="122px"
+		android:layout_height="122px"
+		android:layout_marginTop="40px"
+		android:src="@drawable/my_account"/>
+
+	<TextView
+		android:id="@+id/tv_my_account_name"
+		android:gravity="center"
+		android:textSize="@dimen/text_size_xsmall"
+		android:textColor="@color/text_black"
+		android:layout_width="match_parent"
+		android:layout_height="90px"/>
+</LinearLayout>

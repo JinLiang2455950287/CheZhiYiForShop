@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_apply"
+    android:layout_width="match_parent"
+    android:layout_gravity="bottom"
+    android:layout_alignParentBottom="true"
+    android:layout_height="148px"
+    android:visibility="gone"
+    android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/btn_reserve"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="在线咨询"
+        android:layout_marginRight="2px"
+        android:textColor="@color/white"
+        android:background="@color/theme_color_default" />
+
+    <Button
+        android:id="@+id/btn_buy"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="我要报名"
+        android:layout_marginLeft="2px"
+        android:textColor="@color/white"
+        android:background="@color/theme_color_default" />
+
+</LinearLayout>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_login">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="120px"
+            android:layout_marginTop="230px"
+            android:src="@drawable/login_logo" />
+
+        <com.ruanyun.chezhiyi.commonlib.view.widget.CleanableEditText
+            android:id="@+id/edit_phone_input"
+            style="@style/edit_text_login_name"
+            android:drawableLeft="@drawable/login_icon_username"
+            android:hint="@string/phone_hint" />
+
+        <View style="@style/divider_horizontal_style" />
+
+        <com.ruanyun.chezhiyi.commonlib.view.widget.CleanableEditText
+            android:id="@+id/edit_password_input"
+            style="@style/edit_text_password"
+            android:drawableLeft="@drawable/login_icon_password"
+            android:hint="@string/password_hint" />
+
+        <View style="@style/divider_horizontal_style" />
+
+        <Button
+            android:id="@+id/btn_login"
+            style="@style/button_defaulted"
+            android:layout_marginTop="92px"
+            android:text="@string/btn_login" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="180px"
+            android:layout_marginRight="180px">
+
+            <TextView
+                android:id="@+id/tv_forget_password"
+                style="@style/text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="56px"
+                android:paddingTop="56px"
+                android:text="@string/forget_password" />
+
+            <TextView
+                android:id="@+id/tv_register"
+                style="@style/text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:paddingBottom="56px"
+                android:paddingTop="56px"
+                android:text="@string/register_immediately" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll_other_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="265px"
+            android:layout_marginRight="265px"
+            android:layout_marginTop="230px"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@color/bg_divider_horizontal" />
+
+            <TextView
+               android:textSize="@dimen/text_size_small"
+                android:textColor="@color/text_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="54px"
+                android:paddingRight="54px"
+                android:text="其他账号登录" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@color/bg_divider_horizontal" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll_other_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="320px"
+            android:layout_marginRight="320px"
+            android:layout_marginTop="104px"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/img_qq"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/login_other_qq" />
+
+            <ImageView
+                android:id="@+id/img_wx"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/login_other_ws" />
+
+            <ImageView
+                android:id="@+id/img_sina"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/login_other_sina" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

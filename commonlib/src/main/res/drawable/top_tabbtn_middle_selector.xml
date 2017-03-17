@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/station_tab_middle_selected" android:state_selected="true"></item>
+    <item android:drawable="@drawable/station_tab_middle_selected" android:state_pressed="true"></item>
+    <item android:drawable="@drawable/station_tab_middle" android:state_pressed="false"></item>
+    <item android:drawable="@drawable/station_tab_middle"></item>
+
+</selector>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/bg_white"
+              android:orientation="vertical">
+
+    <include layout="@layout/layout_topbar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!--<ListView-->
+            <!--android:id="@+id/list_goods"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
+
+            <include layout="@layout/layout_product_view"/>
+
+            <include
+                android:id="@+id/ll_product_operation"
+                layout="@layout/layout_product_operation"/>
+
+            <!--兑换积分-->
+            <LinearLayout
+                android:id="@+id/ll_need_score"
+                android:layout_width="match_parent"
+                android:layout_height="134px"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="25px"
+                    android:text="兑换积分"/>
+
+                <TextView
+                    android:id="@+id/tv_need_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:padding="25px"
+                    android:text="1234"
+                    android:textColor="@color/theme_color_default"/>
+            </LinearLayout>
+
+            <!--兑换支付-->
+            <LinearLayout
+                android:id="@+id/ll_need_pay"
+                android:layout_width="match_parent"
+                android:layout_height="134px"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="25px"
+                    android:text="兑换支付"/>
+
+                <TextView
+                    android:id="@+id/tv_need_pay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:padding="25px"
+                    android:text="¥1234"
+                    android:textColor="@color/bg_orange"
+                    android:textSize="@dimen/text_size_middle"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <View style="@style/divider_horizontal"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="149px"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_all_price"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center|right"
+            android:paddingRight="30px"
+            android:text="合计：￥120"
+            android:textColor="@color/text_black"/>
+
+        <Button
+            android:id="@+id/btn_submit_order"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#f3971a"
+            android:text="提交订单"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_middle"/>
+    </LinearLayout>
+
+</LinearLayout>

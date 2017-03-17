@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150px"
+
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/img_selector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30px"
+        android:visibility="visible"
+        android:background="@drawable/img_contact_pick_statu_selector"
+        />
+
+    <com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView
+        android:id="@+id/img_avatar"
+        android:layout_width="106px"
+        android:layout_height="106px"
+        android:src="@drawable/icon_new_friends"
+        android:layout_marginLeft="26px" />
+
+    <TextView
+        android:id="@+id/tv_contact_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40px"
+        android:textColor="@color/text_black" />
+</LinearLayout>

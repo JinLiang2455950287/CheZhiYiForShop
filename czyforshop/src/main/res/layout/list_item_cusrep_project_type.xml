@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_root"
+    android:layout_width="match_parent"
+    android:layout_height="153px"
+    android:clickable="true"
+    android:background="#EEF4F5">
+    <ImageView
+        android:id="@+id/img_service_sel"
+        android:layout_width="75px"
+        android:layout_height="75px"
+        android:layout_marginLeft="25px"
+        android:layout_centerVertical="true"
+        android:src="@drawable/img_contact_pick_statu_selector" />
+
+    <TextView
+        android:id="@+id/tv_project_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="120px"
+        android:text="服务内容"
+        android:textColor="@color/theme_color_default" />
+
+    <!--<TextView-->
+        <!--android:id="@+id/text"-->
+        <!--android:text=")"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginRight="98px"-->
+        <!--android:layout_toRightOf="@+id/tv_describe"-->
+        <!--android:layout_alignTop="@+id/tv_describe"-->
+        <!--android:layout_alignBottom="@+id/tv_describe"/>-->
+
+    <TextView
+        android:id="@+id/tv_describe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_marginLeft="28px"
+        android:layout_toRightOf="@id/tv_project_name"
+        android:text=""
+        android:textColor="@color/theme_color_default"
+        android:layout_marginRight="98px"/>
+
+    <ImageView
+        android:id="@+id/img_sel_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="28px"
+        android:src="@drawable/icon_show_selector" />
+    <View
+        style="@style/divider_horizontal"
+        android:layout_alignParentBottom="true"
+        />
+
+</RelativeLayout>

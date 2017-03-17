@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_topbar" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="156px"
+        android:background="@color/bg_commission"
+        android:drawableLeft="@drawable/icon_last_year"
+        android:drawableRight="@drawable/icon_next_year"
+        android:gravity="center"
+        android:paddingLeft="26px"
+        android:paddingRight="26px"
+        android:text="2019年(1234.00)"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/text_size_middle" />
+
+    <include layout="@layout/layout_refresh_list_base" />
+</LinearLayout>

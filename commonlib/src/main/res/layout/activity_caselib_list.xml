@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_topbar" />
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_white"
+        app:tabIndicatorColor="@color/transparent"
+        android:paddingLeft="30px"
+        app:tabMinWidth="70px"
+        android:isScrollContainer="true"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/theme_color_default"
+        app:tabTextColor="@color/text_black"
+        app:tabTextAppearance="@style/caselib_tabtext_style"
+        />
+
+    <com.ruanyun.chezhiyi.commonlib.view.widget.lazyviewpager.LazyViewPager
+        android:id="@+id/content_panle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+</LinearLayout>

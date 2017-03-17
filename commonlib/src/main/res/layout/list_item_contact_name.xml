@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="170px"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:background="@color/white"
+    >
+
+    <com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView
+        android:id="@+id/img_avatar"
+        android:layout_width="110px"
+        android:layout_height="112px"
+        android:layout_marginLeft="30px"
+        app:civ_border_width="0dp"
+        android:layout_gravity="center_vertical"
+        app:civ_border_color="@android:color/transparent"
+        android:src="@drawable/icon_new_friends" />
+
+    <TextView
+        android:id="@+id/tv_contact_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="178px"
+        android:text="adf"
+        android:textColor="@color/text_black" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/color_gray_line"
+        android:layout_gravity="bottom"
+        />
+</FrameLayout>

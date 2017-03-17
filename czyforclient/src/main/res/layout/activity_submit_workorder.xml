@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--工单结算-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_topbar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--工单项目-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_look_workorder"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="141px"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_alignTop="@id/text_booking_project"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:paddingRight="25px"-->
+                    <!--android:text="查看工单"-->
+                    <!--android:textColor="@color/theme_color_default"-->
+                    <!--android:textSize="@dimen/text_size_xsmall"/>-->
+
+                <TextView
+                    android:id="@+id/text_booking_project"
+                    style="@style/text_booking_gray"
+                    android:layout_width="match_parent"
+                    android:text="服务项目"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_booking_project"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_booking_project"
+                    android:background="@color/white"
+                    android:paddingLeft="25px"/>
+            </RelativeLayout>
+
+            <!--代下单项目-->
+            <TextView
+                android:id="@+id/tv_dai_xia_dan_name"
+                style="@style/text_booking_gray"
+                android:layout_width="match_parent"
+                android:layout_height="141px"
+                android:text="代下单项目"/>
+
+            <!--代下单项目列表-->
+            <ListView
+                android:id="@+id/lv_dai_xia_dan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"/>
+
+            <!--代下单项目小计-->
+            <LinearLayout
+                android:id="@+id/ll_dai_xia_dan_xiaoji"
+                android:layout_width="match_parent"
+                android:layout_height="131px"
+                android:background="@color/white"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="25px"
+                    android:text="小计"/>
+
+                <TextView
+                    android:id="@+id/tv_dai_xia_dan_total_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="25px"
+                    android:text=""
+                    android:textColor="@color/bg_oragle"/>
+            </LinearLayout>
+
+            <!--已购项目-->
+            <TextView
+                android:id="@+id/tv_yi_gou_name"
+                style="@style/text_booking_gray"
+                android:layout_width="match_parent"
+                android:layout_height="141px"
+                android:text="已购项目"/>
+
+            <!--已购项目列表-->
+            <ListView
+                android:id="@+id/lv_yi_gou"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <!--已购项目小计-->
+            <LinearLayout
+                android:id="@+id/ll_yi_gou_xiaoji"
+                android:layout_width="match_parent"
+                android:layout_height="131px"
+                android:background="@color/white"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="25px"
+                    android:text="小计"/>
+
+                <TextView
+                    android:id="@+id/tv_yi_gou_total_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="25px"
+                    android:text=""
+                    android:textColor="@color/bg_oragle"/>
+            </LinearLayout>
+
+            <!--优惠劵-->
+            <LinearLayout
+                android:id="@+id/ll_discount"
+                android:layout_width="match_parent"
+                android:layout_height="148px"
+                android:layout_marginBottom="30px"
+                android:layout_marginTop="30px"
+                android:background="@color/white"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="25px"
+                    android:text="优惠劵"/>
+
+                <TextView
+                    android:id="@+id/tv_discount_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10px"
+                    android:drawableRight="@drawable/em_right_arrow_icon"
+                    android:padding="25px"
+                    android:textColor="@color/bg_oragle"
+                    android:text="50元优惠劵"/>
+            </LinearLayout>
+
+            <!--订单总价-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="148px"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="25px"
+                    android:textColor="@color/black"
+                    android:text="订单总价"/>
+
+                <TextView
+                    android:id="@+id/tv_all_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="25px"
+                    android:text=""
+                    android:textColor="@color/bg_oragle"/>
+            </LinearLayout>
+
+            <!--代下单项目-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90px"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="25px"
+                    android:text="代下单项目"/>
+
+                <!--代下单项目总价-->
+                <TextView
+                    android:id="@+id/tv_dai_xia_dan_all_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="25px"
+                    android:text=""/>
+            </LinearLayout>
+
+            <!--预付定金-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90px"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="25px"
+                    android:text="预付定金"/>
+
+                <!--预付定金 金额-->
+                <TextView
+                    android:id="@+id/tv_down_payment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="25px"
+                    android:text=""/>
+            </LinearLayout>
+
+            <!--已购项目-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90px"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="25px"
+                    android:text="已购项目"/>
+
+                <!--已购项目总价-->
+                <TextView
+                    android:id="@+id/tv_yi_gou_all_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="25px"
+                    android:text=""/>
+            </LinearLayout>
+
+            <!--优惠金额-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90px"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="25px"
+                    android:text="优惠金额"/>
+
+                <!--优惠金额 -->
+                <TextView
+                    android:id="@+id/tv_discount_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="25px"
+                    android:text=""/>
+            </LinearLayout>
+
+            <!--待支付-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90px"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="25px"
+                    android:textColor="@color/black"
+                    android:text="待支付"/>
+
+                <!--待支付-->
+                <TextView
+                    android:id="@+id/tv_to_be_paid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="25px"
+                    android:text=""
+                    android:textColor="@color/bg_oragle"/>
+            </LinearLayout>
+
+            <!--合计-->
+            <LinearLayout
+                android:id="@+id/ll_work_all_price"
+                android:layout_width="match_parent"
+                android:layout_height="148px"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_work_all_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30px"
+                    android:text=""/>
+
+                <TextView
+                    android:id="@+id/tv_work_all_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20px"
+                    android:background="@color/bg_oragle"
+                    android:gravity="center"
+                    android:paddingBottom="30px"
+                    android:paddingLeft="60px"
+                    android:paddingRight="60px"
+                    android:paddingTop="30px"
+                    android:text="付款"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

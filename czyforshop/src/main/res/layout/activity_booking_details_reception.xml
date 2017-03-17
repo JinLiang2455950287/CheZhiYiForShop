@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/layout_topbar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_white">
+        <!--预约详情已接待-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/layout_booking_details_top"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="27px"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_to_shop_time"
+                    style="@style/text_booking_gray"
+                    android:text="到店时间"/>
+
+                <TextView
+                    android:id="@+id/tv_to_shop_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="141px"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_size_xsmall"/>
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_client_remark"
+                    style="@style/text_booking_gray"
+                    android:gravity="top"
+                    android:paddingTop="45px"
+                    android:text="客户备注信息"/>
+
+                <TextView
+                    android:id="@+id/tv_client_remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/text_remark"
+                    android:layout_toRightOf="@+id/text_remark"
+                    android:ellipsize="end"
+                    android:gravity="top"
+                    android:lineSpacingExtra="10px"
+                    android:paddingBottom="45px"
+                    android:paddingRight="25px"
+                    android:paddingTop="45px"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_size_xsmall"/>
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_service_remark"
+                    style="@style/text_booking_gray"
+                    android:gravity="top"
+                    android:paddingTop="45px"
+                    android:text="客服备注提醒"/>
+
+                <TextView
+                    android:id="@+id/tv_service_remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/text_remark"
+                    android:layout_toRightOf="@+id/text_remark"
+                    android:ellipsize="end"
+                    android:gravity="top"
+                    android:lineSpacingExtra="10px"
+                    android:paddingBottom="45px"
+                    android:paddingRight="25px"
+                    android:paddingTop="45px"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_size_xsmall"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

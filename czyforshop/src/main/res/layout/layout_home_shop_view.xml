@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="428px"
+    android:background="@color/theme_color_default"
+    android:orientation="vertical"
+    tools:showIn="@layout/fragment_home">
+
+    <TextView
+        android:id="@+id/tv_shop_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80px"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:text=""
+        android:textSize="@dimen/text_size_xmiddle" />
+
+    <LinearLayout
+        android:layout_below="@id/tv_shop_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="105px"
+        android:layout_marginBottom="30px"
+        android:orientation="horizontal">
+
+        <!--施工提成-->
+        <TextView
+            android:id="@+id/tv_push_money"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:lineSpacingExtra="10px"
+            android:textSize="42px"
+            android:textColor="@color/white"
+            android:text="施工提成\n¥0.0" />
+
+        <!--销售提成-->
+        <TextView
+            android:id="@+id/tv_sales_commissions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:lineSpacingExtra="10px"
+            android:textSize="42px"
+            android:text="销售提成\n¥0.0"
+            android:textColor="@color/white" />
+
+        <!--用户数-->
+        <TextView
+            android:id="@+id/tv_user_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:lineSpacingExtra="10px"
+            android:textSize="42px"
+            android:text="用户数\n190"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</RelativeLayout>

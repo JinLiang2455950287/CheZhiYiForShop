@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_shop_collect"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_topbar" />
+
+    <RelativeLayout
+        android:id="@+id/business_summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40px"
+        android:layout_marginRight="20px"
+        android:orientation="horizontal"
+        android:paddingBottom="30px"
+        android:paddingTop="30px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="营业汇总"
+            android:textColor="@color/black"
+            android:textSize="50px" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5px"
+        android:layout_marginLeft="10px"
+        android:layout_marginRight="10px"
+        android:background="@color/color_gray_line" />
+
+    <RelativeLayout
+        android:id="@+id/number_Stastic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40px"
+        android:layout_marginRight="20px"
+        android:orientation="horizontal"
+        android:paddingBottom="30px"
+        android:paddingTop="30px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="会员统计"
+            android:textColor="@color/black"
+            android:textSize="50px" />
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5px"
+        android:layout_marginLeft="10px"
+        android:layout_marginRight="10px"
+        android:background="@color/color_gray_line" />
+
+    <RelativeLayout
+        android:id="@+id/new_User"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40px"
+        android:layout_marginRight="20px"
+        android:orientation="horizontal"
+        android:paddingBottom="30px"
+        android:paddingTop="30px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="新增用户"
+            android:textColor="@color/black"
+            android:textSize="50px" />
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5px"
+        android:layout_marginLeft="10px"
+        android:layout_marginRight="10px"
+        android:background="@color/color_gray_line" />
+
+    <RelativeLayout
+        android:id="@+id/sale_good"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40px"
+        android:layout_marginRight="20px"
+        android:orientation="horizontal"
+        android:paddingBottom="30px"
+        android:paddingTop="30px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="销售商品"
+            android:textColor="@color/black"
+            android:textSize="50px" />
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5px"
+        android:layout_marginLeft="10px"
+        android:layout_marginRight="10px"
+        android:background="@color/color_gray_line" />
+
+</LinearLayout>

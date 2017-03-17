@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CheZhiYiForShop.iml" filepath="$PROJECT_DIR$/CheZhiYiForShop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/carrecomentlib/carrecomentlib.iml" filepath="$PROJECT_DIR$/carrecomentlib/carrecomentlib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/commonlib/commonlib.iml" filepath="$PROJECT_DIR$/commonlib/commonlib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/czyforclient/czyforclient.iml" filepath="$PROJECT_DIR$/czyforclient/czyforclient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/czyforshop/czyforshop.iml" filepath="$PROJECT_DIR$/czyforshop/czyforshop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easeui/easeui.iml" filepath="$PROJECT_DIR$/easeui/easeui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/imagepicker/imagepicker.iml" filepath="$PROJECT_DIR$/imagepicker/imagepicker.iml" />
+    </modules>
+  </component>
+</project>

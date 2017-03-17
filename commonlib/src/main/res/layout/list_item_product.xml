@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@drawable/item_selector_default"
+              android:descendantFocusability="blocksDescendants"
+              android:orientation="vertical">
+
+    <!--产品、团购、限时促销、众筹、秒杀item-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="45px"
+        android:layout_marginLeft="27px"
+        android:layout_marginRight="27px"
+        android:layout_marginTop="45px"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="260px"
+            android:layout_height="260px">
+
+            <ImageView
+                android:id="@+id/iv_product_photo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:background="@drawable/corner_rectangle_gray_border"
+                android:padding="1px"
+                android:scaleType="centerCrop"
+                android:src="@drawable/default_img"/>
+
+            <TextView
+                android:id="@+id/tv_purchase_time"
+                android:layout_width="match_parent"
+                android:layout_height="52px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/smaller_transparent_black"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="限时购: 08.30-09.03"
+                android:textColor="@color/text_white"
+                android:textSize="9sp"
+                android:visibility="gone"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="52px"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_title"
+                style="@style/text_black_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15px"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:paddingTop="20px"
+                android:singleLine="true"
+                android:text=""/>
+
+            <TextView
+                android:id="@+id/tv_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:paddingBottom="35px"
+                android:paddingTop="5px"
+                android:singleLine="true"
+                android:text="副标题"
+                android:textColor="@color/text_comment_gray"
+                android:textSize="@dimen/text_size_small"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="40px"
+                android:visibility="gone">
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="262px"
+                    android:layout_height="37px"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="65px"
+                    android:focusable="false"
+                    android:max="100"
+                    android:progressDrawable="@drawable/progressbar_hrizontal_color"/>
+
+                <TextView
+                    android:id="@+id/tv_percentage"
+                    android:layout_width="262px"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="10sp"/>
+
+                <TextView
+                    android:id="@+id/tv_limit_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="center"
+                    android:paddingRight="20px"
+                    android:textColor="@color/theme_color_default"
+                    android:textSize="@dimen/text_size_small"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5px">
+
+                <TextView
+                    android:id="@+id/tv_sold_number"
+                    style="@style/text_item_product"
+                    android:layout_alignBottom="@+id/tv_price"
+                    android:layout_centerVertical="false"
+                    android:layout_marginBottom="5px"
+                    android:layout_toRightOf="@id/tv_price"
+                    android:paddingBottom="2px"
+                    android:text="已售123"
+                    android:textColor="@color/text_comment_gray"/>
+
+                <TextView
+                    android:id="@+id/tv_purchase"
+                    style="@style/text_red_bg"
+                    android:layout_width="200px"
+                    android:layout_height="105px"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerVertical="false"
+                    android:paddingLeft="1px"
+                    android:paddingRight="1px"
+                    android:singleLine="true"
+                    android:text="¥999999抢"/>
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100px"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="bottom"
+                    android:text="¥745"
+                    android:textColor="@color/text_orange"
+                    android:textSize="@dimen/text_size_large"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal"/>
+</LinearLayout>

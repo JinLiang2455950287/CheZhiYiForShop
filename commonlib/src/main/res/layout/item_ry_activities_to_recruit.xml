@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--活动招募图片-->
+<ImageView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/iv_activities_to_recruit"
+    android:layout_width="match_parent"
+    android:layout_height="348px"
+    android:layout_marginBottom="24px"
+    android:scaleType="centerCrop"/>

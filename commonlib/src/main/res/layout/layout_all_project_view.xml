@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_all_project"
+    android:layout_width="match_parent"
+    android:layout_height="148px"
+    android:padding="30px"
+    android:layout_marginTop="26px"
+    android:background="@drawable/item_selector_default">
+
+    <ImageView
+        android:id="@+id/iv_recommend"
+        android:layout_width="56px"
+        android:layout_height="56px"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="30px" />
+
+    <TextView
+        android:id="@+id/tv_all_project"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="30px"
+        android:drawableRight="@drawable/icon_go"
+        android:layout_toRightOf="@id/iv_recommend"
+        android:textColor="@color/headline_text_black"
+        android:text="推荐项目" />
+</RelativeLayout>

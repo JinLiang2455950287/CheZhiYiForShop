@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--客户接待 非会员-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_white"
+        android:orientation="vertical">
+
+        <include layout="@layout/layout_topbar" />
+
+        <TextView
+            style="@style/text_black_style"
+            android:layout_width="match_parent"
+            android:layout_height="150px"
+            android:layout_margin="27px"
+            android:background="@drawable/white_shape"
+            android:drawableRight="@drawable/icon_scan"
+            android:gravity="center_vertical"
+            android:paddingLeft="43px"
+            android:paddingRight="43px"
+            android:text="皖" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/tv_appointe_phone"
+                style="@style/text_black_style"
+                android:layout_width="0dp"
+                android:layout_height="150px"
+                android:layout_margin="27px"
+                android:layout_weight="1"
+                android:background="@drawable/white_shape"
+                android:gravity="center_vertical"
+                android:hint="输入车主手机号码"
+                android:inputType="phone"
+                android:paddingLeft="43px"
+                android:paddingRight="43px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="150px"
+                android:layout_margin="27px"
+                android:gravity="center_vertical"
+                android:paddingLeft="43px"
+                android:paddingRight="43px"
+                android:text="非会员"
+                android:textColor="@color/blue_text"
+                android:textSize="@dimen/text_size_xsmall" />
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/text_default"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="55px"
+            android:paddingLeft="27px"
+            android:paddingRight="27px"
+            android:paddingTop="55px"
+            android:text="选择服务" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <RelativeLayout
+                android:id="@+id/rl_add_server"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="27px"
+                android:background="@drawable/shape_blue_frame_linearlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="147px"
+                    android:layout_centerHorizontal="true"
+                    android:drawableLeft="@drawable/icon_add_new_pro"
+                    android:drawablePadding="26px"
+                    android:gravity="center"
+                    android:text="添加服务项目"
+                    android:textColor="@color/blue_text"
+                    android:textSize="@dimen/text_size_xsmall" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            style="@style/text_default"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="55px"
+            android:paddingLeft="27px"
+            android:paddingRight="27px"
+            android:paddingTop="55px"
+            android:text="填写服务备注" />
+
+        <EditText
+            style="@style/text_black_style"
+            android:layout_width="match_parent"
+            android:layout_height="150px"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:hint="填写内部服务备注"
+            android:paddingLeft="54px"
+            android:paddingRight="54px" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_submit"
+        style="@style/text_submit"
+        android:layout_gravity="bottom"
+        android:text="提交" />
+
+</FrameLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp"
+    android:background="@drawable/corner_rectangle_white_radius_shape"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/text_black"
+            android:paddingBottom="47px"
+            android:paddingTop="62px"
+            android:text="行驶证上可查看车架号和发动机号" />
+
+        <ImageView
+            android:id="@+id/iv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="23px"
+            android:src="@drawable/mycar_sample_close" />
+    </RelativeLayout>
+
+    <ImageView
+        android:src="@drawable/mycar_sample"
+        android:id="@+id/iv_drive_license"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:minWidth="626px"
+        android:scaleType="centerCrop" />
+</LinearLayout>

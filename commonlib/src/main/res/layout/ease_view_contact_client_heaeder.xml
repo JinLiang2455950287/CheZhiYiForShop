@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_new_friend"
+        style="@style/ll_contact_header_common">
+
+        <cn.bingoogolapple.badgeview.BGABadgeImageView
+            android:id="@+id/bgaimg_new_friend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="27px"
+            android:layout_marginRight="13px"
+            android:src="@drawable/icon_new_friends" />
+
+        <TextView
+            style="@style/text_contact_header"
+            android:text="@string/new_friends"
+            android:layout_gravity="center_vertical"
+            />
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+
+    <LinearLayout
+        android:id="@+id/ll_my_groups"
+        style="@style/ll_contact_header_common">
+
+        <TextView
+            style="@style/text_contact_header"
+            android:drawableLeft="@drawable/icon_my_groups"
+            android:text="@string/my_groups" />
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+
+    <!-- <LinearLayout
+         android:id="@+id/ll_black_list"
+         style="@style/ll_contact_header_common">
+
+         <TextView
+             style="@style/text_contact_header"
+             android:drawableLeft="@drawable/icon_blacklist"
+             android:gravity="center_vertical"
+             android:text="@string/black_lists" />
+     </LinearLayout>-->
+
+    <View style="@style/divider_horizontal" />
+</LinearLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/corner_rectangle_white_selector"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="50px"
+            android:paddingTop="50px"
+            android:text="@string/choose_your_refund_reason"
+            android:textColor="@color/theme_color_default"
+            android:textSize="@dimen/text_size_middle" />
+
+        <View style="@style/divider_horizontal" />
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@null"
+            android:scrollbars="none" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="5dp"
+        android:layout_marginTop="28px"
+        android:background="@drawable/corner_rectangle_white_selector"
+        android:gravity="center"
+        android:paddingBottom="50px"
+        android:paddingTop="50px"
+        android:text="取消"
+        android:textColor="@color/theme_color_default"
+        android:textSize="@dimen/text_size_middle" />
+
+</LinearLayout>

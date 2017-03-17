@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_width="match_parent"
+			  android:layout_height="wrap_content"
+			  android:id="@+id/ll_popwindow_layout"
+	android:background="@color/white">
+
+	<GridView
+		android:id="@+id/gv_popwindow_car_region"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@color/bg_white"
+		android:numColumns="8"
+		android:paddingLeft="25px"
+		android:paddingTop="35px"
+		android:scrollbars="none"/>
+</LinearLayout>

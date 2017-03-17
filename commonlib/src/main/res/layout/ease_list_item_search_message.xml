@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="235px">
+
+<com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView
+    android:id="@+id/img_avatar"
+    android:layout_width="170px"
+    android:layout_height="170px"
+    android:layout_marginLeft="25px"
+    android:layout_centerVertical="true"
+    android:src="@drawable/icon_new_friends"
+    />
+
+    <TextView
+        android:id="@+id/tv_user_nick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_black"
+        android:layout_toRightOf="@id/img_avatar"
+        android:layout_marginTop="50px"
+        android:layout_marginLeft="38px"
+        android:text="昵称"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_chat_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40px"
+        android:layout_marginLeft="38px"
+        android:text="聊天内容"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:layout_below="@id/tv_user_nick"
+        android:layout_toRightOf="@id/img_avatar"
+        />
+</com.zhy.autolayout.AutoRelativeLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="115px">
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="30px"
+        style="@style/CustomCheckboxTheme"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="35px"
+        android:text="五一保养享七折优惠"
+        android:textColor="@color/text_black"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="115px"
+        android:layout_gravity="center_vertical"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_marginRight="25px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_launcher"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="250px"
+    android:background="@drawable/item_selector_default"
+    android:descendantFocusability="blocksDescendants">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/item_selector_default"
+        android:descendantFocusability="blocksDescendants"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="60px"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView
+                android:id="@+id/iv_product_photo"
+                android:layout_width="150px"
+                android:layout_height="150px"
+                android:scaleType="centerCrop"
+                android:src="@drawable/default_img" />
+            <!--android:background="@color/smaller_transparent_black"-->
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10px"
+                android:lines="1"
+                android:text="张某某" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="60px"
+            android:layout_marginRight="250px"
+            android:layout_marginTop="40px"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_number"
+                android:layout_width="wrap_content"
+                android:layout_height="0px"
+                android:layout_weight="1"
+                android:ellipsize="middle"
+                android:gravity="center_vertical"
+                android:lines="1"
+                android:text="12345678" />
+
+            <TextView
+                android:id="@+id/tv_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="0px"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:lines="1"
+                android:text="18：00拿车！" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3px"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:background="@color/gray_border" />
+</RelativeLayout>

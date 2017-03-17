@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?><!--群组聊天设置界面-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_topbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--群组名称-->
+            <LinearLayout
+                android:id="@+id/ll_group_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="27px"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/widthRatio"
+                    android:layout_height="149px"
+                    android:gravity="center_vertical"
+                    android:padding="30px"
+                    android:text="群组名称"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/tv_group_name"
+                    style="@style/widthRatio"
+                    android:ellipsize="end"
+                    android:gravity="right"
+                    android:maxLines="1"
+                    android:padding="30px"
+                    android:text="" />
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal" />
+            <!--群组头像-->
+            <RelativeLayout
+                android:id="@+id/rl_group_head"
+                android:layout_width="match_parent"
+                android:layout_height="149px"
+                android:background="@color/white">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="30px"
+                    android:text="群组头像"
+                    android:textColor="@color/black" />
+
+                <com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView
+                    android:id="@+id/iv_group_head"
+                    android:layout_width="125px"
+                    android:layout_height="125px"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="40px"
+                    android:layout_toLeftOf="@+id/icon_image_right"
+                    android:src="@drawable/default_img" />
+
+                <ImageView
+                    android:id="@+id/icon_image_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:paddingRight="30px"
+                    android:src="@drawable/em_ic_right_arrow" />
+            </RelativeLayout>
+
+            <View style="@style/divider_horizontal" />
+            <!--群组成员-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:minHeight="376px"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="149px"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/widthRatio"
+                        android:layout_gravity="center"
+                        android:ellipsize="end"
+                        android:padding="30px"
+                        android:text="群组成员"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/tv_group_number"
+                        style="@style/widthRatio"
+                        android:layout_gravity="center_vertical"
+                        android:drawablePadding="10px"
+                        android:drawableRight="@drawable/em_ic_right_arrow"
+                        android:ellipsize="end"
+                        android:gravity="right|center_vertical"
+                        android:padding="30px"
+                        android:text="数量" />
+                </LinearLayout>
+
+                <!--  群组成员的头像-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:minHeight="200px"
+                    android:orientation="horizontal"
+                    android:padding="15px">
+
+                    <com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView
+                        android:id="@+id/iv_group_head_1"
+                        android:layout_width="165px"
+                        android:layout_height="165px"
+                        android:layout_marginLeft="20px"
+                        android:visibility="gone"
+                        app:border_color="@android:color/transparent" />
+
+                    <com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView
+                        android:id="@+id/iv_group_head_2"
+                        android:layout_width="165px"
+                        android:layout_height="165px"
+                        android:layout_marginLeft="20px"
+                        android:visibility="gone"
+                        app:border_color="@android:color/transparent" />
+
+                    <com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView
+                        android:id="@+id/iv_group_head_3"
+                        android:layout_width="165px"
+                        android:layout_height="165px"
+                        android:layout_marginLeft="20px"
+                        android:visibility="gone"
+                        app:border_color="@android:color/transparent" />
+
+                    <com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView
+                        android:id="@+id/iv_group_head_4"
+                        android:layout_width="165px"
+                        android:layout_height="165px"
+                        android:layout_marginLeft="20px"
+                        android:visibility="gone"
+                        app:border_color="@android:color/transparent" />
+
+                    <ImageView
+                        android:id="@+id/iv_group_head_5"
+                        android:layout_width="165px"
+                        android:layout_height="165px"
+                        android:layout_marginLeft="20px"
+                        android:src="@drawable/ease_group_add" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--  消息免打扰  -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="149px"
+                android:layout_marginTop="40px"
+                android:background="@color/white"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="30px"
+                    android:text="消息免打扰"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/btn_message_alert_settings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="30px"
+                    android:background="@drawable/ease_switch_button_selector" />
+            </RelativeLayout>
+
+            <View style="@style/divider_horizontal" />
+            <!--置顶聊天-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="149px"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:padding="30px"
+                    android:text="置顶聊天"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/btn_message_stick_settings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="30px"
+                    android:background="@drawable/ease_switch_button_selector" />
+            </RelativeLayout>
+
+            <!--  查找聊天内容  -->
+            <TextView
+                android:id="@+id/tv_find_chat_record"
+                android:layout_width="match_parent"
+                android:layout_height="149px"
+                android:layout_marginTop="40px"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:padding="30px"
+                android:text="查找聊天内容"
+                android:textColor="@color/black" />
+
+            <!--  清空聊天记录  -->
+            <TextView
+                android:id="@+id/tv_clear_chat_record"
+                android:layout_width="match_parent"
+                android:layout_height="149px"
+                android:layout_marginTop="40px"
+                android:background="@color/white"
+                android:padding="30px"
+                android:text="清空聊天记录"
+                android:textColor="@color/black" />
+
+            <!--删除并退出  -->
+            <Button
+                android:id="@+id/btn_exit_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="60px"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="60px"
+                android:background="#FF2C07"
+                android:text="删除并退出"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

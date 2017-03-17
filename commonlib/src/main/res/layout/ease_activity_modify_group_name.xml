@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white"
+    android:orientation="vertical">
+    <!--修改群组名称-->
+    <include layout="@layout/layout_topbar" />
+
+    <View
+        style="@style/divider_horizontal"
+        android:layout_marginTop="60px" />
+
+    <com.ruanyun.chezhiyi.commonlib.view.widget.CleanableEditText
+        android:id="@+id/edit_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="50px"
+        android:paddingLeft="27px"
+        android:paddingRight="27px"
+        android:paddingTop="50px"
+        android:textColor="@color/text_black"
+        android:textSize="@dimen/text_size_xsmall" />
+
+    <View style="@style/divider_horizontal" />
+
+    <TextView
+        android:id="@+id/tv_words_count"
+        style="@style/text_default"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:paddingBottom="19px"
+        android:paddingRight="27px"
+        android:paddingTop="19px"
+       />
+</LinearLayout>

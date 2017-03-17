@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center_horizontal">
+
+    <include
+         layout="@layout/layout_topbar" />
+
+    <TextView
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvTechnicalSupport"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="121dp"
+        android:background="@color/white"
+        android:padding="40px"
+        android:text="检查更新"
+        android:textColor="@color/black_deep"
+        android:textSize="@dimen/text_size_middle" />
+
+    <TextView
+        android:id="@+id/tvVersions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/button"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="79dp"
+        android:background="@drawable/shape_corner_border_gray"
+        android:paddingLeft="20px"
+        android:paddingRight="20px"
+        android:text="v1.0" />
+
+    <ImageView
+        android:layout_width="566px"
+        android:layout_height="273px"
+        android:layout_alignBottom="@id/tvVersions"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="41dp"
+        android:src="@drawable/my_about_logo" />
+
+    <TextView
+        android:id="@+id/tvTechnicalSupport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="200px"
+        android:gravity="center"
+        android:text="技术支持" />
+
+    <TextView
+        android:id="@+id/tvCopRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="40px"
+        android:gravity="center"
+        android:text="\@2016 RuanYun Network Technology Co.,Ltd"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/tvCompany"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:gravity="center"
+        android:text="安徽软云信息科技有限公司"
+        android:layout_above="@id/tvCopRight"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15px" />
+
+</RelativeLayout>

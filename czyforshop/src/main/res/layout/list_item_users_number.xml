@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <!--用户数item-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="44px"
+        android:layout_marginLeft="27px"
+        android:layout_marginRight="27px">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/icon_usernum_hp"
+            android:drawablePadding="25px"
+            android:paddingTop="36px"
+            android:textColor="@color/text_default"
+            android:textSize="@dimen/text_size_xsmall" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingTop="36px"
+            android:text="09/09 12:00"
+            android:textColor="@color/text_default"
+            android:textSize="@dimen/text_size_xsmall" />
+
+        <TextView
+            android:id="@+id/tv_cars_num"
+            style="@style/text_radius_style"
+            android:layout_below="@id/tv_name"
+            android:layout_marginTop="50px"
+            android:background="@drawable/corner_rectangle_green_shape"
+            android:paddingLeft="29px"
+            android:paddingRight="29px"
+            android:text="皖A88888"
+            android:textColor="@color/theme_color_default" />
+
+        <TextView
+            android:id="@+id/tv_type"
+            style="@style/text_radius_style"
+            android:layout_below="@id/tv_name"
+            android:layout_marginLeft="35px"
+            android:layout_marginTop="50px"
+            android:layout_toRightOf="@id/tv_cars_num"
+            android:background="@drawable/corner_rectangle_grange_shapr"
+            android:paddingLeft="22px"
+            android:paddingRight="22px"
+            android:text="清洗清洗"
+            android:textColor="@color/text_white" />
+
+    </RelativeLayout>
+
+    <View style="@style/divider_horizontal_spacing" />
+</LinearLayout>

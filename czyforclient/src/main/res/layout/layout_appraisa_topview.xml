@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_appraise_top"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/ll_shop_app"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingBottom="20px">
+
+        <TextView
+            android:id="@+id/tv_shop_app"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="评价商家"/>
+
+        <View
+            android:id="@+id/view_line"
+            style="@style/divider_horizontal"
+            android:layout_below="@id/tv_shop_app"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+        <RatingBar
+            android:id="@+id/rb_satisfaction"
+            style="?android:ratingBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="106px"
+            android:layout_gravity="center"
+            android:layout_marginTop="36px"
+            android:numStars="5"
+            android:progressDrawable="@drawable/rating_bar"
+            android:stepSize="1"/>
+
+        <EditText
+            android:id="@+id/et_mer_appraise"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="220px"
+            android:layout_marginLeft="25px"
+            android:layout_marginRight="25px"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_edit_text_normal"
+            android:padding="30px"
+            android:gravity="start"
+            android:textSize="@dimen/text_size_xsmall"
+            android:hint="请输入你对商家的评价"
+            android:paddingBottom="10px" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_goods"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20px"
+            android:background="@color/white"
+            android:padding="10dp"
+            android:text="评价服务"/>
+
+        <View
+            android:id="@+id/view_line_goods"
+            style="@style/divider_horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:orientation="vertical"
+				android:id="@+id/rl_waiting_area"
+				android:background="@color/bg_white">
+
+	<include layout="@layout/layout_topbar"/>
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/topbar"
+		android:layout_above="@+id/btn_order_receiving">
+
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@color/white">
+
+			<include layout="@layout/list_item_await_car"/>
+
+			<TextView
+				android:id="@+id/tv_user_remark"
+				android:layout_below="@+id/rl_waiting_car_info"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:paddingTop="42px"
+				android:paddingBottom="42px"
+				android:paddingLeft="25px"
+				android:paddingRight="25px"
+				android:textColor="@color/text_black"
+				android:text="客户备注：啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"/>
+
+			<View
+				android:id="@+id/divider2"
+				style="@style/divider_horizontal"
+				android:layout_below="@+id/tv_user_remark"/>
+
+			<View
+				android:id="@+id/divider3"
+				android:layout_width="match_parent"
+				android:layout_height="25px"
+				android:background="@color/bg_white"
+				android:layout_below="@+id/divider2"/>
+
+			<TextView
+				android:id="@+id/text_workorder_number"
+				style="@style/text_await_area"
+				android:text="工单编号"
+				android:layout_below="@+id/divider3"/>
+
+			<TextView
+				android:id="@+id/tv_workorder_number"
+				style="@style/text_await_area"
+				android:text="2016051226654"
+				android:layout_width="match_parent"
+				android:textColor="@color/text_black"
+				android:layout_alignTop="@+id/text_workorder_number"
+				android:layout_toRightOf="@+id/text_workorder_number"/>
+
+			<View
+				android:id="@+id/divider4"
+				style="@style/divider_horizontal"
+				android:layout_below="@+id/text_workorder_number"/>
+
+			<TextView
+				android:id="@+id/text_service_item"
+				style="@style/text_await_area"
+				android:text="服务项目"
+				android:layout_below="@+id/text_workorder_number"/>
+
+			<ListView
+				android:id="@+id/lv_service_item"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_below="@+id/text_service_item"/>
+
+			<View
+				android:id="@+id/divider5"
+				style="@style/divider_horizontal"
+				android:layout_below="@+id/lv_service_item"/>
+
+			<TextView
+				android:id="@+id/text_service_gongwei"
+				style="@style/text_await_area"
+				android:text="服务工位"
+				android:layout_below="@+id/divider5"/>
+
+			<TextView
+				android:id="@+id/tv_service_gongwei"
+				style="@style/text_await_area"
+				android:text="选择工位"
+				android:layout_width="wrap_content"
+				android:textColor="@color/theme_color_default"
+				android:paddingRight="25px"
+				android:background="@drawable/item_selector_default"
+				android:layout_alignTop="@+id/text_service_gongwei"
+				android:layout_toRightOf="@+id/text_service_gongwei"/>
+
+			<View
+				android:id="@+id/divider6"
+				style="@style/divider_horizontal"
+				android:layout_below="@+id/text_service_gongwei"/>
+
+			<TextView
+				android:id="@+id/text_service_technician"
+				style="@style/text_await_area"
+				android:text="服务技师"
+				android:layout_below="@+id/divider6"/>
+
+			<TextView
+				android:id="@+id/tv_service_technician"
+				style="@style/text_await_area"
+				android:text="等待技师接单"
+				android:layout_width="match_parent"
+				android:textColor="@color/text_black"
+				android:layout_alignTop="@+id/text_service_technician"
+				android:layout_toRightOf="@+id/text_service_technician"/>
+
+			<View
+				android:id="@+id/divider7"
+				style="@style/divider_horizontal"
+				android:layout_below="@+id/text_service_technician"/>
+
+			<TextView
+				android:id="@+id/text_remark"
+				style="@style/text_await_area"
+				android:text="客服备注"
+				android:gravity="top"
+				android:paddingTop="52px"
+				android:layout_below="@+id/text_service_technician"
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentStart="true"/>
+
+			<TextView
+				android:id="@+id/tv_remark"
+				style="@style/text_await_area"
+				android:layout_height="wrap_content"
+				android:text="啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
+				android:layout_width="match_parent"
+				android:lineSpacingExtra="5px"
+				android:paddingRight="25px"
+				android:gravity="top"
+				android:paddingTop="52px"
+				android:minHeight="147px"
+				android:paddingBottom="52px"
+				android:textColor="@color/text_black"
+				android:layout_alignTop="@+id/text_remark"
+				android:layout_toRightOf="@+id/text_remark"/>
+
+		</RelativeLayout>
+	</ScrollView>
+
+	<Button
+		android:id="@+id/btn_order_receiving"
+		android:layout_width="match_parent"
+		android:layout_height="140px"
+		android:layout_gravity="bottom"
+		android:layout_alignParentBottom="true"
+		android:layout_marginBottom="27px"
+		android:layout_marginLeft="25px"
+		android:layout_marginRight="25px"
+		android:background="@drawable/button_selector_default"
+		android:text="接单"
+		android:textColor="@color/white"
+		android:textSize="@dimen/text_size_xmiddle"/>
+
+</RelativeLayout>

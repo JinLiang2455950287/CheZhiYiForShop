@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ruanyun.chezhiyi.commonlib.view.widget.TopTabButton
+    android:id="@+id/toptab"
+    android:layout_width="360px"
+    android:layout_height="87px"
+    android:layout_centerInParent="true"
+    xmlns:android="http://schemas.android.com/apk/res/android" />
+

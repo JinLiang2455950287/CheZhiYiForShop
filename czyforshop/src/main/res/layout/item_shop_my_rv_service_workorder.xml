@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_width="match_parent"
+			  android:layout_height="174px"
+			  android:gravity="center_horizontal"
+			  android:paddingLeft="70px"
+			  android:background="@drawable/item_selector_default"
+			  android:orientation="horizontal">
+
+	<ImageView
+		android:id="@+id/iv_my_workorder_photo"
+		android:layout_width="74px"
+		android:layout_height="74px"
+		android:layout_gravity="center"
+		android:src="@drawable/my_list_workorder"/>
+
+	<TextView
+		android:id="@+id/tv_my_service_workorder"
+		android:paddingLeft="25px"
+		android:gravity="center_vertical"
+		android:textSize="@dimen/text_size_middle"
+		android:textColor="@color/text_black"
+		android:drawableRight="@drawable/icon_go"
+		android:paddingRight="25px"
+		android:layout_width="match_parent"
+		android:text="服务工单"
+		android:layout_height="174px"/>
+</LinearLayout>

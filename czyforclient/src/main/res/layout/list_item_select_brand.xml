@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <!--选择品牌item-->
+
+    <LinearLayout
+        android:id="@+id/linearLayout_char"
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_char"
+            android:text="A"
+            style="@style/text_black_style"
+            android:layout_marginLeft="50px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center_vertical"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150px"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_brand"
+            android:layout_width="95px"
+            android:layout_height="95px"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="50px"
+            android:layout_marginRight="40px"
+            android:src="@drawable/default_img"/>
+
+        <TextView
+            android:id="@+id/tv_brand"
+            style="@style/text_black_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="47px"
+            android:paddingRight="27px" />
+
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+</LinearLayout>

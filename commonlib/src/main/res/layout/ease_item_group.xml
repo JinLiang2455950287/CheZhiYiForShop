@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  群组  item  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="20px"
+    android:orientation="horizontal">
+
+    <com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView
+        android:id="@+id/iv_group_head"
+        android:layout_width="120px"
+        android:layout_height="120px"
+        android:layout_marginLeft="40px"
+        app:civ_border_color="@color/transparent"
+        android:src="@drawable/icon_my_groups"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tv_group_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40px"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_middle"
+        android:maxLines="1"
+        android:layout_gravity="center"
+        android:text="群组名称"/>
+
+</LinearLayout>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/ll_product_operation"
+              android:layout_height="wrap_content"
+              android:layout_width="match_parent"
+              android:orientation="vertical"
+              tools:showIn="@layout/activity_submit_order">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="147px"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingRight="40px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:padding="20px"
+            android:text="购买数量"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_border_gray"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imbtn_sub"
+                android:layout_width="107px"
+                android:layout_height="107px"
+                android:background="@drawable/shape_btn_border_left"
+                android:src="@drawable/order_minus_normal"/>
+
+            <View
+                style="@style/divide_vertical"
+                android:layout_width="1dp"
+                android:background="@color/border_color"/>
+
+            <TextView
+                android:id="@+id/edit_number"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:gravity="center"
+                android:paddingLeft="50px"
+                android:paddingRight="50px"
+                android:text="1"
+                android:textColor="@color/text_black"/>
+
+            <View
+                style="@style/divide_vertical"
+                android:layout_width="1dp"
+                android:background="@color/border_color"/>
+
+            <ImageButton
+                android:id="@+id/imbtn_add"
+                android:layout_width="107px"
+                android:layout_height="107px"
+                android:background="@drawable/shape_btn_border_right"
+                android:src="@drawable/order_add_normal"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal"/>
+
+    <TextView
+        android:id="@+id/tv_total"
+        android:layout_width="match_parent"
+        android:layout_height="147px"
+        android:background="@color/white"
+        android:gravity="right|center_vertical"
+        android:paddingRight="30px"
+        android:text="共1件商品  合计：¥68"
+        android:textColor="@color/text_black"/>
+
+    <!--优惠劵-->
+    <LinearLayout
+        android:id="@+id/ll_select_coupon"
+        android:layout_width="match_parent"
+        android:layout_height="147px"
+        android:layout_marginBottom="25px"
+        android:layout_marginTop="25px"
+        android:background="@drawable/item_selector_default"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:padding="20px"
+            android:text="优惠劵"/>
+
+        <TextView
+            android:id="@+id/tv_preferential"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20px"
+            android:drawablePadding="20px"
+            android:drawableRight="@drawable/em_right_arrow_icon"
+            android:text=""
+            android:textColor="@color/text_black"/>
+    </LinearLayout>
+</LinearLayout>

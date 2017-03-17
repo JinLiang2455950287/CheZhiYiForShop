@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white">
+
+    <include layout="@layout/layout_topbar" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/divider4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/topbar"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/text_order_number"
+                style="@style/text_booking_gray"
+                android:background="@color/white"
+                android:text="预约编号" />
+
+            <TextView
+                android:id="@+id/tv_order_number"
+                android:layout_width="match_parent"
+                android:layout_height="141px"
+                android:layout_toRightOf="@+id/text_order_number"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:text=""
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_xsmall" />
+
+            <View
+                android:id="@+id/divider1"
+                style="@style/divider_horizontal"
+                android:layout_below="@+id/text_order_number" />
+
+            <TextView
+                android:id="@+id/text_booking_state"
+                style="@style/text_booking_gray"
+                android:layout_below="@+id/divider1"
+                android:background="@color/white"
+                android:text="预约服务状态" />
+
+            <TextView
+                android:id="@+id/tv_booking_state"
+                android:layout_width="match_parent"
+                android:layout_height="141px"
+                android:layout_alignTop="@+id/text_booking_state"
+                android:layout_toRightOf="@+id/text_booking_state"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:text=""
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_xsmall" />
+
+            <View
+                android:id="@+id/divider6"
+                style="@style/divider_horizontal"
+                android:layout_below="@+id/text_booking_state" />
+
+            <TextView
+                android:id="@+id/text_booking_project"
+                style="@style/text_booking_gray"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/divider6"
+                android:layout_toLeftOf="@+id/tv_look_workorder"
+                android:text="预约服务项目" />
+
+            <TextView
+                android:id="@+id/tv_look_workorder"
+                android:layout_width="wrap_content"
+                android:layout_height="141px"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/text_booking_project"
+                android:gravity="center_vertical"
+                android:paddingRight="25px"
+                android:text="查看工单"
+                android:textColor="@color/theme_color_default"
+                android:textSize="@dimen/text_size_xsmall" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_booking_project"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_look_workorder"
+                android:background="@color/white"
+                android:paddingLeft="25px"/>
+
+            <TextView
+                android:id="@+id/text_arrive_time"
+                style="@style/text_booking_gray"
+                android:layout_below="@+id/rv_booking_project"
+                android:layout_marginTop="27px"
+                android:background="@color/white"
+                android:text="预计到店时间" />
+
+            <TextView
+                android:id="@+id/tv_arrive_time"
+                android:layout_width="match_parent"
+                android:layout_height="141px"
+                android:layout_alignTop="@+id/text_arrive_time"
+                android:layout_toRightOf="@+id/text_arrive_time"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:text=""
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size_xsmall" />
+
+            <View
+                android:id="@+id/divider2"
+                style="@style/divider_horizontal"
+                android:layout_below="@+id/text_arrive_time" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/divider2"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/text_remark"
+                    style="@style/text_booking_gray"
+                    android:gravity="top"
+                    android:paddingTop="45px"
+                    android:text="客户备注信息" />
+
+                <TextView
+                    android:id="@+id/tv_remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/text_remark"
+                    android:layout_toRightOf="@+id/text_remark"
+                    android:ellipsize="end"
+                    android:gravity="top"
+                    android:lineSpacingExtra="10px"
+                    android:paddingBottom="45px"
+                    android:paddingRight="25px"
+                    android:paddingTop="45px"
+                    android:text=""
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_size_xsmall" />
+
+                <View
+                    android:id="@+id/divider3"
+                    style="@style/divider_horizontal"
+                    android:layout_alignParentBottom="true" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <View
+        android:id="@+id/divider4"
+        style="@style/divider_horizontal"
+        android:layout_above="@+id/rl_money" />
+
+    <RelativeLayout
+        android:id="@+id/rl_money"
+        android:layout_width="match_parent"
+        android:layout_height="141px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/text_money"
+            style="@style/text_booking_gray"
+            android:layout_width="wrap_content"
+            android:text=""
+            android:textColor="@color/text_black" />
+
+        <TextView
+            android:id="@+id/tv_money"
+            android:layout_width="wrap_content"
+            android:layout_height="141px"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/text_money"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="@color/text_orange"
+            android:textSize="@dimen/text_size_middle" />
+
+        <TextView
+            android:id="@+id/text_pay_money"
+            android:layout_width="220px"
+            android:layout_height="90px"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="25px"
+            android:background="@drawable/corner_rectangle_grange_border"
+            android:gravity="center"
+            android:text="支付订金"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_cancel_booking"
+            android:layout_width="220px"
+            android:layout_height="90px"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="35px"
+            android:layout_toLeftOf="@+id/text_pay_money"
+            android:background="@drawable/corner_rectangle_gray_shape"
+            android:gravity="center"
+            android:text="取消预约"
+            android:textColor="@color/text_black" />
+    </RelativeLayout>
+</RelativeLayout>

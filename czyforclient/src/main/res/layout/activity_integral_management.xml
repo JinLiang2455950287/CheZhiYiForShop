@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white"
+    android:orientation="vertical">
+    <!--积分管理-->
+    <include layout="@layout/layout_topbar" />
+
+    <include layout="@layout/layout_membership_header" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/icon_change"
+        android:drawablePadding="37px"
+        android:paddingBottom="55px"
+        android:paddingLeft="27px"
+        android:paddingRight="27px"
+        android:paddingTop="55px"
+        android:text="积分兑换"
+        android:textColor="@color/text_black" />
+
+    <View style="@style/divider_horizontal" />
+
+    <include layout="@layout/layout_refresh_list_base" />
+</LinearLayout>

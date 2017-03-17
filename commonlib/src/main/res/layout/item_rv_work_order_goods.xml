@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10px"
+    android:orientation="horizontal">
+
+    <!--商品的名称-->
+    <TextView
+        android:id="@+id/tv_goods_name"
+        android:singleLine="true"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:paddingRight="20px"
+        android:layout_height="wrap_content"
+        android:textColor="@color/theme_color_default"
+        android:text="五一清洗五折优惠、钣金喷漆" />
+
+    <!--代下单显示-->
+    <TextView
+        android:id="@+id/tv_goods_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="20px"
+        android:textColor="@color/theme_color_default"
+        android:text="(代)"
+        android:visibility="gone" />
+
+</LinearLayout>

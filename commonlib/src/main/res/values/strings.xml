@@ -1,0 +1,127 @@
+<resources xmlns:xliff="http://schemas.android.com/tools">
+
+    <string name="password_digits">  ._0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLIMNOPQRSTUVWXYZ</string>
+    <string name="number_digits">0123456789</string>
+    <string name="digits_plate_num">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLIMNOPQRSTUVWXYZ</string>
+    <!--登录-->
+    <string name="phone_hint">请输入手机号码</string>
+    <string name="password_hint">请输入密码</string>
+    <string name="btn_login">登  录</string>
+    <string name="register_immediately">立即注册</string>
+    <string name="forget_password">忘记密码</string>
+    <string name="limit_password_hint">请输入密码(6–16位)</string>
+    <string name="confirm_password_hint">请确认密码(6–16位)</string>
+    <!--验证码-->
+    <string name="get_verification_code_hint">获取验证码</string>
+    <string name="get_code_again"><xliff:g>%s</xliff:g>重新获取</string>
+    <string name="verification_code_hint">请输入验证码</string>
+    <!--修改登录密码-->
+    <string name="old_password_hint">请输入旧密码</string>
+    <string name="news_password_hint">请输入新密码</string>
+    <string name="confirm_update">确认修改</string>
+    <string name="retrieve_password">找回密码</string>
+    <string name="next_steps">下一步</string>
+    <string name="nick_name_hint">请输入昵称</string>
+    <string name="confirm_news_password_hint">请确认新密码</string>
+    <string name="confirm_reset_password">确认重置密码</string>
+    <string name="confirm_update_password_hint">确认修改密码</string>
+    <string name="user_agreement">我已阅读并同意《掌上汽服用户协议》</string>
+    <string name="new_friends">新的朋友</string>
+    <string name="my_groups">讨论组</string>
+    <string name="metting_room">会议室</string>
+    <string name="black_lists">黑名单</string>
+    <string name="loading">加载中...</string>
+
+    <!-- 导航栏文字 -->
+    <string name="home">首页</string>
+    <string name="message">消息</string>
+    <string name="find">发现</string>
+    <string name="business">电商</string>
+    <string name="mine">我的</string>
+    <string name="please_fill_in_the_information">请将信息填写完整</string>
+    <string name="password_not_same">输入两次密码不一致</string>
+
+    <string name="article_info">文章资讯</string>
+
+    <string name="all">全部</string>
+    <string name="cars_info">汽车资讯</string>
+    <string name="cars_encyclopedia">汽车百科</string>
+    <string name="cars_maintenance">维修保养</string>
+    <string name="shop_activity">店内活动</string>
+
+    <!--账户管理-->
+    <string name="account_mangement">账户管理</string>
+    <string name="photo">头像</string>
+    <string name="nick_name">昵称</string>
+    <string name="sex">性别</string>
+    <string name="bir_date">出生日期</string>
+    <string name="personalized_signature">个性签名</string>
+    <string name="grade">会员等级</string>
+    <string name="quit_login">退出登录</string>
+    <string name="work_state">工作状态</string>
+    <string name="personal_label">个人标签</string>
+    <string name="personal_hobby">个人爱好</string>
+    <!--在线报名-->
+    <string name="real_name">您的姓名 ：</string>
+    <string name="phone">联系电话 :</string>
+    <string name="registration_num">报名人数 :</string>
+    <string name="remarks_info">备注信息 :</string>
+    <string name="registration_price">报名费用 :</string>
+    <string name="total_amount">合计金额 :</string>
+    <!--预约-->
+    <string name="expected_time_to_shop">预定到店时间 :</string>
+    <string name="service_remarks">服务备注信息 :</string>
+    <string name="confirm_appointment">确认预约</string>
+    <string name="choice_project">选择服务项目</string>
+    <string name="appointment_service_project">预约服务项目 :</string>
+    <!--优惠券-->
+    <string name="not_used">未使用</string>
+    <string name="expired">已过期</string>
+    <string name="already_used">已使用</string>
+    <string name="confirm">取消</string>
+
+    <string name="birthday_legitimate">请选择正确日期</string>
+    <string name="confirmed">确定</string>
+
+    <!--评论点赞-->
+    <string name="zan_num">赞(%1$d)</string>
+    <!--我的爱车-->
+    <string name="essential_information">基本信息 (必填)</string>
+    <string name="license_plate">车牌号码</string>
+    <string name="query_violation_information">查询违章信息</string>
+    <string name="vehicle_on_time">上牌时间</string>
+    <string name="vehicle_color">车辆颜色</string>
+    <string name="travel_mileage">行驶里程</string>
+    <string name="maintenance_mileage">保养里程</string>
+    <string name="frame_number">车架号码</string>
+    <string name="engine_number">发动机号</string>
+
+    <string name="refund_application">申请退款</string>
+    <string name="choose_your_refund_reason" >请选择你的退款原因</string>
+    <string name="canceld">取消</string>
+
+    <!-- 在线支付-->
+    <string name="order_num">订单编号</string>
+    <string name="pay_sum">支付金额</string>
+    <string name="pay_online">在线支付</string>
+    <string name="sure_to_pay">确认支付</string>
+    <string name="select_pay_way">请选择支付方式</string>
+    <string name="account_balance">会员卡支付</string>
+    <string name="alipay_pay">支付宝支付</string>
+    <string name="wechat_pay">微信支付</string>
+    <string name="recommend_wechat">推荐已安装微信客户端的用户使用</string>
+    <string name="recommend_alipay">推荐已安装支付宝客户端的用户使用</string>
+    <string name="to_pay">去支付</string>
+    <string name="confirm_order">确认订单</string>
+    <!--秒杀-->
+    <string name="seckill_start_time">距离<xliff:g>%s</xliff:g>点开始仅剩</string>
+    <string name="seckill_end_time">距离<xliff:g>%s</xliff:g>点结束仅剩</string>
+    <string name="money">会员卡（%s元）</string>
+    <string name="integral_detail">积分：%s 分</string>
+    <string name="integral">积分兑换（%s分）</string>
+
+    <!-- 接单-->
+    <string name="arrive_time">预计<xliff:g>%s</xliff:g>点到店</string>
+    <string name="reserve_cout">当前有<xliff:g>%s</xliff:g>个预约</string>
+    <string name="setting_hit_text">包含订单状态、到期提醒、优惠促销等重要信息推送</string>
+</resources>

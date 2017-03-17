@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--发起群聊-->
+    <TextView
+        android:id="@+id/tv_menu_btn_msg"
+        android:layout_width="wrap_content"
+        android:background="@drawable/item_selector_default"
+        android:layout_height="wrap_content"
+        android:padding="40px"
+        android:text="发起群聊"
+        android:textSize="@dimen/text_size_middle"
+        android:drawableLeft="@drawable/icon_inf_groupchat"
+        android:drawablePadding="30px"/>
+
+    <View android:id="@+id/divider"
+        style="@style/divider_horizontal"/>
+
+    <!--发起群聊-->
+    <TextView
+        android:id="@+id/tv_menu_btn_add_friend"
+        android:layout_width="wrap_content"
+        android:background="@drawable/item_selector_default"
+        android:layout_height="wrap_content"
+        android:padding="40px"
+        android:text="添加好友"
+        android:textSize="@dimen/text_size_middle"
+        android:drawableLeft="@drawable/icon_inf_addfriend"
+        android:drawablePadding="30px"/>
+
+</LinearLayout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="244px"
+    android:background="@drawable/item_selector_default">
+
+    <!--<cn.bingoogolapple.badgeview.BGABadgeFrameLayout-->
+    <!--android:id="@+id/bg_number"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:paddingTop="53px"-->
+    <!--android:paddingLeft="33px"-->
+    <!--android:paddingRight="33px">-->
+    <!--</cn.bingoogolapple.badgeview.BGABadgeFrameLayout>-->
+
+    <TextView
+        android:id="@+id/tv_my_state_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:paddingBottom="33px"
+        android:text="function name"
+        android:textColor="@color/text_black"
+        android:textSize="@dimen/text_size_xsmall" />
+
+    <ImageView
+        android:id="@+id/iv_my_state_photo"
+        android:layout_width="74px"
+        android:layout_height="74px"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="53px"
+        android:src="@drawable/my_workorder_ser" />
+
+    <TextView
+        android:id="@+id/bg_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/circle_red"
+        android:gravity="center"
+        android:text=""
+        android:visibility="gone"
+        android:textSize="@dimen/text_size_small"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="30px"
+        android:textColor="@color/white" />
+
+</FrameLayout>

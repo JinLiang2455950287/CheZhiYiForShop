@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ruanyun.chezhiyi.commonlib.view.widget.CleanableEditText
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/edt_search"
+    android:layout_width="800px"
+    android:layout_height="88px"
+    android:imeOptions="actionSearch"
+    android:background="@color/white"
+    android:drawableLeft="@drawable/icon_search_normal"
+    android:inputType="text"
+    android:singleLine="true"
+    android:paddingLeft="25px"
+    android:drawablePadding="25px"
+    android:layout_centerInParent="true">
+
+    <requestFocus/>
+</com.ruanyun.chezhiyi.commonlib.view.widget.CleanableEditText>

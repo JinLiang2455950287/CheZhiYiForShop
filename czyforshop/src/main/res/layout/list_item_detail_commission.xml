@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <!--首页 提成 详细列表 item-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="37px">
+
+        <TextView
+            style="@style/text_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="37px"
+            android:paddingLeft="27px"
+            android:paddingRight="27px"
+            android:text="09/02 12:00" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingBottom="37px"
+            android:paddingRight="27px"
+            android:text="+111.00"
+            android:textColor="@color/text_orange"
+            android:textSize="@dimen/text_size_middle" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18px"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/widthRatio"
+            android:paddingBottom="20px"
+            android:paddingLeft="27px"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_size_xsmall" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20px"
+            android:paddingRight="27px"
+            android:text="¥ 20"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_size_xsmall" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="35px"
+        android:layout_marginLeft="27px"
+        android:layout_marginTop="13px"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_radius_style"
+            android:background="@drawable/corner_rectangle_green_shape"
+            android:paddingLeft="29px"
+            android:paddingRight="29px"
+            android:text="皖A88888"
+            android:textColor="@color/theme_color_default" />
+
+        <TextView
+            style="@style/text_radius_style"
+            android:layout_marginLeft="35px"
+            android:background="@drawable/corner_rectangle_grange_shapr"
+            android:paddingLeft="22px"
+            android:paddingRight="22px"
+            android:text="清洗清洗"
+            android:textColor="@color/text_white" />
+
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal_spacing" />
+</LinearLayout>

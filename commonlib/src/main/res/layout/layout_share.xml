@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="150px">
+        <TextView
+            android:gravity="center_vertical"
+            android:paddingLeft="28px"
+            android:id="@+id/tv_cancel"
+            android:text="取消"
+            android:textSize="@dimen/text_size_xsmall"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <TextView
+
+           android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:layout_marginRight="28px"
+            android:paddingLeft="34px"
+            android:paddingRight="34px"
+            android:id="@+id/tv_copy"
+            android:text="分享给好友"
+            android:background="@drawable/corner_rectangle_black_shape"
+            android:textSize="@dimen/text_size_xsmall"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="78px" />
+
+    </RelativeLayout>
+
+    <GridView
+        android:id="@+id/grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="86px"
+        android:numColumns="5"></GridView>
+
+</LinearLayout>

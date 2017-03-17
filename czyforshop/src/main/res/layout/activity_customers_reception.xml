@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_topbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--客户接待-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg_white"
+            android:orientation="vertical">
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="27px">
+
+                <EditText
+                    android:id="@+id/edt_carnum_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="150px"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="0dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:imeOptions="actionSend"
+                    android:maxLength="7"
+                    android:paddingLeft="43px"
+                    android:paddingRight="43px"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_size_xsmall" />
+
+                <ImageButton
+                    android:id="@+id/img_btn_scan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="43px"
+                    android:background="@color/transparent"
+                    android:src="@drawable/icon_scan" />
+            </FrameLayout>
+
+            <View style="@style/divider_horizontal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <com.ruanyun.chezhiyi.commonlib.view.widget.CleanableEditText
+                    android:id="@+id/edt_appointe_phone"
+                    style="@style/text_black_style"
+                    android:layout_width="0dp"
+                    android:layout_height="150px"
+                    android:layout_weight="1"
+                    android:background="@drawable/white_shape"
+                    android:digits="0123456789"
+                    android:gravity="center_vertical"
+                    android:hint="输入车主手机号码"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:paddingLeft="43px"
+                    android:paddingRight="43px"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/tv_costomer_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="150px"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="43px"
+                    android:paddingRight="43px"
+                    android:text="客户信息"
+                    android:textColor="@color/blue_text"
+                    android:textSize="@dimen/text_size_xsmall"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <!--保养里程数-->
+            <LinearLayout
+                android:id="@+id/ll_upkeep"
+                android:layout_width="match_parent"
+                android:layout_height="150px"
+                android:layout_marginTop="27px"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/text_black_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="43px"
+                    android:text="输入最新里程(非必填)"
+                    android:textColor="@color/text_gray" />
+
+                <TextView
+                    android:id="@+id/tv_upkeep"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="20px"
+                    android:drawableRight="@drawable/em_right_arrow_icon"
+                    android:gravity="right"
+                    android:paddingLeft="43px"
+                    android:paddingRight="43px"
+                    android:singleLine="true"
+                    android:text="" />
+            </LinearLayout>
+
+            <!--预约客户信息-->
+            <LinearLayout
+                android:id="@+id/ll_appoint_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/text_default"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="55px"
+                    android:paddingLeft="27px"
+                    android:paddingRight="27px"
+                    android:paddingTop="55px"
+                    android:text="客户预约信息" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/img_car_photo"
+                        android:layout_width="262px"
+                        android:layout_height="262px"
+                        android:layout_marginBottom="45px"
+                        android:layout_marginLeft="27px"
+                        android:layout_marginTop="45px"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/default_imge_big" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="42px"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/tv_car_platenum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingRight="10px"
+                                android:paddingTop="56px"
+                                android:text="皖123"
+                                android:textColor="@color/text_black"
+                                android:textSize="@dimen/text_size_middle" />
+
+                            <TextView
+                                android:id="@+id/tv_arrive_time"
+                                style="@style/text_default"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:paddingRight="27px"
+                                android:paddingTop="56px"
+                                android:text="预计9:00到店" />
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/tv_car_owner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/icon_usernum_hp"
+                            android:drawablePadding="28px"
+                            android:gravity="center_vertical"
+                            android:paddingTop="41px"
+                            android:text="" />
+
+                        <!--  <android.support.v7.widget.RecyclerView
+                              android:id="@+id/ry_type"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content" />-->
+                        <com.ruanyun.chezhiyi.commonlib.view.widget.FlowLayout
+                            android:id="@+id/lables_service"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15px">
+
+                        </com.ruanyun.chezhiyi.commonlib.view.widget.FlowLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View style="@style/divider_horizontal_spacing" />
+
+                <TextView
+                    android:id="@+id/tv_remarks"
+                    style="@style/text_black_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:paddingBottom="44px"
+                    android:paddingLeft="28px"
+                    android:paddingRight="28px"
+                    android:paddingTop="44px"
+                    android:text="客户备注：客户预约信息客户预约信息" />
+
+                <View style="@style/divider_horizontal" />
+
+            </LinearLayout>
+
+            <TextView
+                style="@style/text_default"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="55px"
+                android:paddingLeft="27px"
+                android:paddingRight="27px"
+                android:paddingTop="55px"
+                android:text="选择服务" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/ry_choice_server"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <RelativeLayout
+                    android:id="@+id/rl_add_server"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="27px"
+                    android:background="@drawable/shape_blue_frame_linearlayout">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="147px"
+                        android:layout_centerHorizontal="true"
+                        android:drawableLeft="@drawable/icon_add_new_pro"
+                        android:drawablePadding="26px"
+                        android:gravity="center"
+                        android:text="添加服务项目"
+                        android:textColor="@color/blue_text"
+                        android:textSize="@dimen/text_size_xsmall" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <TextView
+                style="@style/text_default"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="55px"
+                android:paddingLeft="27px"
+                android:paddingRight="27px"
+                android:paddingTop="55px"
+                android:text="填写服务备注" />
+
+            <View style="@style/divider_horizontal" />
+
+            <EditText
+                android:id="@+id/edt_write_mark"
+                style="@style/text_black_style"
+                android:layout_width="match_parent"
+                android:layout_height="150px"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:hint="填写内部服务备注"
+                android:maxEms="50"
+                android:paddingLeft="54px"
+                android:paddingRight="54px" />
+
+            <View style="@style/divider_horizontal" />
+
+            <Button
+                android:id="@+id/bt_submit"
+                style="@style/text_submit"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="68px"
+                android:text="提交" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

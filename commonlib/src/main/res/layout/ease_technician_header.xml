@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <!--头像 昵称  备注-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView
+            android:id="@+id/img_photo"
+            android:layout_width="193px"
+            android:layout_height="194px"
+            android:layout_marginBottom="24px"
+            android:layout_marginLeft="27px"
+            android:layout_marginTop="24px"
+            android:src="@drawable/em_default_avatar"
+            app:border_color="@color/transparent"
+            app:border_width="0dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50px"
+            android:layout_marginTop="30px"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_remark_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="30px"
+                android:drawableRight="@drawable/icon_male"
+                android:paddingTop="30px"
+                android:text=""
+                android:textColor="@color/text_black" />
+
+            <TextView
+                android:id="@+id/tv_nickname"
+                style="@style/text_default"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:textColor="@color/text_nick_name_color"
+                android:text="" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal"/>
+
+    <!--个性签名   个人说明-->
+    <LinearLayout
+        android:id="@+id/ll_introduction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27px"
+        android:background="@color/white"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tv_introduction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="55px"
+            android:paddingLeft="27px"
+            android:paddingTop="55px"
+            android:text="个人说明："
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_size_xsmall" />
+
+        <TextView
+            android:id="@+id/tv_introduction_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="55px"
+            android:paddingLeft="27px"
+            android:paddingRight="27px"
+            android:paddingTop="55px"
+            android:text="个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_size_xsmall" />
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal"/>
+
+    <!-- 设置备注 -->
+    <LinearLayout
+        android:id="@+id/ll_remarks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27px"
+        android:background="@color/white"
+        android:focusable="true"
+        android:visibility="gone"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/textView_item_style"
+            android:text="设置备注 " />
+
+        <EditText
+            android:id="@+id/edit_remarks"
+            style="@style/widthRatio"
+            android:layout_weight="3"
+            android:background="@null"
+            android:paddingRight="27px"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_size_xsmall" />
+    </LinearLayout>
+
+    <View
+        android:visibility="gone"
+        style="@style/divider_horizontal"/>
+
+    <!-- 手机号 -->
+    <LinearLayout
+        android:id="@+id/ll_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27px"
+        android:background="@color/white"
+        android:orientation="horizontal" >
+
+        <TextView
+
+            style="@style/textView_item_style"
+            android:text="手机号码 " />
+
+        <TextView
+            android:id="@+id/tv_phone"
+            style="@style/widthRatio"
+            android:layout_weight="3"
+            android:paddingRight="27px"
+            android:text="121222222"
+            android:textColor="@color/theme_color_default"
+            android:textSize="@dimen/text_size_xsmall" />
+    </LinearLayout>
+
+    <View
+        style="@style/divider_horizontal"
+        android:layout_marginLeft="27px"
+        android:layout_marginRight="27px" />
+
+    <!--工作状态 -->
+    <LinearLayout
+        android:id="@+id/ll_work_state"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/textView_item_style"
+            android:text="工作状态 " />
+
+        <TextView
+            android:id="@+id/tv_work_state"
+            style="@style/widthRatio"
+            android:layout_weight="3"
+            android:paddingRight="27px"
+            android:text="正常工作中"
+            android:textColor="@color/theme_color_default"
+            android:textSize="@dimen/text_size_xsmall" />
+    </LinearLayout>
+
+    <View
+        style="@style/divider_horizontal"
+        android:layout_marginLeft="27px"
+        android:layout_marginRight="27px" />
+
+    <!--案例库  或  车辆信息-->
+    <LinearLayout
+        android:id="@+id/ll_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tv_car_info"
+            style="@style/textView_item_style"
+            android:layout_gravity="center_vertical"
+            android:text="案例库" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="55px"
+            android:layout_marginTop="55px"
+            android:layout_weight="3">
+
+            <ImageView
+                android:id="@+id/img_pic_1"
+                android:layout_width="185px"
+                android:layout_height="185px"
+                android:scaleType="centerCrop"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/img_pic_2"
+                android:layout_width="185px"
+                android:layout_height="185px"
+                android:layout_marginLeft="26px"
+                android:scaleType="centerCrop"
+                android:layout_toRightOf="@id/img_pic_1"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/img_pic_3"
+                android:layout_width="185px"
+                android:layout_height="185px"
+                android:layout_marginLeft="26px"
+                android:scaleType="centerCrop"
+                android:layout_toRightOf="@id/img_pic_2"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="27px"
+                android:src="@drawable/em_right_arrow_icon" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal"/>
+
+</merge>

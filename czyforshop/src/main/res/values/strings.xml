@@ -1,0 +1,10 @@
+<resources>
+    <!--<string name="app_name">快号通开发包</string>-->
+    <string name="app_name">掌上汽服技师端</string>
+    <string name="empty_tips_workbay">当前没有空闲工位</string>
+    <string name="empty_tips_goods">该客户没有已购商品</string>
+    <string name="empty_tips_technician">当前没有空闲技师</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_topbar" />
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_title"
+        android:layout_width="match_parent"
+        android:layout_height="110px"
+        app:tabIndicatorColor="@color/transparent"
+        android:paddingLeft="30px"
+        app:tabMode="scrollable"
+        android:background="@color/white"
+        app:tabSelectedTextColor="@color/theme_color_default"
+        app:tabTextColor="@color/text_black" />
+
+    <com.ruanyun.chezhiyi.commonlib.view.widget.lazyviewpager.LazyViewPager
+        android:id="@+id/content_panle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+</LinearLayout>

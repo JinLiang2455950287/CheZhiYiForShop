@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ruanyun.chezhiyi.commonlib.view.widget.StationTopTabButton
+    android:id="@+id/toptab"
+    android:layout_width="wrap_content"
+    android:minWidth="540px"
+    android:layout_height="87px"
+    android:layout_centerInParent="true"
+    xmlns:android="http://schemas.android.com/apk/res/android" />
+

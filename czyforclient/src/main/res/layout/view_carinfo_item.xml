@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="906px"
+    android:layout_height="644px"
+    android:id="@+id/fr_root"
+    android:background="@color/text_black">
+
+    <ImageView
+        android:id="@+id/img_car_photo"
+        android:layout_width="match_parent"
+        android:layout_height="433px"
+        android:scaleType="centerCrop"
+        android:src="@drawable/default_img" />
+
+    <TextView
+        android:id="@+id/tv_car_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="120px"
+        android:text="车名"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_choose_carband"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="47px"
+        android:maxLength="14"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="点击选择车辆品牌款系(必填)"
+        android:textColor="@color/white" />
+
+    <ImageView
+        android:id="@+id/img_choose_carband"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="25px"
+        android:layout_marginRight="15px"
+        android:layout_marginBottom="45px"
+        android:layout_gravity="bottom|right"
+
+        android:src="@drawable/mycar_sel_go" />
+</FrameLayout>

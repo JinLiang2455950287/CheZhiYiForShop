@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_topbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="149px"
+                android:gravity="center_vertical"
+                android:paddingLeft="25px"
+                android:text="选择服务项目" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView_serve_type"
+                android:layout_width="match_parent"
+                android:layout_height="838px"
+                android:background="@color/white" />
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginTop="25px" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="148px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="25px"
+                    android:text="预计到店时间："
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_size_middle" />
+
+                <TextView
+                    android:id="@+id/tv_appointment_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="@color/theme_color_default"
+                    android:textSize="@dimen/text_size_middle" />
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="148px"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="25px"
+                    android:text="服务备注信息："
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_size_middle" />
+
+                <EditText
+                    android:id="@+id/edit_serve_remake"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:hint="填写你的特别要求..."
+                    android:textSize="@dimen/text_size_middle" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginBottom="210px" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_to_appointment"
+        android:layout_width="match_parent"
+        android:layout_height="140px"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="27px"
+        android:layout_marginLeft="25px"
+        android:layout_marginRight="25px"
+        android:background="@drawable/button_selector_default"
+        android:text="确认预约"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_xmiddle" />
+
+    </RelativeLayout>
+
+</LinearLayout>

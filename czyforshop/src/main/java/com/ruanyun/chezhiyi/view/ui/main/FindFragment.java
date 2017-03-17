@@ -77,7 +77,6 @@ import retrofit2.Call;
  */
 public class FindFragment extends RefreshBaseFragment implements FindMvpView, OnItemClickListener, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
-
     @BindView(R.id.recyclerView_time_limit_promotion)
     RecyclerView recyclerViewTimeLimitPromotion;//限时促销的商品列表
     @BindView(R.id.topbar)

@@ -12,8 +12,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
             android:divider="@null"
-            android:dividerHeight="20px"
             android:scrollbarStyle="outsideOverlay" />
     </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
 

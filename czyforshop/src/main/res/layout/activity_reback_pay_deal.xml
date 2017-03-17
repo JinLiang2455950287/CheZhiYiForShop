@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_reback_pay_deal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,38 +10,55 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="500px"
         android:layout_marginLeft="50px"
         android:layout_marginRight="50px"
         android:layout_marginTop="30px"
+        android:background="@drawable/corner_rectangle_bg_white_shape"
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/et_content"
             android:layout_width="match_parent"
-            android:layout_height="500px"
-            android:background="@drawable/corner_rectangle_bg_white_shape"
+            android:layout_height="0px"
+            android:layout_weight="1"
             android:gravity="top"
+            android:hint="您有什么想说的....."
+            android:background="@null"
             android:maxLength="100"
+            android:textSize="18dp"
             android:padding="20px" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="140px"
-            android:layout_marginTop="50px"
-            android:background="@drawable/corner_rectangle_green_strok"
-            android:text="同意通过"
-            android:textColor="@color/white" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="140px"
-            android:layout_marginTop="50px"
-            android:background="@drawable/corner_rectangle_orange_strok"
-            android:text="拒绝通过"
-            android:textColor="@color/white" />
-
+        <TextView
+            android:id="@+id/tv_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="30px"
+            android:text="0/100"
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/text_size_xsmall" />
 
     </LinearLayout>
 
-    <include layout="@layout/layout_topbar" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="140px"
+        android:layout_marginLeft="50px"
+        android:layout_marginRight="50px"
+        android:layout_marginTop="50px"
+        android:background="@drawable/corner_rectangle_green_strok"
+        android:text="同意通过"
+        android:textColor="@color/white" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="140px"
+        android:layout_marginLeft="50px"
+        android:layout_marginRight="50px"
+        android:layout_marginTop="50px"
+        android:background="@drawable/corner_rectangle_orange_strok"
+        android:text="拒绝通过"
+        android:textColor="@color/white" />
+
 </LinearLayout>

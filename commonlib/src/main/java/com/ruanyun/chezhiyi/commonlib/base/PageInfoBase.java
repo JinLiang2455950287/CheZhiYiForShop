@@ -52,4 +52,15 @@ public  class PageInfoBase<T> {
     public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
     }
+
+    @Override
+    public String toString() {
+        return "PageInfoBase{" +
+                "currentPage=" + currentPage +
+                ", pageNum=" + pageNum +
+                ", totalPage=" + totalPage +
+                ", result=" + result +
+                ", totalCount=" + totalCount +
+                '}';
+    }
 }

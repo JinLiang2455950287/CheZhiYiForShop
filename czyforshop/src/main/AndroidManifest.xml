@@ -502,6 +502,7 @@
         <activity
         android:name=".view.ui.home.MemberSearchActivity"
         android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

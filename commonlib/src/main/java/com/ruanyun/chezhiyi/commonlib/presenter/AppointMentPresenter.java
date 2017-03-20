@@ -36,7 +36,7 @@ public class AppointMentPresenter implements Presenter<AppointMentMvpView> {
             @Override
             public void onSuccess(Call call, ResultBase<List<YuYueItemBean>> pageInfoBaseResultBase) {
                 LogX.e("测试", pageInfoBaseResultBase.getObj().toString());
-                appointMentMvpView.getDataSuccess(pageInfoBaseResultBase.getObj());
+                appointMentMvpView.getDataSuccess(pageInfoBaseResultBase.getObj(),pageInfoBaseResultBase.getObj().toString());
                 appointMentMvpView.dismissLoadingView();
             }
 

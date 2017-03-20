@@ -43,6 +43,7 @@ public class AppointMentDealActivity extends AutoLayoutActivity implements Topba
     RYEmptyView emptyview;
     private YuyueListAdapter adapter;
     private List<YuYueItemBean> productInfos;
+    private String yuYueItemBeanString = "null";
     private AppointMentPresenter appointMentPresenter = new AppointMentPresenter();
 
     @Override
@@ -109,8 +110,8 @@ public class AppointMentDealActivity extends AutoLayoutActivity implements Topba
     @Override
     public void onProductBuyItemClick(YuYueItemBean yuYueItemBean) {
         Intent intent = new Intent(mContext, AppointMentDealDetailActivity.class);
-        intent.putExtra("project_number", yuYueItemBean.getProjectNum());
-        intent.putExtra("project_time", yuYueItemBean.getPredictShopTime());
+        intent.putExtra("project", yuYueItemBean.getProjectNum());
+        intent.putExtra("crateTime", yuYueItemBean.getCreateTime());
         startActivity(intent);
     }
 
@@ -193,7 +194,8 @@ public class AppointMentDealActivity extends AutoLayoutActivity implements Topba
     }
 
     @Override
-    public void getDataSuccess(List<YuYueItemBean> listinfo) {
+    public void getDataSuccess(List<YuYueItemBean> listinfo, String listinfoString) {
+        yuYueItemBeanString = listinfoString;
         setProductInfosType(listinfo);
         adapterUpData();
     }

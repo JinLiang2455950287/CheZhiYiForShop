@@ -1,11 +1,16 @@
 package com.ruanyun.chezhiyi.commonlib.view.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.ruanyun.chezhiyi.commonlib.R;
+import com.ruanyun.chezhiyi.commonlib.model.ProjectType;
 import com.ruanyun.chezhiyi.commonlib.model.YuYueItemBean;
+import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
 import com.zhy.autolayout.utils.AutoUtils;
@@ -35,7 +40,16 @@ public class YuyueListAdapter extends CommonAdapter<YuYueItemBean> {
 //                (ImageView) holder.getView(R.id.iv_product_photo), R.drawable.default_img);
 
         holder.setText(R.id.tv_number, item.getMakeNum());
-        holder.setText(R.id.tv_project, item.getProjectNum());
+        StringBuffer prjectBuffer = new StringBuffer();
+        List<ProjectType> projectTypes = new Gson().fromJson(item.getProjectNum(), new TypeToken<List<ProjectType>>() {
+        }.getType());
+        for (int i = 0, size = projectTypes.size(); i < size; i++) {
+            prjectBuffer.append(projectTypes.get(i).getProjectName());
+            if (i != projectTypes.size()-1) {
+                prjectBuffer.append(",");
+            }
+        }
+        holder.setText(R.id.tv_project, prjectBuffer.toString());
         holder.setText(R.id.tv_time, item.getPredictShopTime());
         holder.setText(R.id.tv_detail, item.getRemark());
         TextView dealwith_btn = holder.getView(R.id.dealwith_btn);

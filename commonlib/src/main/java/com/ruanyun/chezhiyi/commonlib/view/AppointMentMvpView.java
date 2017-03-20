@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public interface AppointMentMvpView {
-    void getDataSuccess(List<YuYueItemBean> listinfo);
+    void getDataSuccess(List<YuYueItemBean> listinfo,String string);
 
     void dismissLoadingView();
 

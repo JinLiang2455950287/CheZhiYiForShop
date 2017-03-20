@@ -4,47 +4,17 @@
     android:id="@+id/activity_appoint_ment_deal_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_white"
     android:orientation="vertical">
 
     <include layout="@layout/layout_topbar" />
-    <!--预约项目-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20px"
-        android:layout_marginRight="20px"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingBottom="30px"
-        android:paddingTop="30px">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="50px"
-            android:text="预约项目：" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="50px"
-            android:text="更换轮胎" />
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="5px"
-        android:layout_marginLeft="10px"
-        android:layout_marginRight="10px"
-        android:background="@color/color_gray_line" />
     <!--预约时间-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20px"
-        android:layout_marginRight="20px"
+        android:paddingLeft="30px"
         android:gravity="center_vertical"
+        android:background="@color/white"
         android:orientation="horizontal"
         android:paddingBottom="30px"
         android:paddingTop="30px">
@@ -52,60 +22,32 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="50px"
             android:text="预约时间：" />
 
         <TextView
+            android:id="@+id/tv_projecttime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="50px"
             android:text="2017-03-04" />
 
     </LinearLayout>
 
-    <View
+
+    <cn.bingoogolapple.refreshlayout.BGARefreshLayout
+        android:id="@+id/refreshlayout"
         android:layout_width="match_parent"
-        android:layout_height="5px"
-        android:layout_marginLeft="10px"
-        android:layout_marginRight="10px"
-        android:background="@color/color_gray_line" />
-    <!--预约定金-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20px"
-        android:layout_marginRight="20px"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingBottom="30px"
-        android:paddingTop="30px">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="50px"
-            android:text="预约定金：" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:textSize="50px"
-            android:background="@null"
-            android:inputType="number"
-            android:layout_marginRight="30px"
-            android:hint="请输入金额" />
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="5px"
-        android:layout_marginLeft="10px"
-        android:layout_marginRight="10px"
-        android:background="@color/color_gray_line" />
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:divider="@null"
+            android:dividerHeight="15dp"
+            android:scrollbarStyle="outsideOverlay" />
+    </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
 
 
 </LinearLayout>

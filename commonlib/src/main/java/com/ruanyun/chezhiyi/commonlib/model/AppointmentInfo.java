@@ -198,4 +198,24 @@ public class AppointmentInfo implements Parcelable {
             return new AppointmentInfo[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "AppointmentInfo{" +
+                "makeId=" + makeId +
+                ", makeNum='" + makeNum + '\'' +
+                ", storeNum='" + storeNum + '\'' +
+                ", userNum='" + userNum + '\'' +
+                ", makeStatus=" + makeStatus +
+                ", projectNum='" + projectNum + '\'' +
+                ", predictShopTime='" + predictShopTime + '\'' +
+                ", remark='" + remark + '\'' +
+                ", createTime='" + createTime + '\'' +
+                ", downPaymentOrderNum='" + downPaymentOrderNum + '\'' +
+                ", downPayment=" + downPayment +
+                ", workOrderInfoList=" + workOrderInfoList +
+                ", orderInfo=" + orderInfo +
+                ", user=" + user +
+                '}';
+    }
 }

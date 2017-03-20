@@ -12,6 +12,7 @@ import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.base.AutoLayoutActivity;
 import com.ruanyun.chezhiyi.commonlib.model.YuYueItemBean;
 import com.ruanyun.chezhiyi.commonlib.presenter.AppointMentPresenter;
+import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.view.AppointMentMvpView;
 import com.ruanyun.chezhiyi.commonlib.view.adapter.YuyueListAdapter;
 import com.ruanyun.chezhiyi.commonlib.view.widget.RYEmptyView;
@@ -76,7 +77,7 @@ public class AppointMentDealActivity extends AutoLayoutActivity implements Topba
         lvProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Toast.makeText(mContext, "jfeif", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -110,8 +111,9 @@ public class AppointMentDealActivity extends AutoLayoutActivity implements Topba
     @Override
     public void onProductBuyItemClick(YuYueItemBean yuYueItemBean) {
         Intent intent = new Intent(mContext, AppointMentDealDetailActivity.class);
-        intent.putExtra("project", yuYueItemBean.getProjectNum());
+        intent.putExtra("MakeNum", yuYueItemBean.getMakeNum());
         intent.putExtra("crateTime", yuYueItemBean.getCreateTime());
+        intent.putExtra("project", yuYueItemBean.getProjectNum());
         startActivity(intent);
     }
 

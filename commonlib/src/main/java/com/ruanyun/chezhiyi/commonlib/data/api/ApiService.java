@@ -131,6 +131,12 @@ public interface ApiService {
     Call<ResultBase<List<YuYueItemBean>>> getYuYueList(@Path("userNum") String userNum);
 
     /**
+     * 预约处理
+     */
+    @POST(C.ApiUrl.URL_GET_YUYUE_DEAL)
+    Call<ResultBase> getYuYueDeal(@Path("userNum") String userNum, @Query("isDownPayment") int isDownPayment, @Query("makeNum") String makeNum, @Body YuYueDealListParams project);
+
+    /**
      * 技师端查看退款信息，当前列表为退款中信息
      **/
     @POST(C.ApiUrl.URL_GET_TUIKUANG_LIST)

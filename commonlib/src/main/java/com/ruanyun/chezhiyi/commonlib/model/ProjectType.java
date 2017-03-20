@@ -33,6 +33,9 @@ public class ProjectType implements Parcelable {
     private int sortNum;
     /** 是否支持预约 1是2否**/
     private int isMake;
+    /*预约金额*/
+    @Transient
+    private String yuMoney;
     @Transient
     private List<ProjectType> childProjectTypeList;
 
@@ -70,7 +73,13 @@ public class ProjectType implements Parcelable {
         this.isMake = isMake;
     }
 
+    public String getYuMoney() {
+        return yuMoney;
+    }
 
+    public void setYuMoney(String yuMoney) {
+        this.yuMoney = yuMoney;
+    }
 //    @Transient
 //    private int technicianProjectId;
 //
@@ -105,8 +114,8 @@ public class ProjectType implements Parcelable {
     }
 
     @Generated(hash = 1122313167)
-    public ProjectType(int projectId, @NotNull String projectNum, String projectName,
-            String parentNum, String projectAllName, int sortNum, int isMake) {
+    public ProjectType(int projectId, @NotNull String projectNum, String projectName, String parentNum,
+            String projectAllName, int sortNum, int isMake) {
         this.projectId = projectId;
         this.projectNum = projectNum;
         this.projectName = projectName;

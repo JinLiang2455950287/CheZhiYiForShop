@@ -155,6 +155,10 @@ public final class C {
          **/
         public static final String URL_GET_YUYUE_LIST = "app/{userNum}/make/list_confirm";
         /**
+         * 预约处理
+         **/
+        public static final String URL_GET_YUYUE_DEAL = "app/{userNum}/make/confirm";
+        /**
          * 技师端查看退款信息，当前列表为退款中信息
          **/
         public static final String URL_GET_TUIKUANG_LIST = "app/{userNum}/order/tuikuan/list";

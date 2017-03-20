@@ -45,9 +45,15 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:divider="@null"
+            android:descendantFocusability="afterDescendants"
             android:dividerHeight="15dp"
             android:scrollbarStyle="outsideOverlay" />
     </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
-
+    <com.ruanyun.chezhiyi.commonlib.view.widget.RYEmptyView
+        android:id="@+id/emptyview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:visibility="gone" />
 
 </LinearLayout>

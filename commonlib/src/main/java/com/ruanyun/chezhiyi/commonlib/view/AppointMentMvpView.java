@@ -13,6 +13,7 @@ public interface AppointMentMvpView {
     void getDataSuccess(List<YuYueItemBean> listinfo,String string);
 
     void dismissLoadingView();
+    void showEmptyView();
 
     void showLoadingView();
 

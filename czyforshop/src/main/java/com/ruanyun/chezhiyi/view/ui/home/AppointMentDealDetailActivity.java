@@ -1,7 +1,9 @@
 package com.ruanyun.chezhiyi.view.ui.home;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -88,12 +90,6 @@ public class AppointMentDealDetailActivity extends AutoLayoutActivity implements
         lvProduct.setAdapter(adapter);
         projectlist = projectTypes;
 
-        lvProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(mContext, "jfiejf", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
 
@@ -112,8 +108,11 @@ public class AppointMentDealDetailActivity extends AutoLayoutActivity implements
             Gson gson = new Gson();
             yuYueDealListParams.setProject(gson.toJson(listparams));
             emptyview.showLoading();
+            CloseKeyBoard();//关闭软键盘
+            tvProjectcreatetime.setVisibility(View.GONE);
             yuYueDealPresenter.getGongGao(app.getApiService().getYuYueDeal(app.getCurrentUserNum(), 1, MakeNum, yuYueDealListParams));
             listparams.clear();
+
         }
     }
 
@@ -147,5 +146,6 @@ public class AppointMentDealDetailActivity extends AutoLayoutActivity implements
     public void cancelSuccess() {
 
     }
+
 
 }

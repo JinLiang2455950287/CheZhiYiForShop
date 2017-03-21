@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import com.ruanyun.chezhiyi.commonlib.App;
 import com.ruanyun.chezhiyi.commonlib.R;
@@ -31,12 +32,13 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected <T extends View> T getViewFromLayout(@LayoutRes int layout) {
-        return getViewFromLayout(layout,null,false);
+        return getViewFromLayout(layout, null, false);
     }
 
     protected <T extends View> T getViewFromLayout(@LayoutRes int layout, ViewGroup root, boolean attach) {
         return (T) LayoutInflater.from(mContext).inflate(layout, root, attach);
     }
+
     protected <T extends View> T getViewFromLayout(@LayoutRes int layout, @IdRes int viewId) {
         View v = LayoutInflater.from(mContext).inflate(layout, null, false);
         return (T) v.findViewById(viewId);
@@ -57,10 +59,12 @@ public class BaseActivity extends AppCompatActivity {
         app.popActivity(this);
         mContext = null;
     }
-   /**
+
+    /**
      * 状态栏透明
-     *@author zhangsan
-     *@date   16/8/24 下午2:01
+     *
+     * @author zhangsan
+     * @date 16/8/24 下午2:01
      */
     protected void statusbarTint(View topbar) {
         StatusBarUtils.from(this)
@@ -155,6 +159,14 @@ public class BaseActivity extends AppCompatActivity {
     public boolean isClient() {
         LogX.i(TAG, "packageName ---->  " + getPackageName());
         return getPackageName().contains("client");
+    }
+
+    /*关闭软键盘*/
+    public void CloseKeyBoard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+        }
     }
 
 }

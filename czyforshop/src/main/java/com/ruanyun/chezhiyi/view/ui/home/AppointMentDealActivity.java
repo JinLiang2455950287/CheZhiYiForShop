@@ -66,8 +66,7 @@ public class AppointMentDealActivity extends AutoLayoutActivity implements Topba
                 .setBackBtnEnable(true)
                 .onBackBtnClick()
                 .setTopbarClickListener(this);
-        emptyview.showLoading();
-        appointMentPresenter.getYuYueData(app.getApiService().getYuYueList(app.getCurrentUserNum()));
+
     }
 
     private void setAdapter() {
@@ -83,15 +82,24 @@ public class AppointMentDealActivity extends AutoLayoutActivity implements Topba
     }
 
     public void setProductInfosType(List<YuYueItemBean> productInfoList) {
+        productInfos.clear();
         for (YuYueItemBean info : productInfoList) {
             productInfos.add(info);
         }
+        adapterUpData(productInfos);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        emptyview.showLoading();
+        appointMentPresenter.getYuYueData(app.getApiService().getYuYueList(app.getCurrentUserNum()));
     }
 
     /**
      * 刷新Adapter
      */
-    private void adapterUpData() {
+    private void adapterUpData(List<YuYueItemBean> productInfos) {
         adapter.setData(productInfos);
         adapter.notifyDataSetChanged();
     }
@@ -199,12 +207,15 @@ public class AppointMentDealActivity extends AutoLayoutActivity implements Topba
     public void getDataSuccess(List<YuYueItemBean> listinfo, String listinfoString) {
         yuYueItemBeanString = listinfoString;
         setProductInfosType(listinfo);
-        adapterUpData();
     }
 
     @Override
     public void dismissLoadingView() {
         emptyview.loadSuccuss();
+    }
+
+    @Override
+    public void showEmptyView() {
     }
 
     @Override

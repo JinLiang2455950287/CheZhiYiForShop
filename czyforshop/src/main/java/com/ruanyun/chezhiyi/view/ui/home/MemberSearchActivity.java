@@ -15,6 +15,7 @@ import com.ruanyun.chezhiyi.commonlib.base.AutoLayoutActivity;
 import com.ruanyun.chezhiyi.commonlib.model.HuiYuanKuaiChaInfo;
 import com.ruanyun.chezhiyi.commonlib.model.params.MemberParams;
 import com.ruanyun.chezhiyi.commonlib.presenter.MemberSearchPresenter;
+import com.ruanyun.chezhiyi.commonlib.util.CloseKeyBoard;
 import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.view.MemberSearchMvpView;
 import com.ruanyun.chezhiyi.commonlib.view.adapter.HuiYuanListAdapter;
@@ -97,6 +98,8 @@ public class MemberSearchActivity extends AutoLayoutActivity implements Topbar.o
         int id = view.getId();
         if (id == imb_search) {
             if (edSearch.getText().toString().length() > 0) {
+//                CloseKeyBoard.hideSoftInput(mContext, edSearch);
+                CloseKeyBoard.showSoftInput(mContext);
                 params.setParams(edSearch.getText().toString());
                 emptyview.showLoading();
                 memberSearchPresenter.loadMemberData(app.getApiService().getHuiYuanList(app.getCurrentUserNum(), params));

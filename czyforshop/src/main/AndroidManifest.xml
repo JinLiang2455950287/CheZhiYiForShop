@@ -500,8 +500,8 @@
             android:screenOrientation="portrait" />
         <!-- 会员查询 -->
         <activity
-        android:name=".view.ui.home.MemberSearchActivity"
-        android:screenOrientation="portrait" />
+            android:name=".view.ui.home.MemberSearchActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

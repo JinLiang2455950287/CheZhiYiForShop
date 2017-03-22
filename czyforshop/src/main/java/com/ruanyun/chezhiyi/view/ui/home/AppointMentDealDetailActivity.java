@@ -18,6 +18,7 @@ import com.ruanyun.chezhiyi.commonlib.model.ProjectType;
 import com.ruanyun.chezhiyi.commonlib.model.params.YuYueDealListParams;
 import com.ruanyun.chezhiyi.commonlib.model.params.YuYueDealParams;
 import com.ruanyun.chezhiyi.commonlib.presenter.YuYueDealPresenter;
+import com.ruanyun.chezhiyi.commonlib.util.CloseKeyBoard;
 import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.view.YuYueDealMvpView;
 import com.ruanyun.chezhiyi.commonlib.view.adapter.YuyueDealAdapter;
@@ -108,7 +109,7 @@ public class AppointMentDealDetailActivity extends AutoLayoutActivity implements
             Gson gson = new Gson();
             yuYueDealListParams.setProject(gson.toJson(listparams));
             emptyview.showLoading();
-            CloseKeyBoard();//关闭软键盘
+            CloseKeyBoard.showSoftInput(mContext);//关闭软键盘
             tvProjectcreatetime.setVisibility(View.GONE);
             yuYueDealPresenter.getGongGao(app.getApiService().getYuYueDeal(app.getCurrentUserNum(), 1, MakeNum, yuYueDealListParams));
             listparams.clear();

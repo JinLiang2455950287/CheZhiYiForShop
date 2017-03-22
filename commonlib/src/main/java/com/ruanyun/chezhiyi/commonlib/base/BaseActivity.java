@@ -161,12 +161,12 @@ public class BaseActivity extends AppCompatActivity {
         return getPackageName().contains("client");
     }
 
-    /*关闭软键盘*/
-    public void CloseKeyBoard() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm != null) {
-            imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
-        }
-    }
+//    /*关闭软键盘*/
+//    public void CloseKeyBoard() {
+//        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//        if (imm != null) {
+//            imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+//        }
+//    }
 
 }

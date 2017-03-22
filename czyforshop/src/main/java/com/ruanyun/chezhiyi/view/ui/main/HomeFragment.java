@@ -207,7 +207,7 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
         // 提醒数量
         systemRemindParams.setIsPush(RemindInfo.STATUS_PUSHED);
         systemRemindParams.setIsRead(RemindInfo.READ_NO);
-        systemRemindParams.setRemindType(RemindInfo.REMIND_TYPE_MAINTAIN+","+RemindInfo.REMIND_TYPE_BIRTHDAY+","+RemindInfo.REMIND_TYPE_BALANCE+","+RemindInfo.REMIND_TYPE_MEMBERLOSE);
+        systemRemindParams.setRemindType(RemindInfo.REMIND_TYPE_MAINTAIN + "," + RemindInfo.REMIND_TYPE_BIRTHDAY + "," + RemindInfo.REMIND_TYPE_BALANCE + "," + RemindInfo.REMIND_TYPE_MEMBERLOSE);
         announcementPresenter.getWakeCount(app.getApiService().getSystemRemindList(app.getCurrentUserNum(), systemRemindParams));
 
         // 滚动广告

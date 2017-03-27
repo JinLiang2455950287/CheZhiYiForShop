@@ -131,6 +131,12 @@ public interface ApiService {
     Call<ResultBase<List<YuYueItemBean>>> getYuYueList(@Path("userNum") String userNum);
 
     /**
+     * 主页面权限表
+     */
+    @POST(C.ApiUrl.URL_GET_PERSSION)
+    Call<ResultBase<List<PerssionBean>>> getPerssion(@Path("userNum") String userNum);
+
+    /**
      * 预约处理
      */
     @POST(C.ApiUrl.URL_GET_YUYUE_DEAL)

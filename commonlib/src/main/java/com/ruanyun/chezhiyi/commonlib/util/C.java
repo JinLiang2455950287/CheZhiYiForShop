@@ -154,6 +154,12 @@ public final class C {
          * 查看预约列表
          **/
         public static final String URL_GET_YUYUE_LIST = "app/{userNum}/make/list_confirm";
+
+        /**
+         * 查看权限表
+         **/
+        public static final String URL_GET_PERSSION = "app/{userNum}/buttons/list";
+
         /**
          * 预约处理
          **/

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -26,6 +27,7 @@ import com.ruanyun.chezhiyi.commonlib.base.BaseFragment;
 import com.ruanyun.chezhiyi.commonlib.base.ResultBase;
 import com.ruanyun.chezhiyi.commonlib.model.GongGaoInfo;
 import com.ruanyun.chezhiyi.commonlib.model.HomeIconInfo;
+import com.ruanyun.chezhiyi.commonlib.model.PerssionBean;
 import com.ruanyun.chezhiyi.commonlib.model.RecommendInfo;
 import com.ruanyun.chezhiyi.commonlib.model.RemindInfo;
 import com.ruanyun.chezhiyi.commonlib.model.ReportInfo;
@@ -35,6 +37,7 @@ import com.ruanyun.chezhiyi.commonlib.model.params.RecommentParams;
 import com.ruanyun.chezhiyi.commonlib.model.params.SystemRemindParams;
 import com.ruanyun.chezhiyi.commonlib.presenter.AnnouncementPresenter;
 import com.ruanyun.chezhiyi.commonlib.presenter.HomeNoticePresenter;
+import com.ruanyun.chezhiyi.commonlib.presenter.HomePerssionPresenter;
 import com.ruanyun.chezhiyi.commonlib.presenter.StoreInfoPresenter;
 import com.ruanyun.chezhiyi.commonlib.util.AppUtility;
 import com.ruanyun.chezhiyi.commonlib.util.C;
@@ -44,6 +47,7 @@ import com.ruanyun.chezhiyi.commonlib.util.ImageUtil;
 import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.util.StringUtil;
 import com.ruanyun.chezhiyi.commonlib.view.AnnouncementMvpView;
+import com.ruanyun.chezhiyi.commonlib.view.HomePerssionMvpView;
 import com.ruanyun.chezhiyi.commonlib.view.NoticeMvpView;
 import com.ruanyun.chezhiyi.commonlib.view.StoreInfoMvpView;
 import com.ruanyun.chezhiyi.commonlib.view.adapter.HomeAdverBanner;
@@ -83,7 +87,8 @@ import retrofit2.Call;
  * Created by ycw on 2016/8/23.
  */
 public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMvpView, OnItemClickListener, AnnouncementMvpView,
-        HomeFunctionView.ItemViewClickListener, ViewPager.OnPageChangeListener, NoticeMvpView, SwipeRefreshLayout.OnRefreshListener {
+        HomeFunctionView.ItemViewClickListener, ViewPager.OnPageChangeListener, NoticeMvpView, SwipeRefreshLayout.OnRefreshListener,
+        HomePerssionMvpView {
 
     @BindView(R.id.rtv_flash_news)
     RollableTextView rtvFlashNews;//滚动消息
@@ -150,6 +155,8 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
     private int[] page_indicatorId = new int[]{R.drawable.shape_ring_indicator_unselect, R.drawable.shape_ring_indicator_selected};
     private List<GongGaoInfo> gongGaoInfoList = new ArrayList<>();
     private SystemRemindParams systemRemindParams = new SystemRemindParams();
+    private HomePerssionPresenter homePerssionPresenter = new HomePerssionPresenter();//权限表
+    private List<String> permissionList = new ArrayList<>();
 
     @Override
     public void onDestroy() {
@@ -158,6 +165,7 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
         storeInfoPresenter.detachView();
         homeNoticePresenter.detachView();
         announcementPresenter.detachView();
+        homePerssionPresenter.detachView();
 
     }
 
@@ -169,6 +177,7 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
         storeInfoPresenter.attachView(this);
         homeNoticePresenter.attachView(this);
         announcementPresenter.attachView(this);
+        homePerssionPresenter.attachView(this);
         return mContentView;
     }
 
@@ -197,7 +206,8 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
         //推荐项目列表数据
         setRecommendList();
         getUIData();
-
+        //权限表
+        homePerssionPresenter.getPerssionData(app.getApiService().getPerssion(app.getCurrentUserNum()));
         //今日预约数量
         announcementPresenter.getAppointMentCount(app.getApiService().getAppointMentCount(app.getCurrentUserNum()));
 
@@ -219,9 +229,9 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
         setadvertiseBanner();
     }
 
-    /*
-    * 设置滚动广告条
-    * */
+    /**
+     * 设置滚动广告条
+     */
     private void setadvertiseBanner() {
         progressbar.setVisibility(View.GONE);
         convenientBanner.setPages(new CBViewHolderCreator() {
@@ -475,25 +485,49 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
     public void onClick(View view) {
         int id = view.getId();
         switch (id) {
-            case R.id.home_gzzt://工位查看
-                Intent intent4 = new Intent(mContext, WaitAreaActivity.class);
-                intent4.putExtra("AreaType", "4");
-                startActivity(intent4);
+            case R.id.home_gzzt://工位状态
+                if (permissionList.contains("GWZT")) {
+                    Intent intent4 = new Intent(mContext, WaitAreaActivity.class);
+                    intent4.putExtra("AreaType", "4");
+                    startActivity(intent4);
+                } else {
+                    permissionDialog();
+                }
                 break;
             case R.id.home_hukc://会员快查
-                showActivity(MemberSearchActivity.class);
+                if (permissionList.contains("HYKC")) {
+                    showActivity(MemberSearchActivity.class);
+                } else {
+                    permissionDialog();
+                }
                 break;
             case R.id.home_dtyy://当天预约
-                showActivity(DayAppointmentActivity.class);
+                if (permissionList.contains("DTYY")) {
+                    showActivity(DayAppointmentActivity.class);
+                } else {
+                    permissionDialog();
+                }
                 break;
             case R.id.home_mdtj://门店汇总
-                showActivity(ShopCollectActivity.class);
+                if (permissionList.contains("MDHZ")) {
+                    showActivity(ShopCollectActivity.class);
+                } else {
+                    permissionDialog();
+                }
                 break;
             case R.id.home_yuyue: //预约
-                showActivity(AppointMentDealActivity.class);
+                if (permissionList.contains("YY")) {
+                    showActivity(AppointMentDealActivity.class);
+                } else {
+                    permissionDialog();
+                }
                 break;
             case R.id.home_rebackpay://退款
-                showActivity(RebackPayActivity.class);
+                if (permissionList.contains("TK")) {
+                    showActivity(RebackPayActivity.class);
+                } else {
+                    permissionDialog();
+                }
                 break;
             case R.id.home_wake://消息提醒
                 Intent intent = new Intent(mContext, SystemRemindActivity.class);
@@ -504,24 +538,40 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
             case R.id.rl_all_project:
                 onFunctionClick((String) view.getTag());
                 break;
-            case R.id.open_oder:
-                showActivity(OpenOrderActivity.class);
+            case R.id.open_oder://开单
+                if (permissionList.contains("KD")) {
+                    showActivity(OpenOrderActivity.class);
+                } else {
+                    permissionDialog();
+                }
                 break;
             case R.id.wait_area://等候区界面
-                Intent intent2 = new Intent(mContext, WaitAreaActivity.class);
-                intent2.putExtra("AreaType", "2");
-                startActivity(intent2);
+                if (permissionList.contains("DHQ")) {
+                    Intent intent2 = new Intent(mContext, WaitAreaActivity.class);
+                    intent2.putExtra("AreaType", "2");
+                    startActivity(intent2);
+                } else {
+                    permissionDialog();
+                }
                 break;
             case R.id.settlement_area: //结算去界面
-                Intent intent3 = new Intent(mContext, WaitAreaActivity.class);
-                intent3.putExtra("AreaType", "3");
-                startActivity(intent3);
-
+                if (permissionList.contains("JSQ")) {
+                    Intent intent3 = new Intent(mContext, WaitAreaActivity.class);
+                    intent3.putExtra("AreaType", "3");
+                    startActivity(intent3);
+                } else {
+                    permissionDialog();
+                }
                 break;
             case R.id.quality_area://质检区界面
-                Intent intent6 = new Intent(mContext, WaitAreaActivity.class);
-                intent6.putExtra("AreaType", "6");
-                startActivity(intent6);
+                if (permissionList.contains("ZZQ")) {
+                    Intent intent6 = new Intent(mContext, WaitAreaActivity.class);
+                    intent6.putExtra("AreaType", "6");
+                    startActivity(intent6);
+                } else {
+                    permissionDialog();
+                }
+
                 break;
             case R.id.rtv_flash_news:  //通知公告 滚动消息设置
                 if (gongGaoInfoList.size() > 0) {
@@ -601,6 +651,8 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
     @Override
     public void onRefresh() {
         homeNoticePresenter.getReportInfo(app.getApiService().report(app.getCurrentUserNum()));
+        //权限表
+        homePerssionPresenter.getPerssionData(app.getApiService().getPerssion(app.getCurrentUserNum()));
     }
 
     @Override
@@ -668,5 +720,30 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
     public void getWaitCountSuccess(String count) {
         app.loadingDialogHelper.dissMiss();
         tv_wakecount.setText(count);
+    }
+
+    //获取权限表
+    @Override
+    public void getDataSuccess(List<PerssionBean> perssionList) {
+        LogX.e("权限表", perssionList.toString());
+        permissionList.clear();
+        for (PerssionBean perssion : perssionList) {
+            permissionList.add(perssion.getButNum());
+        }
+    }
+
+    @Override
+    public void getDataFault() {
+
+    }
+
+    /*权限dialog*/
+    public void permissionDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+//        builder.setTitle("Material Design Dialog");
+        builder.setMessage("您没有权限进入！");
+        builder.setNegativeButton("取消", null);
+        builder.setPositiveButton("确定", null);
+        builder.show();
     }
 }

@@ -39,16 +39,35 @@
                         android:textColor="@color/white" />
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/wait_area"
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="80px"
-                    android:layout_marginTop="160px"
-                    android:drawableTop="@drawable/homeframent_denghou"
-                    android:text="等候区"
-                    android:textColor="@color/white" />
+                    android:layout_marginTop="160px">
+
+                    <TextView
+                        android:id="@+id/wait_area"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:drawableTop="@drawable/homeframent_denghou"
+                        android:text="等候区"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/wait_area_count"
+                        android:layout_width="45px"
+                        android:layout_height="45px"
+                        android:layout_marginLeft="-10px"
+                        android:layout_toRightOf="@+id/wait_area"
+                        android:background="@drawable/circlr_orange"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -161,12 +180,12 @@
                         android:textSize="80px" />
 
                     <TextView
+                        android:id="@+id/textView2"
                         android:layout_width="wrap_content"
                         android:layout_height="0px"
                         android:layout_weight="0.8"
                         android:gravity="center"
-                        android:text="退款"
-                        android:id="@+id/textView2" />
+                        android:text="退款" />
                 </LinearLayout>
 
                 <View style="@style/divide_vertical" />

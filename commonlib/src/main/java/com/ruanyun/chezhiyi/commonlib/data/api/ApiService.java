@@ -137,6 +137,12 @@ public interface ApiService {
     Call<ResultBase<List<PerssionBean>>> getPerssion(@Path("userNum") String userNum);
 
     /**
+     * 主页面等候区数量
+     */
+    @POST(C.ApiUrl.URL_GET_WAITAREA_COUNT)
+    Call<ResultBase> getWaitAreaCount(@Path("userNum") String userNum);
+
+    /**
      * 预约处理
      */
     @POST(C.ApiUrl.URL_GET_YUYUE_DEAL)

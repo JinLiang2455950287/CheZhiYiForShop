@@ -156,6 +156,11 @@ public final class C {
         public static final String URL_GET_YUYUE_LIST = "app/{userNum}/make/list_confirm";
 
         /**
+         * 获取等候区数量
+         **/
+        public static final String URL_GET_WAITAREA_COUNT = "app/{userNum}/workorder/wait_count";
+
+        /**
          * 查看权限表
          **/
         public static final String URL_GET_PERSSION = "app/{userNum}/buttons/list";

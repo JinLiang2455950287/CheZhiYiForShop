@@ -38,6 +38,7 @@ import com.ruanyun.chezhiyi.commonlib.model.params.SystemRemindParams;
 import com.ruanyun.chezhiyi.commonlib.presenter.AnnouncementPresenter;
 import com.ruanyun.chezhiyi.commonlib.presenter.HomeNoticePresenter;
 import com.ruanyun.chezhiyi.commonlib.presenter.HomePerssionPresenter;
+import com.ruanyun.chezhiyi.commonlib.presenter.HomeWaitAreaCountPresenter;
 import com.ruanyun.chezhiyi.commonlib.presenter.StoreInfoPresenter;
 import com.ruanyun.chezhiyi.commonlib.util.AppUtility;
 import com.ruanyun.chezhiyi.commonlib.util.C;
@@ -48,6 +49,7 @@ import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.util.StringUtil;
 import com.ruanyun.chezhiyi.commonlib.view.AnnouncementMvpView;
 import com.ruanyun.chezhiyi.commonlib.view.HomePerssionMvpView;
+import com.ruanyun.chezhiyi.commonlib.view.HomeWaitAreaCountView;
 import com.ruanyun.chezhiyi.commonlib.view.NoticeMvpView;
 import com.ruanyun.chezhiyi.commonlib.view.StoreInfoMvpView;
 import com.ruanyun.chezhiyi.commonlib.view.adapter.HomeAdverBanner;
@@ -88,7 +90,7 @@ import retrofit2.Call;
  */
 public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMvpView, OnItemClickListener, AnnouncementMvpView,
         HomeFunctionView.ItemViewClickListener, ViewPager.OnPageChangeListener, NoticeMvpView, SwipeRefreshLayout.OnRefreshListener,
-        HomePerssionMvpView {
+        HomePerssionMvpView, HomeWaitAreaCountView {
 
     @BindView(R.id.rtv_flash_news)
     RollableTextView rtvFlashNews;//滚动消息
@@ -113,6 +115,8 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
     LinearLayout loPageTurningPoint;
     @BindView(R.id.open_oder)
     TextView openOder;
+    @BindView(R.id.wait_area_count)
+    TextView waitAreaCount;
     @BindView(R.id.wait_area)
     TextView waitArea;
     @BindView(R.id.settlement_area)
@@ -157,6 +161,7 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
     private SystemRemindParams systemRemindParams = new SystemRemindParams();
     private HomePerssionPresenter homePerssionPresenter = new HomePerssionPresenter();//权限表
     private List<String> permissionList = new ArrayList<>();
+    private HomeWaitAreaCountPresenter homeWaitAreaCountPresenter = new HomeWaitAreaCountPresenter();//等候区数量
 
     @Override
     public void onDestroy() {
@@ -166,6 +171,7 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
         homeNoticePresenter.detachView();
         announcementPresenter.detachView();
         homePerssionPresenter.detachView();
+        homeWaitAreaCountPresenter.detachView();
 
     }
 
@@ -178,6 +184,7 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
         homeNoticePresenter.attachView(this);
         announcementPresenter.attachView(this);
         homePerssionPresenter.attachView(this);
+        homeWaitAreaCountPresenter.attachView(this);
         return mContentView;
     }
 
@@ -206,6 +213,8 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
         //推荐项目列表数据
         setRecommendList();
         getUIData();
+        //获取等候区数量
+        homeWaitAreaCountPresenter.getWaitAreaCountData(app.getApiService().getWaitAreaCount(app.getCurrentUserNum()));
         //权限表
         homePerssionPresenter.getPerssionData(app.getApiService().getPerssion(app.getCurrentUserNum()));
         //今日预约数量
@@ -653,6 +662,8 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
         homeNoticePresenter.getReportInfo(app.getApiService().report(app.getCurrentUserNum()));
         //权限表
         homePerssionPresenter.getPerssionData(app.getApiService().getPerssion(app.getCurrentUserNum()));
+        //获取等候区数量
+        homeWaitAreaCountPresenter.getWaitAreaCountData(app.getApiService().getWaitAreaCount(app.getCurrentUserNum()));
     }
 
     @Override
@@ -745,5 +756,20 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
         builder.setNegativeButton("取消", null);
         builder.setPositiveButton("确定", null);
         builder.show();
+    }
+
+    /*获取等候区数量*/
+    @Override
+    public void getWaitAreaCount(ResultBase resultBase) {
+        LogX.e("等候区1", resultBase.toString());
+        if (TextUtils.isEmpty(resultBase.toString())) {
+            waitAreaCount.setVisibility(View.VISIBLE);
+            waitAreaCount.setText(resultBase.getObj() + "");
+        }
+    }
+
+    @Override
+    public void getWaitAreaCounterr() {
+
     }
 }

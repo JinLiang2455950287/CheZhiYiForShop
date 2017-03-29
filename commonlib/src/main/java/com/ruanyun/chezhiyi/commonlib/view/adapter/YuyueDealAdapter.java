@@ -61,19 +61,22 @@ public class YuyueDealAdapter extends CommonAdapter<ProjectType> {
 
             @Override
             public void afterTextChanged(Editable s) {
+                String isPay = dealwith_btn.getText().toString().trim();
+                if (TextUtils.isEmpty(isPay)) return;
                 item.setYuMoney(dealwith_btn.getText().toString());
+                onProductIsPayClickListener.onProductIsPayItemClick(1);
             }
         });
     }
 
-    public interface OnProductBuyClickListener {
-        void onProductBuyItemClick(ProjectType proJectType);
+    public interface OnProductIsPayClickListener {
+        void onProductIsPayItemClick(int isDownPayment);
     }
 
     // click callback
-    OnProductBuyClickListener onProductBuyClickListener;
+    OnProductIsPayClickListener onProductIsPayClickListener;
 
-    public void setOnPopupClickListener(OnProductBuyClickListener onProductBuyClickListener) {
-        this.onProductBuyClickListener = onProductBuyClickListener;
+    public void setIsPayClickListener(OnProductIsPayClickListener onProductIsPayClickListener) {
+        this.onProductIsPayClickListener = onProductIsPayClickListener;
     }
 }

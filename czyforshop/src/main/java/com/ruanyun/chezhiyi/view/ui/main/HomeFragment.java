@@ -213,8 +213,8 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
         //推荐项目列表数据
         setRecommendList();
         getUIData();
-        //获取等候区数量
-        homeWaitAreaCountPresenter.getWaitAreaCountData(app.getApiService().getWaitAreaCount(app.getCurrentUserNum()));
+        //获取等候区数量  status=3
+        homeWaitAreaCountPresenter.getWaitAreaCountData(app.getApiService().getWaitAreaCount(app.getCurrentUserNum(), "3"));
         //权限表
         homePerssionPresenter.getPerssionData(app.getApiService().getPerssion(app.getCurrentUserNum()));
         //今日预约数量
@@ -662,8 +662,21 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
         homeNoticePresenter.getReportInfo(app.getApiService().report(app.getCurrentUserNum()));
         //权限表
         homePerssionPresenter.getPerssionData(app.getApiService().getPerssion(app.getCurrentUserNum()));
-        //获取等候区数量
-        homeWaitAreaCountPresenter.getWaitAreaCountData(app.getApiService().getWaitAreaCount(app.getCurrentUserNum()));
+        //获取等候区数量 status=3
+        homeWaitAreaCountPresenter.getWaitAreaCountData(app.getApiService().getWaitAreaCount(app.getCurrentUserNum(), "3"));
+
+        //今日预约数量
+        announcementPresenter.getAppointMentCount(app.getApiService().getAppointMentCount(app.getCurrentUserNum()));
+
+        // 今日申请退款数量
+        announcementPresenter.getRePayCount(app.getApiService().getRePayCount(app.getCurrentUserNum()));
+
+        // 提醒数量
+        systemRemindParams.setIsPush(RemindInfo.STATUS_PUSHED);
+        systemRemindParams.setIsRead(RemindInfo.READ_NO);
+        systemRemindParams.setRemindType(RemindInfo.REMIND_TYPE_MAINTAIN + "," + RemindInfo.REMIND_TYPE_BIRTHDAY + "," + RemindInfo.REMIND_TYPE_BALANCE + "," + RemindInfo.REMIND_TYPE_MEMBERLOSE);
+        announcementPresenter.getWakeCount(app.getApiService().getSystemRemindList(app.getCurrentUserNum(), systemRemindParams));
+
     }
 
     @Override
@@ -761,11 +774,14 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
     /*获取等候区数量*/
     @Override
     public void getWaitAreaCount(ResultBase resultBase) {
-        LogX.e("等候区1", resultBase.toString());
-        if (TextUtils.isEmpty(resultBase.toString())) {
-            waitAreaCount.setVisibility(View.VISIBLE);
-            waitAreaCount.setText(resultBase.getObj() + "");
-        }
+        LogX.e("等候区1", String.valueOf(resultBase.getObj()) + "");
+        if (TextUtils.isEmpty(resultBase.getObj().toString()))
+            return;
+        waitAreaCount.setVisibility(View.VISIBLE);
+//        waitAreaCount.setText((int) (resultBase.getObj()) + "");
+        String count = resultBase.getObj().toString();
+        waitAreaCount.setText(count.substring(0,count.indexOf(".")));
+
     }
 
     @Override

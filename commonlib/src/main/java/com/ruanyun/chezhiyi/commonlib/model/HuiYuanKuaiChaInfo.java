@@ -1,5 +1,6 @@
 package com.ruanyun.chezhiyi.commonlib.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * 会员快查
  */
 
-public class HuiYuanKuaiChaInfo {
+public class HuiYuanKuaiChaInfo implements Serializable {
     /**
      * accountBalance : 0
      * auths : []

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_topbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_white"
+            android:orientation="vertical">
+
+            <!--头像-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_selector_default"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:paddingBottom="20px"
+                android:paddingLeft="20px"
+                android:paddingTop="20px">
+
+                <com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView
+                    android:id="@+id/img_photo"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_marginRight="40px"
+                    android:layout_centerVertical="true" />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40px"
+                    android:layout_toRightOf="@+id/img_photo"
+                    android:text="name"
+                    android:textColor="@color/text_black" />
+
+                <TextView
+                    android:id="@+id/tv_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/img_photo"
+                    android:layout_marginBottom="40px"
+                    android:layout_toRightOf="@+id/img_photo"
+                    android:gravity="center"
+                    android:text="nickname"
+                    android:textColor="@color/text_black" />
+
+
+            </RelativeLayout>
+
+            <View style="@style/divider_horizontal_spacing" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:background="@drawable/item_selector_default"
+                android:orientation="horizontal"
+                android:paddingBottom="40px"
+                android:paddingLeft="20px"
+                android:paddingTop="40px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="个性签名"
+                    android:textColor="@color/text_black" />
+
+                <TextView
+                    android:id="@+id/tv_persionname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40px"
+                    android:ellipsize="end"
+                    android:gravity="right"
+                    android:lines="1"
+                    android:textColor="@color/text_default" />
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal_spacing" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_selector_default"
+                android:orientation="horizontal"
+                android:paddingBottom="40px"
+                android:paddingLeft="20px"
+                android:paddingTop="40px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="个人爱好"
+                    android:textColor="@color/text_black" />
+
+                <com.ruanyun.chezhiyi.commonlib.view.widget.FlowLayout
+                    android:id="@+id/flow_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40px"
+                    android:ellipsize="end"
+                    android:gravity="right"
+                    android:lines="1"
+                    android:textColor="@color/text_default" />
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal_spacing" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:background="@drawable/item_selector_default"
+                android:orientation="horizontal"
+                android:paddingBottom="40px"
+                android:paddingLeft="20px"
+                android:paddingTop="40px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="账号余额"
+                    android:textColor="@color/text_black" />
+
+                <TextView
+                    android:id="@+id/tv_remain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40px"
+                    android:ellipsize="end"
+                    android:gravity="right"
+                    android:lines="1"
+                    android:textColor="@color/text_default" />
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal_spacing" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_selector_default"
+                android:orientation="horizontal"
+                android:paddingBottom="40px"
+                android:paddingLeft="20px"
+                android:paddingTop="40px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="消费记录"
+                    android:textColor="@color/text_black" />
+
+                <TextView
+                    android:id="@+id/tv_consume"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40px"
+                    android:ellipsize="end"
+                    android:gravity="right"
+                    android:lines="1"
+                    android:textColor="@color/text_default" />
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:background="@drawable/item_selector_default"
+                android:orientation="horizontal"
+                android:paddingBottom="40px"
+                android:paddingLeft="20px"
+                android:paddingTop="40px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="手机号码"
+                    android:textColor="@color/text_black" />
+
+                <TextView
+                    android:id="@+id/ll_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40px"
+                    android:ellipsize="end"
+                    android:gravity="right"
+                    android:lines="1"
+                    android:textColor="@color/text_default" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

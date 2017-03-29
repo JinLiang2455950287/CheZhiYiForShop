@@ -1,6 +1,7 @@
 package com.ruanyun.chezhiyi.view.ui.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -78,7 +79,11 @@ public class MemberSearchActivity extends AutoLayoutActivity implements Topbar.o
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(mContext, "你点击了是第 " + position + " 条", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, HuiYuanDetailActivity.class);
+                Bundle mBundle = new Bundle();
+                mBundle.putSerializable("huiYuanDetail", listinfo.get(position));
+                intent.putExtras(mBundle);
+                startActivity(intent);
             }
         });
     }

@@ -8,150 +8,139 @@
     <!--titlebar-->
     <include layout="@layout/layout_topbar" />
 
-
     <!--车牌输入-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="120px"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
         android:layout_marginTop="30px"
         android:orientation="horizontal">
 
-        <LinearLayout
+        <EditText
+            android:id="@+id/edit_province"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/carcode_edittext_bg"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:text="皖"
+            android:textColor="#000"
+            android:textSize="28sp" />
+
+        <EditText
+            android:id="@+id/edit_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/carcode_edittext_bg"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:text="A"
+            android:textColor="#000"
+            android:textSize="28sp" />
+
+        <EditText
+            android:id="@+id/edit_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/carcode_edittext_bg"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:text=""
+            android:textColor="#000"
+            android:textSize="28sp" />
+
+        <EditText
+            android:id="@+id/edit_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/carcode_edittext_bg"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:text=""
+            android:textColor="#000"
+            android:textSize="28sp" />
+
+        <EditText
+            android:id="@+id/edit_4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/carcode_edittext_bg"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:text=""
+            android:textColor="#000"
+            android:textSize="28sp" />
+
+        <EditText
+            android:id="@+id/edit_5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/carcode_edittext_bg"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:text=""
+            android:textColor="#000"
+            android:textSize="28sp" />
+
+        <EditText
+            android:id="@+id/edit_6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/carcode_edittext_bg"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:text=""
+            android:textColor="#000"
+            android:textSize="28sp" />
+
+        <TextView
+            android:id="@+id/img_btn_scan"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="6">
-
-            <EditText
-                android:id="@+id/edit_province"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:background="@drawable/carcode_edittext_bg"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:gravity="center"
-                android:text="皖"
-                android:textColor="#000"
-                android:textSize="28sp" />
-
-            <EditText
-                android:id="@+id/edit_1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:background="@drawable/carcode_edittext_bg"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:gravity="center"
-                android:text="A"
-                android:textColor="#000"
-                android:textSize="28sp" />
-
-            <EditText
-                android:id="@+id/edit_2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:background="@drawable/carcode_edittext_bg"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:gravity="center"
-                android:text=""
-                android:textColor="#000"
-                android:textSize="28sp" />
-
-            <EditText
-                android:id="@+id/edit_3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:background="@drawable/carcode_edittext_bg"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:gravity="center"
-                android:text=""
-                android:textColor="#000"
-                android:textSize="28sp" />
-
-            <EditText
-                android:id="@+id/edit_4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:background="@drawable/carcode_edittext_bg"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:gravity="center"
-                android:text=""
-                android:textColor="#000"
-                android:textSize="28sp" />
-
-            <EditText
-                android:id="@+id/edit_5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:background="@drawable/carcode_edittext_bg"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:gravity="center"
-                android:text=""
-                android:textColor="#000"
-                android:textSize="28sp" />
-
-            <EditText
-                android:id="@+id/edit_6"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:background="@drawable/carcode_edittext_bg"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:gravity="center"
-                android:text=""
-                android:textColor="#000"
-                android:textSize="28sp" />
-
-            <TextView
-                android:id="@+id/img_btn_scan"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="right|center_vertical"
-                android:layout_marginRight="43px"
-                android:layout_weight="1"
-                android:background="@drawable/corner_solid_blue"
-                android:gravity="center"
-                android:text="开单"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginLeft="10px"
+            android:layout_weight="1.5"
+            android:background="@drawable/corner_solid_blue"
+            android:gravity="center"
+            android:text="开单"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="5px"
-        android:layout_marginTop="20px"
-        android:background="@color/color_gray_line" />
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20px"
+        android:background="@drawable/open_icon" />
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -494,7 +494,7 @@
         <activity
             android:name=".view.ui.home.RebackPayActivity"
             android:screenOrientation="portrait" />
-        <!--退款审核处理界面-->
+        <!-- 退款审核处理界面 -->
         <activity
             android:name=".view.ui.home.RebackPayDealActivity"
             android:screenOrientation="portrait" />
@@ -502,7 +502,7 @@
         <activity
             android:name=".view.ui.home.MemberSearchActivity"
             android:screenOrientation="portrait" />
-
+        <activity android:name=".view.ui.home.HuiYuanDetailActivity"></activity>
     </application>
 
 </manifest>

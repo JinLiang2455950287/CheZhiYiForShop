@@ -37,7 +37,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  * <p/>jin
  * Created by hdl on 2017/3/9.
  */
-public class AppointMentDealDetailActivity extends AutoLayoutActivity implements Topbar.onTopbarClickListener, YuYueDealMvpView {
+public class AppointMentDealDetailActivity extends AutoLayoutActivity implements Topbar.onTopbarClickListener, YuYueDealMvpView, YuyueDealAdapter.OnProductIsPayClickListener {
     @BindView(R.id.topbar)
     Topbar topbar;
     @BindView(R.id.list)
@@ -54,6 +54,7 @@ public class AppointMentDealDetailActivity extends AutoLayoutActivity implements
     private List<YuYueDealParams> listparams = new ArrayList<>();
     private List<ProjectType> projectlist = new ArrayList<>();
     private YuYueDealListParams yuYueDealListParams = new YuYueDealListParams();
+    private int isDownPayment = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +89,7 @@ public class AppointMentDealDetailActivity extends AutoLayoutActivity implements
 
     private void setAdapter(List<ProjectType> projectTypes) {
         adapter = new YuyueDealAdapter(mContext, R.layout.list_item_yuyue_deal_product, projectTypes);
+        adapter.setIsPayClickListener(this);
         lvProduct.setAdapter(adapter);
         projectlist = projectTypes;
 
@@ -111,7 +113,7 @@ public class AppointMentDealDetailActivity extends AutoLayoutActivity implements
             emptyview.showLoading();
             CloseKeyBoard.showSoftInput(mContext);//关闭软键盘
             tvProjectcreatetime.setVisibility(View.GONE);
-            yuYueDealPresenter.getGongGao(app.getApiService().getYuYueDeal(app.getCurrentUserNum(), 1, MakeNum, yuYueDealListParams));
+            yuYueDealPresenter.getGongGao(app.getApiService().getYuYueDeal(app.getCurrentUserNum(), isDownPayment, MakeNum, yuYueDealListParams));
             listparams.clear();
 
         }
@@ -149,4 +151,9 @@ public class AppointMentDealDetailActivity extends AutoLayoutActivity implements
     }
 
 
+    @Override
+    public void onProductIsPayItemClick(int count) {
+        LogX.e("isDownPayment", count + "");
+        isDownPayment = count;
+    }
 }

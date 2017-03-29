@@ -140,7 +140,7 @@ public interface ApiService {
      * 主页面等候区数量
      */
     @POST(C.ApiUrl.URL_GET_WAITAREA_COUNT)
-    Call<ResultBase> getWaitAreaCount(@Path("userNum") String userNum);
+    Call<ResultBase> getWaitAreaCount(@Path("userNum") String userNum, @Query("status") String status);
 
     /**
      * 预约处理

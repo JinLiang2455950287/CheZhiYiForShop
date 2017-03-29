@@ -402,4 +402,42 @@ public class WorkOrderInfo implements Parcelable {
         @Override
         public WorkOrderInfo[] newArray(int size) {return new WorkOrderInfo[size];}
     };
+
+    @Override
+    public String toString() {
+        return "WorkOrderInfo{" +
+                "workOrderId=" + workOrderId +
+                ", workOrderNum='" + workOrderNum + '\'' +
+                ", workOrderStatus=" + workOrderStatus +
+                ", storeNum='" + storeNum + '\'' +
+                ", projectNum='" + projectNum + '\'' +
+                ", projectName='" + projectName + '\'' +
+                ", servicePlateNumber='" + servicePlateNumber + '\'' +
+                ", carPicPath='" + carPicPath + '\'' +
+                ", remark='" + remark + '\'' +
+                ", serviceUserName='" + serviceUserName + '\'' +
+                ", serviceUserNum='" + serviceUserNum + '\'' +
+                ", createUserName='" + createUserName + '\'' +
+                ", createUserNum='" + createUserNum + '\'' +
+                ", createTime='" + createTime + '\'' +
+                ", makeNum='" + makeNum + '\'' +
+                ", downPayment=" + downPayment +
+                ", downPaymentOrderNum='" + downPaymentOrderNum + '\'' +
+                ", totalAmount=" + totalAmount +
+                ", totalAmountOrderNum='" + totalAmountOrderNum + '\'' +
+                ", workbayName='" + workbayName + '\'' +
+                ", leadingUserName='" + leadingUserName + '\'' +
+                ", leadingUserNum='" + leadingUserNum + '\'' +
+                ", childProjectNum='" + childProjectNum + '\'' +
+                ", workOrderRecordList=" + workOrderRecordList +
+                ", workOrderGoodsList=" + workOrderGoodsList +
+                ", orderGoodsDetailList=" + orderGoodsDetailList +
+                ", workOrderAssistList=" + workOrderAssistList +
+                ", parentNum='" + parentNum + '\'' +
+                ", user=" + user +
+                ", payAmount=" + payAmount +
+                ", isSelected=" + isSelected +
+                ", isParent=" + isParent +
+                '}';
+    }
 }

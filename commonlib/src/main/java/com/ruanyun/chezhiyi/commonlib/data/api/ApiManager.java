@@ -16,6 +16,8 @@ public class ApiManager {
     //    public static final String API_URL = "http://121.199.25.216:5190/czy/";
     public static final String API_URL = "http://192.168.8.200:8080/czy/";
 //    public static final String API_URL = "http://192.168.8.158:8080/czy/";
+//    public static final String API_URL = " http://106.15.40.78:8080/czy/";
+
 
     private static Retrofit retrofit;
     private static final long CONNECT_TIME_OUT = 10 * 1000;

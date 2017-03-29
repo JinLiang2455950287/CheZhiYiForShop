@@ -68,7 +68,7 @@ import static com.ruanyun.chezhiyi.R.id.edt_carnum_input;
 
 /**
  * Description:客户接待页面
- * author: zhangsan on 16/10/8 上午8:31.
+ * author: jl on 17/3/28
  */
 public class CustomerReceptionActivity extends AutoLayoutActivity implements Topbar.onTopbarClickListener,
         CustomerRepMvpView, ChooseServiceTab.onTabClickListener, TextView.OnEditorActionListener {
@@ -91,7 +91,7 @@ public class CustomerReceptionActivity extends AutoLayoutActivity implements Top
     @BindView(R.id.bt_submit)
     Button btSubmit;
     @BindView(edt_carnum_input)
-    EditText edtCarnumInput;
+    TextView edtCarnumInput;
     @BindView(R.id.tv_costomer_info)
     TextView tvCostomerInfo;
     @BindView(R.id.img_car_photo)
@@ -175,8 +175,7 @@ public class CustomerReceptionActivity extends AutoLayoutActivity implements Top
         presenter.attachView(this);
         registerBus();
         serviceTypeCount = DbHelper.getInstance().getServiceTypeCount();
-        plateNumber = getIntent().getStringExtra("plateNumber");
-        edtCarnumInput.setText(plateNumber);
+
     }
 
     @Override
@@ -243,33 +242,21 @@ public class CustomerReceptionActivity extends AutoLayoutActivity implements Top
                 .onBackBtnClick()
                 .setTopbarClickListener(this);
         edtCarnumInput.setOnEditorActionListener(this);
-        edtCarnumInput.setText("");
+            /*获取开单界面传过来的车牌号码*/
+        plateNumber = getIntent().getStringExtra("plateNumber");
+        edtCarnumInput.setText(plateNumber);
+        String cph = plateNumber.toString().toUpperCase();
+        if (StringUtil.isCarNum(cph) && textWatcherEnable) {
+            carNumber = cph;
+            presenter.getScanCustomerInfo(carNumber);
+        }
         adapter = new CustomerRepAdapter(mContext, workOrderUiList);
         // adapter.setOnProjectTypeClick(this);
         ryChoiceServer.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         ryChoiceServer.setItemAnimator(new DefaultItemAnimator());
         ryChoiceServer.setAdapter(adapter);
         adapter.setTabclickListener(this);
-        edtCarnumInput.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String cph = s.toString().toUpperCase();
-                if (StringUtil.isCarNum(cph) && textWatcherEnable) {
-                    carNumber = cph;
-                    presenter.getScanCustomerInfo(carNumber);
-                }
-            }
-        });
 //        车辆图片的点击事件
         imgCarPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -446,7 +433,7 @@ public class CustomerReceptionActivity extends AutoLayoutActivity implements Top
             adapter.notifyItemRangeRemoved(relataedPostion + 1, removeCount);
     }
 
-    @OnClick({R.id.tv_costomer_info, R.id.bt_submit, R.id.rl_add_server, R.id.img_btn_scan, R.id.ll_upkeep})
+    @OnClick({R.id.tv_costomer_info, R.id.bt_submit, R.id.rl_add_server, R.id.img_btn_scan, R.id.ll_upkeep, R.id.edt_carnum_input})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_costomer_info://客户信息
@@ -478,6 +465,9 @@ public class CustomerReceptionActivity extends AutoLayoutActivity implements Top
                 Intent i = new Intent(mContext, UpdateNickNameActivity.class);
                 i.putExtra(C.IntentKey.TOPBAR_TITLE, UpdateNickNameActivity.STRING_UPKEEP);
                 startActivityForResult(i, REQ_ADD_UPKEEP);
+                break;
+            case R.id.edt_carnum_input://点击号牌返回号牌输入界面
+                finish();
                 break;
         }
     }

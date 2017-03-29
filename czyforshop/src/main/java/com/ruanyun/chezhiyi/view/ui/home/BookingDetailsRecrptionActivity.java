@@ -20,6 +20,7 @@ import com.ruanyun.chezhiyi.commonlib.presenter.BookingInfoPresenter;
 import com.ruanyun.chezhiyi.commonlib.util.AppUtility;
 import com.ruanyun.chezhiyi.commonlib.util.C;
 import com.ruanyun.chezhiyi.commonlib.util.DbHelper;
+import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.view.BookingInfoMvpView;
 import com.ruanyun.chezhiyi.commonlib.view.adapter.BookingServiceAdapter;
 import com.ruanyun.chezhiyi.commonlib.view.ui.common.WorkOrderDetailedActivity;
@@ -115,10 +116,12 @@ public class BookingDetailsRecrptionActivity extends AutoLayoutActivity implemen
         rvBookingProject.setLayoutManager(serverManager);
         adapter = new BookingServiceAdapter(mContext, firstList);
         adapter.setOnBookingServiceClickListener(this);
+        LogX.e("firstList", firstList.toString());
         adapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, Object o, int position) {
                 List<WorkOrderInfo> stubSecondList = subProject.get(((WorkOrderInfo) o).getProjectNum());
+
                 if (stubSecondList == null || stubSecondList.size() == 0) {
                     String json = ((WorkOrderInfo) o).getChildProjectNum();
                     Type type = new TypeToken<List<WorkOrderInfo>>() {
@@ -126,15 +129,18 @@ public class BookingDetailsRecrptionActivity extends AutoLayoutActivity implemen
                     stubSecondList = (new Gson()).fromJson(json, type);
                     subProject.put(((WorkOrderInfo) o).getProjectNum(), stubSecondList);
                 }
-                if (((WorkOrderInfo) o).isParent()) {
-                    if (!((WorkOrderInfo) o).isSelected()) {
-                        firstList.addAll(position + 1, stubSecondList);
-                        firstList.get(position).setSelected(true);
-                        adapter.notifyDataSetChanged();
-                    } else {
-                        firstList.removeAll(stubSecondList);
-                        firstList.get(position).setSelected(false);
-                        adapter.notifyDataSetChanged();
+                if (stubSecondList != null && stubSecondList.size() > 0) {
+                    LogX.e("firstliststubSecondList", stubSecondList.toString());
+                    if (((WorkOrderInfo) o).isParent()) {
+                        if (!((WorkOrderInfo) o).isSelected()) {
+                            firstList.addAll(position + 1, stubSecondList);
+                            firstList.get(position).setSelected(true);
+                            adapter.notifyDataSetChanged();
+                        } else {
+                            firstList.removeAll(stubSecondList);
+                            firstList.get(position).setSelected(false);
+                            adapter.notifyDataSetChanged();
+                        }
                     }
                 }
             }
@@ -182,6 +188,7 @@ public class BookingDetailsRecrptionActivity extends AutoLayoutActivity implemen
     @Override
     public void showGetBookingInfoSuccess(ResultBase<AppointmentInfo> appointmentInfoResultBase) {
         mAppointmentInfo = appointmentInfoResultBase.getObj();
+        LogX.e("预约详情", mAppointmentInfo.toString());
         showData();
     }
 
@@ -205,14 +212,16 @@ public class BookingDetailsRecrptionActivity extends AutoLayoutActivity implemen
             workOrderInfo.setParent(true);
             workOrderInfo.setSelected(false);
         }
+        LogX.e("firstList", firstList.toString());
         adapter.setDatas(firstList);
         rlCarLicenseNumber.setVisibility(View.VISIBLE);
         if (firstList.size() > 0)
-        tvCarLicenseNumber.setText(firstList.get(0).getServicePlateNumber());//车牌号码
+            tvCarLicenseNumber.setText(firstList.get(0).getServicePlateNumber());//车牌号码
     }
 
     /**
      * 查看工单回调
+     *
      * @param workOrderInfo
      */
     @Override

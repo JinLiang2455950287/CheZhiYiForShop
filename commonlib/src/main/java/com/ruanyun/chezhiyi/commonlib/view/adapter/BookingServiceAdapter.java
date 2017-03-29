@@ -9,8 +9,10 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.TextView;
+
 import com.ruanyun.chezhiyi.commonlib.R;
 import com.ruanyun.chezhiyi.commonlib.model.WorkOrderInfo;
+import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 import com.zhy.adapter.recyclerview.base.ItemViewDelegate;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
@@ -48,12 +50,14 @@ public class BookingServiceAdapter extends MultiItemTypeAdapter<WorkOrderInfo> {
             @Override
             public void convert(ViewHolder holder, final WorkOrderInfo item, int position) {
                 AutoUtils.auto(holder.getConvertView());
+                LogX.e("firstListisParent", item.toString());
+
                 TextView tvTypeName = holder.getView(com.ruanyun.chezhiyi.commonlib.R.id.tv_type_name);
                 TextView tvPrice = holder.getView(com.ruanyun.chezhiyi.commonlib.R.id.tv_price);
                 tvPrice.setVisibility(View.VISIBLE);
                 tvPrice.setTextSize(12);
-                tvPrice.setTextColor(Color.rgb(170,170,170));
-                String str="(订金：<font color='#FBBB53'>¥"+item.getDownPayment()+"</font>)";
+                tvPrice.setTextColor(Color.rgb(170, 170, 170));
+                String str = "(订金：<font color='#FBBB53'>¥" + item.getDownPayment() + "</font>)";
                 tvPrice.setText(Html.fromHtml(str));
                 tvTypeName.setText(item.getProjectName());
                 if (hasChild) {
@@ -70,7 +74,7 @@ public class BookingServiceAdapter extends MultiItemTypeAdapter<WorkOrderInfo> {
                     tvPrice.setText(ss);
                     holder.setVisible(R.id.iv_type_name, false);
                 }
-                if(onBookingServiceClickListener!=null) {
+                if (onBookingServiceClickListener != null) {
                     TextView tvLookWorkorder = holder.getView(com.ruanyun.chezhiyi.commonlib.R.id.tv_look);
                     tvLookWorkorder.setVisibility(View.VISIBLE);
                     tvLookWorkorder.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +100,7 @@ public class BookingServiceAdapter extends MultiItemTypeAdapter<WorkOrderInfo> {
 
             @Override
             public void convert(ViewHolder holder, WorkOrderInfo projectType, int position) {
+                LogX.e("firstListisChild", projectType.toString());
                 AutoUtils.auto(holder.getConvertView());
                 TextView tvServerSubType = holder.getView(com.ruanyun.chezhiyi.commonlib.R.id.tv_server_sub_type);
                 tvServerSubType.setText(projectType.getProjectName());
@@ -104,10 +109,11 @@ public class BookingServiceAdapter extends MultiItemTypeAdapter<WorkOrderInfo> {
         });
     }
 
-    public void setDatas(List<WorkOrderInfo> datas){
+    public void setDatas(List<WorkOrderInfo> datas) {
         mDatas = datas;
         notifyDataSetChanged();
     }
+
     public interface OnBookingServiceClickListener {
         void onBookingServiceClick(WorkOrderInfo workOrderInfo);
     }

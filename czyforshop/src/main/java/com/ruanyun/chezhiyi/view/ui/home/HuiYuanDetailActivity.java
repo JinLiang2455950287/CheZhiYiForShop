@@ -1,18 +1,23 @@
 package com.ruanyun.chezhiyi.view.ui.home;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.base.AutoLayoutActivity;
 import com.ruanyun.chezhiyi.commonlib.model.HuiYuanKuaiChaInfo;
+import com.ruanyun.chezhiyi.commonlib.model.User;
 import com.ruanyun.chezhiyi.commonlib.util.AppUtility;
+import com.ruanyun.chezhiyi.commonlib.util.C;
 import com.ruanyun.chezhiyi.commonlib.util.FileUtil;
 import com.ruanyun.chezhiyi.commonlib.util.ImageUtil;
 import com.ruanyun.chezhiyi.commonlib.util.LogX;
+import com.ruanyun.chezhiyi.commonlib.view.ui.common.RecordActivity;
 import com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView;
 import com.ruanyun.chezhiyi.commonlib.view.widget.FlowLayout;
 import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
@@ -23,9 +28,15 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class HuiYuanDetailActivity extends AutoLayoutActivity implements Topbar
-        .onTopbarClickListener {
+/**
+ * Description ：会员详情
+ * <p/>
+ * Created by ycw on 2017/3/29.
+ */
+
+public class HuiYuanDetailActivity extends AutoLayoutActivity implements Topbar.onTopbarClickListener, View.OnClickListener {
 
 
     @BindView(R.id.topbar)
@@ -43,11 +54,12 @@ public class HuiYuanDetailActivity extends AutoLayoutActivity implements Topbar
     @BindView(R.id.tv_remain)
     TextView tvremain;
     @BindView(R.id.tv_consume)
-    TextView tvConsume;
+    LinearLayout tvConsume;
     @BindView(R.id.ll_phone)
     TextView llPhone;
     private HuiYuanKuaiChaInfo huiYuanKuaiChaInfo;
     private List<String> stringList = new ArrayList<>();
+    private User user = new User(); //被查看的用户
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,15 +82,13 @@ public class HuiYuanDetailActivity extends AutoLayoutActivity implements Topbar
 
     private void upDataUi(HuiYuanKuaiChaInfo huiYuanKuaiChaInfo) {
         ImageUtil.loadImage(mContext, FileUtil.getImageUrl(huiYuanKuaiChaInfo.getUserPhoto()), imgPhoto, R.drawable.default_img);
-        LogX.e("HuiYuanKuaiChaInfo", FileUtil.getImageUrl(huiYuanKuaiChaInfo.getUserPhoto()) + ";;;");
+        tvConsume.setOnClickListener(this);
         tvName.setText(huiYuanKuaiChaInfo.getNickName());
         tvNickname.setText("昵称：" + huiYuanKuaiChaInfo.getNickName());
         tvPersionname.setText(huiYuanKuaiChaInfo.getPersonalNote());
 //        FlowLayout flowView;
         tvremain.setText(huiYuanKuaiChaInfo.getAccountBalance() + "");
-        tvConsume.setText("消费记录");
         llPhone.setText(huiYuanKuaiChaInfo.getLinkTel());
-
         String[] arr = huiYuanKuaiChaInfo.getUserInterest().split(",");
         stringList = Arrays.asList(arr);
         flowView.removeAllViews();
@@ -103,6 +113,19 @@ public class HuiYuanDetailActivity extends AutoLayoutActivity implements Topbar
         int id = v.getId();
         if (id == com.ruanyun.chezhiyi.commonlib.R.id.img_btn_left) {
             finish();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_consume:
+                user.setUserNum(huiYuanKuaiChaInfo.getUserNum());
+                LogX.e("消费记录", user.toString());
+                Intent intent = new Intent(mContext, RecordActivity.class);
+                intent.putExtra(C.IntentKey.USER_INFO, user);
+                showActivity(intent);
+                break;
         }
     }
 }

@@ -117,6 +117,10 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
     TextView openOder;
     @BindView(R.id.wait_area_count)
     TextView waitAreaCount;
+    @BindView(R.id.wait_settlement_count)
+    TextView waitSettlementCount;
+    @BindView(R.id.wait_quality_count)
+    TextView waitQualityCount;
     @BindView(R.id.wait_area)
     TextView waitArea;
     @BindView(R.id.settlement_area)
@@ -780,7 +784,7 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
         waitAreaCount.setVisibility(View.VISIBLE);
 //        waitAreaCount.setText((int) (resultBase.getObj()) + "");
         String count = resultBase.getObj().toString();
-        waitAreaCount.setText(count.substring(0,count.indexOf(".")));
+        waitAreaCount.setText(count.substring(0, count.indexOf(".")));
 
     }
 

@@ -502,7 +502,7 @@
         <activity
             android:name=".view.ui.home.MemberSearchActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".view.ui.home.HuiYuanDetailActivity"></activity>
+        <activity android:name=".view.ui.home.HuiYuanDetailActivity" />
     </application>
 
 </manifest>

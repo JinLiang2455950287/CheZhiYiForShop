@@ -562,6 +562,12 @@ public interface ApiService {
     Call<ResultBase> getRePayCount(@Path("userNum") String userNum);
 
     /**
+     * 退款审核
+     **/
+    @POST(C.ApiUrl.URL_REPAY_EXAMINE)
+    Call<ResultBase> getRePayExanine(@Path("userNum") String userNum,@Query("refundNum") String refundNum,@Query("status") int status,@Query("remark") String remark);
+
+    /**
      * 代下单(添加商品)
      **/
     @POST(C.ApiUrl.URL_INSTEAD_ORDER)

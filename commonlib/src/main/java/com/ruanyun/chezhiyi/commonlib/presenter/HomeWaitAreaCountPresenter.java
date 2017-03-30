@@ -9,6 +9,7 @@ import retrofit2.Call;
 
 /**
  * Created by czy on 2017/3/27.
+ * 获取等候区数量  status=3;等候结算区数量status=8；等候质检区数量tatus=6
  */
 
 public class HomeWaitAreaCountPresenter implements Presenter<HomeWaitAreaCountView> {
@@ -21,13 +22,19 @@ public class HomeWaitAreaCountPresenter implements Presenter<HomeWaitAreaCountVi
     }
 
     /*获取主页面等候区的数量*/
-    public void getWaitAreaCountData(Call<ResultBase> call) {
+    public void getWaitAreaCountData(Call<ResultBase> call, final String status) {
         this.call = call;
         call.enqueue(new ResponseCallback<ResultBase>() {
             @Override
             public void onSuccess(Call call, ResultBase resultBase) {
-                homeWaitAreaCountView.getWaitAreaCount(resultBase);
-                LogX.e("等候区", resultBase.toString());
+                if (status.equals("3")) {//等候区
+                    homeWaitAreaCountView.getWaitAreaCount(resultBase);
+                } else if (status.equals("6")) {//质检区
+                    homeWaitAreaCountView.getZhiJianAreaCount(resultBase);
+                } else {//结算区
+                    homeWaitAreaCountView.getJieSuanAreaCount(resultBase);
+                }
+                LogX.e("等候区/结算区/质检区", resultBase.toString());
             }
 
             @Override

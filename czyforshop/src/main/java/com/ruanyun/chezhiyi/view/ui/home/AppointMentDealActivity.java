@@ -76,7 +76,7 @@ public class AppointMentDealActivity extends AutoLayoutActivity implements Topba
         lvProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(mContext, "jfeif", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, "jfeif", Toast.LENGTH_SHORT).show();
             }
         });
     }

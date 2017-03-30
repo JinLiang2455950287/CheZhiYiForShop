@@ -63,8 +63,13 @@ public class YuyueDealAdapter extends CommonAdapter<ProjectType> {
             public void afterTextChanged(Editable s) {
                 String isPay = dealwith_btn.getText().toString().trim();
                 if (TextUtils.isEmpty(isPay)) return;
-                item.setYuMoney(dealwith_btn.getText().toString());
-                onProductIsPayClickListener.onProductIsPayItemClick(1);
+                if (Integer.parseInt(isPay) > 0) {
+                    item.setYuMoney(isPay);
+                    onProductIsPayClickListener.onProductIsPayItemClick(1);
+                }
+
+//                if (isPay.length() == 1 && !isPay.substring(0, 1).endsWith("0"))
+
             }
         });
     }

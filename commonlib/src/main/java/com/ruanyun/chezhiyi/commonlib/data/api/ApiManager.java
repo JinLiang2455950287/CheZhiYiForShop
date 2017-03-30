@@ -3,9 +3,14 @@ package com.ruanyun.chezhiyi.commonlib.data.api;
 
 import com.ruanyun.chezhiyi.commonlib.data.api.converter.GsonConverterFactory;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 
 /**
@@ -15,8 +20,9 @@ public class ApiManager {
 
     //    public static final String API_URL = "http://121.199.25.216:5190/czy/";
 //    public static final String API_URL = "http://192.168.8.200:8080/czy/";
-    public static final String API_URL = "http://192.168.8.158:8080/czy/";
-//    public static final String API_URL = " http://106.15.40.78:8080/czy/";
+//    public static final String API_URL = "http://192.168.8.158:8080/czy/";
+    public static final String API_URL = " http://106.15.40.78:8080/czy/";//测试
+//    public static final String API_URL = " http://106.15.40.78:8081/czy/";//正式
 
 
     private static Retrofit retrofit;
@@ -25,6 +31,11 @@ public class ApiManager {
     private static OkHttpClient okHttpClient;
 
     public static void build() {
+
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+
         if (okHttpClient == null) {
             OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
             okHttpClient = builder
@@ -32,6 +43,10 @@ public class ApiManager {
                     .readTimeout(READ_TIME_OUT, TimeUnit.MILLISECONDS)
                     .writeTimeout(READ_TIME_OUT, TimeUnit.MILLISECONDS)
                     .addInterceptor(new LoggingInterceptor())
+                    .addInterceptor(new HttpLoggingInterceptor().setLevel(
+                            HttpLoggingInterceptor.Level.BODY
+                    ))
+                    .addNetworkInterceptor(new HttpLoggingInterceptor())
                     .build();
         }
         if (retrofit == null) {

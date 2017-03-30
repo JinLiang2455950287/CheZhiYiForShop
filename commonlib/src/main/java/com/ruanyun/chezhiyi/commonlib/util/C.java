@@ -496,6 +496,11 @@ public final class C {
         public static final String URL_APPOINTMENT_COUNT = "app/{userNum}/make/list_confirm_count";
 
         /**
+         * 退款审核
+         */
+        public static final String URL_REPAY_EXAMINE = "app/{userNum}/order/tuikuan/examine";
+
+        /**
          * 退款申请数量
          */
         public static final String URL_REPAY_COUNT = "app/{userNum}/order/tuikuan/list_count";

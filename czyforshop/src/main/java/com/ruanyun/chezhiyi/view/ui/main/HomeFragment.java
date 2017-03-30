@@ -217,8 +217,10 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
         //推荐项目列表数据
         setRecommendList();
         getUIData();
-        //获取等候区数量  status=3
-        homeWaitAreaCountPresenter.getWaitAreaCountData(app.getApiService().getWaitAreaCount(app.getCurrentUserNum(), "3"));
+        //获取等候区数量  status=3;等候结算区status=8；等候质检区tatus=6
+        homeWaitAreaCountPresenter.getWaitAreaCountData(app.getApiService().getWaitAreaCount(app.getCurrentUserNum(), "3"), "3");
+        homeWaitAreaCountPresenter.getWaitAreaCountData(app.getApiService().getWaitAreaCount(app.getCurrentUserNum(), "6"), "6");
+        homeWaitAreaCountPresenter.getWaitAreaCountData(app.getApiService().getWaitAreaCount(app.getCurrentUserNum(), "8"), "8");
         //权限表
         homePerssionPresenter.getPerssionData(app.getApiService().getPerssion(app.getCurrentUserNum()));
         //今日预约数量
@@ -666,8 +668,11 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
         homeNoticePresenter.getReportInfo(app.getApiService().report(app.getCurrentUserNum()));
         //权限表
         homePerssionPresenter.getPerssionData(app.getApiService().getPerssion(app.getCurrentUserNum()));
-        //获取等候区数量 status=3
-        homeWaitAreaCountPresenter.getWaitAreaCountData(app.getApiService().getWaitAreaCount(app.getCurrentUserNum(), "3"));
+//        homeWaitAreaCountPresenter.getWaitAreaCountData(app.getApiService().getWaitAreaCount(app.getCurrentUserNum(), "3"));
+        //获取等候区数量  status=3;等候结算区status=8；等候质检区tatus=6
+        homeWaitAreaCountPresenter.getWaitAreaCountData(app.getApiService().getWaitAreaCount(app.getCurrentUserNum(), "3"), "3");
+        homeWaitAreaCountPresenter.getWaitAreaCountData(app.getApiService().getWaitAreaCount(app.getCurrentUserNum(), "6"), "6");
+        homeWaitAreaCountPresenter.getWaitAreaCountData(app.getApiService().getWaitAreaCount(app.getCurrentUserNum(), "8"), "8");
 
         //今日预约数量
         announcementPresenter.getAppointMentCount(app.getApiService().getAppointMentCount(app.getCurrentUserNum()));
@@ -781,10 +786,44 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
         LogX.e("等候区1", String.valueOf(resultBase.getObj()) + "");
         if (TextUtils.isEmpty(resultBase.getObj().toString()))
             return;
+//        if (count.length() > 1 && !count.equals("0")) {
+//
+//        }
         waitAreaCount.setVisibility(View.VISIBLE);
-//        waitAreaCount.setText((int) (resultBase.getObj()) + "");
         String count = resultBase.getObj().toString();
         waitAreaCount.setText(count.substring(0, count.indexOf(".")));
+    }
+
+    /*获取质检区数量*/
+    @Override
+    public void getZhiJianAreaCount(ResultBase resultBase) {
+        LogX.e("质检区", String.valueOf(resultBase.getObj()) + "");
+        if (TextUtils.isEmpty(resultBase.getObj().toString()))
+            return;
+        String count = resultBase.getObj().toString();
+        if (count.length() > 1 && !count.equals("0")) {
+            count = count.substring(0, count.indexOf("."));
+            if (!count.equals("0")) {
+                waitQualityCount.setVisibility(View.VISIBLE);
+                waitQualityCount.setText(count);
+            }
+        }
+    }
+
+    /*获取结算区数量*/
+    @Override
+    public void getJieSuanAreaCount(ResultBase resultBase) {
+        LogX.e("结算区1", String.valueOf(resultBase.getObj()) + "");
+        if (TextUtils.isEmpty(resultBase.getObj().toString()))
+            return;
+        String count = resultBase.getObj().toString();
+        if (count.length() > 1 && !count.equals("0")) {
+            count = count.substring(0, count.indexOf("."));
+            if (!count.equals("0")) {
+                waitSettlementCount.setVisibility(View.VISIBLE);
+                waitSettlementCount.setText(count);
+            }
+        }
 
     }
 

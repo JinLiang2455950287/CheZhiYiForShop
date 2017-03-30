@@ -99,6 +99,7 @@ public class AddServiceGoodsActivity extends RefreshBaseActivity implements Topb
         initListener();
         refreshWithLoading();
         refreshLayout.setPullDownRefreshEnable(false);//屏蔽下拉刷新
+        LogX.e("代下单", "AddServiceGoodsActivity");
     }
 
     @Override
@@ -236,14 +237,15 @@ public class AddServiceGoodsActivity extends RefreshBaseActivity implements Topb
     }
 
     /**
-      * 过滤已选服务大项目
-      *@author zhangsan
-      *@date   16/10/19 下午3:53
-      */
+     * 过滤已选服务大项目
+     *
+     * @author zhangsan
+     * @date 16/10/19 下午3:53
+     */
     private void filterProjectList() {
         ArrayList<String> projectNums = getIntent().getStringArrayListExtra(C.IntentKey.PROJECT_NUMS);
 
-        for (int i = 0,size=projectNums.size(); i < size; i++) {
+        for (int i = 0, size = projectNums.size(); i < size; i++) {
             Iterator<ProjectType> iterator = stairprojectTypes.iterator();
             while (iterator.hasNext()) {
                 if (iterator.next().getProjectNum().equals(projectNums.get(i))) {
@@ -272,11 +274,12 @@ public class AddServiceGoodsActivity extends RefreshBaseActivity implements Topb
 
     /**
      * topbar 监听
+     *
      * @param v
      */
     @Override
     public void onTobbarViewClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case com.ruanyun.chezhiyi.commonlib.R.id.img_btn_left:
                 finish();
                 break;
@@ -290,13 +293,17 @@ public class AddServiceGoodsActivity extends RefreshBaseActivity implements Topb
                 break;
             case com.ruanyun.chezhiyi.commonlib.R.id.tv_title_right:
                 if (isAddGoods) {
+                    LogX.e("代下单", "isAddGoods");
                     if (workOrderNum == null) {//添加服务商品
                         addServiceGoods(CustomerReceptionActivity.REQ_ADD_GOODS);
+                        LogX.e("代下单", "添加服务商品");
                     } else {//代下单
                         saveInsteadOrder();
+                        LogX.e("代下单", "//代下单");
                     }
                 } else {//添加服务项目
                     addServiceProject();
+                    LogX.e("代下单", "添加服务项目");
                 }
                 break;
         }
@@ -327,11 +334,12 @@ public class AddServiceGoodsActivity extends RefreshBaseActivity implements Topb
         insteadOrderPparams.setWorkOrderNum(workOrderNum);
         String JsonStr = getProductInfoListJsonStr();
         LogX.d("retrofit", "====代下单========\n" + JsonStr);
-        if ("".equals(JsonStr)) {
+        if (JsonStr == null) {
             AppUtility.showToastMsg("请选择商品");
             return;
         }
         insteadOrderPparams.setResultJosnString(JsonStr);
+
         presenter.setInsteadOrderMvpView(app.getApiService().insteadOrder(app.getCurrentUserNum(), insteadOrderPparams));
     }
 
@@ -350,13 +358,19 @@ public class AddServiceGoodsActivity extends RefreshBaseActivity implements Topb
                         String.valueOf(info.getSalePrice()),
                         info.getGoodsCount(),
                         info.getMainPhoto(),
-                        info.getSgtcje()==null?"0":info.getSgtcje().toString(),
-                        info.getXstcje()==null?"0":info.getXstcje().toString());
+                        info.getSgtcje() == null ? "0" : info.getSgtcje().toString(),
+                        info.getXstcje() == null ? "0" : info.getXstcje().toString());
                 WorkOrderGoodsList.add(WorkOrderGoods);
             }
         }
-        Gson gson = new Gson();
-        return gson.toJson(WorkOrderGoodsList);
+        if (WorkOrderGoodsList.size() > 0) {//选择了商品
+            Gson gson = new Gson();
+            String stData = gson.toJson(WorkOrderGoodsList);
+            return stData;
+        } else {//没选择商品
+            return null;
+        }
+
     }
 
     /**

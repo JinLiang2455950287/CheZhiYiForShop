@@ -1,5 +1,6 @@
 package com.ruanyun.chezhiyi.view.ui.home;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -73,7 +74,9 @@ public class RebackPayActivity extends AutoLayoutActivity implements Topbar.onTo
         lvProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                showActivity(RebackPayDealActivity.class);
+                Intent intent = new Intent(mContext, RebackPayDealActivity.class);
+                intent.putExtra("refundNum", productInfos.get(position).getOrderNum());
+                startActivity(intent);
             }
         });
     }

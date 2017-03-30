@@ -10,5 +10,9 @@ import com.ruanyun.chezhiyi.commonlib.base.ResultBase;
 public interface HomeWaitAreaCountView {
     void getWaitAreaCount(ResultBase resultBase);
 
+    void getZhiJianAreaCount(ResultBase resultBase);
+
+    void getJieSuanAreaCount(ResultBase resultBase);
+
     void getWaitAreaCounterr();
 }

@@ -229,7 +229,7 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
 //        tvMyUserName.setCompoundDrawables(null, null, img, null); //设置右图标
         tvMyUserName.setCompoundDrawablesWithIntrinsicBounds(null, null, user.getUserSexWhiteResId() == 0 ? null : ContextCompat.getDrawable(mContext, user.getUserSexWhiteResId()), null);
         tvMyUserName.setText(user.getNickName());
-        Glide.with(mContext).load(ApiManager.API_URL + user.getUserPhoto()).error(R.drawable.default_imge_small).into(circleImageView);
+        Glide.with(mContext).load((ApiManager.API_URL + user.getUserPhoto()).trim()).error(R.drawable.default_imge_small).into(circleImageView);
         //标签
         String workStatus = DbHelper.getInstance().getParentName(user.getWorkStatus(), C
                 .ParentCode.WORK_STATUS);

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,6 +24,8 @@ import com.ruanyun.chezhiyi.commonlib.util.AppUtility;
 import com.ruanyun.chezhiyi.commonlib.util.C;
 import com.ruanyun.chezhiyi.commonlib.util.DbHelper;
 import com.ruanyun.chezhiyi.commonlib.util.FileUtil;
+import com.ruanyun.chezhiyi.commonlib.util.ImageUtil;
+import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.view.AccountMangementMvpView;
 import com.ruanyun.chezhiyi.commonlib.view.widget.ChooseInterestsDialog;
 import com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView;
@@ -90,6 +93,7 @@ public class AccountMangermentActivity extends HeaderPickerActivity implements T
     private DatePickerDialog mDatePickerDialog;
     private Calendar mCalendar;
     private long mTimeInMillis;
+    private String aa;
 
     @Override
     protected void onCreate(Bundle bundle) {
@@ -179,7 +183,7 @@ public class AccountMangermentActivity extends HeaderPickerActivity implements T
                     AppUtility.showToastMsg(R.string.birthday_legitimate);
                 }
             }
-        },year, month, day);
+        }, year, month, day);
         mDatePickerDialog.getDatePicker().setMaxDate(mTimeInMillis);
         mDatePickerDialog.setTitle("");
     }
@@ -188,8 +192,13 @@ public class AccountMangermentActivity extends HeaderPickerActivity implements T
         appUser = app.getUser();
         if (appUser.getUserNum() == null) return;
         if (mContext == null) return;
-        Glide.with(mContext).load(FileUtil.getImageUrl(appUser.getUserPhoto()))
-                .error(R.drawable.default_img).into(imgPhoto);
+        aa = FileUtil.getImageUrl(appUser.getUserPhoto());
+        LogX.e("账户管理==", appUser.getUserPhoto().toString().trim());
+        LogX.e("账户管理=", aa.trim());
+//        Glide.with(mContext).load(aa.trim()).into(imgPhoto);
+
+        ImageUtil.loadImage(mContext, aa.trim(), imgPhoto, R.drawable.default_img);
+
         tvNickname.setText(appUser.getNickName());
         sex = appUser.getUserSex();
         tvSex.setText(sex == C.USER_SEX_UNKNOW ? "" : sex == C.USER_SEX_MAN ? "男" : "女");
@@ -198,13 +207,13 @@ public class AccountMangermentActivity extends HeaderPickerActivity implements T
             tvBirDate.setText(birDate.substring(0, 10));
         }
         workState = appUser.getWorkStatus();
-        btnWorkState.setSelected(workState.equals(C.WORKSTATE_NOT_BUSY)  || workState.equals(C.WORKSTATE_BUSY) );//1 -工作中 2-休息中
+        btnWorkState.setSelected(workState.equals(C.WORKSTATE_NOT_BUSY) || workState.equals(C.WORKSTATE_BUSY));//1 -工作中 2-休息中
         tvPersonalNote.setText(appUser.getPersonalNote());//个性签名
         userInterest = appUser.getUserInterest();
         tvPersonalTechnicianNote.setText(appUser.getPersonalNote());
-        if( isClient() ) {
+        if (isClient()) {
             if (!TextUtils.isEmpty(userInterest))
-            creatServiceLables(Arrays.asList(userInterest.split(",")));
+                creatServiceLables(Arrays.asList(userInterest.split(",")));
         } else {
             String userLabel = appUser.getLabelCode();
             List<String> allLabels = new ArrayList<>();
@@ -309,6 +318,7 @@ public class AccountMangermentActivity extends HeaderPickerActivity implements T
 
     /**
      * 出生日期
+     *
      * @param format
      */
     private void getDate(String format) {
@@ -357,7 +367,7 @@ public class AccountMangermentActivity extends HeaderPickerActivity implements T
     //日期
     public void getBirDate() {
         CharSequence tvBirDateText = tvBirDate.getText();
-        if ( !TextUtils.isEmpty(tvBirDateText) ) {
+        if (!TextUtils.isEmpty(tvBirDateText)) {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             try {
                 Date date = simpleDateFormat.parse(tvBirDateText.toString());

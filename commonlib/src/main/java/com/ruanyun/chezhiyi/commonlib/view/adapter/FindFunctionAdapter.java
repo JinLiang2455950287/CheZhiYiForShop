@@ -8,6 +8,7 @@ import com.ruanyun.chezhiyi.commonlib.R;
 import com.ruanyun.chezhiyi.commonlib.base.CommonAdapter;
 import com.ruanyun.chezhiyi.commonlib.model.HomeIconInfo;
 import com.ruanyun.chezhiyi.commonlib.util.FileUtil;
+import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 import com.zhy.autolayout.utils.AutoUtils;
 
@@ -28,7 +29,8 @@ public class FindFunctionAdapter extends CommonAdapter<HomeIconInfo> {
     @Override
     protected void convert(ViewHolder holder, HomeIconInfo homeIconInfo, int position) {
         AutoUtils.auto(holder.getConvertView());
-        Glide.with(mContext).load(FileUtil.getImageUrl(homeIconInfo.getAndroidPic())).into((ImageView) holder.getView(R.id.iv_my_function_photo));
+        Glide.with(mContext).load((FileUtil.getImageUrl(homeIconInfo.getAndroidPic())).trim()).into((ImageView) holder.getView(R.id.iv_my_function_photo));
+        LogX.e("发现页的功能图标",(FileUtil.getImageUrl(homeIconInfo.getAndroidPic())).trim());
         holder.setText(R.id.tv_my_function_name,homeIconInfo.getHomeIconName());
     }
 }

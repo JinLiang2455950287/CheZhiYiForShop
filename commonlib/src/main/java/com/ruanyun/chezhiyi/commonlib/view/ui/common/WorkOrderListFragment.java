@@ -140,6 +140,7 @@ public class WorkOrderListFragment extends RefreshBaseFragment implements
         }
         params.setWorkOrderStatusString(workOrderStatusString);
         params.setPageNum(currentPage);
+        LogX.e("服务工单111",params.toString());
         return app.getApiService().getMyWorkOrderList(app.getCurrentUserNum(), params);
     }
 

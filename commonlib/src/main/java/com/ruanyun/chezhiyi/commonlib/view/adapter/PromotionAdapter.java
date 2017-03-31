@@ -37,12 +37,12 @@ public class PromotionAdapter extends CommonAdapter<PromotionInfo> {
         TextView tvNewPrice = holder.getView(R.id.tv_news_price);
         TextView tvOldPrice = holder.getView(R.id.tv_old_price);
 
-        Glide.with(mContext).load(FileUtil.getImageUrl(promotionInfo.getMainPhoto()))
+        Glide.with(mContext).load((FileUtil.getImageUrl(promotionInfo.getMainPhoto())).trim())
                 .error(R.drawable.default_img).into(imageView);
         tvNewPrice.setText(new StringBuilder().append("¥").append(promotionInfo.getActivityPrice()).toString());
         tvOldPrice.setText(new StringBuilder().append("¥").append(promotionInfo.getMarketPrice()).toString());
         tvOldPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-        tvPurchaseTime.setText("限时购: "+ StringUtil.getMonthDayTime(promotionInfo.getPromotionBeginDate())
-                + "—"+StringUtil.getMonthDayTime(promotionInfo.getPromotionEndDate()));
+        tvPurchaseTime.setText("限时购: " + StringUtil.getMonthDayTime(promotionInfo.getPromotionBeginDate())
+                + "—" + StringUtil.getMonthDayTime(promotionInfo.getPromotionEndDate()));
     }
 }

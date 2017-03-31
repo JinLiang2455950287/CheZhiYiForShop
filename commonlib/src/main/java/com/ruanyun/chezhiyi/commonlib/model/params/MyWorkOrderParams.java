@@ -64,4 +64,16 @@ public class MyWorkOrderParams extends PageParamsBase {
     public void setIsDaiXiaDan(String isDaiXiaDan) {
         this.isDaiXiaDan = isDaiXiaDan;
     }
+
+    @Override
+    public String toString() {
+        return "MyWorkOrderParams{" +
+                "workOrderStatus=" + workOrderStatus +
+                ", workOrderStatusString='" + workOrderStatusString + '\'' +
+                ", leadingUserNum='" + leadingUserNum + '\'' +
+                ", serviceUserNum='" + serviceUserNum + '\'' +
+                ", type='" + type + '\'' +
+                ", isDaiXiaDan='" + isDaiXiaDan + '\'' +
+                '}';
+    }
 }

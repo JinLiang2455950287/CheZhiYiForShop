@@ -53,6 +53,7 @@ import com.ruanyun.chezhiyi.commonlib.view.widget.FlowLayout;
 import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
 import com.ruanyun.chezhiyi.view.adapter.CustomerRepAdapter;
 import com.ruanyun.chezhiyi.view.ui.home.AddServiceGoodsActivity;
+import com.ruanyun.chezhiyi.view.ui.home.OpenOrderActivity;
 import com.ruanyun.chezhiyi.view.widget.ChooseServiceTab;
 import com.wintone.demo.plateid.MemoryCameraActivity;
 
@@ -467,7 +468,7 @@ public class CustomerReceptionActivity extends AutoLayoutActivity implements Top
                 startActivityForResult(i, REQ_ADD_UPKEEP);
                 break;
             case R.id.edt_carnum_input://点击号牌返回号牌输入界面
-                finish();
+                skipActivity(OpenOrderActivity.class);
                 break;
         }
     }

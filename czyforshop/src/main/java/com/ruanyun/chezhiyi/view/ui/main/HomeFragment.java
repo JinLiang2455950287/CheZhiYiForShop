@@ -784,14 +784,15 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
     @Override
     public void getWaitAreaCount(ResultBase resultBase) {
         LogX.e("等候区1", String.valueOf(resultBase.getObj()) + "");
-        if (TextUtils.isEmpty(resultBase.getObj().toString()))
-            return;
-//        if (count.length() > 1 && !count.equals("0")) {
-//
-//        }
-        waitAreaCount.setVisibility(View.VISIBLE);
+
         String count = resultBase.getObj().toString();
-        waitAreaCount.setText(count.substring(0, count.indexOf(".")));
+        if (count.length() > 1 && !count.equals("0")) {
+            count = count.substring(0, count.indexOf("."));
+            if (!count.equals("0")) {
+                waitAreaCount.setVisibility(View.VISIBLE);
+                waitAreaCount.setText(count);
+            }
+        }
     }
 
     /*获取质检区数量*/

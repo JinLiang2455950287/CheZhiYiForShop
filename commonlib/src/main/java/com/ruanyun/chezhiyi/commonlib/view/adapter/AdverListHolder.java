@@ -28,7 +28,7 @@ public class AdverListHolder
 
     @Override
     public void UpdateUI(Context context, int position, AdverListInfo data) {
-        ImageUtil.loadImage(mContext, FileUtil.getImageUrl(data.getMainPhoto()), imageView);
+        ImageUtil.loadImage(mContext, (FileUtil.getImageUrl(data.getMainPhoto())).trim(), imageView);
         LogX.d("ycw", "data.getFilePath() --------> " + FileUtil.getImageUrl(data.getMainPhoto()));
 
     }

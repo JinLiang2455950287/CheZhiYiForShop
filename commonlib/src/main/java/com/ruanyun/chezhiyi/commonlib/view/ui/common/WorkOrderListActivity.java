@@ -34,7 +34,7 @@ public class WorkOrderListActivity extends AutoLayoutActivity implements Topbar.
     String[] clientTabName = {"全部","等候中","进行中","待结算","已完成"};
     String[] clientTabType = {"2,3,4,5,6,7,8,9","3","4,5,6,7","8","9"};
     String[] shopTabName = {"全部","待服务","服务中","结算中","已完成"};
-    String[] shopTabType = {"4,5,6,7,8,9","3,4","5"/*,6,7*/,"8","9"};
+    String[] shopTabType = {"4,5,6,7,8,9","3,4,7","5"/*,6,7*/,"8","9"};
 
 
     @Override

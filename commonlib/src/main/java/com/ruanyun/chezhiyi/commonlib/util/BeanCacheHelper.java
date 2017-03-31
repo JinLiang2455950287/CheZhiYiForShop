@@ -37,7 +37,7 @@ public class BeanCacheHelper {
         App.getInstance().getApiService().getParentCodeVersion().enqueue(new ResponseCallback<ResultBase<List<ParentCodeInfo>>>() {
             @Override
             public void onSuccess(Call call, final ResultBase<List<ParentCodeInfo>> parentCodeInfoResult) {
-                Log.e("======4.1.2获取需要缓存的版本号",parentCodeInfoResult.getObj().toString());
+                Log.e("======4.1.2获取需要缓存的版本号", parentCodeInfoResult.getObj().toString());
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -52,9 +52,9 @@ public class BeanCacheHelper {
                                 getParentCode();   //获取parentCode
                             }
                         }
-                      //  if (DbHelper.getInstance().)) {
+                        //  if (DbHelper.getInstance().)) {
                         //getProjectTypes();
-                       // }
+                        // }
                         //if (TextUtils.isEmpty(loginName))
 //                        getHomeIconToDb();
 
@@ -87,7 +87,7 @@ public class BeanCacheHelper {
         App.getInstance().getApiService().getParentCodeInfo().enqueue(new ResponseCallback<ResultBase<List<ParentCodeInfo>>>() {
             @Override
             public void onSuccess(Call call, final ResultBase<List<ParentCodeInfo>> parentCodeInfoResult) {
-                LogX.e("=====1.8.2获取公共字典表",parentCodeInfoResult.getObj().toString());
+                LogX.e("=====1.8.2获取公共字典表", parentCodeInfoResult.getObj().toString());
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -126,7 +126,7 @@ public class BeanCacheHelper {
             @Override
             public void onSuccess(Call call, ResultBase<List<CarModel>> carModelsResult) {
                 //save(carModelsResult, C.PrefName.PREF_CARMODEL);
-                LogX.e("=====1.8.6 获取车型信息",carModelsResult.getObj().toString());
+                LogX.e("=====1.8.6 获取车型信息", carModelsResult.getObj().toString());
                 DbHelper.getInstance().saveCarModels(carModelsResult.getObj());
                 DbHelper.getInstance().insertParentCode(parentMaps.get(C.ParentCode.CARMODEL));
             }
@@ -155,7 +155,7 @@ public class BeanCacheHelper {
         App.getInstance().getApiService().getProjectType().enqueue(new ResponseCallback<ResultBase<List<ProjectType>>>() {
             @Override
             public void onSuccess(Call call, final ResultBase<List<ProjectType>> projectTypeResult) {
-                LogX.e("=====1.8.7获取工单服务或技师技能",projectTypeResult.getObj().toString());
+                LogX.e("=====1.8.7获取工单服务或技师技能", projectTypeResult.getObj().toString());
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -192,17 +192,18 @@ public class BeanCacheHelper {
 
     /**
      * 获取  当前  用户信息
+     *
      * @param userNum
      * @param activity
      * @param eventKey
      */
-    public void getUserByNum(final String userNum, FragmentActivity activity,final String eventKey) {
+    public void getUserByNum(final String userNum, FragmentActivity activity, final String eventKey) {
         App.getInstance().loadingDialogHelper.showIgnoreStatu(activity, "处理中...");
         Call<ResultBase<User>> call = App.getInstance().getHxApiService().getUserByNum(App.getInstance().getCurrentUserNum(), userNum);
         call.enqueue(new ResponseCallback<ResultBase<User>>() {
             @Override
             public void onSuccess(Call call, ResultBase<User> userResult) {
-                EventBus.getDefault().post(new Event<User>(eventKey,userResult.getObj()));
+                EventBus.getDefault().post(new Event<User>(eventKey, userResult.getObj()));
                 App.getInstance().setUser(userResult.getObj());
                 EventBus.getDefault().post(eventKey);
             }
@@ -227,17 +228,18 @@ public class BeanCacheHelper {
 
     /**
      * 根据用户编号获取  含有朋友的关系 的用户信息
-     * @param userNum   用户编号
+     *
+     * @param userNum  用户编号
      * @param activity
      * @param eventKey
      */
-    public void getFriendShipInfo(final String userNum, FragmentActivity activity,final String eventKey) {
+    public void getFriendShipInfo(final String userNum, FragmentActivity activity, final String eventKey) {
         App.getInstance().loadingDialogHelper.showIgnoreStatu(activity, "处理中...");
         Call<ResultBase<User>> call = App.getInstance().getHxApiService().getFriendShipInfo(App.getInstance().getCurrentUserNum(), userNum);
         call.enqueue(new ResponseCallback<ResultBase<User>>() {
             @Override
             public void onSuccess(Call call, ResultBase<User> userResult) {
-                EventBus.getDefault().postSticky(new Event<User>(eventKey,userResult.getObj()));
+                EventBus.getDefault().postSticky(new Event<User>(eventKey, userResult.getObj()));
             }
 
             @Override
@@ -277,7 +279,9 @@ public class BeanCacheHelper {
                                         () == rhs.getSortNum() ? 0 : 1;
                             }
                         });
+                        LogX.e("homeIcon前", list.toString());
                         DbHelper.getInstance().insertHomeIcons(list);
+                        LogX.e("homeIcon后", list.toString());
                     }
                 }).start();
             }
@@ -366,12 +370,13 @@ public class BeanCacheHelper {
         return DbHelper.getInstance().getAllCarModel();
     }
 
-   /**
+    /**
      * 获取车辆颜色
-     *@author zhangsan
-     *@date   16/9/24 下午5:41
+     *
+     * @author zhangsan
+     * @date 16/9/24 下午5:41
      */
-    public List<ParentCodeInfo> getCarColorList(){
+    public List<ParentCodeInfo> getCarColorList() {
         return DbHelper.getInstance().getParentCodeList(C.ParentCode.CAR_COLOR);
     }
 
@@ -399,8 +404,8 @@ public class BeanCacheHelper {
         return DbHelper.getInstance().getParentCodeList(parentCodeName);
     }
 
-    public String getArticleTypeName(int articleTyple){
-        return DbHelper.getInstance().getParentName(Integer.toString(articleTyple),C.ParentCode.ARTICLE_TYPE);
+    public String getArticleTypeName(int articleTyple) {
+        return DbHelper.getInstance().getParentName(Integer.toString(articleTyple), C.ParentCode.ARTICLE_TYPE);
     }
 
     /**
@@ -428,7 +433,7 @@ public class BeanCacheHelper {
     private <T> T get(String prefClssName, Class clazz) {
         try {
             String data = PrefUtility.get(prefClssName, "");
-            return (T) new Gson().fromJson(data,clazz);
+            return (T) new Gson().fromJson(data, clazz);
 
         } catch (Exception e) {
             e.printStackTrace();

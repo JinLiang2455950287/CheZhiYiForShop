@@ -307,6 +307,19 @@ public interface ApiService {
     Call<ResultBase<PageInfoBase<ProductInfo>>> getProductList(@Path("userNum") String userNum, @Body ProductGroupPurchaseParams params);
 
     /**
+     * 卡套餐列表
+     */
+    @POST(C.ApiUrl.URL_CARDPACKEG_LIST)
+    Call<ResultBase<List<CardPackageListModel>>> getCardPackegList(@Path("userNum") String userNum);
+//    Call<ResultBase>  getCardPackegList(@Path("userNum") String userNum);
+
+    /**
+     * 卡套餐详情
+     */
+    @POST(C.ApiUrl.URL_CARDPACKEG_INFO)
+    Call<ResultBase<CardPackageDetailInfo>> getCardPackegInfo(@Path("userNum") String userNum,@Query("packageNum") String packageNum);
+
+    /**
      * 限时促销列表
      */
     @POST(C.ApiUrl.URL_PROMOTION_LIST)

@@ -503,6 +503,8 @@
             android:name=".view.ui.home.MemberSearchActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".view.ui.home.HuiYuanDetailActivity" />
+        <activity android:name=".view.ui.home.CardPackageActivity" />
+        <activity android:name=".view.ui.home.CardPackageDetailActivity"></activity>
     </application>
 
 </manifest>

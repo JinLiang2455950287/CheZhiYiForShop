@@ -34,4 +34,13 @@ public  class ResultBase<T> {
     public void setObj(T obj) {
         this.obj = obj;
     }
+
+    @Override
+    public String toString() {
+        return "ResultBase{" +
+                "result=" + result +
+                ", msg='" + msg + '\'' +
+                ", obj=" + obj +
+                '}';
+    }
 }

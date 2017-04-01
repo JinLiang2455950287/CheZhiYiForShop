@@ -211,6 +211,17 @@ public final class C {
          **/
         public static final String URL_PRODUCT_LIST = "app/{userNum}/goods/info/list";
 
+
+        /**
+         * 卡套餐app/{userNum}/package/list    获取卡套餐列表
+         **/
+        public static final String URL_CARDPACKEG_LIST = "app/{userNum}/package/list";
+
+        /**
+         * 卡套餐/app/{userNum}/package/info    获取卡套餐实体
+         **/
+        public static final String URL_CARDPACKEG_INFO = "app/{userNum}/package/info";
+
         /**
          * 1.12.2众筹列表
          **/

@@ -706,7 +706,8 @@ public class AppUtility {
 
     /**
      * 显示商品详细页
-     *  @param payPrice       实际付款的商品单价
+     *
+     * @param payPrice       实际付款的商品单价
      * @param currentUserNum 当前用户的Num
      * @param goodsNum       商品的 num
      * @param goodsType      商品的类型  或  订单的类型
@@ -789,7 +790,7 @@ public class AppUtility {
      * @param projectNum     商品所属类别编号
      * @param mainPhoto      商品的图片
      * @param commonFlag     可以购买1  不允许购买 2
-     * @param subtitle        副标题  分享时使用
+     * @param subtitle       副标题  分享时使用
      * @return
      */
     public static Intent getGoodsIntent(double payPrice,
@@ -872,27 +873,27 @@ public class AppUtility {
      * @return 商品的   jsonstring
      */
     public static String getGoodsJsonString(String goodsNum,
-            double activityPrice,
-            String orderType,
-            String commonNum,
-            String goodsName,
-            String projectNum,
-            String mainPhoto,
-            String commonFlag,
-            String viceTitle) {
+                                            double activityPrice,
+                                            String orderType,
+                                            String commonNum,
+                                            String goodsName,
+                                            String projectNum,
+                                            String mainPhoto,
+                                            String commonFlag,
+                                            String viceTitle) {
         orderType = AppUtility.getTypeName(orderType);
         GoodsInfo goodsInfo = new GoodsInfo(commonNum,
                 goodsNum,
                 orderType,
-                TextUtils.isEmpty(goodsName)? "" : Base64.encode(goodsName.getBytes()),
+                TextUtils.isEmpty(goodsName) ? "" : Base64.encode(goodsName.getBytes()),
                 activityPrice,
                 projectNum,
                 mainPhoto,
                 commonFlag,
-                TextUtils.isEmpty(viceTitle)? "" : Base64.encode(viceTitle.getBytes()));
+                TextUtils.isEmpty(viceTitle) ? "" : Base64.encode(viceTitle.getBytes()));
         Gson gson = new Gson();
         String toJson = gson.toJson(goodsInfo);
-        LogX.e("WebViewActivity", " AppUtility\n" + toJson );
+        LogX.e("WebViewActivity", " AppUtility\n" + toJson);
         return toJson;
     }
 

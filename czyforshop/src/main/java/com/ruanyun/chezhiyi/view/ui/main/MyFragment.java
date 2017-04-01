@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableStringBuilder;
@@ -70,7 +71,7 @@ import static android.app.Activity.RESULT_OK;
  * @author hdl
  *         我的界面
  */
-public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnItemClickListener, ShopMyMvpView, NoticeMvpView {
+public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnItemClickListener, ShopMyMvpView, NoticeMvpView, SwipeRefreshLayout.OnRefreshListener {
 
     public static final int REQUEST_CODE_REFRESH = 578;
     private static final int REQUEST_CODE_LISTCOUNT_REFRESH = 779;
@@ -99,6 +100,8 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
     TextView tvSalesCommissions;
     @BindView(R.id.tv_user_number)
     TextView tvUserNumber;
+    @BindView(R.id.refreshlayout)
+    SwipeRefreshLayout refreshlayout;
 
     private ShopMyRecyclerViewAdapter rvAdapter;
     private ShopMyPresenter myPresenter = new ShopMyPresenter();
@@ -151,7 +154,18 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
         getSystemRemind();
         getMyListCount();
         getPersonOrder();//获取销售提成，施工提成
+        initRefreshView();
     }
+
+    /**
+     * 初始化下拉刷新
+     */
+    private void initRefreshView() {
+        refreshlayout.setColorSchemeResources(com.ruanyun.chezhiyi.commonlib.R.color.holo_blue_bright, com.ruanyun.chezhiyi.commonlib.R.color.holo_green_light,
+                com.ruanyun.chezhiyi.commonlib.R.color.holo_orange_light, com.ruanyun.chezhiyi.commonlib.R.color.holo_red_light);
+        refreshlayout.setOnRefreshListener(this);
+    }
+
 
     /**
      * 获取销售提成，施工提成
@@ -455,6 +469,7 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
     @Override
     public void getReportInfoSuccess(ReportInfo reportInfo) {
         if (reportInfo == null) return;
+        refreshlayout.setRefreshing(false);
         tvPushMoney.setText(getText("施工提成\n¥", new BigDecimal(reportInfo.getSgtcAmount()).setScale(2, BigDecimal.ROUND_HALF_UP).toString()));
         tvSalesCommissions.setText(getText("销售提成\n¥", new BigDecimal(reportInfo.getXstcAmount()).setScale(2, BigDecimal.ROUND_HALF_UP).toString()));
         tvUserNumber.setText(getText("工单数\n", String.valueOf(reportInfo.getUserCount())));
@@ -462,6 +477,7 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
 
     @Override
     public void getReportInfoError() {
+        refreshlayout.setRefreshing(false);
         tvPushMoney.setText(getText("施工提成\n¥", "0.00"));
         tvSalesCommissions.setText(getText("销售提成\n¥", "0.00"));
         tvUserNumber.setText(getText("工单数\n", "0"));
@@ -483,5 +499,10 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
         SpannableStringBuilder spb = new SpannableStringBuilder();
         spb.append(name).append(num).setSpan(new RelativeSizeSpan(1.6f), name.length(), name.length() + num.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
         return spb;
+    }
+
+    @Override
+    public void onRefresh() {
+        getPersonOrder();//获取销售提成，施工提成
     }
 }

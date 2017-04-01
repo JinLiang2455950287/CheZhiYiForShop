@@ -60,11 +60,16 @@ public class RebackPayActivity extends AutoLayoutActivity implements Topbar.onTo
         payPresenter.attachView(this);
         emptyview.bind(mRefreshLayout);
         emptyview.showLoading();
-        payPresenter.getRePayData(app.getApiService().getTuiKuanList(app.getCurrentUserNum()));
         topbar.setTttleText("退款审核")
                 .setBackBtnEnable(true)
                 .onBackBtnClick()
                 .setTopbarClickListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        payPresenter.getRePayData(app.getApiService().getTuiKuanList(app.getCurrentUserNum()));
     }
 
     private void setAdapter() {
@@ -75,7 +80,7 @@ public class RebackPayActivity extends AutoLayoutActivity implements Topbar.onTo
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(mContext, RebackPayDealActivity.class);
-                intent.putExtra("refundNum", productInfos.get(position).getOrderNum());
+                intent.putExtra("refundNum", productInfos.get(position).getRefundApplicationNum());
                 startActivity(intent);
             }
         });
@@ -191,6 +196,7 @@ public class RebackPayActivity extends AutoLayoutActivity implements Topbar.onTo
 
     @Override
     public void getDataSuccess(List<TuiKuanInfo> listinfo) {
+        productInfos.clear();
         for (TuiKuanInfo info : listinfo) {
             productInfos.add(info);
         }

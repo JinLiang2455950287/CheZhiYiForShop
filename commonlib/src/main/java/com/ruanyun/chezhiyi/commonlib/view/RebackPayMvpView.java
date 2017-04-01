@@ -11,6 +11,6 @@ public interface RebackPayMvpView {
 
     void getRebackSccess(ResultBase resultBase);
 
-    void getRebackFalse();
+    void getRebackFalse(ResultBase resultBase);
 
 }

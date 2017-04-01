@@ -523,8 +523,8 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
                     permissionDialog();
                 }
                 break;
-            case R.id.home_mdtj://门店汇总
-                if (permissionList.contains("MDHZ")) {
+            case R.id.home_mdtj://门店统计
+                if (permissionList.contains("MDTJ")) {
                     showActivity(ShopCollectActivity.class);
                 } else {
                     permissionDialog();

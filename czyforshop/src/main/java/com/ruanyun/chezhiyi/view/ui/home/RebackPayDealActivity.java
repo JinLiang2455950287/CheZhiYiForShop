@@ -6,12 +6,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.base.AutoLayoutActivity;
 import com.ruanyun.chezhiyi.commonlib.base.ResultBase;
 import com.ruanyun.chezhiyi.commonlib.presenter.RebackPayPrsenter;
 import com.ruanyun.chezhiyi.commonlib.util.AppUtility;
+import com.ruanyun.chezhiyi.commonlib.util.FileUtil;
 import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.view.RebackPayMvpView;
 import com.ruanyun.chezhiyi.commonlib.view.widget.EmojiFiltrationTextWatcher;
@@ -91,16 +93,19 @@ public class RebackPayDealActivity extends AutoLayoutActivity implements Topbar.
     @Override
     public void getRebackSccess(ResultBase resultBase) {
         app.loadingDialogHelper.dissMiss();
-//        if (resultBase.getObj()) {
-//
-//        }
         LogX.e("退款审核1", resultBase.getObj().toString());
         LogX.e("退款审核1", resultBase.toString());
+        if (resultBase.getResult() == 1) {
+            finish();
+        }
     }
 
     @Override
-    public void getRebackFalse() {
-
+    public void getRebackFalse(ResultBase resultBase) {
+        LogX.e("退款审核1getRebackFalse", resultBase.getObj().toString());
+        LogX.e("退款审核1getRebackFalse", resultBase.toString());
+        app.loadingDialogHelper.dissMiss();
+        AppUtility.showToastMsg("退款审核失败");
     }
 
     @Override

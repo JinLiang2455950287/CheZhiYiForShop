@@ -6,6 +6,7 @@ import com.ruanyun.chezhiyi.commonlib.base.ResultBase;
 import retrofit2.Call;
 
 import com.ruanyun.chezhiyi.commonlib.data.api.ResponseCallback;
+import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.view.RebackPayMvpView;
 
 
@@ -29,17 +30,19 @@ public class RebackPayPrsenter implements Presenter<RebackPayMvpView> {
         call.enqueue(new ResponseCallback<ResultBase>() {
             @Override
             public void onSuccess(Call call, ResultBase resultBase) {
+                LogX.e("退款原因onSuccess", resultBase.toString());
                 rebackPayMvpView.getRebackSccess(resultBase);
             }
 
             @Override
             public void onError(Call call, ResultBase resultBase, int errorCode) {
-
+                LogX.e("退款原因onError", "errorCode" + errorCode + resultBase.toString());
+                rebackPayMvpView.getRebackFalse(resultBase);
             }
 
             @Override
             public void onFail(Call call, String msg) {
-
+                LogX.e("退款原因onFail", msg.toString());
             }
 
             @Override

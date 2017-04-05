@@ -22,15 +22,15 @@ import de.greenrobot.event.EventBus;
  */
 public class ImageUtil {
 
-    public static void loadImage(Context context,String imgUrl, ImageView imageView){
+    public static void loadImage(Context context, String imgUrl, ImageView imageView) {
         Glide.with(context)
-                .load(imgUrl)
+                .load(imgUrl.trim())
                 .into(imageView);
     }
 
-    public static void loadImage(Context context, String imgUrl, ImageView imageView, @DrawableRes int defaultBg){
+    public static void loadImage(Context context, String imgUrl, ImageView imageView, @DrawableRes int defaultBg) {
         Glide.with(context)
-                .load(imgUrl)
+                .load(imgUrl.trim())
                 .placeholder(defaultBg)
                 .error(defaultBg)
                 .into(imageView);
@@ -138,7 +138,6 @@ public class ImageUtil {
     }
 
 
-
     /**
      * 格式化单位
      *
@@ -173,7 +172,6 @@ public class ImageUtil {
 
         return result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "TB";
     }
-
 
 
 }

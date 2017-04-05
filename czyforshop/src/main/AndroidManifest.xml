@@ -503,8 +503,14 @@
             android:name=".view.ui.home.MemberSearchActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".view.ui.home.HuiYuanDetailActivity" />
-        <activity android:name=".view.ui.home.CardPackageActivity" />
-        <activity android:name=".view.ui.home.CardPackageDetailActivity"/>
+        <!--卡套餐-->
+        <activity
+            android:name=".view.ui.home.CardPackageActivity"
+            android:screenOrientation="portrait" />
+        <!--卡套餐详情-->
+        <activity
+            android:name=".view.ui.home.CardPackageDetailActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

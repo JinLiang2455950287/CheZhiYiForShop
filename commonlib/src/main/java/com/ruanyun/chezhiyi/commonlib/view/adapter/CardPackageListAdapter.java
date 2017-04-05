@@ -2,10 +2,13 @@ package com.ruanyun.chezhiyi.commonlib.view.adapter;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ruanyun.chezhiyi.commonlib.R;
 import com.ruanyun.chezhiyi.commonlib.model.CardPackageListModel;
+import com.ruanyun.chezhiyi.commonlib.util.FileUtil;
+import com.ruanyun.chezhiyi.commonlib.util.ImageUtil;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
 import com.zhy.autolayout.utils.AutoUtils;
@@ -31,10 +34,9 @@ public class CardPackageListAdapter extends CommonAdapter<CardPackageListModel> 
     @Override
     protected void convert(ViewHolder holder, final CardPackageListModel item, final int position) {
         AutoUtils.auto(holder.getConvertView());
-//        ImageUtil.loadImage(mContext, FileUtil.getImageUrl(item.getMainPhoto()),
-//                (ImageView) holder.getView(R.id.iv_product_photo), R.drawable.default_img);
+        ImageUtil.loadImage(mContext, FileUtil.getImageUrl(""),
+                (ImageView) holder.getView(R.id.iv_product_photo), R.drawable.cardpackage);
 
-//
         holder.setText(R.id.tv_title, item.getPackageName());
         holder.setText(R.id.tv_subtitle, "[价值" + (item.getPackageCost()+item.getPackagePrice()) + "元]" + " 优惠" + item.getPackageCost());
         holder.setText(R.id.tv_price, "¥" + item.getPackagePrice());

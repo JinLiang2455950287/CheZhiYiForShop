@@ -4,8 +4,12 @@ import android.content.Context;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.base.CommonAdapter;
 import com.ruanyun.chezhiyi.commonlib.model.GoodsListBean;
+import com.ruanyun.chezhiyi.commonlib.util.FileUtil;
+import com.ruanyun.chezhiyi.commonlib.util.ImageUtil;
+import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 import com.zhy.autolayout.utils.AutoUtils;
 
@@ -26,7 +30,7 @@ public class CardPackageInfoAdapter extends CommonAdapter<GoodsListBean> {
     @Override
     protected void convert(ViewHolder holder, GoodsListBean goodsListBean, int position) {
         AutoUtils.auto(holder.getConvertView());
-        ImageView ivImage = holder.getView(com.ruanyun.chezhiyi.commonlib.R.id.iv_image);
+        ImageView ivImage = holder.getView(com.ruanyun.chezhiyi.commonlib.R.id.iv_product_photo);
         TextView tvTitle = holder.getView(com.ruanyun.chezhiyi.commonlib.R.id.tv_title);
         TextView tvPrice = holder.getView(com.ruanyun.chezhiyi.commonlib.R.id.tv_price);
         TextView tvpurchase = holder.getView(com.ruanyun.chezhiyi.commonlib.R.id.tv_purchase);
@@ -37,12 +41,8 @@ public class CardPackageInfoAdapter extends CommonAdapter<GoodsListBean> {
         } else {
             tvpurchase.setText("×" + goodsListBean.getGoodsCount());
         }
-
-//        Glide.with(mContext)
-//                .load(FileUtil.getImageUrl(recommendInfo.getMainPhoto()))
-//                .placeholder(R.drawable.default_img)
-//                .error(R.drawable.default_img)
-//                .into(ivImage);
+        LogX.e("不限次",FileUtil.getImageUrl(goodsListBean.getMainPhoto()));
+        ImageUtil.loadImage(mContext,  FileUtil.getImageUrl(goodsListBean.getMainPhoto()), ivImage, R.drawable.cardpackage);
 
     }
 

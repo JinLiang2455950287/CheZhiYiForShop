@@ -62,7 +62,7 @@
         android:layout_gravity="center_horizontal|bottom"
         android:layout_marginBottom="40px"
         android:gravity="center"
-        android:text="\@2016 RuanYun Network Technology Co.,Ltd"
+        android:text="Copyright © 2016 安徽车之翼网络科技有限公司"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|bottom"
         android:gravity="center"
-        android:text="安徽软云信息科技有限公司"
+        android:text="车之翼公司"
         android:layout_above="@id/tvCopRight"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15px" />

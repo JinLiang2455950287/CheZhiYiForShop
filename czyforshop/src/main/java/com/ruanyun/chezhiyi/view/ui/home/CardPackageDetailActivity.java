@@ -58,7 +58,6 @@ public class CardPackageDetailActivity extends AutoLayoutActivity implements Top
     private CardPackageInfoAdapter cardPackageInfoAdapter;
     private CardPackageDetailInfo cardPackageDetailInfo = new CardPackageDetailInfo();
     private List<GoodsListBean> listData;
-    private OrderInfo orderInfo = new OrderInfo();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

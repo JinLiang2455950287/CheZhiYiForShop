@@ -19,6 +19,7 @@ import com.ruanyun.chezhiyi.commonlib.util.AppUtility;
 import com.ruanyun.chezhiyi.commonlib.util.C;
 import com.ruanyun.chezhiyi.commonlib.util.DbHelper;
 import com.ruanyun.chezhiyi.commonlib.util.FileUtil;
+import com.ruanyun.chezhiyi.commonlib.util.ImageUtil;
 import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.util.StringUtil;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
@@ -50,19 +51,15 @@ public class HomeRecommendAdapter extends CommonAdapter<RecommendInfo> {
         TextView tvPrice = holder.getView(R.id.tv_price);
         TextView tvOldPrice = holder.getView(R.id.tv_old_price);
         TextView tvComment = holder.getView(R.id.tv_comment);
-
-        Glide.with(mContext)
-                .load(FileUtil.getImageUrl(recommendInfo.getMainPhoto()))
-                .placeholder(R.drawable.default_img)
-                .error(R.drawable.default_img)
-                .into(ivImage);
+        ImageUtil.loadImage(mContext, FileUtil.getImageUrl(recommendInfo.getMainPhoto()), ivImage, R.drawable.default_img);
+//        Glide.with(mContext).load(FileUtil.getImageUrl(recommendInfo.getMainPhoto())).placeholder(R.drawable.default_img).error(R.drawable.default_img).into(ivImage);
         LogX.d("HomeRecommendAdapter", "-------->" + FileUtil.getImageUrl(recommendInfo.getMainPhoto()));
         tvComment.setText(new StringBuilder().append(recommendInfo.getCommentCount()).append("评论").toString());
         tvOldPrice.setText(new StringBuilder().append("¥").append(recommendInfo.getMarketPrice()).toString());
         tvOldPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中间横线（删除线）
         tvSalesVolume.setText(new StringBuilder().append("已售").append(recommendInfo.getSaleCount()).toString());
         tvPrice.setText(getPriceSpannableString(new StringBuilder().append("¥")
-                .append(recommendInfo.getActivityPrice()==0?recommendInfo.getSalePrice() : recommendInfo.getActivityPrice() ).toString()));
+                .append(recommendInfo.getActivityPrice() == 0 ? recommendInfo.getSalePrice() : recommendInfo.getActivityPrice()).toString()));
         tvTitle.setText(recommendInfo.getTitle());
         tvType.setText(recommendInfo.getTypeName());
         setTypeAddTime(tvType, tvTimeLimit, recommendInfo);
@@ -100,7 +97,7 @@ public class HomeRecommendAdapter extends CommonAdapter<RecommendInfo> {
                 break;
 
             case RecommendInfo.GOODS_TYPE_MS://秒杀
-                tvTimeLimit.setText("距离开始："+ recommendInfo.getBeginTime());
+                tvTimeLimit.setText("距离开始：" + recommendInfo.getBeginTime());
                 tvType.setBackgroundResource(R.drawable.shape_ms_bg);
                 break;
 

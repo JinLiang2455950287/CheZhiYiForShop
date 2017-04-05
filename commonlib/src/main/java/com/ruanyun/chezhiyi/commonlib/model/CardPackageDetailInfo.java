@@ -1,5 +1,6 @@
 package com.ruanyun.chezhiyi.commonlib.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -35,7 +36,7 @@ public class CardPackageDetailInfo {
     private int packageId;
     private String packageName;
     private String packageNum;
-    private int packagePrice;
+    private BigDecimal packagePrice;
     private int packageSale;
     private int packageStatus;
     private List<GoodsListBean> goodsList;
@@ -112,11 +113,11 @@ public class CardPackageDetailInfo {
         this.packageNum = packageNum;
     }
 
-    public int getPackagePrice() {
+    public BigDecimal getPackagePrice() {
         return packagePrice;
     }
 
-    public void setPackagePrice(int packagePrice) {
+    public void setPackagePrice(BigDecimal packagePrice) {
         this.packagePrice = packagePrice;
     }
 

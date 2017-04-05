@@ -3,6 +3,7 @@ package com.ruanyun.chezhiyi.commonlib.presenter;
 import com.ruanyun.chezhiyi.commonlib.base.ResultBase;
 import com.ruanyun.chezhiyi.commonlib.data.api.ResponseCallback;
 import com.ruanyun.chezhiyi.commonlib.model.OrderInfo;
+import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.view.CardPackageDingDanView;
 
 import retrofit2.Call;
@@ -26,6 +27,7 @@ public class CardPackageDingDanPresenter implements Presenter<CardPackageDingDan
         call.enqueue(new ResponseCallback<ResultBase<OrderInfo>>() {
             @Override
             public void onSuccess(Call call, ResultBase<OrderInfo> resultBase) {
+                LogX.e("套餐详情getDingDanDataonSuccess", resultBase.getObj().toString());
                 if (resultBase.getResult() == 1) {
                     cardPackageDingDanView.reportDinDanSuccess(resultBase.getObj());
                 }
@@ -33,11 +35,13 @@ public class CardPackageDingDanPresenter implements Presenter<CardPackageDingDan
 
             @Override
             public void onError(Call call, ResultBase<OrderInfo> resultBase, int errorCode) {
+                LogX.e("套餐详情getDingDanDataonError", resultBase.getObj().toString());
                 cardPackageDingDanView.reportDinDanFalse();
             }
 
             @Override
             public void onFail(Call call, String msg) {
+                LogX.e("套餐详情getDingDanDataonFail", msg.toString());
                 cardPackageDingDanView.reportDinDanFalse();
             }
 

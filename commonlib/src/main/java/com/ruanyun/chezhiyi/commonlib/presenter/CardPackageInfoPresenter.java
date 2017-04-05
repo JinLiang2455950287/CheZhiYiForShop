@@ -28,18 +28,18 @@ public class CardPackageInfoPresenter implements Presenter<CardPackageInfoView> 
         call.enqueue(new ResponseCallback<ResultBase<CardPackageDetailInfo>>() {
             @Override
             public void onSuccess(Call call, ResultBase<CardPackageDetailInfo> resultBase) {
-                LogX.e("套餐详情prsenter", resultBase.getObj().toString());
+                LogX.e("套餐详情getCardPackageInfoonSuccess", resultBase.getObj().toString());
                 cardPackageInfoView.getDataSuccess(resultBase.getObj());
             }
 
             @Override
             public void onError(Call call, ResultBase resultBase, int errorCode) {
-
+                LogX.e("套餐详情getCardPackageInfoonError", resultBase.getObj().toString());
             }
 
             @Override
             public void onFail(Call call, String msg) {
-
+                LogX.e("套餐详情getCardPackageInfoonFail", msg.toString());
             }
 
             @Override

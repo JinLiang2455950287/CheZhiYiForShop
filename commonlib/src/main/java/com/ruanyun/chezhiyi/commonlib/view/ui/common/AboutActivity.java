@@ -40,7 +40,7 @@ public class AboutActivity extends AutoLayoutActivity implements View.OnClickLis
         tvVersions.setText(AppUtility.getVersion(mContext));
         button.setOnClickListener(this);
 
-        topbar.setTttleText("关于掌上汽服")
+        topbar.setTttleText("关于我们")
                 .setBackBtnEnable(true)
                 .onBackBtnClick()
                 .setTopbarClickListener(this);

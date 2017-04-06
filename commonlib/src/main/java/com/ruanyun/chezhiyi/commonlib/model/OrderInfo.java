@@ -343,4 +343,33 @@ public class OrderInfo implements Parcelable {
             return new OrderInfo[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "OrderInfo{" +
+                "orderNum='" + orderNum + '\'' +
+                ", orderStatus=" + orderStatus +
+                ", orderLoginName='" + orderLoginName + '\'' +
+                ", orderUserNum='" + orderUserNum + '\'' +
+                ", orderUserName='" + orderUserName + '\'' +
+                ", orderRemark='" + orderRemark + '\'' +
+                ", orderType='" + orderType + '\'' +
+                ", commonNum='" + commonNum + '\'' +
+                ", storeNum='" + storeNum + '\'' +
+                ", totalCount=" + totalCount +
+                ", singlePrice=" + singlePrice +
+                ", totalPrice=" + totalPrice +
+                ", preferentialPrice=" + preferentialPrice +
+                ", couponNum='" + couponNum + '\'' +
+                ", actualPrice=" + actualPrice +
+                ", payMethod=" + payMethod +
+                ", payTime='" + payTime + '\'' +
+                ", consumeTime='" + consumeTime + '\'' +
+                ", orderCreateTime='" + orderCreateTime + '\'' +
+                ", payThirtAccount='" + payThirtAccount + '\'' +
+                ", orderGoodsList=" + orderGoodsList +
+                ", orderStatusString='" + orderStatusString + '\'' +
+                ", totalCountSurplus=" + totalCountSurplus +
+                '}';
+    }
 }

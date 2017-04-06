@@ -166,6 +166,11 @@ public final class C {
         public static final String URL_GET_PERSSION = "app/{userNum}/buttons/list";
 
         /**
+         * 获取客户余额
+         **/
+        public static final String URL_GET_CUSTOMERYUE = "app/{userNum}/user/center";
+
+        /**
          * 预约处理
          **/
         public static final String URL_GET_YUYUE_DEAL = "app/{userNum}/make/confirm";

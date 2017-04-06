@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.ruanyun.chezhiyi.commonlib.R;
 import com.ruanyun.chezhiyi.commonlib.model.WorkOrderRecordInfo;
+import com.ruanyun.chezhiyi.commonlib.util.CommentUtils;
 import com.zhy.adapter.abslistview.MultiItemTypeAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
 import com.zhy.adapter.abslistview.base.ItemViewDelegate;
@@ -28,7 +29,8 @@ public class WorkOrderRecordAdapter extends MultiItemTypeAdapter<WorkOrderRecord
     private boolean operationable = false;     //可操作的
     private boolean needToDistribution = false;  //  需要分配提成
     private boolean isLeadingUser = false;//  是否是 施工负责人
-    public  boolean isShowQulityCheckBtn=true;//判断是否 显示质检 按钮
+    public boolean isShowQulityCheckBtn = true;//判断是否 显示质检 按钮
+
     public void setNeedToDistribution(boolean needToDistribution) {
         this.needToDistribution = needToDistribution;
     }
@@ -82,11 +84,11 @@ public class WorkOrderRecordAdapter extends MultiItemTypeAdapter<WorkOrderRecord
                 if (operationable && position == 0) {
                     holder.setVisible(R.id.ll_operation_add_helper, true);
                     if (isLeadingUser) {
-                        holder.setVisible(R.id.tv_end_order,true);
-                        holder.setVisible(R.id.tv_add_helper,true);
+                        holder.setVisible(R.id.tv_end_order, true);
+                        holder.setVisible(R.id.tv_add_helper, true);
                     } else {  // 不是施工技师  只可以代下单
-                        holder.setVisible(R.id.tv_end_order,false);
-                        holder.setVisible(R.id.tv_add_helper,false);
+                        holder.setVisible(R.id.tv_end_order, false);
+                        holder.setVisible(R.id.tv_add_helper, false);
                     }
                 } else {
                     holder.setVisible(R.id.ll_operation_add_helper, false);
@@ -125,6 +127,12 @@ public class WorkOrderRecordAdapter extends MultiItemTypeAdapter<WorkOrderRecord
                         }
                     }
                 });
+
+                if (CommentUtils.permission.contains("GDNZ")) {
+                    holder.setVisible(R.id.tv_add_helper, true);
+                    holder.setVisible(R.id.tv_end_order, true);
+                    holder.setVisible(R.id.tv_add_helper, false);
+                }
             }
         });
 
@@ -224,7 +232,7 @@ public class WorkOrderRecordAdapter extends MultiItemTypeAdapter<WorkOrderRecord
 //                    }
 //                });
 //===============================================================================================
-                if (operationable && position == 0 ) {      //是否可以操作
+                if (operationable && position == 0) {      //是否可以操作
                     holder.setVisible(R.id.ll_operation_quality, true);
                     if (workOrderRecordInfo.getWorkOrderStatus() == WorkOrderRecordInfo.WORK_ORDER_STATUS_FINISH) { // 已完成的工单
                         if (needToDistribution && isLeadingUser) { //  是施工技师 并且  需要 分配提成
@@ -233,16 +241,14 @@ public class WorkOrderRecordAdapter extends MultiItemTypeAdapter<WorkOrderRecord
                         } else {
                             holder.setVisible(R.id.ll_operation_quality, false);
                         }
-                    }
-                    else if (workOrderRecordInfo.getWorkOrderStatus() == WorkOrderRecordInfo.WORK_ORDER_STATUS_QUALITY) {   //施工结束，质检中
+                    } else if (workOrderRecordInfo.getWorkOrderStatus() == WorkOrderRecordInfo.WORK_ORDER_STATUS_QUALITY) {   //施工结束，质检中
                         if (isShowQulityCheckBtn) {     // 当前用户 有没有质检权限
                             holder.setVisible(R.id.ll_operation_quality, true);
                         } else {
                             holder.setVisible(R.id.ll_operation_quality, false);
                         }
-                    }
-                    else if (workOrderRecordInfo.getWorkOrderStatus() == WorkOrderRecordInfo.WORK_ORDER_STATUS_REPAIR ||
-                            workOrderRecordInfo.getWorkOrderStatus() == WorkOrderRecordInfo.WORK_ORDER_STATUS_PREPARE  ) {  //返修中，质检不合格  或  //即将开始施工
+                    } else if (workOrderRecordInfo.getWorkOrderStatus() == WorkOrderRecordInfo.WORK_ORDER_STATUS_REPAIR ||
+                            workOrderRecordInfo.getWorkOrderStatus() == WorkOrderRecordInfo.WORK_ORDER_STATUS_PREPARE) {  //返修中，质检不合格  或  //即将开始施工
                         if (isLeadingUser) {     // 当前用户 是不是施工技师
                             holder.setVisible(R.id.ll_operation_quality, true);
                         } else {
@@ -298,6 +304,8 @@ public class WorkOrderRecordAdapter extends MultiItemTypeAdapter<WorkOrderRecord
                 } else {
                     holder.setVisible(R.id.ll_operation_quality, false);
                 }
+
+
             }
         });
 

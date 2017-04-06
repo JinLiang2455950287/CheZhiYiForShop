@@ -137,6 +137,13 @@ public interface ApiService {
     Call<ResultBase<List<PerssionBean>>> getPerssion(@Path("userNum") String userNum);
 
     /**
+     * 获取客户余额
+     */
+    @POST(C.ApiUrl.URL_GET_CUSTOMERYUE)
+    Call<ResultBase<CustomerAccountModel>> getCusomerYue(@Path("userNum") String userNum);
+
+
+    /**
      * 主页面等候区数量
      */
     @POST(C.ApiUrl.URL_GET_WAITAREA_COUNT)
@@ -317,7 +324,7 @@ public interface ApiService {
      * 卡套餐详情
      */
     @POST(C.ApiUrl.URL_CARDPACKEG_INFO)
-    Call<ResultBase<CardPackageDetailInfo>> getCardPackegInfo(@Path("userNum") String userNum,@Query("packageNum") String packageNum);
+    Call<ResultBase<CardPackageDetailInfo>> getCardPackegInfo(@Path("userNum") String userNum, @Query("packageNum") String packageNum);
 
     /**
      * 限时促销列表
@@ -578,7 +585,7 @@ public interface ApiService {
      * 退款审核
      **/
     @POST(C.ApiUrl.URL_REPAY_EXAMINE)
-    Call<ResultBase> getRePayExanine(@Path("userNum") String userNum,@Query("refundNum") String refundNum,@Query("status") int status,@Query("remark") String remark);
+    Call<ResultBase> getRePayExanine(@Path("userNum") String userNum, @Query("refundNum") String refundNum, @Query("status") int status, @Query("remark") String remark);
 
     /**
      * 代下单(添加商品)
@@ -785,6 +792,13 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("app/{userNum}/order/add_jiesuan")
     Call<ResultBase<OrderInfo>> addJieSuan(@Path("userNum") String userNum, @Field("jsonArrayString") String jsonArrayString);
+
+    /**
+     * shop工单结算
+     **/
+    @POST("app/{userNum}/workorder/add_jiesuan")
+    Call<ResultBase<OrderInfo>> addJieSuan2(@Path("userNum") String userNum, @Field("jsonArrayString") String workOrderNumString, @Query("payType") int payType);
+
 
     /**
      * 1.8.8	校验验证码

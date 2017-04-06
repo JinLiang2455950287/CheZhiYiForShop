@@ -131,7 +131,7 @@ public class CardPackageActivity extends AutoLayoutActivity implements Topbar.on
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
         // 在这里加载最新数据
         emptyview.showLoading();
-//        cardPackagePresenter.getCardPackageList(app.getApiService().getCardPackegList(app.getCurrentUserNum()));
+        cardPackagePresenter.getCardPackageList(app.getApiService().getCardPackegList(app.getCurrentUserNum()));
 
     }
 

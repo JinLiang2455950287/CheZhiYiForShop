@@ -48,7 +48,7 @@ public class JieSuanPresenter implements Presenter<JieSuanMvpView> {
             public void onSuccess(Call call, ResultBase<JieSuanInfo> resultBase) {
                 if (mvpView == null) return;
                 mvpView.getJieSuanSuccess(resultBase.getObj());
-                LogX.e("结算工单",resultBase.getObj().toString());
+                LogX.e("结算onSuccess",resultBase.getObj().toString());
 
             }
 

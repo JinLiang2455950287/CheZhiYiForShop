@@ -1,5 +1,6 @@
 package com.ruanyun.chezhiyi.commonlib.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -27,7 +28,7 @@ public class CardPackageListModel {
      */
 
     private String createTime;
-    private int packageCommMoney;
+    private BigDecimal packageCommMoney;
     private int packageCommRatio;
     private int packageCommission;
     private int packageCost;
@@ -48,11 +49,11 @@ public class CardPackageListModel {
         this.createTime = createTime;
     }
 
-    public int getPackageCommMoney() {
+    public BigDecimal getPackageCommMoney() {
         return packageCommMoney;
     }
 
-    public void setPackageCommMoney(int packageCommMoney) {
+    public void setPackageCommMoney(BigDecimal packageCommMoney) {
         this.packageCommMoney = packageCommMoney;
     }
 

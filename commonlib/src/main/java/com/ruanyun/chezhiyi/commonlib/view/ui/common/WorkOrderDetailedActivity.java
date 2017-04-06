@@ -14,23 +14,29 @@ import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ruanyun.chezhiyi.commonlib.R;
 import com.ruanyun.chezhiyi.commonlib.base.AutoLayoutActivity;
 import com.ruanyun.chezhiyi.commonlib.base.ResultBase;
 import com.ruanyun.chezhiyi.commonlib.model.AssistUserInfo;
 import com.ruanyun.chezhiyi.commonlib.model.OrderGoodsInfo;
+import com.ruanyun.chezhiyi.commonlib.model.PerssionBean;
 import com.ruanyun.chezhiyi.commonlib.model.ProjectType;
 import com.ruanyun.chezhiyi.commonlib.model.User;
 import com.ruanyun.chezhiyi.commonlib.model.WorkOrderInfo;
 import com.ruanyun.chezhiyi.commonlib.model.WorkOrderRecordInfo;
 import com.ruanyun.chezhiyi.commonlib.model.params.UpdateStatusParams;
 import com.ruanyun.chezhiyi.commonlib.model.params.WorkOrderSubmitInfo;
+import com.ruanyun.chezhiyi.commonlib.presenter.HomePerssionPresenter;
 import com.ruanyun.chezhiyi.commonlib.presenter.WorkOrderDetailedPresenter;
 import com.ruanyun.chezhiyi.commonlib.util.AppUtility;
 import com.ruanyun.chezhiyi.commonlib.util.C;
+import com.ruanyun.chezhiyi.commonlib.util.CommentUtils;
 import com.ruanyun.chezhiyi.commonlib.util.DbHelper;
+import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.util.StringUtil;
+import com.ruanyun.chezhiyi.commonlib.view.HomePerssionMvpView;
 import com.ruanyun.chezhiyi.commonlib.view.WorkOrderDetailedMvpView;
 import com.ruanyun.chezhiyi.commonlib.view.adapter.WorkOrderGoodsAdapter;
 import com.ruanyun.chezhiyi.commonlib.view.adapter.WorkOrderRecordAdapter;
@@ -45,7 +51,7 @@ import java.util.List;
  * <p/>
  * Created by ycw on 2016/9/26.
  */
-public class WorkOrderDetailedActivity extends AutoLayoutActivity implements
+public class WorkOrderDetailedActivity extends AutoLayoutActivity implements HomePerssionMvpView,
         WorkOrderDetailedMvpView, Topbar.onTopbarClickListener, WorkOrderRecordAdapter.BtnClick {
 
     public static final int REQUEST_CODE = 1992;
@@ -73,7 +79,8 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements
     private View listHeadView;
     private String refuseRemake = "";
     private WorkOrderGoodsAdapter adapter;//商品的集合
-
+    private HomePerssionPresenter homePerssionPresenter = new HomePerssionPresenter();//权限表
+    private List<String> permissionList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle bundle) {
@@ -81,6 +88,7 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements
         presenter.attachView(this);
         setContentView(R.layout.activity_workorder_detailed);
         initView();
+        homePerssionPresenter.attachView(this);
     }
 
     private void initView() {
@@ -89,16 +97,16 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements
 
         tvWorkOrderNum = (TextView) listHeadView.findViewById(R.id.tv_work_order_num);
         tvWorkOrderProject = (TextView) listHeadView.findViewById(R.id.tv_work_order_project);
-        tvWorkOrderGoods = (TextView) listHeadView.findViewById( R.id.tv_work_order_goods);
-        rvWorkOrderGoods = (RecyclerView) listHeadView.findViewById( R.id.rv_work_order_goods);
-        tvWorkOrderWorkNumber = (TextView) listHeadView.findViewById( R.id.tv_work_order_work_number);
+        tvWorkOrderGoods = (TextView) listHeadView.findViewById(R.id.tv_work_order_goods);
+        rvWorkOrderGoods = (RecyclerView) listHeadView.findViewById(R.id.rv_work_order_goods);
+        tvWorkOrderWorkNumber = (TextView) listHeadView.findViewById(R.id.tv_work_order_work_number);
         tvWorkOrderBodyLeader = (TextView) listHeadView.findViewById(R.id.tv_work_order_body_leader);
         tvWorkOrderLeader = (TextView) listHeadView.findViewById(R.id.tv_work_order_leader);
         tvWorkOrderBodyCustomer = (TextView) listHeadView.findViewById(R.id.tv_work_order_body_customer);
         tvWorkOrderBodyCar = (TextView) listHeadView.findViewById(R.id.tv_work_order_body_car);
-        tvWorkOrderRemake = (TextView) listHeadView.findViewById( R.id.tv_work_order_remake);
-        tvWorkOrderAllPrice = (TextView) listHeadView.findViewById( R.id.tv_work_order_all_price);
-        tvWorkOrderDownPayment = (TextView) listHeadView.findViewById( R.id.tv_work_order_down_payment);
+        tvWorkOrderRemake = (TextView) listHeadView.findViewById(R.id.tv_work_order_remake);
+        tvWorkOrderAllPrice = (TextView) listHeadView.findViewById(R.id.tv_work_order_all_price);
+        tvWorkOrderDownPayment = (TextView) listHeadView.findViewById(R.id.tv_work_order_down_payment);
 
         list = getView(R.id.list);
         topbar = getView(R.id.topbar);
@@ -117,9 +125,9 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements
             public void onItemClick(View view, RecyclerView.ViewHolder holder, Object o, int position) {
                 OrderGoodsInfo goodsInfo = (OrderGoodsInfo) o;
                 String goodsType = AppUtility.getTypeName(goodsInfo.getGoodsInfo().getGoodsType());
-                if ( goodsType.equals(C.OrderType.ORDER_TYPE_CP)||
-                        goodsType.equals(C.OrderType.ORDER_TYPE_TG)||
-                        goodsType.equals(C.OrderType.ORDER_TYPE_JF) ) {  // 是产品。团购。积分商品  跳转到详情页
+                if (goodsType.equals(C.OrderType.ORDER_TYPE_CP) ||
+                        goodsType.equals(C.OrderType.ORDER_TYPE_TG) ||
+                        goodsType.equals(C.OrderType.ORDER_TYPE_JF)) {  // 是产品。团购。积分商品  跳转到详情页
                     AppUtility.showGoodsWebView(goodsInfo.getSinglePrice(),
                             app.getCurrentUserNum(),
                             goodsInfo.getGoodsNum(),
@@ -158,16 +166,17 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements
             }
         });
         getData();
-
+        //权限表
+        homePerssionPresenter.getPerssionData(app.getApiService().getPerssion(app.getCurrentUserNum()));
     }
 
     /**
      * 获取界面显示数据 更新界面
      */
     private void updateUI() {
-        tvWorkOrderNum.setText("服务编号："+ mWorkOrderInfo.getWorkOrderNum());
-        tvWorkOrderProject.setText("服务项目："+ mWorkOrderInfo.getProjectName());
-        tvWorkOrderWorkNumber.setText("服务工位：" + getNameString(mWorkOrderInfo.getWorkbayName()) );//工位
+        tvWorkOrderNum.setText("服务编号：" + mWorkOrderInfo.getWorkOrderNum());
+        tvWorkOrderProject.setText("服务项目：" + mWorkOrderInfo.getProjectName());
+        tvWorkOrderWorkNumber.setText("服务工位：" + getNameString(mWorkOrderInfo.getWorkbayName()));//工位
         if (mWorkOrderInfo.getWorkOrderStatus() > 5) {
             tvWorkOrderAllPrice.setText("工单总价：¥" + mWorkOrderInfo.getTotalAmount());
             tvWorkOrderAllPrice.setVisibility(View.VISIBLE);
@@ -248,10 +257,10 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements
     public void getWorkorderInfoSuccess(WorkOrderInfo workOrderInfo) {
         mWorkOrderInfo = workOrderInfo;
         if (projectType == null) {
-            projectType= DbHelper.getInstance().getServiceType(mWorkOrderInfo.getProjectNum());
+            projectType = DbHelper.getInstance().getServiceType(mWorkOrderInfo.getProjectNum());
         }
         updateUI();
-        if ( !isClient() ) {
+        if (!isClient()) {
             workOrderRecordAdapter.setBtnClick(this);
             workOrderRecordAdapter.setOperationable(true);
             workOrderRecordAdapter.setLeadingUser(app.getCurrentUserNum().equals(mWorkOrderInfo.getLeadingUserNum()));
@@ -265,6 +274,7 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements
 
     /**
      * 设置服务技师名
+     *
      * @param workOrderAssistList
      */
     private void setLeadingUserName(List<AssistUserInfo> workOrderAssistList) {
@@ -277,7 +287,7 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements
         StringBuilder sb = new StringBuilder();
         sb.append("【负责人】").append(mWorkOrderInfo.getLeadingUserName());
         pickedAssistUserNums.add(mWorkOrderInfo.getLeadingUserNum());
-        for (int i = 0; i< workOrderAssistList.size(); i++) {
+        for (int i = 0; i < workOrderAssistList.size(); i++) {
             sb.append("、【协助人】");
             sb.append(workOrderAssistList.get(i).getAssistUserName());
             pickedAssistUserNums.add(workOrderAssistList.get(i).getAssistUserNum());
@@ -339,6 +349,7 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements
 
     /**
      * 设置商品的名称 “、”分割
+     *
      * @param workOrderGoodsInfos
      */
     private void setGoodsNameList(List<OrderGoodsInfo> workOrderGoodsInfos) {
@@ -379,12 +390,13 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements
 
     /**
      * 获取工单商品成功
+     *
      * @param workBayInfoResultBase
      */
     @Deprecated
     @Override
     public void getWorkorderGoodsSuccess(ResultBase<List<WorkOrderSubmitInfo.WorkOrderGoods>>
-                                                     workBayInfoResultBase) {
+                                                 workBayInfoResultBase) {
         List<WorkOrderSubmitInfo.WorkOrderGoods> goodsList = workBayInfoResultBase.getObj();
 
 //        if (goodsList.size() == 0) {
@@ -405,6 +417,7 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements
 
     /**
      * 获取协助技师成功后
+     *
      * @param assistUserInfo
      */
     @Override
@@ -422,7 +435,7 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements
 
     @Override
     public void getFriendShipInfoSuccess(User user) {
-        if (user ==  null || user.getUserNum() == null) return;
+        if (user == null || user.getUserNum() == null) return;
         if (user.getUserType() == 3) {
             if (StringUtil.isPhone(user.getLoginName())) {
                 AppUtility.goToUserProfile(mContext, user);
@@ -445,9 +458,9 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            if (requestCode == REQUEST_CODE ) {
+            if (requestCode == REQUEST_CODE) {
                 getData();
-            } else if (requestCode == REQUEST_CODE_UPDATE_STATUS){
+            } else if (requestCode == REQUEST_CODE_UPDATE_STATUS) {
                 refuseRemake = data.getStringExtra(C.IntentKey.UPDATE_SIGNATURE);
                 UpdateWorkStatus(WorkOrderRecordInfo.WORK_ORDER_STATUS_REPAIR, refuseRemake);
             }
@@ -456,6 +469,7 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements
 
     /**
      * 点击事件
+     *
      * @param status
      * @param view
      * @param position
@@ -464,13 +478,13 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements
     public void onBtnClick(int status, View view, int position) {
         setResult(RESULT_OK);//返回刷新
         int viewId = view.getId();
-        if (viewId == R.id.tv_end_order ) {     // 结束施工
+        if (viewId == R.id.tv_end_order) {     // 结束施工
             showTipDialog("确定结束施工？", WorkOrderRecordInfo.WORK_ORDER_STATUS_QUALITY);
         } else if (viewId == R.id.tv_add_helper) {      // 添加助手
             toAddAssistUser();
         } else if (viewId == R.id.tv_assist) {      // 代下单
             Intent intent = new Intent();
-            intent.putExtra(C.IntentKey.PROJECTTYPE_INFO,projectType);
+            intent.putExtra(C.IntentKey.PROJECTTYPE_INFO, projectType);
             intent.putExtra(C.IntentKey.WORKORDER_NUM, mWorkOrderInfo.getWorkOrderNum());
             intent.setClassName(mContext, "com.ruanyun.chezhiyi.view.ui.home.AddServiceGoodsActivity");
             startActivityForResult(intent, REQUEST_CODE);
@@ -483,10 +497,9 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements
                 intent.putExtra(C.IntentKey.WORKORDER_INFO, mWorkOrderInfo);
                 showActivity(intent);
             } else if (status == WorkOrderRecordInfo.WORK_ORDER_STATUS_PREPARE ||
-                    status == WorkOrderRecordInfo.WORK_ORDER_STATUS_REPAIR ) {//开始施工
+                    status == WorkOrderRecordInfo.WORK_ORDER_STATUS_REPAIR) {//开始施工
                 showTipDialog("确定开始施工？", WorkOrderRecordInfo.WORK_ORDER_STATUS_UNDER_CONSTRUCTION);
-            }
-            else if (status == WorkOrderRecordInfo.WORK_ORDER_STATUS_QUALITY) {//质检中
+            } else if (status == WorkOrderRecordInfo.WORK_ORDER_STATUS_QUALITY) {//质检中
                 showTipDialog("确定质检通过？", WorkOrderRecordInfo.WORK_ORDER_STATUS_CONFORMITY);
             }
         } else if (viewId == R.id.tv_cancel) {      //拒绝， 添加助手
@@ -530,6 +543,7 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements
 
     /**
      * 显示提示
+     *
      * @param msg
      * @param status
      */
@@ -547,4 +561,25 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements
         }).show();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        homePerssionPresenter.detachView();
+    }
+
+    @Override
+    public void getDataSuccess(List<PerssionBean> perssionList) {
+        LogX.e("权限表", perssionList.toString());
+        CommentUtils.permission.clear();
+        for (PerssionBean perssion : perssionList) {
+//            permissionList.add(perssion.getButNum());
+            CommentUtils.permission.add(perssion.getButNum());
+        }
+        LogX.e("权限表 CommentUtils.permission", CommentUtils.permission.toString());
+    }
+
+    @Override
+    public void getDataFault() {
+
+    }
 }

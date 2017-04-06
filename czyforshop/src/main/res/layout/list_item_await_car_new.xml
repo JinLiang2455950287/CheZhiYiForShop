@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_waiting_car_info"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_car_photo"
+            android:layout_width="260px"
+            android:layout_height="260px"
+            android:layout_marginBottom="43px"
+            android:layout_marginLeft="25px"
+            android:layout_marginRight="42px"
+            android:layout_marginTop="43px"
+            android:src="@drawable/default_img"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_car_number"
+            android:layout_width="wrap_content"
+            android:layout_height="80px"
+            android:layout_marginLeft="42px"
+            android:layout_marginRight="30px"
+            android:gravity="center_vertical"
+            android:text="皖A66666"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_middle" />
+
+        <com.ruanyun.chezhiyi.commonlib.view.widget.LabelFlowLayout
+            android:id="@+id/labelflow_service_item"
+            android:layout_width="wrap_content"
+            android:layout_height="80px"
+            android:layout_marginTop="20px"
+            android:layout_toRightOf="@+id/tv_car_number"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="50px"
+            android:layout_below="@+id/tv_car_number"
+            android:layout_marginLeft="42px"
+            android:layout_marginRight="30px"
+            android:layout_toRightOf="@+id/iv_car_photo"
+            android:drawableLeft="@drawable/icon_usernum_hp"
+            android:drawablePadding="20px"
+            android:gravity="center_vertical"
+            android:text="软骨鱼ruanyun"
+            android:textColor="@color/text_booking_gray"
+            android:textSize="@dimen/text_size_xsmall" />
+
+        <TextView
+            android:id="@+id/tv_await_time_or_money"
+            android:layout_width="wrap_content"
+            android:layout_height="50px"
+            android:layout_below="@+id/tv_car_number"
+            android:layout_toRightOf="@+id/tv_user_name"
+            android:gravity="center_vertical"
+            android:paddingRight="25px"
+            android:text="已等候：3H"
+            android:textColor="@color/text_comment_gray"
+            android:textSize="@dimen/text_size_small" />
+
+
+        <TextView
+            android:id="@+id/tv_take_order"
+            android:layout_width="150px"
+            android:layout_height="50px"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20px"
+            android:background="@drawable/corner_rectangle_green_shape2"
+            android:gravity="center"
+            android:text="结算"
+            android:textColor="@color/text_comment_gray"
+            android:textSize="@dimen/text_size_small"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

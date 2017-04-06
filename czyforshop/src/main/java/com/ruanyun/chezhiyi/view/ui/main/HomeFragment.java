@@ -42,6 +42,7 @@ import com.ruanyun.chezhiyi.commonlib.presenter.HomeWaitAreaCountPresenter;
 import com.ruanyun.chezhiyi.commonlib.presenter.StoreInfoPresenter;
 import com.ruanyun.chezhiyi.commonlib.util.AppUtility;
 import com.ruanyun.chezhiyi.commonlib.util.C;
+import com.ruanyun.chezhiyi.commonlib.util.CommentUtils;
 import com.ruanyun.chezhiyi.commonlib.util.DbHelper;
 import com.ruanyun.chezhiyi.commonlib.util.FileUtil;
 import com.ruanyun.chezhiyi.commonlib.util.ImageUtil;
@@ -164,7 +165,6 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
     private List<GongGaoInfo> gongGaoInfoList = new ArrayList<>();
     private SystemRemindParams systemRemindParams = new SystemRemindParams();
     private HomePerssionPresenter homePerssionPresenter = new HomePerssionPresenter();//权限表
-    private List<String> permissionList = new ArrayList<>();
     private HomeWaitAreaCountPresenter homeWaitAreaCountPresenter = new HomeWaitAreaCountPresenter();//等候区数量
 
     @Override
@@ -501,7 +501,7 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
         int id = view.getId();
         switch (id) {
             case R.id.home_gzzt://工位状态
-                if (permissionList.contains("GWZT")) {
+                if (CommentUtils.permission.contains("GWZT")) {
                     Intent intent4 = new Intent(mContext, WaitAreaActivity.class);
                     intent4.putExtra("AreaType", "4");
                     startActivity(intent4);
@@ -510,35 +510,35 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
                 }
                 break;
             case R.id.home_hukc://会员快查
-                if (permissionList.contains("HYKC")) {
+                if (CommentUtils.permission.contains("HYKC")) {
                     showActivity(MemberSearchActivity.class);
                 } else {
                     permissionDialog();
                 }
                 break;
             case R.id.home_dtyy://当天预约
-                if (permissionList.contains("DTYY")) {
+                if (CommentUtils.permission.contains("DTYY")) {
                     showActivity(DayAppointmentActivity.class);
                 } else {
                     permissionDialog();
                 }
                 break;
             case R.id.home_mdtj://门店统计
-                if (permissionList.contains("MDTJ")) {
+                if (CommentUtils.permission.contains("MDTJ")) {
                     showActivity(ShopCollectActivity.class);
                 } else {
                     permissionDialog();
                 }
                 break;
             case R.id.home_yuyue: //预约
-                if (permissionList.contains("YY")) {
+                if (CommentUtils.permission.contains("YY")) {
                     showActivity(AppointMentDealActivity.class);
                 } else {
                     permissionDialog();
                 }
                 break;
             case R.id.home_rebackpay://退款
-                if (permissionList.contains("TK")) {
+                if (CommentUtils.permission.contains("TK")) {
                     showActivity(RebackPayActivity.class);
                 } else {
                     permissionDialog();
@@ -554,14 +554,14 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
                 onFunctionClick((String) view.getTag());
                 break;
             case R.id.open_oder://开单
-                if (permissionList.contains("KD")) {
+                if (CommentUtils.permission.contains("KD")) {
                     showActivity(OpenOrderActivity.class);
                 } else {
                     permissionDialog();
                 }
                 break;
             case R.id.wait_area://等候区界面
-                if (permissionList.contains("DHQ")) {
+                if (CommentUtils.permission.contains("DHQ")) {
                     Intent intent2 = new Intent(mContext, WaitAreaActivity.class);
                     intent2.putExtra("AreaType", "2");
                     startActivity(intent2);
@@ -570,7 +570,7 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
                 }
                 break;
             case R.id.settlement_area: //结算去界面
-                if (permissionList.contains("JSQ")) {
+                if (CommentUtils.permission.contains("JSQ")) {
                     Intent intent3 = new Intent(mContext, WaitAreaActivity.class);
                     intent3.putExtra("AreaType", "3");
                     startActivity(intent3);
@@ -579,7 +579,7 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
                 }
                 break;
             case R.id.quality_area://质检区界面
-                if (permissionList.contains("ZZQ")) {
+                if (CommentUtils.permission.contains("ZZQ")) {
                     Intent intent6 = new Intent(mContext, WaitAreaActivity.class);
                     intent6.putExtra("AreaType", "6");
                     startActivity(intent6);
@@ -759,10 +759,11 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
     @Override
     public void getDataSuccess(List<PerssionBean> perssionList) {
         LogX.e("权限表", perssionList.toString());
-        permissionList.clear();
+        CommentUtils.permission.clear();
         for (PerssionBean perssion : perssionList) {
-            permissionList.add(perssion.getButNum());
+            CommentUtils.permission.add(perssion.getButNum());
         }
+        LogX.e("权限表",  CommentUtils.permission.toString());
     }
 
     @Override

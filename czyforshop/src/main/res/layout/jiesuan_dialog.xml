@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="550px"
+    android:background="@android:color/transparent"
+    android:padding="20px">
+    <!--android:background="@android:color/transparent"-->
+    <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="520px"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="20px"
+        android:background="@drawable/corner_rectangle_white_shape"
+        android:descendantFocusability="blocksDescendants"
+        app:cardCornerRadius="20px">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="520px"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="match_parent"
+                android:layout_height="70px"
+                android:background="@color/theme_color_default"
+                android:gravity="center"
+                android:text="支付宝支付"
+                android:textColor="@color/white" />
+
+            <RadioGroup
+                android:id="@+id/rg"
+                android:layout_width="match_parent"
+                android:layout_height="350px"
+                android:layout_below="@+id/tv">
+
+                <RadioButton
+                    android:id="@+id/rb_remain"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="余额支付" />
+
+                <RadioButton
+                    android:id="@+id/rb_pay"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="支付宝支付" />
+
+                <RadioButton
+                    android:id="@+id/rb_wei"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="微信支付" />
+
+                <RadioButton
+                    android:id="@+id/rb_cash"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="现金支付" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/bt_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="60px"
+                android:layout_below="@+id/rg"
+                android:layout_marginBottom="15px"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="20px"
+                android:background="@drawable/corner_rectangle_radius_green_shape"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/tv_yue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="90px"
+                android:text="¥100.0"
+                android:textColor="@color/black" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <ImageView
+        android:id="@+id/tv_dimiss"
+        android:layout_width="60px"
+        android:layout_height="60px"
+        android:layout_gravity="end"
+        android:elevation="2dp"
+        android:src="@drawable/close_pic" />
+
+</FrameLayout>

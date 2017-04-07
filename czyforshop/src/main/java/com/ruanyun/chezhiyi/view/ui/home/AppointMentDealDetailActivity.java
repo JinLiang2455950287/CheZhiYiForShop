@@ -22,6 +22,7 @@ import com.ruanyun.chezhiyi.commonlib.util.CloseKeyBoard;
 import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.view.YuYueDealMvpView;
 import com.ruanyun.chezhiyi.commonlib.view.adapter.YuyueDealAdapter;
+import com.ruanyun.chezhiyi.commonlib.view.widget.CashierInputFilter;
 import com.ruanyun.chezhiyi.commonlib.view.widget.RYEmptyView;
 import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
 
@@ -152,8 +153,9 @@ public class AppointMentDealDetailActivity extends AutoLayoutActivity implements
 
 
     @Override
-    public void onProductIsPayItemClick(int count) {
+    public void onProductIsPayItemClick(int count, String payMent) {
         LogX.e("isDownPayment", count + "");
+        LogX.e("进进进", yuYueDealListParams.toString());
         isDownPayment = count;
     }
 }

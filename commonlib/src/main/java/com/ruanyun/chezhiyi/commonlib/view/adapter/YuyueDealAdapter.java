@@ -2,6 +2,7 @@ package com.ruanyun.chezhiyi.commonlib.view.adapter;
 
 import android.content.Context;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
@@ -13,6 +14,8 @@ import com.google.gson.reflect.TypeToken;
 import com.ruanyun.chezhiyi.commonlib.R;
 import com.ruanyun.chezhiyi.commonlib.model.ProjectType;
 import com.ruanyun.chezhiyi.commonlib.model.YuYueItemBean;
+import com.ruanyun.chezhiyi.commonlib.util.LogX;
+import com.ruanyun.chezhiyi.commonlib.view.widget.CashierInputFilter;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
 import com.zhy.autolayout.utils.AutoUtils;
@@ -63,19 +66,19 @@ public class YuyueDealAdapter extends CommonAdapter<ProjectType> {
             public void afterTextChanged(Editable s) {
                 String isPay = dealwith_btn.getText().toString().trim();
                 if (TextUtils.isEmpty(isPay)) return;
-//                if (Integer.parseInt(isPay) > 0) {
-                    item.setYuMoney(isPay);
-                    onProductIsPayClickListener.onProductIsPayItemClick(1);
-//                }
-
-//                if (isPay.length() == 1 && !isPay.substring(0, 1).endsWith("0"))
-
+//                CashierInputFilter cashierInputFilter = new CashierInputFilter();
+//                cashierInputFilter.filter(isPay,1,1,1,1)
+//                InputFilter[] filters = {new CashierInputFilter(9), new InputFilter.LengthFilter(9)};
+//                et.setFilters(filters);
+                item.setYuMoney(isPay);
+                LogX.e("进进进",item.getYuMoney());
+                onProductIsPayClickListener.onProductIsPayItemClick(1, isPay);
             }
         });
     }
 
     public interface OnProductIsPayClickListener {
-        void onProductIsPayItemClick(int isDownPayment);
+        void onProductIsPayItemClick(int isDownPayment, String payMent);
     }
 
     // click callback

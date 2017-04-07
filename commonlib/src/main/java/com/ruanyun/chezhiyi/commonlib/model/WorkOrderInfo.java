@@ -18,7 +18,10 @@ public class WorkOrderInfo implements Parcelable {
     private String projectNum;          //服务一级类编号
     private String projectName;         //服务一级类名称
     private String servicePlateNumber;      //车牌号
-    /**车辆图片*/
+    private String dxdAmount;
+    /**
+     * 车辆图片
+     */
     private String carPicPath;
     private String remark;     //  备注
     private String serviceUserName;          //司机用户num
@@ -35,24 +38,42 @@ public class WorkOrderInfo implements Parcelable {
     private String leadingUserName;              //施工负责人
     private String leadingUserNum;              //施工负责人
     private String childProjectNum;             //服务二级类 json字符串  "[{\"childProjectTypeList\":[],\"projectNum\":\"001002000000000\",\"projectName\":\"诊断\",\"parentNum\":\"001000000000000\",\"projectAllName\":\"\",\"projectId\":11,\"isSelected\":true,\"isParent\":false,\"sortNum\":1}]",
-    /**  工单流水 详情时使用 工单流水   */
+    /**
+     * 工单流水 详情时使用 工单流水
+     */
     private List<WorkOrderRecordInfo> workOrderRecordList;
 //    /**代下单的商品信息代下单的商品数据结构*/
 //    private List<OrderGoodsInfo> workOrderDxdList;
-    /**  服务的商品信息商品数据结构，在工单详情页逗号拼接商品名称显示   */
+    /**
+     * 服务的商品信息商品数据结构，在工单详情页逗号拼接商品名称显示
+     */
     private List<OrderGoodsInfo> workOrderGoodsList;
-    /**  已购项目  */
+    /**
+     * 已购项目
+     */
     private List<OrderGoodsInfo> orderGoodsDetailList;
-    /**  协助技师 在技师端工单详情页如果此list数量大于0代表需要分配施工提成   */
+    /**
+     * 协助技师 在技师端工单详情页如果此list数量大于0代表需要分配施工提成
+     */
     private List<AssistUserInfo> workOrderAssistList;
 
-    /** 父类编号 与父类的projectNum相同 000000 为一级 **/
+    /**
+     * 父类编号 与父类的projectNum相同 000000 为一级
+     **/
     private String parentNum;
     private User user;
     private double payAmount;
 
-    private boolean isSelected=false;
-    private boolean isParent=false;
+    private boolean isSelected = false;
+    private boolean isParent = false;
+
+    public String getDxdAmount() {
+        return dxdAmount;
+    }
+
+    public void setDxdAmount(String dxdAmount) {
+        this.dxdAmount = dxdAmount;
+    }
 
     public String getRemark() {
         return remark;
@@ -322,7 +343,9 @@ public class WorkOrderInfo implements Parcelable {
     }
 
     @Override
-    public int describeContents() { return 0; }
+    public int describeContents() {
+        return 0;
+    }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
@@ -333,6 +356,7 @@ public class WorkOrderInfo implements Parcelable {
         dest.writeString(this.projectNum);
         dest.writeString(this.projectName);
         dest.writeString(this.servicePlateNumber);
+        dest.writeString(this.dxdAmount);
         dest.writeString(this.carPicPath);
         dest.writeString(this.remark);
         dest.writeString(this.serviceUserName);
@@ -368,6 +392,7 @@ public class WorkOrderInfo implements Parcelable {
         this.projectNum = in.readString();
         this.projectName = in.readString();
         this.servicePlateNumber = in.readString();
+        this.dxdAmount = in.readString();
         this.carPicPath = in.readString();
         this.remark = in.readString();
         this.serviceUserName = in.readString();
@@ -397,10 +422,14 @@ public class WorkOrderInfo implements Parcelable {
 
     public static final Creator<WorkOrderInfo> CREATOR = new Creator<WorkOrderInfo>() {
         @Override
-        public WorkOrderInfo createFromParcel(Parcel source) {return new WorkOrderInfo(source);}
+        public WorkOrderInfo createFromParcel(Parcel source) {
+            return new WorkOrderInfo(source);
+        }
 
         @Override
-        public WorkOrderInfo[] newArray(int size) {return new WorkOrderInfo[size];}
+        public WorkOrderInfo[] newArray(int size) {
+            return new WorkOrderInfo[size];
+        }
     };
 
     @Override
@@ -413,6 +442,7 @@ public class WorkOrderInfo implements Parcelable {
                 ", projectNum='" + projectNum + '\'' +
                 ", projectName='" + projectName + '\'' +
                 ", servicePlateNumber='" + servicePlateNumber + '\'' +
+                ", dxdAmount='" + dxdAmount + '\'' +
                 ", carPicPath='" + carPicPath + '\'' +
                 ", remark='" + remark + '\'' +
                 ", serviceUserName='" + serviceUserName + '\'' +

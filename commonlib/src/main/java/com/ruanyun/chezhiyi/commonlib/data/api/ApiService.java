@@ -796,8 +796,9 @@ public interface ApiService {
     /**
      * shop工单结算
      **/
+    @FormUrlEncoded
     @POST("app/{userNum}/workorder/add_jiesuan")
-    Call<ResultBase<OrderInfo>> addJieSuan2(@Path("userNum") String userNum, @Field("jsonArrayString") String workOrderNumString, @Query("payType") int payType);
+    Call<ResultBase<OrderInfo>> addJieSuan2(@Path("userNum") String userNum, @Field("jsonArrayString") String jsonArrayString, @Query("payType") int payType);
 
 
     /**

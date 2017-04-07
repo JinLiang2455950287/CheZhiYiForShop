@@ -68,7 +68,7 @@ public class WorkOrderFragment extends RefreshBaseFragment implements AwaitOrCle
     private List<WorkOrderInfo> workOrderInfoList = new ArrayList<>();
     private String paramsStatus;
     private CustomerAccountPresenter customerAccountPresenter = new CustomerAccountPresenter();//获取用户余额
-    private SubmitWorkOrderPresenter submitWorkOrderPresenter = new SubmitWorkOrderPresenter();
+    private SubmitWorkOrderPresenter submitWorkOrderPresenter = new SubmitWorkOrderPresenter();//结算
     ;//结算
     private JieSuanParm parm = null;//结算params
     private List<PayWorkOrdersBean> payWorkOrdersBeanList = null;
@@ -177,6 +177,8 @@ public class WorkOrderFragment extends RefreshBaseFragment implements AwaitOrCle
     public void onRefreshResult(PageInfoBase result, String tag) {
         workOrderInfoList.clear();
         workOrderInfoList.addAll(result.getResult());
+        LogX.e("workOrderInfoListgetResult()", result.getResult().toString());
+        LogX.e("workOrderInfoList", workOrderInfoList.toString());
         mAdapter.notifyDataSetChanged();
 
     }
@@ -214,11 +216,11 @@ public class WorkOrderFragment extends RefreshBaseFragment implements AwaitOrCle
         LogX.e("WorkOrderInfo", workOrderInfo.toString());
         workOderInfoitem = workOrderInfo;
         payWorkOrdersBeanList.clear();
-        payWorkOrdersBeanList.add(new PayWorkOrdersBean(workOrderInfo.getWorkOrderNum(), "0", "", "0"));
+        payWorkOrdersBeanList.add(new PayWorkOrdersBean(workOrderInfo.getWorkOrderNum(), workOrderInfo.getDxdAmount(), "", "0"));
         parm.setPayWorkOrders(payWorkOrdersBeanList);
 
         parm.setWorkOrderNumString(workOrderInfo.getWorkOrderNum());
-        parm.setPayTotalAmount(workOrderInfo.getTotalAmount() + "");
+        parm.setPayTotalAmount(workOrderInfo.getDxdAmount() + "");
         parm.setUserNum(workOrderInfo.getUser().getUserNum());
         parm.setCouponNum("");
         parm.setPreferentialPrice("0");
@@ -258,8 +260,8 @@ public class WorkOrderFragment extends RefreshBaseFragment implements AwaitOrCle
         tvcofirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submitWorkOrderPresenter.addJieSuan(app.getApiService().addJieSuan(app.getCurrentUserNum(), new Gson().toJson(parm)));
                 LogX.e("结算loadingDialogHelper", app.getCurrentUserNum() + ";" + new Gson().toJson(parm) + "" + PayType);
+                submitWorkOrderPresenter.addJieSuan(app.getApiService().addJieSuan2(app.getCurrentUserNum(), new Gson().toJson(parm), PayType));
                 builder.dismiss();
             }
         });

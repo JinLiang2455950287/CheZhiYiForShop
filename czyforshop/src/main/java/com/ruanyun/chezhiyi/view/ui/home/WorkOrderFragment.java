@@ -74,6 +74,8 @@ public class WorkOrderFragment extends RefreshBaseFragment implements AwaitOrCle
     private List<PayWorkOrdersBean> payWorkOrdersBeanList = null;
     private int PayType = 4;//结算方式
     private static final int REQUEST_FINISH_CODE = 234;// 支付成功后
+    private WorkOrderInfo workOderInfoitem = new WorkOrderInfo();//选择的
+    private int position;
 
     public WorkOrderFragment() {
     }
@@ -207,8 +209,10 @@ public class WorkOrderFragment extends RefreshBaseFragment implements AwaitOrCle
     }
 
     @Override
-    public void onTakeOrderClick(WorkOrderInfo workOrderInfo) {
+    public void onTakeOrderClick(WorkOrderInfo workOrderInfo, int positionData) {
+        position = positionData;
         LogX.e("WorkOrderInfo", workOrderInfo.toString());
+        workOderInfoitem = workOrderInfo;
         payWorkOrdersBeanList.clear();
         payWorkOrdersBeanList.add(new PayWorkOrdersBean(workOrderInfo.getWorkOrderNum(), "0", "", "0"));
         parm.setPayWorkOrders(payWorkOrdersBeanList);
@@ -223,7 +227,7 @@ public class WorkOrderFragment extends RefreshBaseFragment implements AwaitOrCle
     }
 
     //结算方式dialog
-    private void dialogEducation(String remainMoney) {
+    private void dialogEducation(int remainMoney) {
 
         final AlertDialog builder = new AlertDialog.Builder(getActivity(), R.style.Dialog).create(); // 先得到构造器
         builder.show();
@@ -233,11 +237,13 @@ public class WorkOrderFragment extends RefreshBaseFragment implements AwaitOrCle
         builder.getWindow().setContentView(view);
         RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.rg);
         RadioButton rb_remain = (RadioButton) view.findViewById(R.id.rb_remain);
-        rb_remain.setEnabled(false);
+        if (remainMoney < workOderInfoitem.getTotalAmount()) {
+            rb_remain.setEnabled(false);
+        }
         TextView tvcofirm = (TextView) view.findViewById(R.id.bt_confirm);
         TextView tv_yue = (TextView) view.findViewById(R.id.tv_yue);
         ImageView dimiss = (ImageView) view.findViewById(R.id.tv_dimiss);
-        tv_yue.setText(remainMoney);
+        tv_yue.setText("¥ " + remainMoney);
         //获取屏幕的尺寸
         WindowManager windowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
 
@@ -289,7 +295,7 @@ public class WorkOrderFragment extends RefreshBaseFragment implements AwaitOrCle
     @Override
     public void getRemainSuccess(CustomerAccountModel customerAccount) {
         LogX.e("获取会员余额", customerAccount.toString());
-        dialogEducation("¥" + customerAccount.getAccountBalance() + "");
+        dialogEducation(customerAccount.getAccountBalance());
     }
 
     @Override
@@ -306,6 +312,10 @@ public class WorkOrderFragment extends RefreshBaseFragment implements AwaitOrCle
 //            startActivityForResult(AppUtility.getPayIntent(orderInfo, mContext), REQUEST_FINISH_CODE);
 //            //            finish();
 //        }
+
+        workOrderInfoList.remove(position);
+        mAdapter.notifyDataSetChanged();
+
     }
 
     @Override

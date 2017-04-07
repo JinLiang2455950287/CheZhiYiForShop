@@ -30,19 +30,21 @@ public class CardPackageInfoAdapter extends CommonAdapter<GoodsListBean> {
     @Override
     protected void convert(ViewHolder holder, GoodsListBean goodsListBean, int position) {
         AutoUtils.auto(holder.getConvertView());
+        LogX.e("卡套餐详情提交订单", goodsListBean.toString());
         ImageView ivImage = holder.getView(com.ruanyun.chezhiyi.commonlib.R.id.iv_product_photo);
         TextView tvTitle = holder.getView(com.ruanyun.chezhiyi.commonlib.R.id.tv_title);
         TextView tvPrice = holder.getView(com.ruanyun.chezhiyi.commonlib.R.id.tv_price);
         TextView tvpurchase = holder.getView(com.ruanyun.chezhiyi.commonlib.R.id.tv_purchase);
         tvTitle.setText(goodsListBean.getGoodsName());
         tvPrice.setText("¥ " + goodsListBean.getGoodsPrice());
-        if (goodsListBean.getGoodsCount().endsWith("")) {
+        LogX.e("不限次", goodsListBean.getGoodsCount());
+        if (goodsListBean.getGoodsCount().equals("")) {
             tvpurchase.setText("不限次");
         } else {
             tvpurchase.setText("×" + goodsListBean.getGoodsCount());
         }
-        LogX.e("不限次",FileUtil.getImageUrl(goodsListBean.getMainPhoto()));
-        ImageUtil.loadImage(mContext,  FileUtil.getImageUrl(goodsListBean.getMainPhoto()), ivImage, R.drawable.cardpackage);
+
+        ImageUtil.loadImage(mContext, FileUtil.getImageUrl(goodsListBean.getMainPhoto()), ivImage, R.drawable.default_imge_middle);
 
     }
 

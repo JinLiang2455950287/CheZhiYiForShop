@@ -38,7 +38,8 @@ public class CardPackageListAdapter extends CommonAdapter<CardPackageListModel> 
                 (ImageView) holder.getView(R.id.iv_product_photo), R.drawable.cardpackage);
 
         holder.setText(R.id.tv_title, item.getPackageName());
-        holder.setText(R.id.tv_subtitle, "[价值" + (item.getPackageCost()+item.getPackagePrice()) + "元]" + " 优惠" + item.getPackageCost());
+//        holder.setText(R.id.tv_subtitle, "[价值" + (item.getPackageCost()+item.getPackagePrice()) + "元]" + " 优惠" + item.getPackageCost());
+        holder.setText(R.id.tv_subtitle, "[价值" + item.getPackagePrice() + "元]" + item.getPackageName());
         holder.setText(R.id.tv_price, "¥" + item.getPackagePrice());
         holder.setText(R.id.tv_sold_number, "已售" + item.getPackageSale());
         TextView tvPurchase = holder.getView(R.id.tv_purchase);

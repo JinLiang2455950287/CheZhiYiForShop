@@ -80,7 +80,6 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements Hom
     private String refuseRemake = "";
     private WorkOrderGoodsAdapter adapter;//商品的集合
     private HomePerssionPresenter homePerssionPresenter = new HomePerssionPresenter();//权限表
-    private List<String> permissionList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle bundle) {
@@ -255,6 +254,7 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements Hom
 
     @Override
     public void getWorkorderInfoSuccess(WorkOrderInfo workOrderInfo) {
+        LogX.e(TAG, workOrderInfo.toString());
         mWorkOrderInfo = workOrderInfo;
         if (projectType == null) {
             projectType = DbHelper.getInstance().getServiceType(mWorkOrderInfo.getProjectNum());

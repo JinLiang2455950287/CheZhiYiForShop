@@ -6,6 +6,7 @@ import android.content.Context;
 import com.ruanyun.chezhiyi.commonlib.R;
 import com.ruanyun.chezhiyi.commonlib.base.CommonAdapter;
 import com.ruanyun.chezhiyi.commonlib.model.OrderGoodsInfo;
+import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.List;
@@ -23,7 +24,8 @@ public class WorkOrderGoodsAdapter extends CommonAdapter<OrderGoodsInfo> {
 
     @Override
     protected void convert(ViewHolder viewHolder, OrderGoodsInfo goodsInfo, int position) {
-        viewHolder.setText(R.id.tv_goods_name, goodsInfo.getGoodsName());
+        LogX.e("WorkOrderGoodsAdapter", goodsInfo.toString());
+        viewHolder.setText(R.id.tv_goods_name, goodsInfo.getGoodsName() + "  ×" +goodsInfo.getTotalCount());
         if (goodsInfo.getIsDaiXiaDan() == 1) {  // 代下单  显示 （代）
             viewHolder.setVisible(R.id.tv_goods_add, true);
         } else {

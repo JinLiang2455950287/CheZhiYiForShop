@@ -3,6 +3,7 @@ package com.ruanyun.chezhiyi.commonlib.presenter;
 import com.ruanyun.chezhiyi.commonlib.base.ResultBase;
 import com.ruanyun.chezhiyi.commonlib.data.api.ResponseCallback;
 import com.ruanyun.chezhiyi.commonlib.model.OrderInfo;
+import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.view.SubmitWorkOrderMvpView;
 
 import retrofit2.Call;
@@ -37,9 +38,10 @@ public class SubmitWorkOrderPresenter implements Presenter<SubmitWorkOrderMvpVie
 
     /**
      * 工单结算
+     *
      * @param baseCall
      */
-    public void addJieSuan(Call<ResultBase<OrderInfo>> baseCall){
+    public void addJieSuan(Call<ResultBase<OrderInfo>> baseCall) {
         if (submitWorkOrderMvpView == null) return;
         submitWorkOrderMvpView.showLoadingView();
         this.call = baseCall;
@@ -52,16 +54,17 @@ public class SubmitWorkOrderPresenter implements Presenter<SubmitWorkOrderMvpVie
 
             @Override
             public void onError(Call call, ResultBase<OrderInfo> orderInfoResultBase, int errorCode) {
-
+                LogX.e("结算onError", errorCode + ";;errorCode");
             }
 
             @Override
             public void onFail(Call call, String msg) {
-
+                LogX.e("结算onFail", msg + ";;msg");
             }
 
             @Override
             public void onResult() {
+                LogX.e("结算onResult", ";;onResult");
                 if (submitWorkOrderMvpView == null) return;
                 submitWorkOrderMvpView.disMissLoadingView();
             }

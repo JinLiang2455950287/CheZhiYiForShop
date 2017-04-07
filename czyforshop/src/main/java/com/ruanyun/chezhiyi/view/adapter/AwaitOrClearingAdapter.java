@@ -52,7 +52,7 @@ public class AwaitOrClearingAdapter extends CommonAdapter<WorkOrderInfo> {
     }
 
     @Override
-    protected void convert(ViewHolder holder, final WorkOrderInfo item, int position) {
+    protected void convert(ViewHolder holder, final WorkOrderInfo item, final int position) {
         AutoUtils.auto(holder.getConvertView());
         ImageUtil.loadImage(mContext, FileUtil.getImageUrl(item.getCarPicPath()), (ImageView) holder.getView(R.id.iv_car_photo), R.drawable.default_img);
         holder.setText(R.id.tv_car_number, item.getServicePlateNumber());//车牌号
@@ -81,7 +81,7 @@ public class AwaitOrClearingAdapter extends CommonAdapter<WorkOrderInfo> {
             tvTakeOrder.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    OnTakeOrderClickListener.onTakeOrderClick(item);
+                    OnTakeOrderClickListener.onTakeOrderClick(item,position);
                 }
             });
         }
@@ -119,7 +119,7 @@ public class AwaitOrClearingAdapter extends CommonAdapter<WorkOrderInfo> {
     }
 
     public interface OnTakeOrderClickListener {
-        void onTakeOrderClick(WorkOrderInfo workOrderInfo);
+        void onTakeOrderClick(WorkOrderInfo workOrderInfo,int position);
     }
 
     OnTakeOrderClickListener OnTakeOrderClickListener;

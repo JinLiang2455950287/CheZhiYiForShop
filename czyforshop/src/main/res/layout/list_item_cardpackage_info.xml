@@ -15,7 +15,7 @@
         android:background="@drawable/corner_rectangle_gray_border"
         android:padding="1px"
         android:scaleType="centerCrop"
-        android:src="@drawable/default_img" />
+        android:src="@drawable/default_imge_middle" />
 
     <TextView
         android:id="@+id/tv_title"

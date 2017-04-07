@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ruanyun.chezhiyi.R;
@@ -52,6 +53,8 @@ public class CardPackageDetailActivity extends AutoLayoutActivity implements Top
     TextView tvTotalprice;
     @BindView(R.id.tv_purchase)
     TextView tvPurchase;
+    @BindView(R.id.li_purse)
+    LinearLayout lipurse;
     private CardPackageInfoPresenter cardPackageInfoPresenter = new CardPackageInfoPresenter();
     private CardPackageDingDanPresenter cardPackageDingDanPresenter = new CardPackageDingDanPresenter();
     private String packageNumber;
@@ -119,6 +122,7 @@ public class CardPackageDetailActivity extends AutoLayoutActivity implements Top
         tvTotalprice.setText("¥ " + cardPackageDetailInfo.getPackagePrice() + "");
         tvOrginprice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中间横线（删除线）
         tvNewprice.setText("¥ " + cardPackageDetailInfo.getPackagePrice() + "");
+        lipurse.setVisibility(View.GONE);
     }
 
     @Override

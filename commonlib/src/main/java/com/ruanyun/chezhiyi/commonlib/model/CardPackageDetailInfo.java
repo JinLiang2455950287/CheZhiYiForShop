@@ -28,7 +28,7 @@ public class CardPackageDetailInfo {
      */
 
     private String createTime;
-    private int packageCommMoney;
+    private BigDecimal packageCommMoney;
     private int packageCommRatio;
     private int packageCommission;
     private int packageCost;
@@ -49,11 +49,11 @@ public class CardPackageDetailInfo {
         this.createTime = createTime;
     }
 
-    public int getPackageCommMoney() {
+    public BigDecimal getPackageCommMoney() {
         return packageCommMoney;
     }
 
-    public void setPackageCommMoney(int packageCommMoney) {
+    public void setPackageCommMoney(BigDecimal packageCommMoney) {
         this.packageCommMoney = packageCommMoney;
     }
 

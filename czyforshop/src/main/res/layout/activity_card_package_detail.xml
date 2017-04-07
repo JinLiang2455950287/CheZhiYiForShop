@@ -132,6 +132,7 @@
                 android:background="@color/gray_border" />
 
             <LinearLayout
+                android:id="@+id/li_purse"
                 android:layout_width="match_parent"
                 android:layout_height="100px"
                 android:background="@color/white"
@@ -230,11 +231,11 @@
 
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginBottom="20px"
-                android:background="@color/gray_border" />
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1px"-->
+                <!--android:layout_marginBottom="20px"-->
+                <!--android:background="@color/gray_border" />-->
 
         </LinearLayout>
     </ScrollView>

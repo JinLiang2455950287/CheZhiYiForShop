@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
+    android:paddingBottom="5px"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -20,6 +21,7 @@
             android:layout_marginTop="43px"
             android:src="@drawable/default_img"
             android:visibility="gone" />
+
 
         <TextView
             android:id="@+id/tv_car_number"
@@ -43,7 +45,7 @@
         <TextView
             android:id="@+id/tv_user_name"
             android:layout_width="wrap_content"
-            android:layout_height="50px"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/tv_car_number"
             android:layout_marginLeft="42px"
             android:layout_marginRight="30px"
@@ -58,7 +60,7 @@
         <TextView
             android:id="@+id/tv_await_time_or_money"
             android:layout_width="wrap_content"
-            android:layout_height="50px"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/tv_car_number"
             android:layout_toRightOf="@+id/tv_user_name"
             android:gravity="center_vertical"

@@ -12,6 +12,7 @@ import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.base.AutoLayoutActivity;
 import com.ruanyun.chezhiyi.commonlib.model.TuiKuanInfo;
 import com.ruanyun.chezhiyi.commonlib.presenter.RePayPresenter;
+import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.view.RePayMvpView;
 import com.ruanyun.chezhiyi.commonlib.view.adapter.RebackPayListAdapter;
 import com.ruanyun.chezhiyi.commonlib.view.widget.RYEmptyView;
@@ -114,34 +115,7 @@ public class RebackPayActivity extends AutoLayoutActivity implements Topbar.onTo
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
         // 在这里加载最新数据
-
-        if (true) {
-            // 如果网络可用，则加载网络数据
-            new AsyncTask<Void, Void, Void>() {
-
-                @Override
-                protected Void doInBackground(Void... params) {
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    return null;
-                }
-
-                @Override
-                protected void onPostExecute(Void aVoid) {
-                    // 加载完毕后在 UI 线程结束下拉刷新
-                    mRefreshLayout.endRefreshing();
-//                    mDatas.addAll(0, DataEngine.loadNewData());
-//                    mAdapter.setDatas(mDatas);
-                }
-            }.execute();
-        } else {
-            // 网络不可用，结束下拉刷新
-            Toast.makeText(this, "网络不可用", Toast.LENGTH_SHORT).show();
-            mRefreshLayout.endRefreshing();
-        }
+        payPresenter.getRePayData(app.getApiService().getTuiKuanList(app.getCurrentUserNum()));
     }
 
     @Override
@@ -196,12 +170,14 @@ public class RebackPayActivity extends AutoLayoutActivity implements Topbar.onTo
 
     @Override
     public void getDataSuccess(List<TuiKuanInfo> listinfo) {
+        LogX.e("退款审核", listinfo.toString());
         productInfos.clear();
         for (TuiKuanInfo info : listinfo) {
             productInfos.add(info);
         }
         adapter.setData(productInfos);
         adapter.notifyDataSetChanged();
+        mRefreshLayout.endRefreshing();
     }
 
     @Override

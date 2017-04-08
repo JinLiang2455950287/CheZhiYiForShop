@@ -79,7 +79,7 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements Hom
     private View listHeadView;
     private String refuseRemake = "";
     private WorkOrderGoodsAdapter adapter;//商品的集合
-    private HomePerssionPresenter homePerssionPresenter = new HomePerssionPresenter();//权限表
+//    private HomePerssionPresenter homePerssionPresenter = new HomePerssionPresenter();//权限表
 
     @Override
     protected void onCreate(Bundle bundle) {
@@ -87,7 +87,7 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements Hom
         presenter.attachView(this);
         setContentView(R.layout.activity_workorder_detailed);
         initView();
-        homePerssionPresenter.attachView(this);
+//        homePerssionPresenter.attachView(this);
     }
 
     private void initView() {
@@ -166,7 +166,7 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements Hom
         });
         getData();
         //权限表
-        homePerssionPresenter.getPerssionData(app.getApiService().getPerssion(app.getCurrentUserNum()));
+//        homePerssionPresenter.getPerssionData(app.getApiService().getPerssion(app.getCurrentUserNum()));
     }
 
     /**
@@ -564,18 +564,18 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements Hom
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        homePerssionPresenter.detachView();
+//        homePerssionPresenter.detachView();
     }
 
     @Override
     public void getDataSuccess(List<PerssionBean> perssionList) {
-        LogX.e("权限表", perssionList.toString());
-        CommentUtils.permission.clear();
-        for (PerssionBean perssion : perssionList) {
-//            permissionList.add(perssion.getButNum());
-            CommentUtils.permission.add(perssion.getButNum());
-        }
-        LogX.e("权限表 CommentUtils.permission", CommentUtils.permission.toString());
+//        LogX.e("权限表", perssionList.toString());
+//        CommentUtils.permission.clear();
+//        for (PerssionBean perssion : perssionList) {
+////            permissionList.add(perssion.getButNum());
+//            CommentUtils.permission.add(perssion.getButNum());
+//        }
+//        LogX.e("权限表 CommentUtils.permission", CommentUtils.permission.toString());
     }
 
     @Override

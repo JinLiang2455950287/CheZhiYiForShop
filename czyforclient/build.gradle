@@ -10,13 +10,13 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
-        ndk {abiFilters "armeabi", "armeabi-v7a", "x86"/*, "mips" */}
+        ndk { abiFilters "armeabi", "armeabi-v7a", "x86"/*, "mips" */ }
     }
     signingConfigs {
         config {
             keyAlias 'chezhiyiclient'
             keyPassword '123456'
-            storeFile file('../CheZhiYiClient.jks')
+            storeFile file('../keystore/CheZhiYiClient.jks')
             storePassword '123456'
         }
     }
@@ -31,6 +31,11 @@ android {
         }
     }
     productFlavors {
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 }
 

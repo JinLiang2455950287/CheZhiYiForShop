@@ -16,6 +16,7 @@ import com.ruanyun.chezhiyi.commonlib.base.ResultBase;
 import com.ruanyun.chezhiyi.commonlib.model.WorkBayInfo;
 import com.ruanyun.chezhiyi.commonlib.model.WorkOrderInfo;
 import com.ruanyun.chezhiyi.commonlib.util.C;
+import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.util.NoDoubleClicksListener;
 import com.ruanyun.chezhiyi.commonlib.util.NoDoubleItemClicksListener;
 import com.ruanyun.chezhiyi.commonlib.view.ui.common.WorkOrderDetailedActivity;
@@ -91,6 +92,7 @@ public class WorkBayFragment extends RefreshBaseFragment {
                     Intent workbayIntent = new Intent(mContext, WorkOrderDetailedActivity.class);
                     workbayIntent.putExtra(C.IntentKey.WORKORDER_INFO, info);
                     showActivity(workbayIntent);
+                    LogX.e("工位状态", info.toString());
                 }
             }
         });

@@ -165,7 +165,7 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
     private List<GongGaoInfo> gongGaoInfoList = new ArrayList<>();
     private SystemRemindParams systemRemindParams = new SystemRemindParams();
     private HomePerssionPresenter homePerssionPresenter = new HomePerssionPresenter();//权限表
-    private HomeWaitAreaCountPresenter homeWaitAreaCountPresenter = new HomeWaitAreaCountPresenter();//等候区数量
+    private HomeWaitAreaCountPresenter homeWaitAreaCountPresenter = new HomeWaitAreaCountPresenter();//等候区数量  status=3;结算区数量status=8；质检区数量tatus=6
 
     @Override
     public void onDestroy() {
@@ -763,7 +763,7 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
         for (PerssionBean perssion : perssionList) {
             CommentUtils.permission.add(perssion.getButNum());
         }
-        LogX.e("权限表",  CommentUtils.permission.toString());
+        LogX.e("权限表", CommentUtils.permission.toString());
     }
 
     @Override
@@ -799,7 +799,7 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
     /*获取质检区数量*/
     @Override
     public void getZhiJianAreaCount(ResultBase resultBase) {
-        LogX.e("质检区", String.valueOf(resultBase.getObj()) + "");
+        LogX.e("质检区", "质检区数量:" + String.valueOf(resultBase.getObj()));
         if (TextUtils.isEmpty(resultBase.getObj().toString()))
             return;
         String count = resultBase.getObj().toString();
@@ -808,6 +808,8 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
             if (!count.equals("0")) {
                 waitQualityCount.setVisibility(View.VISIBLE);
                 waitQualityCount.setText(count);
+            } else {
+                waitQualityCount.setVisibility(View.GONE);
             }
         }
     }

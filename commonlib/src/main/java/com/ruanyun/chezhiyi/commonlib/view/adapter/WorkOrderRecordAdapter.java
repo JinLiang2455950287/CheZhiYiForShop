@@ -165,73 +165,7 @@ public class WorkOrderRecordAdapter extends MultiItemTypeAdapter<WorkOrderRecord
                 } else {
                     holder.setTextColorRes(R.id.tv_time_line_event, R.color.text_black);
                 }
-//==========================================================================================================================
-//                //是否可以操作
-//                if (operationable && position == 0 && isLeadingUser ) {
-//                    holder.setVisible(R.id.ll_operation_quality, true);
-//                    if (workOrderRecordInfo.getWorkOrderStatus() == WorkOrderRecordInfo.WORK_ORDER_STATUS_FINISH) {
-//                        if (needToDistribution) {
-//                            holder.setVisible(R.id.ll_operation_quality, true);
-//                            holder.setVisible(R.id.tv_cancel, false);
-//                        } else {
-//                            holder.setVisible(R.id.ll_operation_quality, false);
-//                        }
-//                    }
-//                } else {
-//                    holder.setVisible(R.id.ll_operation_quality, false);
-////                    return;
-//                }
-//
-//                final TextView tvPass = holder.getView(R.id.tv_pass); //质检通过，开始施工， 分配提成
-//                if (workOrderRecordInfo.getWorkOrderStatus() == WorkOrderRecordInfo.WORK_ORDER_STATUS_QUALITY) {   //施工结束，质检中
-//                    tvPass.setText("质检通过");
-//                    if (isShowQulityCheckBtn && position == 0) {
-//                        holder.setVisible(R.id.ll_operation_quality, true);
-//                        tvPass.setBackgroundResource(R.drawable.button_selector_default);
-//                    } else {//不是 质检员隐藏
-//                        tvPass.setVisibility(View.GONE);
-//                    }
-//                }
-//                else if (workOrderRecordInfo.getWorkOrderStatus() == WorkOrderRecordInfo.WORK_ORDER_STATUS_REPAIR ||// 返修中
-//                        workOrderRecordInfo.getWorkOrderStatus() == WorkOrderRecordInfo.WORK_ORDER_STATUS_PREPARE) {//即将开始施工
-//                    tvPass.setText("开始施工");
-//                    tvPass.setBackgroundResource(R.drawable.button_selector_default);
-//                }
-//                else {
-//                    tvPass.setText("分配提成");
-//                    tvPass.setBackgroundResource(R.drawable.corner_rectangle_grange_border);
-//                }
-//                tvPass.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        if (btnClick != null) {
-//                            btnClick.onBtnClick(workOrderRecordInfo.getWorkOrderStatus(), tvPass, position);
-//                        }
-//                    }
-//                });
-//
-//                final TextView tvCancel = holder.getView(R.id.tv_cancel); //拒绝， 添加助手
-//                if (workOrderRecordInfo.getWorkOrderStatus() == WorkOrderRecordInfo.WORK_ORDER_STATUS_QUALITY) {  // 工单质检中   显示 拒绝
-//                    tvCancel.setText("拒绝");
-//                    if(isShowQulityCheckBtn && position == 0) {
-//                        holder.setVisible(R.id.ll_operation_quality, true);
-//                        tvCancel.setVisibility(View.VISIBLE);//是 质检员显示
-//                    } else {
-//                        tvCancel.setVisibility(View.GONE);//不是 质检员隐藏
-//                    }
-//                } else {
-//                    tvCancel.setText("添加助手");
-//                }
-//                tvCancel.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        if (btnClick != null) {
-//                            btnClick.onBtnClick(workOrderRecordInfo.getWorkOrderStatus(),
-//                                    tvCancel, position);
-//                        }
-//                    }
-//                });
-//===============================================================================================
+
                 if (operationable && position == 0) {      //是否可以操作
                     holder.setVisible(R.id.ll_operation_quality, true);
                     if (workOrderRecordInfo.getWorkOrderStatus() == WorkOrderRecordInfo.WORK_ORDER_STATUS_FINISH) { // 已完成的工单
@@ -304,8 +238,12 @@ public class WorkOrderRecordAdapter extends MultiItemTypeAdapter<WorkOrderRecord
                 } else {
                     holder.setVisible(R.id.ll_operation_quality, false);
                 }
-
-
+                if (CommentUtils.permission.contains("GDNZ") && position == 0) {
+                    holder.setVisible(R.id.ll_operation_quality, true);
+                    holder.setVisible(R.id.tv_cancel, true);
+                    holder.setVisible(R.id.tv_pass, true);
+//                    holder.setVisible(R.id.tv_add_helper, false);
+                }
             }
         });
 
@@ -341,8 +279,13 @@ public class WorkOrderRecordAdapter extends MultiItemTypeAdapter<WorkOrderRecord
                 } else {
                     holder.setTextColorRes(R.id.tv_time_line_event, R.color.text_black);
                 }
-
+                if (CommentUtils.permission.contains("GDNZ")) {
+                    holder.setVisible(R.id.tv_add_helper, true);
+                    holder.setVisible(R.id.tv_end_order, true);
+                    holder.setVisible(R.id.tv_add_helper, false);
+                }
             }
+
         });
     }
 

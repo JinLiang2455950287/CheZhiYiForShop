@@ -2,13 +2,13 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="550px"
+    android:layout_height="300dp"
     android:background="@android:color/transparent"
     android:padding="20px">
-    <!--android:background="@android:color/transparent"-->
+
     <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="520px"
+        android:layout_height="250dp"
         android:layout_marginRight="20px"
         android:layout_marginTop="20px"
         android:background="@drawable/corner_rectangle_white_shape"
@@ -18,14 +18,14 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="520px"
+            android:layout_height="250dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv"
                 android:layout_width="match_parent"
-                android:layout_height="70px"
-                android:background="@color/theme_color_default"
+                android:layout_height="40dp"
+                android:background="@drawable/top_background"
                 android:gravity="center"
                 android:text="支付宝支付"
                 android:textColor="@color/white" />
@@ -33,7 +33,7 @@
             <RadioGroup
                 android:id="@+id/rg"
                 android:layout_width="match_parent"
-                android:layout_height="350px"
+                android:layout_height="160dp"
                 android:layout_below="@+id/tv">
 
                 <RadioButton
@@ -70,12 +70,11 @@
             <TextView
                 android:id="@+id/bt_confirm"
                 android:layout_width="match_parent"
-                android:layout_height="60px"
+                android:layout_height="35dp"
                 android:layout_below="@+id/rg"
-                android:layout_marginBottom="15px"
                 android:layout_marginLeft="20px"
                 android:layout_marginRight="20px"
-                android:layout_marginTop="20px"
+                android:layout_marginTop="15px"
                 android:background="@drawable/corner_rectangle_radius_green_shape"
                 android:gravity="center"
                 android:text="确定"
@@ -87,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="20px"
-                android:layout_marginTop="90px"
+                android:layout_marginTop="50dp"
                 android:text="¥100.0"
                 android:textColor="@color/black" />
 
@@ -97,8 +96,8 @@
 
     <ImageView
         android:id="@+id/tv_dimiss"
-        android:layout_width="60px"
-        android:layout_height="60px"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_gravity="end"
         android:elevation="2dp"
         android:src="@drawable/close_pic" />

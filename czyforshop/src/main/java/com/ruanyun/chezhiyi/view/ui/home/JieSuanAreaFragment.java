@@ -124,7 +124,6 @@ public class JieSuanAreaFragment extends RefreshBaseFragment implements JieSuanA
         params.setPageNum(currentPage);
         listPresenter.setTag(TAB_TYPE_SETTLE_ACCOUNTS);
         call = app.getApiService().getMyWorkOrderList(app.getCurrentUserNum(), params);
-
         return call;
     }
 
@@ -135,7 +134,6 @@ public class JieSuanAreaFragment extends RefreshBaseFragment implements JieSuanA
         LogX.e("workOrderInfoListgetResult()", result.getResult().toString());
         LogX.e("workOrderInfoList", workOrderInfoList.toString());
         mAdapter.notifyDataSetChanged();
-
     }
 
     @Override
@@ -215,7 +213,6 @@ public class JieSuanAreaFragment extends RefreshBaseFragment implements JieSuanA
         tvcofirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LogX.e("结算loadingDialogHelper", app.getCurrentUserNum() + ";" + new Gson().toJson(parm) + "" + PayType);
                 submitWorkOrderPresenter.addJieSuan(app.getApiService().addJieSuan2(app.getCurrentUserNum(), new Gson().toJson(parm), PayType));
                 builder.dismiss();
             }

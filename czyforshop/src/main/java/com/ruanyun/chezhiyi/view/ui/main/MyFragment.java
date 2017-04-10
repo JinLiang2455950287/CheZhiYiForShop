@@ -34,6 +34,7 @@ import com.ruanyun.chezhiyi.commonlib.util.AppUtility;
 import com.ruanyun.chezhiyi.commonlib.util.C;
 import com.ruanyun.chezhiyi.commonlib.util.DbHelper;
 import com.ruanyun.chezhiyi.commonlib.util.FileUtil;
+import com.ruanyun.chezhiyi.commonlib.util.ImageUtil;
 import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.util.StringUtil;
 import com.ruanyun.chezhiyi.commonlib.view.NoticeMvpView;
@@ -91,9 +92,9 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
     @BindView(R.id.rl_person_info)
     RelativeLayout rlPersonInfo;
     @BindView(R.id.tv_my_type)
-    FlowLayout tv_my_type;
+    TextView tv_my_type;
     @BindView(R.id.flow_view)
-    FlowLayout flowView;
+    TextView flowView;
     @BindView(R.id.tv_push_money)
     TextView tvPushMoney;
     @BindView(R.id.tv_sales_commissions)
@@ -256,46 +257,8 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
         }
 
         LogX.e("测试啦，", allLabels.toString());
-        creatServiceLables(allLabels);
-    }
-
-
-    /**
-     * 用户标签
-     *
-     * @param stringList
-     */
-    private void creatServiceLables(List<String> stringList) {
-
-        tv_my_type.removeAllViews();
-        ViewGroup.MarginLayoutParams lp2 = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        lp2.setMargins(5, 0, 5, 0);
-        if (stringList.size() > 0) {
-            if (AppUtility.isNotEmpty(stringList.get(0))) {
-                TextView view2 = new TextView(mContext);
-                view2.setText(stringList.get(0));
-                view2.setTextColor(ContextCompat.getColor(mContext, R.color.theme_color_default));
-                view2.setBackgroundResource(com.ruanyun.chezhiyi.commonlib.R.drawable.shape_text_bg_white);
-                view2.setTextSize(12);
-                view2.setLayoutParams(lp2);
-                tv_my_type.addView(view2);
-            }
-        }
-
-        flowView.removeAllViews();
-        ViewGroup.MarginLayoutParams lp = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        lp.setMargins(5, 0, 5, 0);
-        for (int i = 0; i < stringList.size(); i++) {
-            if (AppUtility.isNotEmpty(stringList.get(i)) && i < 4 && i > 0) {
-                TextView view = new TextView(mContext);
-                view.setText(stringList.get(i));
-                view.setTextColor(Color.WHITE);
-                view.setBackgroundResource(com.ruanyun.chezhiyi.commonlib.R.drawable.shape_text_station_label);
-                view.setTextSize(12);
-                view.setLayoutParams(lp);
-                flowView.addView(view);
-            }
-        }
+        tv_my_type.setText(allLabels.get(0).toString());
+        flowView.setText(allLabels.get(1).toString());
     }
 
     @Override

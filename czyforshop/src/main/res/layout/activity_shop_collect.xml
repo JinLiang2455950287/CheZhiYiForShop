@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_shop_collect"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -21,9 +20,58 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="营业汇总"
+            android:drawableLeft="@drawable/mendian_total"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:text="营业额统计"
             android:textColor="@color/black"
-            android:textSize="50px" />
+            android:textSize="@dimen/text_size_middle" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/gray_arrow_right" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_marginLeft="10px"
+        android:layout_marginRight="10px"
+        android:background="@color/color_gray_line" />
+
+    <RelativeLayout
+        android:id="@+id/new_User"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40px"
+        android:layout_marginRight="20px"
+        android:orientation="horizontal"
+        android:paddingBottom="30px"
+        android:paddingTop="30px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/mendian_gongda"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:text="工单统计"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_middle" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/gray_arrow_right" />
 
     </RelativeLayout>
 
@@ -47,37 +95,21 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/mendian_members"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
             android:text="会员统计"
             android:textColor="@color/black"
-            android:textSize="50px" />
+            android:textSize="@dimen/text_size_middle" />
 
 
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:layout_marginLeft="10px"
-        android:layout_marginRight="10px"
-        android:background="@color/color_gray_line" />
-
-    <RelativeLayout
-        android:id="@+id/new_User"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40px"
-        android:layout_marginRight="20px"
-        android:orientation="horizontal"
-        android:paddingBottom="30px"
-        android:paddingTop="30px">
-
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="新增用户"
-            android:textColor="@color/black"
-            android:textSize="50px" />
-
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/gray_arrow_right" />
 
     </RelativeLayout>
 
@@ -101,10 +133,23 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="销售商品"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:drawableLeft="@drawable/mendian_goods"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:text="服务商品"
             android:textColor="@color/black"
-            android:textSize="50px" />
+            android:textSize="@dimen/text_size_middle" />
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/gray_arrow_right" />
 
     </RelativeLayout>
 

@@ -70,7 +70,7 @@
             <TextView
                 android:id="@+id/bt_confirm"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="30dp"
                 android:layout_below="@+id/rg"
                 android:layout_marginLeft="20px"
                 android:layout_marginRight="20px"

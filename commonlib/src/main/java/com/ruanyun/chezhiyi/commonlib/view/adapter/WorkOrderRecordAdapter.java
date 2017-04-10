@@ -279,11 +279,11 @@ public class WorkOrderRecordAdapter extends MultiItemTypeAdapter<WorkOrderRecord
                 } else {
                     holder.setTextColorRes(R.id.tv_time_line_event, R.color.text_black);
                 }
-                if (CommentUtils.permission.contains("GDNZ")) {
-                    holder.setVisible(R.id.tv_add_helper, true);
-                    holder.setVisible(R.id.tv_end_order, true);
-                    holder.setVisible(R.id.tv_add_helper, false);
-                }
+//                if (CommentUtils.permission.contains("GDNZ")) {
+//                    holder.setVisible(R.id.tv_add_helper, true);
+//                    holder.setVisible(R.id.tv_end_order, true);
+//                    holder.setVisible(R.id.tv_add_helper, false);
+//                }
             }
 
         });

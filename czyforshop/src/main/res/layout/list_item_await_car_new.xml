@@ -3,25 +3,18 @@
     android:id="@+id/rl_waiting_car_info"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
     android:background="@color/white"
-    android:paddingBottom="5px"
-    android:orientation="vertical">
+    android:orientation="horizontal">
+    <TextView
+        android:layout_width="5dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:background="@color/theme_color_default" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/iv_car_photo"
-            android:layout_width="260px"
-            android:layout_height="260px"
-            android:layout_marginBottom="43px"
-            android:layout_marginLeft="25px"
-            android:layout_marginRight="42px"
-            android:layout_marginTop="43px"
-            android:src="@drawable/default_img"
-            android:visibility="gone" />
-
 
         <TextView
             android:id="@+id/tv_car_number"
@@ -69,7 +62,6 @@
             android:textColor="@color/text_comment_gray"
             android:textSize="@dimen/text_size_small" />
 
-
         <TextView
             android:id="@+id/tv_take_order"
             android:layout_width="150px"
@@ -83,6 +75,8 @@
             android:textColor="@color/text_comment_gray"
             android:textSize="@dimen/text_size_small"
             android:visibility="gone" />
+
+
 
     </RelativeLayout>
 

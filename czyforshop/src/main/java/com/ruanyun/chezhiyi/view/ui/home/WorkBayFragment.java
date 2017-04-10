@@ -29,7 +29,7 @@ import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import retrofit2.Call;
 
 /**
- * 工位的fragment
+ * 工位的fragment工位状态
  */
 public class WorkBayFragment extends RefreshBaseFragment {
 

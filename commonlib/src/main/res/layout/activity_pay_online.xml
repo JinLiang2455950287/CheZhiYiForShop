@@ -16,28 +16,28 @@
 
         <!--&lt;!&ndash; 订单编号 &ndash;&gt;-->
         <!--<LinearLayout-->
-            <!--android:id="@+id/ll_order_num"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@color/white"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:padding="10dp">-->
+        <!--android:id="@+id/ll_order_num"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/white"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:padding="10dp">-->
 
-            <!--<TextView-->
-                <!--android:id="@+id/tv_order_num_str"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="@string/order_num"-->
-                <!--android:textColor="@color/text_black" />-->
+        <!--<TextView-->
+        <!--android:id="@+id/tv_order_num_str"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/order_num"-->
+        <!--android:textColor="@color/text_black" />-->
 
-            <!--<TextView-->
-                <!--android:id="@+id/tv_order_num"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:gravity="right"-->
-                <!--android:singleLine="true"-->
-                <!--android:text="5345345374534" />-->
+        <!--<TextView-->
+        <!--android:id="@+id/tv_order_num"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:gravity="right"-->
+        <!--android:singleLine="true"-->
+        <!--android:text="5345345374534" />-->
 
         <!--</LinearLayout>-->
 
@@ -97,7 +97,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="40px"
-                android:src="@drawable/icon_green_selected"/>
+                android:src="@drawable/icon_green_selected" />
 
             <ImageView
                 android:id="@+id/image_balance"
@@ -105,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:padding="40px"
-                android:src="@drawable/icon_pay_account"/>
+                android:src="@drawable/icon_pay_account" />
 
             <TextView
                 android:id="@+id/tv_balance_str"
@@ -146,7 +146,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="40px"
-                android:src="@drawable/icon_green_select"/>
+                android:src="@drawable/icon_green_select" />
 
             <ImageView
                 android:id="@+id/image_alipay"
@@ -154,7 +154,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:padding="40px"
-                android:src="@drawable/icon_pay_zfb"/>
+                android:src="@drawable/icon_pay_zfb" />
 
             <TextView
                 android:id="@+id/tv_alipay_str"
@@ -185,7 +185,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:padding="10px">
+            android:padding="10px"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/image_select_status_wechat"
@@ -202,7 +203,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:padding="40px"
-                android:src="@drawable/icon_pay_wx"/>
+                android:src="@drawable/icon_pay_wx" />
 
             <TextView
                 android:id="@+id/tv_wechat_str"

@@ -25,19 +25,17 @@ import com.zhy.autolayout.utils.AutoUtils;
 import java.util.List;
 
 /**
- * Description ：等候区、结算中Adapter
+ * Description ：等候区
  * <p/>
- * Created by hdl on 2016/9/27.
+ * Created by hdl on 2017/4/10
  */
 
-public class AwaitOrClearingAdapter extends CommonAdapter<WorkOrderInfo> {
+public class WaitAreaAdapter extends CommonAdapter<WorkOrderInfo> {
 
     //    LabelFlowLayout labelFlowLayout;
-    private String type;
 
-    public AwaitOrClearingAdapter(Context context, int layoutId, List<WorkOrderInfo> datas, String type) {
+    public WaitAreaAdapter(Context context, int layoutId, List<WorkOrderInfo> datas) {
         super(context, layoutId, datas);
-        this.type = type;
     }
 
     public static final int AWAIT_AREA = 1;//等候区
@@ -57,7 +55,7 @@ public class AwaitOrClearingAdapter extends CommonAdapter<WorkOrderInfo> {
         TextView tvTakeOrder = holder.getView(R.id.tv_take_order);//结算
         tvUserName.setText(item.getUser() == null ? "" : item.getUser().getNickName() == null ? "" : item.getUser().getNickName());
         TextView tvAwaitTimeOrMoney = holder.getView(R.id.tv_await_time_or_money);//等候时长或结算金额
-        if (type.equals(WorkOrderFragment.TAB_TYPE_WAIT_AREA)) {//等候区
+//        if (type.equals(WorkOrderFragment.TAB_TYPE_WAIT_AREA)) {//等候区
             String awaitTime = "已等候：" + awaitTime(item.getCreateTime()) + "H";
 //            String awaitTime = "已等候："+awaitTime("2016-10-09 14:00:00")+"H";
             SpannableString spStr = new SpannableString(awaitTime);
@@ -65,29 +63,29 @@ public class AwaitOrClearingAdapter extends CommonAdapter<WorkOrderInfo> {
             spStr.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.bg_tangerine))
                     , 4, awaitTime.length() - 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
             tvAwaitTimeOrMoney.setText(spStr);
-        } else /*if(type==CLEARING)*/ {//结算中
-            String price = "总计：¥" + item.getTotalAmount();
-            SpannableString spStr = new SpannableString(price);
-            spStr.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.text_orange))
-                    , 3, spStr.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-            spStr.setSpan(new RelativeSizeSpan(1.2f), 4, spStr.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-            tvAwaitTimeOrMoney.setText(spStr);
-            if (!type.equals("6")) {
-                tvTakeOrder.setVisibility(View.VISIBLE);
-            }
-            tvTakeOrder.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    OnTakeOrderClickListener.onTakeOrderClick(item, position);
-                }
-            });
-        }
+//        } else /*if(type==CLEARING)*/ {//结算中
+//            String price = "总计：¥" + item.getTotalAmount();
+//            SpannableString spStr = new SpannableString(price);
+//            spStr.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.text_orange))
+//                    , 3, spStr.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+//            spStr.setSpan(new RelativeSizeSpan(1.2f), 4, spStr.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+//            tvAwaitTimeOrMoney.setText(spStr);
+//            if (!type.equals("6")) {
+//                tvTakeOrder.setVisibility(View.VISIBLE);
+//            }
+//            tvTakeOrder.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    OnTakeOrderClickListener.onTakeOrderClick(item, position);
+//                }
+//            });
+//        }
 
         // 标签控件
         LabelFlowLayout labelFlowLayout = holder.getView(R.id.labelflow_service_item);
         labelFlowLayout.removeAllViews();
         LayoutParams source = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        LabelFlowLayout.MarginLayoutParams lp = new MarginLayoutParams(source);
+        MarginLayoutParams lp = new MarginLayoutParams(source);
 //        lp.leftMargin = 5;
 //        lp.rightMargin = 15;
 //        lp.topMargin = 5;

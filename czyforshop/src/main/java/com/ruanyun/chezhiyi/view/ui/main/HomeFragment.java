@@ -569,7 +569,7 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
                     permissionDialog();
                 }
                 break;
-            case R.id.settlement_area: //结算去界面
+            case R.id.settlement_area: //结算区界面
                 if (CommentUtils.permission.contains("JSQ")) {
                     Intent intent3 = new Intent(mContext, WaitAreaActivity.class);
                     intent3.putExtra("AreaType", "3");
@@ -792,6 +792,8 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
             if (!count.equals("0")) {
                 waitAreaCount.setVisibility(View.VISIBLE);
                 waitAreaCount.setText(count);
+            } else {
+                waitAreaCount.setVisibility(View.GONE);
             }
         }
     }
@@ -826,6 +828,8 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
             if (!count.equals("0")) {
                 waitSettlementCount.setVisibility(View.VISIBLE);
                 waitSettlementCount.setText(count);
+            } else {
+                waitSettlementCount.setVisibility(View.GONE);
             }
         }
 

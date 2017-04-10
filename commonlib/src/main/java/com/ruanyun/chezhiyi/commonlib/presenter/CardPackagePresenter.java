@@ -29,7 +29,7 @@ public class CardPackagePresenter implements Presenter<CardPackageView> {
         call.enqueue(new ResponseCallback<ResultBase<List<CardPackageListModel>>>() {
             @Override
             public void onSuccess(Call call, ResultBase<List<CardPackageListModel>> listResultBase) {
-                LogX.e("卡套餐persenter", listResultBase.getObj().toString());
+                LogX.e("卡套餐persenter", listResultBase.toString());
                 //[CardPackageListModel{access_token='null', msg='null', result=0, obj=null}]
                 cardPackageView.getDataSuccess(listResultBase.getObj());
                 cardPackageView.dismissLoadingView();
@@ -42,6 +42,7 @@ public class CardPackagePresenter implements Presenter<CardPackageView> {
 
             @Override
             public void onFail(Call call, String msg) {
+                cardPackageView.dismissLoadingView();
                 LogX.e("卡套餐persenteronFail", msg+"");
             }
 

@@ -1,11 +1,13 @@
 package com.ruanyun.chezhiyi.view.ui.home;
 
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -39,6 +41,8 @@ import com.ruanyun.chezhiyi.commonlib.view.CustomerAccountView;
 import com.ruanyun.chezhiyi.commonlib.view.SubmitWorkOrderMvpView;
 import com.ruanyun.chezhiyi.commonlib.view.ui.common.WorkOrderDetailedActivity;
 import com.ruanyun.chezhiyi.view.adapter.AwaitOrClearingAdapter;
+import com.ruanyun.chezhiyi.view.adapter.JieSuanAreaAdapter;
+import com.ruanyun.chezhiyi.view.adapter.WaitAreaAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,42 +51,29 @@ import de.greenrobot.event.Subscribe;
 import retrofit2.Call;
 
 /**
- * Description ：
- * <p/>
- * Created by ycw on 2016/12/27.
+ * 结算区
+ * jin
+ * 2017/4/10fragment_jie_suan_area
  */
+public class JieSuanAreaFragment extends RefreshBaseFragment implements JieSuanAreaAdapter.OnTakeOrderClickListener, CustomerAccountView, SubmitWorkOrderMvpView {
 
-public class WorkOrderFragment extends RefreshBaseFragment implements AwaitOrClearingAdapter.OnTakeOrderClickListener, CustomerAccountView, SubmitWorkOrderMvpView {
-
-    public static final String TAB_TYPE_WAIT_AREA = "2";//等候区
     public static final String TAB_TYPE_SETTLE_ACCOUNTS = "3";//结算区
-    public static final String TAB_TYPE_QUALITY_CHECK = "6";//质检去
 
-    private static final String arg_params_status = "ARG_PARAMS_STATUS";
-    private static final String workorderstatus = "";
     public MyWorkOrderParams params = new MyWorkOrderParams();
-    //    private Topbar topbar;
     private ListView lvStation;
-    private AwaitOrClearingAdapter mAdapter;//等候区或结算中获取
+    private JieSuanAreaAdapter mAdapter;//结算区
     private List<WorkOrderInfo> workOrderInfoList = new ArrayList<>();
-    private String paramsStatus;
     private CustomerAccountPresenter customerAccountPresenter = new CustomerAccountPresenter();//获取用户余额
     private SubmitWorkOrderPresenter submitWorkOrderPresenter = new SubmitWorkOrderPresenter();//结算
     private JieSuanParm parm = null;//结算params
     private List<PayWorkOrdersBean> payWorkOrdersBeanList = null;
     private int PayType = 4;//结算方式
-    private static final int REQUEST_FINISH_CODE = 234;// 支付成功后
     private WorkOrderInfo workOderInfoitem = new WorkOrderInfo();//选择的
     private int position;
 
-    public WorkOrderFragment() {
-    }
 
-    public static WorkOrderFragment newInstance(String paramsStatus) {
-        WorkOrderFragment fragment = new WorkOrderFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString(arg_params_status, paramsStatus);
-        fragment.setArguments(bundle);
+    public static JieSuanAreaFragment newInstance() {
+        JieSuanAreaFragment fragment = new JieSuanAreaFragment();
         return fragment;
     }
 
@@ -90,12 +81,11 @@ public class WorkOrderFragment extends RefreshBaseFragment implements AwaitOrCle
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         registerBus();
-        paramsStatus = getArguments().getString(arg_params_status);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mContentView = inflater.inflate(R.layout.fragment_workbay, container, false);
+        mContentView = inflater.inflate(R.layout.fragment_jie_suan_area, container, false);
         initView();
         customerAccountPresenter.attachView(this);
         submitWorkOrderPresenter.attachView(this);
@@ -107,29 +97,15 @@ public class WorkOrderFragment extends RefreshBaseFragment implements AwaitOrCle
         payWorkOrdersBeanList = new ArrayList<>();
         initRefreshLayout();
         lvStation = getView(R.id.list);
-        mAdapter = new AwaitOrClearingAdapter(mContext, R.layout.list_item_await_car_new, workOrderInfoList, paramsStatus);
+        mAdapter = new JieSuanAreaAdapter(mContext, R.layout.list_item_await_car_new, workOrderInfoList);
         lvStation.setAdapter(mAdapter);
         mAdapter.setOnTakeOrderClickListener(this);
         lvStation.setOnItemClickListener(new NoDoubleItemClicksListener() {
             @Override
             public void noDoubleClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (paramsStatus) {
-                    case TAB_TYPE_QUALITY_CHECK://质检
-                        Intent qualityCheckIntent = new Intent(mContext, WorkOrderDetailedActivity.class);
-                        qualityCheckIntent.putExtra(C.IntentKey.WORKORDER_INFO, mAdapter.getItem(position));
-                        showActivity(qualityCheckIntent);
-                        break;
-                    case TAB_TYPE_SETTLE_ACCOUNTS://结算
-                        Intent intent = new Intent(mContext, WorkOrderDetailedActivity.class);
-                        intent.putExtra(C.IntentKey.WORKORDER_INFO, mAdapter.getItem(position));
-                        showActivity(intent);
-                        break;
-                    case TAB_TYPE_WAIT_AREA://等候区
-                        Intent waitAreaIntent = new Intent(mContext, WaitingAreaActivity.class);
-                        waitAreaIntent.putExtra(C.IntentKey.WORKORDER_INFO, mAdapter.getItem(position));
-                        showActivity(waitAreaIntent);
-                        break;
-                }
+                Intent intent = new Intent(mContext, WorkOrderDetailedActivity.class);
+                intent.putExtra(C.IntentKey.WORKORDER_INFO, mAdapter.getItem(position));
+                showActivity(intent);
             }
         });
     }
@@ -143,31 +119,12 @@ public class WorkOrderFragment extends RefreshBaseFragment implements AwaitOrCle
     @Override
     public Call loadData() {
         Call call = null;
-        switch (paramsStatus) {
-            case TAB_TYPE_QUALITY_CHECK://质检
-                //params.setWorkOrderStatusString(null);
-                //工单状态(1工单等待确认 2已确认，等待进店 3等待施工 4即将开始施工 5施工中 6施工结束，质检中 7返修中，质检不合格 8等待结算，质检合格 9完成结算)等候中传值3 等待结算8 完成结算9
-                params.setWorkOrderStatus(6);
-                params.setPageNum(currentPage);
-                listPresenter.setTag(TAB_TYPE_QUALITY_CHECK);
-                call = app.getApiService().getMyWorkOrderList(app.getCurrentUserNum(), params);
-                break;
-            case TAB_TYPE_SETTLE_ACCOUNTS://结算
-                //params.setWorkOrderStatusString(null);
-                //工单状态(1工单等待确认 2已确认，等待进店 3等待施工 4即将开始施工 5施工中 6施工结束，质检中 7返修中，质检不合格 8等待结算，质检合格 9完成结算)等候中传值3 等待结算8 完成结算9
-                params.setWorkOrderStatus(8);
-                params.setPageNum(currentPage);
-                listPresenter.setTag(TAB_TYPE_SETTLE_ACCOUNTS);
-                call = app.getApiService().getMyWorkOrderList(app.getCurrentUserNum(), params);
-                break;
-            case TAB_TYPE_WAIT_AREA://等候区
-                //工单状态(1工单等待确认 2已确认，等待进店 3等待施工 4即将开始施工 5施工中 6施工结束，质检中 7返修中，质检不合格 8等待结算，质检合格 9完成结算)等候中传值3 等待结算8 完成结算9
-                params.setPageNum(currentPage);
-                params.setWorkOrderStatus(3);
-                listPresenter.setTag(TAB_TYPE_WAIT_AREA);
-                call = app.getApiService().getMyWorkOrderList(app.getCurrentUserNum(), params);
-                break;
-        }
+        //工单状态(1工单等待确认 2已确认，等待进店 3等待施工 4即将开始施工 5施工中 6施工结束，质检中 7返修中，质检不合格 8等待结算，质检合格 9完成结算)等候中传值3 等待结算8 完成结算9
+        params.setWorkOrderStatus(8);
+        params.setPageNum(currentPage);
+        listPresenter.setTag(TAB_TYPE_SETTLE_ACCOUNTS);
+        call = app.getApiService().getMyWorkOrderList(app.getCurrentUserNum(), params);
+
         return call;
     }
 
@@ -194,10 +151,10 @@ public class WorkOrderFragment extends RefreshBaseFragment implements AwaitOrCle
      */
     @Subscribe
     public void onReciverefresh(String evet) {
-        if (evet.equals(C.EventKey.REFRESH_WAIT_AREA)) {
-            if (paramsStatus.equals(TAB_TYPE_WAIT_AREA))
-                refreshWithLoading();
-        }
+//        if (evet.equals(C.EventKey.REFRESH_WAIT_AREA)) {
+//            if (paramsStatus.equals(TAB_TYPE_WAIT_AREA))
+//                refreshWithLoading();
+//        }
     }
 
     @Override

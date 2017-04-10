@@ -853,7 +853,7 @@ public class CustomerRepAdapter extends MultiItemTypeAdapter<CustomerRepUiModel>
                         onItemeSelect(customerRepUiModel.getItemNum(), ChooseServiceTab.TAB_TECHNICIAN);
                     } else {  //  选技师未选中的情况下  选择
                         //添加判断逻辑 该选中技师是否在其他工单已选择
-                        if (hasBeSelected(((User)customerRepUiModel.relativeBean).getUserNum())) return;// 已被选择跳过以下步骤
+//                        if (hasBeSelected(((User)customerRepUiModel.relativeBean).getUserNum())) return;// 已被选择跳过以下步骤
                         clickPositon = position;
                         customerRepUiModel.setSelected(!customerRepUiModel.isSelected());
                         refreshItemByViewType(customerRepUiModel.getItemType());

@@ -40,7 +40,8 @@ public class WaitAreaActivity extends BaseActivity implements Topbar.onTopbarCli
         fragments.add(WorkBayFragment.newInstance());//工位
 //        fragments.add(WorkOrderFragment.newInstance(WorkOrderFragment.TAB_TYPE_WAIT_AREA));//等侯区"2"
         fragments.add(WaitAreaFragment.newInstance());//等侯区"2"
-        fragments.add(WorkOrderFragment.newInstance(WorkOrderFragment.TAB_TYPE_QUALITY_CHECK));//质检区"6"
+//        fragments.add(WorkOrderFragment.newInstance(WorkOrderFragment.TAB_TYPE_QUALITY_CHECK));//质检区"6"
+        fragments.add(QualityFragment.newInstance());//质检区"6"
 //        fragments.add(JieSuanAreaFragment.newInstance());//质检区"6"
 //        fragments.add(WorkOrderFragment.newInstance(WorkOrderFragment.TAB_TYPE_SETTLE_ACCOUNTS));//结算区"3"
         fragments.add(JieSuanAreaFragment.newInstance());//结算区"3"

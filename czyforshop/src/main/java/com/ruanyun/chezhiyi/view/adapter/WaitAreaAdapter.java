@@ -25,7 +25,7 @@ import com.zhy.autolayout.utils.AutoUtils;
 import java.util.List;
 
 /**
- * Description ：等候区
+ * Description ：等候区/质检区
  * <p/>
  * Created by hdl on 2017/4/10
  */

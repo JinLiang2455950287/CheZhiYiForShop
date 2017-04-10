@@ -61,6 +61,7 @@ import com.ruanyun.chezhiyi.commonlib.view.ui.common.WebViewActivity;
 import com.ruanyun.chezhiyi.commonlib.view.widget.RYEmptyView;
 import com.ruanyun.chezhiyi.commonlib.view.widget.RollableTextView;
 import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
+import com.ruanyun.chezhiyi.view.ui.home.CardPackageActivity;
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 
 import java.io.UnsupportedEncodingException;
@@ -152,8 +153,8 @@ public class FindFragment extends RefreshBaseFragment implements FindMvpView, On
     private void initView() {
         topbar.setTttleText("电商");
         //获取当前界面的图标
-        List<HomeIconInfo> list = DbHelper.getInstance().getHomeIconInfoList(C.ModuleType.MODULE_TYPE_SHOP_COMMERCE);
-        LogX.d(TAG, "find  HomeIconInfo ---> \n" + list.toString());
+        List<HomeIconInfo> list = DbHelper.getInstance().getHomeIconInfoList(C.ModuleType.MODULE_TYPE_CLIENT_FIND);
+        LogX.e("homeIcon电商", list.toString());
         if (list.size() > 6) {
             //功能图标
             List<HomeIconInfo> listFunction = list.subList(0, 6);
@@ -175,18 +176,18 @@ public class FindFragment extends RefreshBaseFragment implements FindMvpView, On
             recyclerViewFunction.addItemDecoration(new ClientFindGridItemDecoration(mContext));
 
             //限时促销
-            ImageUtil.loadImage(mContext, FileUtil.getImageUrl(list.get(6).getAndroidPic()), ivTimeLimitPromotion);
-            tvTimeLimitPromotion.setText(list.get(6).getHomeIconName());
-        }
-        if (list.size() > 7) {
-            //活动招募
-            ImageUtil.loadImage(mContext, FileUtil.getImageUrl(list.get(7).getAndroidPic()), ivActivitiesToRecruit);
-            tvActivitiesToRecruitName.setText(list.get(7).getHomeIconName());
+            ImageUtil.loadImage(mContext, (FileUtil.getImageUrl(list.get(7).getAndroidPic())).trim(), ivTimeLimitPromotion);
+            tvTimeLimitPromotion.setText(list.get(7).getHomeIconName());
         }
         if (list.size() > 8) {
+            //活动招募
+            ImageUtil.loadImage(mContext, (FileUtil.getImageUrl(list.get(8).getAndroidPic())).trim(), ivActivitiesToRecruit);
+            tvActivitiesToRecruitName.setText(list.get(8).getHomeIconName());
+        }
+        if (list.size() > 9) {
             //猜你喜欢
-            ImageUtil.loadImage(mContext, FileUtil.getImageUrl(list.get(8).getAndroidPic()), ivGuessYouLike);
-            tvGuessYouLikeName.setText(list.get(8).getHomeIconName());
+            ImageUtil.loadImage(mContext, (FileUtil.getImageUrl(list.get(9).getAndroidPic())).trim(), ivGuessYouLike);
+            tvGuessYouLikeName.setText(list.get(9).getHomeIconName());
         }
 
         initActivityRecruitView();
@@ -249,7 +250,7 @@ public class FindFragment extends RefreshBaseFragment implements FindMvpView, On
                         promotionInfo.getTitle(),
                         promotionInfo.getProjectNum(),
                         promotionInfo.getMainPhoto(),
-                        promotionInfo.getViceTitle() );
+                        promotionInfo.getViceTitle());
             }
 
             @Override
@@ -288,7 +289,7 @@ public class FindFragment extends RefreshBaseFragment implements FindMvpView, On
                         recommendInfo.getTitle(),
                         recommendInfo.getRecommentProjectNum(),
                         recommendInfo.getMainPhoto(),
-                        recommendInfo.getTitle() );
+                        recommendInfo.getTitle());
             }
 
             @Override
@@ -634,22 +635,23 @@ public class FindFragment extends RefreshBaseFragment implements FindMvpView, On
      */
     public void onFunctionClick(String moduleNum) {
         switch (moduleNum) {
-            case "32"://文章咨询
+            case "6"://文章咨询//            case "32"://文章咨询
                 showActivity(ArticleListActivity.class);
                 break;
-            case "33"://产品
+            case "7"://产品//            case "33"://产品
                 showActivity(ProductActivity.class);
                 break;
-            case "34"://团购
-                showActivity(GroupPurchaseActivity.class);
+            case "12"://卡套餐           case "34"://团购
+//                showActivity(GroupPurchaseActivity.class);
+                showActivity(CardPackageActivity.class);
                 break;
-            case "35"://限时促销
+            case "9"://限时促销//            case "35"://限时促销
                 showActivity(PromotionActivity.class);
                 break;
-            case "36"://秒杀
+            case "10"://秒杀           // case "36"://秒杀
                 showActivity(SeckillActivity.class);
                 break;
-            case "37"://众筹
+            case "11"://众筹//            case "37"://众筹
                 showActivity(CrowdFundingActivity.class);
                 break;
 //            /*case "10"://限时促销

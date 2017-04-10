@@ -19,7 +19,7 @@
                 android:id="@+id/rl_person_info"
                 android:layout_width="match_parent"
                 android:layout_height="350px"
-                android:background="@color/theme_color_default">
+                android:background="@drawable/top_background">
 
                 <com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView
                     android:id="@+id/iv_my_user_photo"

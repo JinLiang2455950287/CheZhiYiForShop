@@ -54,14 +54,9 @@ public class JieSuanAreaAdapter extends CommonAdapter<WorkOrderInfo> {
         TextView tvTakeOrder = holder.getView(R.id.tv_take_order);//结算
         tvUserName.setText(item.getUser() == null ? "" : item.getUser().getNickName() == null ? "" : item.getUser().getNickName());
         TextView tvAwaitTimeOrMoney = holder.getView(R.id.tv_await_time_or_money);//等候时长或结算金额
-   /*if(type==CLEARING)*/ //结算中
-        String price = "总计：¥" + item.getTotalAmount();
-        SpannableString spStr = new SpannableString(price);
-        spStr.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.text_orange))
-                , 3, spStr.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-        spStr.setSpan(new RelativeSizeSpan(1.2f), 4, spStr.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-        tvAwaitTimeOrMoney.setText(spStr);
-
+        TextView tvTotalMoney = holder.getView(R.id.tv_await_total_money);//应付结算金额
+        tvAwaitTimeOrMoney.setText("总计：¥" + item.getTotalAmount());
+        tvTotalMoney.setText("应付金额：¥" + item.getTotalAmount());
         tvTakeOrder.setVisibility(View.VISIBLE);
 
         tvTakeOrder.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +80,7 @@ public class JieSuanAreaAdapter extends CommonAdapter<WorkOrderInfo> {
             TextView view = new TextView(mContext);
             view.setText(item.getProjectName());
             view.setTextColor(Color.WHITE);
-            view.setTextSize(TypedValue.COMPLEX_UNIT_PX, 25);
+            view.setTextSize(TypedValue.COMPLEX_UNIT_PX, 30);
             view.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.shape_text_station_label));
             AutoUtils.auto(view);
             labelFlowLayout.addView(view, lp);

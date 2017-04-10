@@ -63,7 +63,7 @@ public class QualityFragment extends RefreshBaseFragment {
     private void initView() {
         initRefreshLayout();
         lvStation = getView(R.id.list);
-        mAdapter = new WaitAreaAdapter(mContext, R.layout.list_item_await_car_new, workOrderInfoList);
+        mAdapter = new WaitAreaAdapter(mContext, R.layout.list_item_await_quality, workOrderInfoList);
         lvStation.setAdapter(mAdapter);
         lvStation.setOnItemClickListener(new NoDoubleItemClicksListener() {
             @Override

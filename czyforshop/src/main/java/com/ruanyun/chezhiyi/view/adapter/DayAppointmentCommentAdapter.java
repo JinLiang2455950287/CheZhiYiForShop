@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.text.Html;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -11,6 +12,9 @@ import com.google.gson.reflect.TypeToken;
 import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.model.AppointmentInfo;
 import com.ruanyun.chezhiyi.commonlib.model.ProjectType;
+import com.ruanyun.chezhiyi.commonlib.util.FileUtil;
+import com.ruanyun.chezhiyi.commonlib.util.ImageUtil;
+import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.util.StringUtil;
 import com.ruanyun.chezhiyi.commonlib.view.widget.FlowLayout;
 import com.zhy.adapter.abslistview.CommonAdapter;
@@ -49,6 +53,10 @@ public class DayAppointmentCommentAdapter extends CommonAdapter<AppointmentInfo>
             //到店字体为灰色
             viewHolder.setText(R.id.tv_time, StringUtil.getTimeFromDate(item.getPredictShopTime() + "到店"));
         }
+
+        ImageView im_photo = viewHolder.getView(R.id.head_picCir);
+        ImageUtil.loadImage(mContext, FileUtil.getFileUrl(item.getUser().getUserPhoto()), im_photo, R.drawable.default_imge_middle);
+        LogX.e("已到店", FileUtil.getFileUrl(item.getUser().getUserPhoto()));
 
         //用户UserNum
         viewHolder.setText(R.id.tv_user_name, item.getUser() == null ? "" : item.getUser().getNickName());

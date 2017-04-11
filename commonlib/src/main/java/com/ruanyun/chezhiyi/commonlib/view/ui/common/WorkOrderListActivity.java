@@ -28,13 +28,13 @@ public class WorkOrderListActivity extends AutoLayoutActivity implements Topbar.
 
     Topbar topbar;
     TabLayout tabTitleLayout;
-    /*Lazy*/ViewPager contentPanle;
+    /*Lazy*/ ViewPager contentPanle;
     private ArrayList<Tab> tabTitles;
     private ArrayList<Fragment> tabs = new ArrayList<>();
-    String[] clientTabName = {"全部","等候中","进行中","待结算","已完成"};
-    String[] clientTabType = {"2,3,4,5,6,7,8,9","3","4,5,6,7","8","9"};
-    String[] shopTabName = {"全部","待服务","服务中","结算中","已完成"};
-    String[] shopTabType = {"4,5,6,7,8,9","3,4,7","5"/*,6,7*/,"8","9"};
+    String[] clientTabName = {"全部", "等候中", "进行中", "待结算", "已完成"};
+    String[] clientTabType = {"2,3,4,5,6,7,8,9", "3", "4,5,6,7", "8", "9"};
+    String[] shopTabName = {"全部", "待服务", "服务中", "结算中", "已完成"};
+    String[] shopTabType = {"4,5,6,7,8,9", "3,4,7", "5"/*,6,7*/, "8", "9"};
 
 
     @Override
@@ -92,11 +92,12 @@ public class WorkOrderListActivity extends AutoLayoutActivity implements Topbar.
 
     /**
      * 设置名称  和对应 type
+     *
      * @param tabName
      * @param tabType
      */
     private void setTabTitles(String[] tabName, String[] tabType) {
-        for (int i = 0; i< tabName.length; i++) {
+        for (int i = 0; i < tabName.length; i++) {
             tabTitles.add(new Tab(tabName[i], tabType[i]));
         }
     }
@@ -105,7 +106,7 @@ public class WorkOrderListActivity extends AutoLayoutActivity implements Topbar.
         topbar = getView(R.id.topbar);
         tabTitleLayout = getView(R.id.tab_title);
         contentPanle = getView(R.id.content_panle);
-        topbar.setTttleText(client?"我的工单":"服务工单")
+        topbar.setTttleText(client ? "我的工单" : "服务工单")
                 .setBackBtnEnable(true)
                 .onBackBtnClick()
                 .setTopbarClickListener(this);
@@ -122,9 +123,10 @@ public class WorkOrderListActivity extends AutoLayoutActivity implements Topbar.
 
     /**
      * 选中viewpage Item 项
+     *
      * @param item
      */
-    public void  setSelecteViewPage(int item){
+    public void setSelecteViewPage(int item) {
         contentPanle.setCurrentItem(item);
     }
 
@@ -139,7 +141,7 @@ public class WorkOrderListActivity extends AutoLayoutActivity implements Topbar.
      * 工单结算完成
      */
     @Subscribe
-    public void upViewToFinish(Event<String> event){
+    public void upViewToFinish(Event<String> event) {
         if (event.key.equals(C.EventKey.WORK_ORDER_LIST_FINISH)) {
             setSelecteViewPage(4);// 最后一个
         }

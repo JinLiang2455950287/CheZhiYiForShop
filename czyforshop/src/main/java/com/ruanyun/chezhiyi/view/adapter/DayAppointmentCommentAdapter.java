@@ -16,6 +16,7 @@ import com.ruanyun.chezhiyi.commonlib.util.FileUtil;
 import com.ruanyun.chezhiyi.commonlib.util.ImageUtil;
 import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.util.StringUtil;
+import com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView;
 import com.ruanyun.chezhiyi.commonlib.view.widget.FlowLayout;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;

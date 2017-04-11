@@ -31,7 +31,7 @@ import retrofit2.Call;
  * 已到店
  * Created by msq on 2016/9/26.
  */
-public class DayAppointmentGoFragment extends RefreshBaseFragment{
+public class DayAppointmentGoFragment extends RefreshBaseFragment {
 
     BookingListParams params = new BookingListParams();
     DayAppointmentCommentAdapter adapter;
@@ -60,16 +60,16 @@ public class DayAppointmentGoFragment extends RefreshBaseFragment{
         linearLayoutAppointmentCount.setVisibility(View.GONE);
         initRefreshLayout();
         refreshWithLoading();
-        adapter = new DayAppointmentCommentAdapter(mContext,R.layout.list_item_day_appointment,new ArrayList<AppointmentInfo>(),DayAppointmentCommentAdapter.STATUS_RECEPTED);
-        Drawable drawable=new ColorDrawable(getResources().getColor(R.color.color_gray_line));
-        list.setDivider(drawable);
-        list.setDividerHeight(1);
+        adapter = new DayAppointmentCommentAdapter(mContext, R.layout.list_item_day_appointment, new ArrayList<AppointmentInfo>(), DayAppointmentCommentAdapter.STATUS_RECEPTED);
+//        Drawable drawable=new ColorDrawable(getResources().getColor(R.color.color_gray_line));
+//        list.setDivider(drawable);
+//        list.setDividerHeight(1);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 AppointmentInfo appointmentInfo = adapter.getItem(i);
-                Intent intent = new Intent(mContext,BookingDetailsRecrptionActivity.class);
+                Intent intent = new Intent(mContext, BookingDetailsRecrptionActivity.class);
                 intent.putExtra(C.IntentKey.BOOKING_MAKENUM, appointmentInfo.getMakeNum());
                 showActivity(intent);
             }
@@ -80,7 +80,7 @@ public class DayAppointmentGoFragment extends RefreshBaseFragment{
     public Call loadData() {
         params.setPageNum(currentPage);
         params.setMakeStatusString("4");//已接待
-        return app.getApiService().getBookingList(app.getCurrentUserNum(),params);
+        return app.getApiService().getBookingList(app.getCurrentUserNum(), params);
     }
 
     @Override

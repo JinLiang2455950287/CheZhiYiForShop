@@ -25,13 +25,13 @@ import java.util.List;
  * 当天预约adapter
  */
 public class DayAppointmentCommentAdapter extends CommonAdapter<AppointmentInfo> {
-    public static final String STATUS_RECEPTED="recepted";
-    public static final String STATUS_UNFINISH="unfinish";
+    public static final String STATUS_RECEPTED = "recepted";
+    public static final String STATUS_UNFINISH = "unfinish";
     String status;
     List<AppointmentInfo> data;
     List<ProjectType> serverList = new ArrayList<>();
 
-    public DayAppointmentCommentAdapter(Context context, int layoutId, List<AppointmentInfo> datas , String statu) {
+    public DayAppointmentCommentAdapter(Context context, int layoutId, List<AppointmentInfo> datas, String statu) {
         super(context, layoutId, datas);
         this.data = datas;
         this.status = statu;
@@ -42,56 +42,57 @@ public class DayAppointmentCommentAdapter extends CommonAdapter<AppointmentInfo>
     protected void convert(ViewHolder viewHolder, AppointmentInfo item, int position) {
         AutoUtils.auto(viewHolder.getConvertView());
         //未到店
-        if(STATUS_UNFINISH.equals(status)){
+        if (STATUS_UNFINISH.equals(status)) {
             //预计到店字体为灰色
-            viewHolder.setText(R.id.tv_time,mContext.getString(R.string.arrive_time, StringUtil.getTimeFromDate(item.getPredictShopTime())));
-        } else if(STATUS_RECEPTED.equals(status)){ //已接待
+            viewHolder.setText(R.id.tv_time, mContext.getString(R.string.arrive_time, StringUtil.getTimeFromDate(item.getPredictShopTime())));
+        } else if (STATUS_RECEPTED.equals(status)) { //已接待
             //到店字体为灰色
-            viewHolder.setText(R.id.tv_time, StringUtil.getTimeFromDate(item.getPredictShopTime()+"到店"));
+            viewHolder.setText(R.id.tv_time, StringUtil.getTimeFromDate(item.getPredictShopTime() + "到店"));
         }
 
         //用户UserNum
-        viewHolder.setText(R.id.tv_user_name,item.getUser()==null?"":item.getUser().getNickName());
+        viewHolder.setText(R.id.tv_user_name, item.getUser() == null ? "" : item.getUser().getNickName());
 
         //服务标签流
         FlowLayout labelFlowLayout = viewHolder.getView(R.id.labelflow_appointment_item);
-        getLableFromeProjectJson(item.getProjectNum(),labelFlowLayout);
+        getLableFromeProjectJson(item.getProjectNum(), labelFlowLayout);
 
     }
+
     ViewGroup.MarginLayoutParams lp;
+
     @SuppressWarnings("ResourceType")
-    private void initLayoutParams(){
+    private void initLayoutParams() {
         lp = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         lp.leftMargin = 5;
-        lp.rightMargin = 15;
-        lp.topMargin = 5;
-        lp.bottomMargin = 5;
+        lp.rightMargin = 5;
+        lp.topMargin = 1;
+        lp.bottomMargin = 1;
     }
 
     //解析服务项目json
-    public void  getLableFromeProjectJson(String jsonString,FlowLayout lableFlowLayout){
+    public void getLableFromeProjectJson(String jsonString, FlowLayout lableFlowLayout) {
         serverList.clear();
-        List<ProjectType> projectTypes = new Gson().fromJson(jsonString, new TypeToken<List<ProjectType>>() {}.getType());
+        List<ProjectType> projectTypes = new Gson().fromJson(jsonString, new TypeToken<List<ProjectType>>() {
+        }.getType());
         lableFlowLayout.removeAllViews();
-        for(int i=0,size=projectTypes.size();i<size;i++){
+        for (int i = 0, size = projectTypes.size(); i < size; i++) {
             TextView view = new TextView(mContext);
             view.setText(projectTypes.get(i).getProjectName());
-            view.setTextColor(Color.WHITE);
+            view.setTextColor(Color.rgb(255, 151, 114));
             view.setTextSize(12);
-            view.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.shape_text_station_label));
-            lableFlowLayout.addView(view,lp);
-
+            view.setBackgroundResource(R.drawable.shape_text_station_label_new);
+            lableFlowLayout.addView(view, lp);
         }
-
     }
 
 
-    public void setData(List<AppointmentInfo> appointmentInfo){
+    public void setData(List<AppointmentInfo> appointmentInfo) {
         this.mDatas = appointmentInfo;
         notifyDataSetChanged();
     }
 
-    public void addData(List<AppointmentInfo> appointmentInfo){
+    public void addData(List<AppointmentInfo> appointmentInfo) {
         this.mDatas.addAll(appointmentInfo);
         notifyDataSetChanged();
     }

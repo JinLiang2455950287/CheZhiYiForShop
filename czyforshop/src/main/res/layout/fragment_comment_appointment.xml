@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/linearlayout_bg_gray"
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/linearLayout_appointment_count"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
+        android:layout_height="105px"
         android:background="@color/bg_orange_shallow"
-        android:layout_height="105px">
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tv_appointment_count"
@@ -17,12 +18,34 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="30px"
-            android:textSize="@dimen/text_size_middle"
+            android:text=""
             android:textColor="@color/white"
-            android:text=""/>
+            android:textSize="@dimen/text_size_middle" />
 
     </LinearLayout>
 
-    <include layout="@layout/layout_refresh_list_base" />
+    <cn.bingoogolapple.refreshlayout.BGARefreshLayout
+        android:id="@+id/refreshlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:divider="@null"
+            android:dividerHeight="10dp"
+            android:scrollbarStyle="outsideOverlay" />
+    </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
+
+    <com.ruanyun.chezhiyi.commonlib.view.widget.RYEmptyView
+        android:id="@+id/emptyview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:visibility="gone" />
 
 </LinearLayout>

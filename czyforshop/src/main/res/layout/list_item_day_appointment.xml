@@ -1,61 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="240px"
-    android:orientation="vertical">
+    android:layout_height="80dp"
+    android:background="@color/white">
 
-    <!--当天预约未到店item-->
+    <View
+        style="@style/divider_horizontal"
+        android:layout_alignParentTop="true" />
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="120px"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="45px"
-            android:layout_height="45px"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="30px"
-            android:src="@drawable/icon_usernum_hp" />
-
-        <TextView
-            android:id="@+id/tv_user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="30px"
-            android:text="皖A88888"
-            android:textColor="@color/text_black"
-            android:textSize="14sp" />
+    <ImageView
+        android:id="@+id/im_back"
+        android:layout_width="10dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:src="@color/theme_color_default" />
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="right"
-            android:orientation="horizontal">
+    <ImageView
+        android:id="@+id/head_picCir"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/im_back"
+        android:background="@drawable/default_imge_middle"
+        android:scaleType="center" />
 
-            <TextView
-                android:id="@+id/tv_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="30px"
-                android:text="预计10:00到达"
-                android:textColor="@color/theme_color_default"
-                android:textSize="12sp" />
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/head_picCir"
+        android:background="@color/color_gray_line" />
 
-        </LinearLayout>
-    </LinearLayout>
-
+    <TextView
+        android:id="@+id/tv_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/view_line"
+        android:drawableLeft="@drawable/icon_usernum_black"
+        android:text="name"
+        android:textColor="@color/text_black"
+        android:textSize="14sp" />
 
     <com.ruanyun.chezhiyi.commonlib.view.widget.FlowLayout
         android:id="@+id/labelflow_appointment_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30px" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/tv_user_name" />
+
+    <!--<ImageView-->
+    <!--android:id="@+id/imageView"-->
+    <!--android:layout_width="45px"-->
+    <!--android:layout_height="45px"-->
+    <!--android:layout_gravity="center_vertical"-->
+    <!--android:layout_marginLeft="30px"-->
+    <!--android:src="@drawable/icon_usernum_hp" />-->
 
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/view_line"
+        android:text="预计10:00到达"
+        android:textColor="@color/theme_color_default"
+        android:textSize="12sp" />
+
+
+    <TextView
+        android:id="@+id/tv_take_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20px"
+        android:background="@drawable/gray_arrow_right"
+        android:gravity="center"
+        android:textColor="@color/text_comment_gray"
+        android:textSize="@dimen/text_size_small" />
+
+    <View
+        style="@style/divider_horizontal"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

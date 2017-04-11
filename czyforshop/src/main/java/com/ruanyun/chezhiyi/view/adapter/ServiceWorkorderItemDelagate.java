@@ -38,8 +38,7 @@ public class ServiceWorkorderItemDelagate implements ItemViewDelegate<HomeIconIn
     @Override
     public void convert(ViewHolder holder, HomeIconInfo homeIconInfo, int position) {
         AutoUtils.auto(holder.getConvertView());
-        ImageUtil.loadImage(context, FileUtil.getImageUrl(homeIconInfo.getAndroidPic()), (ImageView) holder.getView(R.id.iv_my_workorder_photo));
-//        Glide.with(context).load(FileUtil.getImageUrl(homeIconInfo.getAndroidPic())).into((ImageView) holder.getView(R.id.iv_my_workorder_photo));
+//        ImageUtil.loadImage(context, FileUtil.getImageUrl(homeIconInfo.getAndroidPic()), (ImageView) holder.getView(R.id.iv_my_workorder_photo));
         holder.setText(R.id.tv_my_service_workorder, homeIconInfo.getHomeIconName());
     }
 }

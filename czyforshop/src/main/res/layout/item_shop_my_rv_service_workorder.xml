@@ -1,28 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  android:layout_width="match_parent"
-			  android:layout_height="174px"
-			  android:gravity="center_horizontal"
-			  android:paddingLeft="70px"
-			  android:background="@drawable/item_selector_default"
-			  android:orientation="horizontal">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="@drawable/item_selector_default"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal">
 
-	<ImageView
-		android:id="@+id/iv_my_workorder_photo"
-		android:layout_width="74px"
-		android:layout_height="74px"
-		android:layout_gravity="center"
-		android:src="@drawable/my_list_workorder"/>
+    <View
+        style="@style/divider_horizontal"
+        android:layout_alignParentTop="true" />
 
-	<TextView
-		android:id="@+id/tv_my_service_workorder"
-		android:paddingLeft="25px"
-		android:gravity="center_vertical"
-		android:textSize="@dimen/text_size_middle"
-		android:textColor="@color/text_black"
-		android:drawableRight="@drawable/icon_go"
-		android:paddingRight="25px"
-		android:layout_width="match_parent"
-		android:text="服务工单"
-		android:layout_height="174px"/>
-</LinearLayout>
+    <!--<ImageView-->
+    <!--android:id="@+id/iv_my_workorder_photo"-->
+    <!--android:layout_width="74px"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_gravity="center_vertical"-->
+    <!--android:src="@drawable/my_list_workorder" />-->
+    <ImageView
+        android:id="@+id/iv_my_workorder_photo"
+        android:layout_width="10dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:src="@color/theme_color_default" />
+
+    <TextView
+        android:id="@+id/tv_my_service_workorder"
+        android:layout_width="match_parent"
+        android:layout_height="174px"
+        android:layout_toRightOf="@+id/iv_my_workorder_photo"
+        android:drawableRight="@drawable/icon_go"
+        android:gravity="center_vertical"
+        android:paddingLeft="25px"
+        android:paddingRight="25px"
+        android:text="服务工单"
+        android:textColor="@color/theme_color_default"
+        android:textSize="@dimen/text_size_middle" />
+</RelativeLayout>

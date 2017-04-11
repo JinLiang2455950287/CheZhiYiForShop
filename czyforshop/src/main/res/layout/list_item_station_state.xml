@@ -1,105 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.autolayout.AutoLinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-			  android:layout_width="match_parent"
-			  android:layout_height="wrap_content"
-			  android:background="@color/white"
-			  android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
 
-	<RelativeLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:paddingLeft="25px"
-		android:paddingTop="30px"
-		android:paddingRight="25px" >
+    <View
+        style="@style/divider_horizontal"
+        android:layout_alignParentTop="true" />
 
-		<!--android:textSize="@dimen/text_size_middle"-->
-		<TextView
-			android:id="@+id/tv_station_name"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="1号维修工位"
-			android:textColor="@color/text_black"
-			android:textSize="50px"
-			android:drawablePadding="30px"
-			android:drawableLeft="@drawable/check_station_busy"
-			android:gravity="center_vertical"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tv_station_state"
+        android:paddingTop="10px">
 
-		<!--android:textSize="@dimen/text_size_xsmall"-->
-		<TextView
-			android:id="@+id/tv_leisure_state"
-			android:layout_width="match_parent"
-			android:layout_marginTop="140px"
-			android:paddingBottom="80px"
-			android:paddingLeft="120px"
-			android:visibility="gone"
-			android:textSize="46px"
-			android:textColor="@color/text_booking_gray"
-			android:layout_height="wrap_content"
-			android:text="该工位空闲中..."/>
+        <!--android:textSize="@dimen/text_size_middle"-->
+        <TextView
+            android:id="@+id/tv_station_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:drawableLeft="@drawable/icon_gongdan_repair"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:text="1号维修工位"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_size_middle" />
 
-		<!--android:textSize="@dimen/text_size_xsmall"-->
-		<TextView
-			android:id="@+id/tv_station_state"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="施工中"
-			android:paddingTop="6px"
-			android:textSize="46px"
-			android:textColor="@color/bg_oragle"
-			android:layout_alignParentRight="true"/>
+        <TextView
+            android:id="@+id/tv_service_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_station_name"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="25px"
+            android:gravity="center_vertical"
+            android:text="【检修】"
+            android:textColor="@color/text_booking_gray"
+            android:textSize="@dimen/text_size_middle" />
 
-		<!--android:textSize="@dimen/text_size_xsmall"-->
-		<TextView
-			android:id="@+id/tv_service_item"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="【检修】"
-			android:layout_marginTop="25px"
-			android:layout_marginLeft="100px"
-			android:gravity="center_vertical"
-			android:textSize="48px"
-			android:textColor="@color/text_booking_gray"
-			android:layout_below="@+id/tv_station_name"/>
+        <!--android:textSize="@dimen/text_size_small"-->
+        <TextView
+            android:id="@+id/tv_car_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_station_name"
+            android:layout_marginTop="25px"
+            android:layout_toRightOf="@+id/tv_service_item"
+            android:background="@drawable/gongdan_carnumber_selector"
+            android:gravity="center_vertical"
+            android:paddingBottom="6px"
+            android:layout_marginLeft="5dp"
+            android:paddingTop="6px"
+            android:text="皖A66666"
+            android:textColor="@color/bg_tangerine"
+            android:textSize="@dimen/text_size_xsmall" />
 
-		<!--android:textSize="@dimen/text_size_small"-->
-		<TextView
-			android:id="@+id/tv_car_number"
-			android:text="皖A66666"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="25px"
-			android:paddingTop="6px"
-			android:paddingBottom="6px"
-			android:gravity="center_vertical"
-			android:textSize="40px"
-			android:textColor="@color/theme_color_default"
-			android:layout_below="@+id/tv_station_name"
-			android:background="@drawable/station_car_number_shap_selector"
-			android:layout_toRightOf="@+id/tv_service_item"/>
+        <!--android:textSize="@dimen/text_size_xsmall"-->
+        <TextView
+            android:id="@+id/text_technician"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_car_number"
+            android:layout_marginLeft="100px"
+            android:layout_marginTop="25px"
+            android:layout_toRightOf="@+id/tv_car_number"
+            android:gravity="center_vertical"
+            android:text="【技师】"
+            android:textColor="@color/text_booking_gray"
+            android:textSize="@dimen/text_size_middle" />
 
-		<!--android:textSize="@dimen/text_size_xsmall"-->
-		<TextView
-			android:id="@+id/text_technician"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="【技师】"
-			android:layout_marginTop="25px"
-			android:layout_marginLeft="100px"
-			android:gravity="center_vertical"
-			android:textColor="@color/text_booking_gray"
-			android:textSize="48px"
-			android:layout_below="@+id/tv_service_item"/>
+        <com.ruanyun.chezhiyi.commonlib.view.widget.LabelFlowLayout
+            android:id="@+id/labelflow_technician"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/text_technician"
+            android:layout_marginLeft="5dp"
+            android:layout_toEndOf="@+id/text_technician"
+            android:layout_toRightOf="@+id/text_technician" />
 
-		<com.ruanyun.chezhiyi.commonlib.view.widget.LabelFlowLayout
-			android:id="@+id/labelflow_technician"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_alignTop="@+id/text_technician"
-			android:layout_toRightOf="@+id/text_technician"
-			android:layout_toEndOf="@+id/text_technician"/>
-	</RelativeLayout>
+        <TextView
+            android:id="@+id/tv_leisure_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_car_number"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="25px"
+            android:gravity="center_vertical"
+            android:text="该工位空闲中..."
+            android:textColor="@color/text_booking_gray"
+            android:textSize="@dimen/text_size_middle" />
+    </RelativeLayout>
 
-	<View android:layout_marginTop="25px" style="@style/divider_horizontal"/>
+    <View
+        style="@style/divider_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="25px" />
 
-</com.zhy.autolayout.AutoLinearLayout>
+    <TextView
+        android:id="@+id/tv_station_state"
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:background="#f8c044"
+        android:drawableTop="@drawable/icon_gongwei_work"
+        android:gravity="center"
+        android:paddingTop="6px"
+        android:text="施\n工\n中"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_middle" />
+
+</RelativeLayout>

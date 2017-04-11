@@ -9,7 +9,6 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.TextView;
@@ -18,7 +17,6 @@ import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.model.WorkOrderInfo;
 import com.ruanyun.chezhiyi.commonlib.util.AppUtility;
 import com.ruanyun.chezhiyi.commonlib.view.widget.LabelFlowLayout;
-import com.ruanyun.chezhiyi.view.ui.home.WorkOrderFragment;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
 import com.zhy.autolayout.utils.AutoUtils;
@@ -26,16 +24,16 @@ import com.zhy.autolayout.utils.AutoUtils;
 import java.util.List;
 
 /**
- * Description ：等候区/质检区
+ * Description ：质检区
  * <p/>
  * Created by hdl on 2017/4/10
  */
 
-public class WaitAreaAdapter extends CommonAdapter<WorkOrderInfo> {
+public class QualityAreaAdapter extends CommonAdapter<WorkOrderInfo> {
 
     //    LabelFlowLayout labelFlowLayout;
 
-    public WaitAreaAdapter(Context context, int layoutId, List<WorkOrderInfo> datas) {
+    public QualityAreaAdapter(Context context, int layoutId, List<WorkOrderInfo> datas) {
         super(context, layoutId, datas);
     }
 
@@ -55,25 +53,29 @@ public class WaitAreaAdapter extends CommonAdapter<WorkOrderInfo> {
         TextView tvUserName = holder.getView(R.id.tv_user_name);//用户名
         TextView tvTakeOrder = holder.getView(R.id.tv_take_order);//结算
         tvUserName.setText(item.getUser() == null ? "" : item.getUser().getNickName() == null ? "" : item.getUser().getNickName());
-        TextView tvAwaitTimeOrMoney = holder.getView(R.id.tv_await_time_or_money);//等候时长或结算金额
-//        if (type.equals(WorkOrderFragment.TAB_TYPE_WAIT_AREA)) {//等候区
-        String awaitTime = "已等候：" + awaitTime(item.getCreateTime()) + "H";
-//            String awaitTime = "已等候："+awaitTime("2016-10-09 14:00:00")+"H";
-        SpannableString spStr = new SpannableString(awaitTime);
-        spStr.setSpan(new RelativeSizeSpan(1.3f), 4, awaitTime.length() - 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-        spStr.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.theme_color_default))
-                , 4, awaitTime.length() - 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        TextView tvAwaitTimeOrMoney = holder.getView(R.id.tv_await_time_or_money);//结算金额
+        String price = "总计：¥" + item.getTotalAmount();
+        SpannableString spStr = new SpannableString(price);
+        spStr.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.text_comment_gray))
+                , 3, spStr.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        spStr.setSpan(new RelativeSizeSpan(1.2f), 4, spStr.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         tvAwaitTimeOrMoney.setText(spStr);
+        tvTakeOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OnTakeOrderClickListener.onTakeOrderClick(item, position);
+            }
+        });
 
         //标签控件
         LabelFlowLayout labelFlowLayout = holder.getView(R.id.labelflow_service_item);
         labelFlowLayout.removeAllViews();
-        ViewGroup.LayoutParams source = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        ViewGroup.MarginLayoutParams lp = new ViewGroup.MarginLayoutParams(source);
+        LayoutParams source = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        MarginLayoutParams lp = new MarginLayoutParams(source);
         lp.leftMargin = 5;
         lp.rightMargin = 5;
         lp.topMargin = 1;
-        lp.bottomMargin =1;
+        lp.bottomMargin = 1;
         for (int i = 0; i < 1; i++) {
             TextView view = new TextView(mContext);
             view.setText(item.getUser() == null ? "" : item.getUser().getNickName());

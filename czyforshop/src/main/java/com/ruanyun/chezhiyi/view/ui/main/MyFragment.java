@@ -99,6 +99,8 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
     TextView tvPushMoney;
     @BindView(R.id.tv_sales_commissions)
     TextView tvSalesCommissions;
+    @BindView(R.id.tv_my_user_nickname)
+    TextView nickname;
     @BindView(R.id.tv_user_number)
     TextView tvUserNumber;
     @BindView(R.id.refreshlayout)
@@ -257,8 +259,13 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
         }
 
         LogX.e("测试啦，", allLabels.toString());
-        tv_my_type.setText(allLabels.get(0).toString());
-        flowView.setText(allLabels.get(1).toString());
+        if (allLabels.size() > 0) {
+            tv_my_type.setText(allLabels.get(0).toString());
+        }
+        if (allLabels.size() > 1) {
+            flowView.setText(allLabels.get(1).toString());
+        }
+        nickname.setText(app.getUser().getPersonalNote());
     }
 
     @Override

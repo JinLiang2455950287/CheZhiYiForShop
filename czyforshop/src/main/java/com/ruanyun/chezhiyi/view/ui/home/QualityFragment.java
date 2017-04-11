@@ -20,6 +20,7 @@ import com.ruanyun.chezhiyi.commonlib.util.C;
 import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.util.NoDoubleItemClicksListener;
 import com.ruanyun.chezhiyi.commonlib.view.ui.common.WorkOrderDetailedActivity;
+import com.ruanyun.chezhiyi.view.adapter.QualityAreaAdapter;
 import com.ruanyun.chezhiyi.view.adapter.WaitAreaAdapter;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class QualityFragment extends RefreshBaseFragment {
     public static final String TAB_TYPE_QUALITY_CHECK = "6";//质检去
     public MyWorkOrderParams params = new MyWorkOrderParams();
     private ListView lvStation;
-    private WaitAreaAdapter mAdapter;//等候区或质检获取
+    private QualityAreaAdapter mAdapter;//等候区或质检获取
     private List<WorkOrderInfo> workOrderInfoList = new ArrayList<>();
 
     public static QualityFragment newInstance() {
@@ -63,7 +64,7 @@ public class QualityFragment extends RefreshBaseFragment {
     private void initView() {
         initRefreshLayout();
         lvStation = getView(R.id.list);
-        mAdapter = new WaitAreaAdapter(mContext, R.layout.list_item_await_quality, workOrderInfoList);
+        mAdapter = new QualityAreaAdapter(mContext, R.layout.list_item_await_quality, workOrderInfoList);
         lvStation.setAdapter(mAdapter);
         lvStation.setOnItemClickListener(new NoDoubleItemClicksListener() {
             @Override

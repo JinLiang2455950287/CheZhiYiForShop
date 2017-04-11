@@ -60,20 +60,22 @@ public class StationStateAdapter extends CommonAdapter<WorkBayInfo> {
         TextView textTechnician = holder.getView(R.id.text_technician);
         TextView tvLeisureState = holder.getView(R.id.tv_leisure_state);//空闲时显示
         LabelFlowLayout labelFlowLayout = holder.getView(R.id.labelflow_technician);
-
+//        icon_gongdan_repair
 
         //        drawable = ContextCompat.getDrawable(mContext, R.drawable.check_station_busy);
         //        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-        tvStationName.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(mContext, R.drawable.check_station_busy), null, null, null);
+        tvStationName.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(mContext, R.drawable.icon_gongdan_repair), null, null, null);
         if (item.getWorkbayStatus() != WorkBayInfo.LEISURE) {//施工中
             tvServiceItem.setVisibility(View.VISIBLE);
             tvCarNumber.setVisibility(View.VISIBLE);
             textTechnician.setVisibility(View.VISIBLE);
             labelFlowLayout.setVisibility(View.VISIBLE);
             tvLeisureState.setVisibility(View.GONE);
-            tvStationState.setText("施工中");
-            tvStationState.setTextColor(Color.rgb(243, 151, 26));
-            if (item.getProjectNum() != null && !TextUtils.isEmpty(item.getProjectNum())) tvServiceItem.setText("【" + item.getProjectName() + "】");
+            tvStationState.setText("施\n工\n中");
+            tvStationState.setBackgroundColor(Color.rgb(248, 192, 68));
+            tvStationState.setCompoundDrawablesWithIntrinsicBounds(null, ContextCompat.getDrawable(mContext, R.drawable.icon_gongwei_work), null, null);
+            if (item.getProjectNum() != null && !TextUtils.isEmpty(item.getProjectNum()))
+                tvServiceItem.setText("【" + item.getProjectName() + "】");
             else tvServiceItem.setText("【其他】");
             if ("".equals(item.getServicePlateNumber())) {
                 tvCarNumber.setText("未上牌");
@@ -90,19 +92,18 @@ public class StationStateAdapter extends CommonAdapter<WorkBayInfo> {
             for (int i = 0; i < 1; i++) {
                 TextView view = new TextView(mContext);
                 view.setText(item.getUser() == null ? "" : item.getUser().getNickName());
-                view.setTextColor(Color.WHITE);
+                view.setTextColor(Color.rgb(255, 151, 114));
+//                view.setTextColor(Color.WHITE);
                 view.setTextSize(TypedValue.COMPLEX_UNIT_PX, 40);
-                view.setBackgroundResource(R.drawable.shape_text_station_label);
+                view.setBackgroundResource(R.drawable.shape_text_station_label_new);
                 view.setLayoutParams(lp);
                 AutoUtils.auto(view);
                 labelFlowLayout.addView(view);
             }
         } else {//空闲中
-            //            drawable = ContextCompat.getDrawable(mContext, R.drawable.check_station_free);
-            //            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-            tvStationName.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(mContext, R.drawable.check_station_free), null, null, null);
-            tvStationState.setText("空闲中");
-            tvStationState.setTextColor(Color.rgb(48, 178, 108));
+            tvStationState.setText("空\n闲\n中");
+            tvStationState.setCompoundDrawablesWithIntrinsicBounds(null, ContextCompat.getDrawable(mContext, R.drawable.icon_gongwei_free), null, null);
+            tvStationState.setBackgroundColor(Color.rgb(0, 204, 205));
             tvLeisureState.setVisibility(View.VISIBLE);
             tvServiceItem.setVisibility(View.GONE);
             tvCarNumber.setVisibility(View.GONE);

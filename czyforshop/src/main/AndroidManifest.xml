@@ -503,14 +503,15 @@
             android:name=".view.ui.home.MemberSearchActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".view.ui.home.HuiYuanDetailActivity" />
-        <!--卡套餐-->
+        <!-- 卡套餐 -->
         <activity
             android:name=".view.ui.home.CardPackageActivity"
             android:screenOrientation="portrait" />
-        <!--卡套餐详情-->
+        <!-- 卡套餐详情 -->
         <activity
             android:name=".view.ui.home.CardPackageDetailActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".view.ui.mendian.BusinessTotalActivity"></activity>
     </application>
 
 </manifest>

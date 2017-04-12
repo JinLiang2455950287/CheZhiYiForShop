@@ -12,6 +12,7 @@ import com.ruanyun.chezhiyi.commonlib.util.C;
 import com.ruanyun.chezhiyi.commonlib.util.FileUtil;
 import com.ruanyun.chezhiyi.commonlib.view.ui.common.WebViewActivity;
 import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
+import com.ruanyun.chezhiyi.view.ui.mendian.BusinessTotalActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,7 +55,9 @@ public class ShopCollectActivity extends AutoLayoutActivity implements Topbar.on
         int id = view.getId();
         switch (id) {
             case R.id.business_summary://营业汇总
-                toWebView(String.format(FileUtil.getFileUrl(C.ApiUrl.WEB_URL_JS_REPORT_YYE), app.getCurrentUserNum(), "1"), WebViewActivity.YYHZ);
+//                toWebView(String.format(FileUtil.getFileUrl(C.ApiUrl.WEB_URL_JS_REPORT_YYE), app.getCurrentUserNum(), "1"), WebViewActivity.YYHZ);
+                Intent intent2 = new Intent(mContext, BusinessTotalActivity.class);
+                showActivity(intent2);
                 break;
             case R.id.number_Stastic://会员统计
                 toWebView(String.format(FileUtil.getFileUrl(C.ApiUrl.WEB_URL_JS_REPORT_HY), app.getCurrentUserNum()), WebViewActivity.HYTJ);

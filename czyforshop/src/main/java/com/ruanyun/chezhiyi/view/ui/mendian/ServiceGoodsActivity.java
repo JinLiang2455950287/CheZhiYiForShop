@@ -1,5 +1,6 @@
 package com.ruanyun.chezhiyi.view.ui.mendian;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.View;
 
 import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.base.AutoLayoutActivity;
+import com.ruanyun.chezhiyi.commonlib.base.BaseActivity;
 import com.ruanyun.chezhiyi.commonlib.model.Tab;
 import com.ruanyun.chezhiyi.commonlib.util.C;
 import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
@@ -21,10 +23,9 @@ import butterknife.ButterKnife;
 /**
  * 2017/4/12
  * jin
- * 营业额汇总 当日/当月
+ * 服务商品统计 当日/当月
  */
-
-public class BusinessTotalActivity extends AutoLayoutActivity implements Topbar.onTopbarClickListener {
+public class ServiceGoodsActivity extends AutoLayoutActivity implements Topbar.onTopbarClickListener {
 
     @BindView(R.id.tab_title)
     TabLayout tabTitle;
@@ -40,14 +41,14 @@ public class BusinessTotalActivity extends AutoLayoutActivity implements Topbar.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_business_total);
+        setContentView(R.layout.activity_service_goods);
         ButterKnife.bind(this);
         initView();
         initTab();
     }
 
     private void initView() {
-        topbar.setTttleText("营业额统计")
+        topbar.setTttleText("服务商品统计")
                 .setBackBtnEnable(true)
                 .onBackBtnClick()
                 .setTopbarClickListener(this);
@@ -57,11 +58,11 @@ public class BusinessTotalActivity extends AutoLayoutActivity implements Topbar.
         setTabTitles(clientTabName, clientTabType);
         for (Tab info : tabTitles) {
             tabTitle.addTab(tabTitle.newTab().setText(info.getTabNum()));
-            BusinessToatalTDFragment businessToatalTDFragment = new BusinessToatalTDFragment();
+            ServiceGoodsFragment serviceGoodsFragment = new ServiceGoodsFragment();
             Bundle bundle = new Bundle();
             bundle.putString(C.IntentKey.WORK_ORDER_STATUS_STRING, info.getType());
-            businessToatalTDFragment.setArguments(bundle);
-            tabs.add(businessToatalTDFragment);
+            serviceGoodsFragment.setArguments(bundle);
+            tabs.add(serviceGoodsFragment);
         }
         contentPanle.setOffscreenPageLimit(2);
         contentPanle.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {

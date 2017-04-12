@@ -13,6 +13,9 @@ import com.ruanyun.chezhiyi.commonlib.util.FileUtil;
 import com.ruanyun.chezhiyi.commonlib.view.ui.common.WebViewActivity;
 import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
 import com.ruanyun.chezhiyi.view.ui.mendian.BusinessTotalActivity;
+import com.ruanyun.chezhiyi.view.ui.mendian.GongDanActivity;
+import com.ruanyun.chezhiyi.view.ui.mendian.MemberCountActivity;
+import com.ruanyun.chezhiyi.view.ui.mendian.ServiceGoodsActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,13 +63,19 @@ public class ShopCollectActivity extends AutoLayoutActivity implements Topbar.on
                 showActivity(intent2);
                 break;
             case R.id.number_Stastic://会员统计
-                toWebView(String.format(FileUtil.getFileUrl(C.ApiUrl.WEB_URL_JS_REPORT_HY), app.getCurrentUserNum()), WebViewActivity.HYTJ);
+//                toWebView(String.format(FileUtil.getFileUrl(C.ApiUrl.WEB_URL_JS_REPORT_HY), app.getCurrentUserNum()), WebViewActivity.HYTJ);
+                Intent intent3 = new Intent(mContext, MemberCountActivity.class);
+                showActivity(intent3);
                 break;
             case R.id.new_User://新增用户
-                toWebView(String.format(FileUtil.getFileUrl(C.ApiUrl.WEB_URL_JS_REPORT_XZKH), app.getCurrentUserNum()), WebViewActivity.XZYH);
+//                toWebView(String.format(FileUtil.getFileUrl(C.ApiUrl.WEB_URL_JS_REPORT_XZKH), app.getCurrentUserNum()), WebViewActivity.XZYH);
+                Intent intent5 = new Intent(mContext, GongDanActivity.class);
+                showActivity(intent5);
                 break;
             case R.id.sale_good://销售商品
-                toWebView(String.format(FileUtil.getFileUrl(C.ApiUrl.WEB_URL_JS_REPORT_XSSP), app.getCurrentUserNum()), WebViewActivity.XSSP);
+//                toWebView(String.format(FileUtil.getFileUrl(C.ApiUrl.WEB_URL_JS_REPORT_XSSP), app.getCurrentUserNum()), WebViewActivity.XSSP);
+                Intent intent4 = new Intent(mContext, ServiceGoodsActivity.class);
+                showActivity(intent4);
                 break;
         }
 

@@ -9,22 +9,22 @@ import android.view.View;
 
 import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.base.AutoLayoutActivity;
+import com.ruanyun.chezhiyi.commonlib.base.BaseActivity;
 import com.ruanyun.chezhiyi.commonlib.model.Tab;
 import com.ruanyun.chezhiyi.commonlib.util.C;
 import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 /**
  * 2017/4/12
  * jin
- * 营业额汇总 当日/当月
+ * 会员统计 当日/当月
  */
-
-public class BusinessTotalActivity extends AutoLayoutActivity implements Topbar.onTopbarClickListener {
+public class MemberCountActivity extends AutoLayoutActivity implements Topbar.onTopbarClickListener {
 
     @BindView(R.id.tab_title)
     TabLayout tabTitle;
@@ -40,7 +40,7 @@ public class BusinessTotalActivity extends AutoLayoutActivity implements Topbar.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_business_total);
+        setContentView(R.layout.activity_member_count);
         ButterKnife.bind(this);
         initView();
         initTab();
@@ -57,11 +57,11 @@ public class BusinessTotalActivity extends AutoLayoutActivity implements Topbar.
         setTabTitles(clientTabName, clientTabType);
         for (Tab info : tabTitles) {
             tabTitle.addTab(tabTitle.newTab().setText(info.getTabNum()));
-            BusinessToatalTDFragment businessToatalTDFragment = new BusinessToatalTDFragment();
+            MemberCountFragment memberCountFragment = new MemberCountFragment();
             Bundle bundle = new Bundle();
             bundle.putString(C.IntentKey.WORK_ORDER_STATUS_STRING, info.getType());
-            businessToatalTDFragment.setArguments(bundle);
-            tabs.add(businessToatalTDFragment);
+            memberCountFragment.setArguments(bundle);
+            tabs.add(memberCountFragment);
         }
         contentPanle.setOffscreenPageLimit(2);
         contentPanle.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {

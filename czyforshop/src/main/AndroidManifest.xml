@@ -511,7 +511,13 @@
         <activity
             android:name=".view.ui.home.CardPackageDetailActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".view.ui.mendian.BusinessTotalActivity"></activity>
+        <activity android:name=".view.ui.mendian.BusinessTotalActivity" />
+        <activity
+            android:name=".view.ui.mendian.MemberCountActivity"
+            android:label="@string/title_activity_member_count"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".view.ui.mendian.ServiceGoodsActivity" />
+        <activity android:name=".view.ui.mendian.GongDanActivity"></activity>
     </application>
 
 </manifest>

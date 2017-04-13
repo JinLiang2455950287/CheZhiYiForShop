@@ -62,7 +62,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="40px"
         android:layout_marginRight="20px"
-        android:layout_marginTop="5dp"
         android:background="@color/white"
         android:orientation="horizontal"
         android:paddingBottom="30px"

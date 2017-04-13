@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_white"
     android:orientation="vertical">
+
     <cn.bingoogolapple.refreshlayout.BGARefreshLayout
         android:id="@+id/refreshlayout"
         android:layout_width="match_parent"
@@ -15,8 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_marginLeft="20px"
-            android:layout_marginRight="20px"
             android:divider="@null"
             android:scrollbarStyle="outsideOverlay" />
     </cn.bingoogolapple.refreshlayout.BGARefreshLayout>

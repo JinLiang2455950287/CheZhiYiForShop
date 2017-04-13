@@ -517,7 +517,8 @@
             android:label="@string/title_activity_member_count"
             android:theme="@style/AppTheme" />
         <activity android:name=".view.ui.mendian.ServiceGoodsActivity" />
-        <activity android:name=".view.ui.mendian.GongDanActivity"></activity>
+        <activity android:name=".view.ui.mendian.GongDanActivity" />
+        <activity android:name=".view.ui.mendian.GongdanDetailActivity"></activity>
     </application>
 
 </manifest>

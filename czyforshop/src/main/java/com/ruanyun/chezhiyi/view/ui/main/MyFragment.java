@@ -46,7 +46,6 @@ import com.ruanyun.chezhiyi.commonlib.view.ui.common.SystemRemindActivity;
 import com.ruanyun.chezhiyi.commonlib.view.ui.common.WebViewActivity;
 import com.ruanyun.chezhiyi.commonlib.view.ui.common.WorkOrderListActivity;
 import com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView;
-import com.ruanyun.chezhiyi.commonlib.view.widget.FlowLayout;
 import com.ruanyun.chezhiyi.view.adapter.ShopMyGridItemDecoration;
 import com.ruanyun.chezhiyi.view.adapter.ShopMyRecyclerViewAdapter;
 import com.ruanyun.chezhiyi.view.ui.mine.DiscountCouponActivity;

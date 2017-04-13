@@ -50,17 +50,17 @@ public class MenDianGoodsListAdapter extends CommonAdapter<String> {
 //        holder.setText(R.id.tv_project, prjectBuffer.toString());
 //        holder.setText(R.id.tv_time, item.getPredictShopTime());
 //        holder.setText(R.id.tv_detail, item.getRemark());
-        TextView dealwith_btn = holder.getView(R.id.dealwith_btn);
+//        TextView dealwith_btn = holder.getView(R.id.dealwith_btn);
 
 
         //处理按钮的回掉
-        dealwith_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
+//        dealwith_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
 //                onProductBuyClickListener.onProductBuyItemClick(item);
-            }
-        });
+//            }
+//        });
     }
 
     public interface OnProductBuyClickListener {

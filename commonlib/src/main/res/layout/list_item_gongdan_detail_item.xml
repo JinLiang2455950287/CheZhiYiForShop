@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="85dp"
+    android:background="@color/white">
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="10dp"
+        android:background="@color/gray_border" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="10dp"
+        android:background="@color/gray_border" />
+
+    <View
+        android:id="@+id/view_theme"
+        android:layout_width="10dp"
+        android:layout_height="110dp"
+        android:background="@color/theme_color_default" />
+
+    <com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView
+        android:id="@+id/cir_picture"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/default_imge_middle" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/cir_picture"
+        android:layout_marginLeft="30dp"
+        android:gravity="center"
+        android:text="丰田"
+        android:textColor="@color/gray_border" />
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="0.8dp"
+        android:layout_height="110dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/cir_picture"
+        android:background="@color/gray_border" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/view_line"
+        android:text="皖 A123432"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_title"
+        android:layout_centerVertical="true"
+        android:text="美孚一号洗车美容保养"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_title"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:text="2017-03-10 09:32" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/tv_time"
+        android:text="36分钟" />
+
+
+</RelativeLayout>

@@ -74,7 +74,7 @@ public class ServiceGoodsFragment extends BaseFragment implements BGARefreshLayo
             listData.add("few");
 //        }
 
-        adapter = new MenDianGoodsListAdapter(mContext, R.layout.list_item_yuyue_product, listData);
+        adapter = new MenDianGoodsListAdapter(mContext, R.layout.list_item_gongdan_servicegoods, listData);
         lvProduct.setAdapter(adapter);
         lvProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

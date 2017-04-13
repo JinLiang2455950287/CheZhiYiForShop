@@ -30,13 +30,7 @@ public class BusinessToatalTDFragment extends BaseFragment implements SwipeRefre
         mContentView = inflater.inflate(R.layout.fragment_business_toatal_td, container, false);
         workOrderStatusString = getArguments().getString(C.IntentKey.WORK_ORDER_STATUS_STRING);
         Toast.makeText(mContext, workOrderStatusString, 2).show();
-        if (workOrderStatusString.equals("2")) {
-            tvBanka.setText(2 + "");
-        } else {
-            tvBanka.setText(3 + "");
-        }
         initRefreshView();
-
         initView();
         return mContentView;
     }

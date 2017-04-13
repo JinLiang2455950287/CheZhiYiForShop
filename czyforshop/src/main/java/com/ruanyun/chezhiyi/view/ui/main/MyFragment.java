@@ -2,7 +2,6 @@ package com.ruanyun.chezhiyi.view.ui.main;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -34,7 +33,6 @@ import com.ruanyun.chezhiyi.commonlib.util.AppUtility;
 import com.ruanyun.chezhiyi.commonlib.util.C;
 import com.ruanyun.chezhiyi.commonlib.util.DbHelper;
 import com.ruanyun.chezhiyi.commonlib.util.FileUtil;
-import com.ruanyun.chezhiyi.commonlib.util.ImageUtil;
 import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.util.StringUtil;
 import com.ruanyun.chezhiyi.commonlib.view.NoticeMvpView;
@@ -49,8 +47,11 @@ import com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView;
 import com.ruanyun.chezhiyi.view.adapter.ShopMyGridItemDecoration;
 import com.ruanyun.chezhiyi.view.adapter.ShopMyRecyclerViewAdapter;
 import com.ruanyun.chezhiyi.view.ui.mine.DiscountCouponActivity;
+import com.ruanyun.chezhiyi.view.ui.mine.GongDanShuActivity;
 import com.ruanyun.chezhiyi.view.ui.mine.InsteadOrderActivity;
 import com.ruanyun.chezhiyi.view.ui.mine.SettingActivity;
+import com.ruanyun.chezhiyi.view.ui.mine.ShiGongTiChengActivity;
+import com.ruanyun.chezhiyi.view.ui.mine.XiaoShouTiChengActivity;
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 
 import java.math.BigDecimal;
@@ -194,11 +195,14 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.tv_push_money) {  //施工提成
-            toWebCount(C.CountType.EXECUTION, mContext, WebViewActivity.SGTC/*"施工提成"*/);
+//            toWebCount(C.CountType.EXECUTION, mContext, WebViewActivity.SGTC/*"施工提成"*/);
+            showActivity(ShiGongTiChengActivity.class);
         } else if (id == R.id.tv_sales_commissions) {  //销售提成
-            toWebCount(C.CountType.MARKET, mContext, WebViewActivity.XSTC/*"销售提成"*/);
+//            toWebCount(C.CountType.MARKET, mContext, WebViewActivity.XSTC/*"销售提成"*/);
+            showActivity(XiaoShouTiChengActivity.class);
         } else if (id == R.id.tv_user_number) {  // 用户数
-            toWebCount(C.CountType.NUMBER, mContext, WebViewActivity.YHS/*"用户数"*/);
+//            toWebCount(C.CountType.NUMBER, mContext, WebViewActivity.YHS/*"用户数"*/);
+            showActivity(GongDanShuActivity.class);
         } else {
             onFunctionClick((String) view.getTag());
         }

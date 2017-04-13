@@ -17,6 +17,11 @@
         android:layout_height="wrap_content"
         android:paddingBottom="3dp">
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray_border" />
+
         <TextView
             android:id="@+id/tv_car_number"
             android:layout_width="wrap_content"
@@ -102,6 +107,11 @@
             android:textColor="@color/text_comment_gray"
             android:textSize="@dimen/text_size_xsmall" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/gray_border" />
     </RelativeLayout>
 
 

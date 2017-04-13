@@ -518,7 +518,10 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".view.ui.mendian.ServiceGoodsActivity" />
         <activity android:name=".view.ui.mendian.GongDanActivity" />
-        <activity android:name=".view.ui.mendian.GongdanDetailActivity"></activity>
+        <activity android:name=".view.ui.mendian.GongdanDetailActivity" />
+        <activity android:name=".view.ui.mine.GongDanShuActivity" />
+        <activity android:name=".view.ui.mine.ShiGongTiChengActivity" />
+        <activity android:name=".view.ui.mine.XiaoShouTiChengActivity"></activity>
     </application>
 
 </manifest>

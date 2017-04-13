@@ -1,7 +1,9 @@
 package com.ruanyun.chezhiyi.view.adapter;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.widget.TextView;
 
 import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.model.OrderGoodsInfo;
@@ -39,13 +41,19 @@ public class InsteadOrderParentDelagate implements ItemViewDelegate<OrderGoodsIn
     public void convert(ViewHolder holder, OrderGoodsInfo item, int position) {
         AutoUtils.auto(holder.getConvertView());
         holder.setText(R.id.tv_workorder_number, TextUtils.isEmpty(item.getWorkOrderNum()) ? "" :
-                "工单编号 : "+item.getWorkOrderNum());//工单编号
-        holder.setText(R.id.tv_service_state, getWorkorderState(item.getGoodsNum()));//当前item.getGoodsNum()为工单状态
+                "NO. " + item.getWorkOrderNum());//工单编号
+        TextView tvstatus = holder.getView(R.id.tv_service_state);
+        if (item.getGoodsNum().equals("7")) {
+            tvstatus.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context,R.drawable.daixiadan_service),null,null,null);
+        } else {
+            tvstatus.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context,R.drawable.daixiadan_finsh),null,null,null);
+        }
+        tvstatus.setText(getWorkorderState(item.getGoodsNum()));//当前item.getGoodsNum()为工单状态
     }
 
     private String getWorkorderState(String goodsNum) {
         String state = "";
-        switch (goodsNum){
+        switch (goodsNum) {
             case "-1":
                 state = "已取消";
                 break;
@@ -61,7 +69,7 @@ public class InsteadOrderParentDelagate implements ItemViewDelegate<OrderGoodsIn
             case "8":
             case "9":
                 state = "已结束";
-            break;
+                break;
         }
         return state;
     }

@@ -38,7 +38,7 @@ public class InsteadOrderDelagate implements ItemViewDelegate<OrderGoodsInfo> {
     public void convert(ViewHolder holder, OrderGoodsInfo item, int position) {
         AutoUtils.auto(holder.getConvertView());
         ImageUtil.loadImage(context, FileUtil.getImageUrl(item.getMainPhoto()), (ImageView) holder.getView(R.id.iv_photo), R.drawable.default_img);
-        holder.setText(R.id.tv_goods_name,item.getGoodsName());
+        holder.setText(R.id.tv_goods_name, item.getGoodsName());
         holder.setText(R.id.tv_money, String.format("¥%s", item.getSinglePrice()));
         holder.setText(R.id.tv_goods_number, String.format("x%s", item.getTotalCount()));
         holder.setText(R.id.tv_total_money, String.format("¥%s", item.getTotalPrice()));

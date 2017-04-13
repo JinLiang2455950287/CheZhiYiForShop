@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:orientation="horizontal">
+    android:background="@color/white">
 
     <ImageView
         android:id="@+id/iv_photo"
@@ -19,6 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="230px"
         android:layout_marginTop="27px"
+        android:layout_toRightOf="@+id/iv_photo"
         android:paddingRight="27px">
 
         <TextView
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:text="¥68"
-            android:textColor="@color/text_orange"
+            android:textColor="@color/black"
             android:textSize="@dimen/text_size_xmiddle" />
 
         <TextView
@@ -52,13 +52,29 @@
             android:textSize="@dimen/text_size_middle" />
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="3dp"
+            android:layout_toLeftOf="@+id/tv_total_money"
+            android:text="总计:"
+            android:textColor="@color/gray_border"
+            android:textSize="@dimen/text_size_middle" />
+
+        <TextView
             android:id="@+id/tv_total_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:text="¥68"
-            android:textColor="@color/text_orange"
+            android:textColor="@color/home_reback_brown"
             android:textSize="@dimen/text_size_xmiddle" />
     </RelativeLayout>
-</LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/gray_border" />
+</RelativeLayout>

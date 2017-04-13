@@ -37,10 +37,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/cir_picture"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="35dp"
         android:gravity="center"
         android:text="丰田"
-        android:textColor="@color/gray_border" />
+        android:textColor="@color/gray_border"
+        android:textSize="@dimen/text_size_small" />
 
     <View
         android:id="@+id/view_line"
@@ -60,7 +61,8 @@
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/view_line"
         android:text="皖 A123432"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_middle" />
 
     <TextView
         android:id="@+id/tv_product"
@@ -69,7 +71,8 @@
         android:layout_alignLeft="@+id/tv_title"
         android:layout_centerVertical="true"
         android:text="美孚一号洗车美容保养"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_middle" />
 
     <TextView
         android:id="@+id/tv_time"
@@ -78,12 +81,13 @@
         android:layout_alignLeft="@+id/tv_title"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="5dp"
+        android:drawableLeft="@drawable/gongdan_alarm2"
         android:text="2017-03-10 09:32" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:drawableLeft="@drawable/gongdan_alarm1"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"

@@ -60,7 +60,7 @@ public class InsteadOrderFragment extends RefreshBaseFragment implements LazyFra
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(refreshLayout!=null){
+        if (refreshLayout != null) {
             refreshLayout.endRefreshing();
         }
     }
@@ -90,7 +90,7 @@ public class InsteadOrderFragment extends RefreshBaseFragment implements LazyFra
                             goodsInfo.getGoodsName(),
                             goodsInfo.getProjectParent(),
                             goodsInfo.getMainPhoto(),
-                            goodsInfo.getViceTitle() );
+                            goodsInfo.getViceTitle());
                 }
             }
         });
@@ -128,6 +128,7 @@ public class InsteadOrderFragment extends RefreshBaseFragment implements LazyFra
 
     /**
      * 数据组装
+     *
      * @param result
      */
     private List<OrderGoodsInfo> getDatas(List<WorkOrderInfo> result) {
@@ -136,7 +137,7 @@ public class InsteadOrderFragment extends RefreshBaseFragment implements LazyFra
         for (WorkOrderInfo workOrderInfo : result) {
             Info = new OrderGoodsInfo();
             Info.setWorkOrderNum(workOrderInfo.getWorkOrderNum());
-            Info.setGoodsNum(workOrderInfo.getWorkOrderStatus()+"");
+            Info.setGoodsNum(workOrderInfo.getWorkOrderStatus() + "");
             Info.setParent(true);
             datas.add(Info);
             List<OrderGoodsInfo> workOrderGoodsList = workOrderInfo.getWorkOrderGoodsList();
@@ -150,7 +151,6 @@ public class InsteadOrderFragment extends RefreshBaseFragment implements LazyFra
         }
         return datas;
     }
-
 
 
 }

@@ -66,11 +66,11 @@
                 android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
                 android:layout_alignTop="@+id/service_project"
-                android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@+id/service_project"
+                android:layout_marginRight="5dp"
                 android:drawableLeft="@drawable/gongdan_alarm2"
-                android:drawablePadding="5dp"
+                android:drawablePadding="10dp"
                 android:text="2017-03-10 09:12" />
 
             <!--<TextView-->
@@ -90,7 +90,8 @@
 
         <View
             style="@style/divider_horizontal"
-            android:layout_alignParentBottom="true" />
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="5dp" />
     </LinearLayout>
 
 </LinearLayout>

@@ -14,7 +14,7 @@
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/tv_my_user_nickname"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/top_translate_background"
+        android:background="@drawable/top_translate_background2"
         android:orientation="horizontal"
         android:paddingBottom="10dp"
         android:paddingTop="10dp">
@@ -108,6 +108,10 @@
 
         </LinearLayout>
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
 
     <cn.bingoogolapple.refreshlayout.BGARefreshLayout
         android:id="@+id/refreshlayout"

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.model.WorkOrderInfo;
 import com.ruanyun.chezhiyi.commonlib.util.AppUtility;
+import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.view.widget.LabelFlowLayout;
 import com.ruanyun.chezhiyi.view.ui.home.WorkOrderFragment;
 import com.zhy.adapter.abslistview.CommonAdapter;
@@ -50,6 +51,7 @@ public class WaitAreaAdapter extends CommonAdapter<WorkOrderInfo> {
     @Override
     protected void convert(ViewHolder holder, final WorkOrderInfo item, final int position) {
         AutoUtils.auto(holder.getConvertView());
+        LogX.e("质检区", item.toString());
 //        ImageUtil.loadImage(mContext, FileUtil.getImageUrl(item.getCarPicPath()), (ImageView) holder.getView(R.id.iv_car_photo), R.drawable.default_img);
         holder.setText(R.id.tv_car_number, item.getServicePlateNumber());//车牌号
         TextView tvUserName = holder.getView(R.id.tv_user_name);//用户名
@@ -70,19 +72,19 @@ public class WaitAreaAdapter extends CommonAdapter<WorkOrderInfo> {
         labelFlowLayout.removeAllViews();
         ViewGroup.LayoutParams source = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         ViewGroup.MarginLayoutParams lp = new ViewGroup.MarginLayoutParams(source);
-        lp.leftMargin = 5;
-        lp.rightMargin = 5;
+        lp.leftMargin = 1;
+        lp.rightMargin = 1;
         lp.topMargin = 1;
-        lp.bottomMargin =1;
+        lp.bottomMargin = 1;
         for (int i = 0; i < 1; i++) {
             TextView view = new TextView(mContext);
-            view.setText(item.getUser() == null ? "" : item.getUser().getNickName());
+            view.setText(item.getUser() == null ? "" : item.getProjectName());
             view.setTextColor(Color.rgb(255, 151, 114));
 //                view.setTextColor(Color.WHITE);
-            view.setTextSize(TypedValue.COMPLEX_UNIT_PX, 35);
+            view.setTextSize(TypedValue.COMPLEX_UNIT_PX, 33);
             view.setBackgroundResource(R.drawable.shape_text_station_label_new);
             view.setLayoutParams(lp);
-            AutoUtils.auto(view);
+//            AutoUtils.auto(view);
             labelFlowLayout.addView(view);
         }
 

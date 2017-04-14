@@ -1,12 +1,10 @@
 package com.ruanyun.chezhiyi.view.ui.mine;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -14,6 +12,7 @@ import com.bigkoo.pickerview.OptionsPickerView;
 import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.base.BaseActivity;
 import com.ruanyun.chezhiyi.commonlib.view.adapter.MendianGongdanshuAdapter;
+import com.ruanyun.chezhiyi.commonlib.view.adapter.TiChenPublicAdapter;
 import com.ruanyun.chezhiyi.commonlib.view.widget.RYEmptyView;
 import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
 
@@ -22,16 +21,15 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 import cn.bingoogolapple.refreshlayout.BGARefreshViewHolder;
 
 /**
- * 销售提成
- * Created by jin on 2017/4/13.
+ * 提成详情
+ * Created by jin on 2017/4/14.
  */
-public class XiaoShouTiChengActivity extends BaseActivity implements Topbar.onTopbarClickListener, BGARefreshLayout.BGARefreshLayoutDelegate {
+public class TiChengPublicActivity extends BaseActivity implements Topbar.onTopbarClickListener, BGARefreshLayout.BGARefreshLayoutDelegate {
     @BindView(R.id.topbar)
     Topbar topbar;
     @BindView(R.id.list)
@@ -40,20 +38,18 @@ public class XiaoShouTiChengActivity extends BaseActivity implements Topbar.onTo
     RYEmptyView emptyview;
     @BindView(R.id.refreshlayout)
     BGARefreshLayout mRefreshLayout;
-    @BindView(R.id.li_month)
-    LinearLayout liMonth;
-    private MendianGongdanshuAdapter adapter;
+
+    private TiChenPublicAdapter adapter;
     private List<String> listData;
     //条件选择器
     private OptionsPickerView pvOptions;
 
-    //    List<String> dateList = Arrays.asList(getResources().getStringArray(R.array.month));
     List dateList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_xiao_shou_ti_cheng);
+        setContentView(R.layout.activity_ti_cheng_public);
         ButterKnife.bind(this);
         initRefreshLayout(mRefreshLayout);
         initView();
@@ -67,24 +63,22 @@ public class XiaoShouTiChengActivity extends BaseActivity implements Topbar.onTo
         listData = new ArrayList<>();
         emptyview.bind(mRefreshLayout);
 //        emptyview.showLoading();
-        topbar.setTttleText("销售提成")
+        String titlename = getIntent().getStringExtra("titleName");
+        topbar.setTttleText(titlename)
                 .setBackBtnEnable(true)
                 .onBackBtnClick()
-                .enableRightImageBtn()
-                .setRightImgBtnBg(R.drawable.gongdian_right_icon)
-                .onRightImgBtnClick()
                 .setTopbarClickListener(this);
     }
 
     private void setAdapter() {
-        listData.add("fe");
+
         listData.add("fe");
         listData.add("fe");
         listData.add("fe");
         listData.add("fe");
         listData.add("fe");
 
-        adapter = new MendianGongdanshuAdapter(mContext, R.layout.list_shigongticheng_item, listData);
+        adapter = new TiChenPublicAdapter(mContext, R.layout.list_ticheng_detail_item, listData);
         lvProduct.setAdapter(adapter);
         lvProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -92,6 +86,7 @@ public class XiaoShouTiChengActivity extends BaseActivity implements Topbar.onTo
             }
         });
     }
+
 
     @Override
     protected void onDestroy() {
@@ -175,7 +170,7 @@ public class XiaoShouTiChengActivity extends BaseActivity implements Topbar.onTo
         }
     }
 
-    @OnClick({R.id.li_month})
+    //    @OnClick({R.id.li_month})
     public void UiOnclick(View view) {
         switch (view.getId()) {
             case R.id.li_month:
@@ -196,15 +191,12 @@ public class XiaoShouTiChengActivity extends BaseActivity implements Topbar.onTo
         }
     }
 
+
     @Override
     public void onTobbarViewClick(View v) {
         int id = v.getId();
         if (id == R.id.img_btn_left) {
             finish();
-        } else if (id == R.id.img_btn_right) {
-            Intent intent = new Intent(this, TiChengPublicActivity.class);
-            intent.putExtra("titleName","销售提成");
-            startActivity(intent);
         }
     }
 }

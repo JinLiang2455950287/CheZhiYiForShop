@@ -62,16 +62,6 @@
                 android:text="测试"
                 android:textColor="@color/bg_tangerine" />
 
-            <TextView
-                android:id="@+id/tv_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/service_project"
-                android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@+id/service_project"
-                android:drawableLeft="@drawable/gongdan_alarm2"
-                android:drawablePadding="5dp"
-                android:text="2017-03-10 09:12" />
 
             <View
                 android:id="@+id/line"

@@ -1,24 +1,13 @@
 package com.ruanyun.chezhiyi.view.ui.mine;
 
-import android.app.AlertDialog;
-import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
-import android.view.Display;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bigkoo.pickerview.OptionsPickerView;
@@ -29,7 +18,6 @@ import com.ruanyun.chezhiyi.commonlib.view.widget.RYEmptyView;
 import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -216,8 +204,10 @@ public class ShiGongTiChengActivity extends BaseActivity implements Topbar.onTop
         int id = v.getId();
         if (id == R.id.img_btn_left) {
             finish();
-        } else if (id == R.id.img_btn_left) {
-            Toast.makeText(mContext, "fe", 2).show();
+        } else if (id == R.id.img_btn_right) {
+            Intent intent = new Intent(this, TiChengPublicActivity.class);
+            intent.putExtra("titleName","施工提成");
+            startActivity(intent);
         }
     }
 }

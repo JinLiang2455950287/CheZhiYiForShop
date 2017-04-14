@@ -21,6 +21,7 @@
 
         <!--施工提成-->
         <LinearLayout
+            android:id="@+id/li_month"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -107,11 +108,6 @@
 
         </LinearLayout>
     </LinearLayout>
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="20px" />
 
     <cn.bingoogolapple.refreshlayout.BGARefreshLayout
         android:id="@+id/refreshlayout"

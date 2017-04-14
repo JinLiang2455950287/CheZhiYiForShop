@@ -17,6 +17,7 @@
 
         <!--施工提成-->
         <LinearLayout
+            android:id="@+id/li_month"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -59,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="20dp"
                 android:lineSpacingExtra="10px"
-                android:text="¥ 21.8"
+                android:text="¥ 0.0"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_middle" />
 

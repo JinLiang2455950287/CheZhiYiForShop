@@ -94,6 +94,7 @@ public class LoginPresenter implements Presenter<LoginMvpView> {
 
     /**
      * 使用 User 登录
+     *
      * @param user
      */
     public void loginWithUser(User user) {
@@ -143,9 +144,9 @@ public class LoginPresenter implements Presenter<LoginMvpView> {
 //                //  HXHelper.getInstance().getUserProfileManager().asyncGetCurrentUserInfo();
 //                HXHelper.getInstance().getUserProfileManager().uploadUserAvatar()setUserInfo(avatar, userNick);
                 //取出之前保存到SharedPreferences的用户信息
-                User currentUser=App.getInstance().getUser();
+                User currentUser = App.getInstance().getUser();
                 //保存信息到环信数据库
-                HXHelper.getInstance().getUserProfileManager().setUserInfo(FileUtil.getFileUrl(currentUser.getUserPhoto()),currentUser.getNickName());
+                HXHelper.getInstance().getUserProfileManager().setUserInfo(FileUtil.getFileUrl(currentUser.getUserPhoto()), currentUser.getNickName());
                 if (mLoginMvpView == null) return;
                 mLoginMvpView.onHxLoginSuccess();
                 //获取工单服务或技师技能并保存到数据库
@@ -171,7 +172,8 @@ public class LoginPresenter implements Presenter<LoginMvpView> {
 
 
     /**
-     *  第三方登录接口
+     * 第三方登录接口
+     *
      * @param thirdCall
      */
     public void loginThird(Call<ResultBase<User>> thirdCall) {
@@ -209,32 +211,33 @@ public class LoginPresenter implements Presenter<LoginMvpView> {
     public void getUserCarInfos() {
         App.getInstance().getApiService().getCarinfoList(
                 App.getInstance().getCurrentUserNum()).enqueue(new
-        ResponseCallback<ResultBase<List<CarInfo>>>() {
-            @Override public void onSuccess(Call call, ResultBase<List<CarInfo>> listResultBase) {
-                if (listResultBase.getObj().isEmpty()) {
-                    mLoginMvpView.userNoCar();
-                } else {
-                    mLoginMvpView.userHaseCar();
-                }
-            }
+                                                                       ResponseCallback<ResultBase<List<CarInfo>>>() {
+                                                                           @Override
+                                                                           public void onSuccess(Call call, ResultBase<List<CarInfo>> listResultBase) {
+                                                                               if (listResultBase.getObj().isEmpty()) {
+                                                                                   mLoginMvpView.userNoCar();
+                                                                               } else {
+                                                                                   mLoginMvpView.userHaseCar();
+                                                                               }
+                                                                           }
 
-            @Override
-            public void onError(Call call, ResultBase<List<CarInfo>> listResultBase, int
-                    errorCode) {
-                mLoginMvpView.showTip("获取车辆信息失败 请重新登录");
-                mLoginMvpView.getCarError();
-            }
+                                                                           @Override
+                                                                           public void onError(Call call, ResultBase<List<CarInfo>> listResultBase, int
+                                                                                   errorCode) {
+                                                                               mLoginMvpView.showTip("获取车辆信息失败 请重新登录");
+                                                                               mLoginMvpView.getCarError();
+                                                                           }
 
-            @Override
-            public void onFail(Call call, String msg) {
-                mLoginMvpView.showTip("获取车辆信息失败 请重新登录");
-                mLoginMvpView.getCarError();
-            }
+                                                                           @Override
+                                                                           public void onFail(Call call, String msg) {
+                                                                               mLoginMvpView.showTip("获取车辆信息失败 请重新登录");
+                                                                               mLoginMvpView.getCarError();
+                                                                           }
 
-            @Override
-            public void onResult() {
+                                                                           @Override
+                                                                           public void onResult() {
 
-            }
-        });
+                                                                           }
+                                                                       });
     }
 }

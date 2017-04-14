@@ -18,6 +18,7 @@
 
         <!--施工提成-->
         <LinearLayout
+            android:id="@+id/li_month"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

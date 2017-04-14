@@ -454,7 +454,7 @@
         <!-- 设置环信应用的appkey -->
         <meta-data
             android:name="EASEMOB_APPKEY"
-            android:value="ruanyun#chezhiyi" />
+            android:value="czyttyc#zsqf" />
         <!-- 百度地图api -->
         <service
             android:name="com.baidu.location.f"

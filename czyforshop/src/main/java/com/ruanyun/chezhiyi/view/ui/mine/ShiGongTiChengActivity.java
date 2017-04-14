@@ -1,12 +1,27 @@
 package com.ruanyun.chezhiyi.view.ui.mine;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
+import android.view.Display;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bigkoo.pickerview.OptionsPickerView;
 import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.base.BaseActivity;
 import com.ruanyun.chezhiyi.commonlib.view.adapter.MendianGongdanshuAdapter;
@@ -14,10 +29,12 @@ import com.ruanyun.chezhiyi.commonlib.view.widget.RYEmptyView;
 import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 import cn.bingoogolapple.refreshlayout.BGARefreshViewHolder;
@@ -35,8 +52,15 @@ public class ShiGongTiChengActivity extends BaseActivity implements Topbar.onTop
     RYEmptyView emptyview;
     @BindView(R.id.refreshlayout)
     BGARefreshLayout mRefreshLayout;
+    @BindView(R.id.li_month)
+    LinearLayout liMonth;
     private MendianGongdanshuAdapter adapter;
     private List<String> listData;
+    //条件选择器
+    private OptionsPickerView pvOptions;
+
+    //    List<String> dateList = Arrays.asList(getResources().getStringArray(R.array.month));
+    List dateList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +73,13 @@ public class ShiGongTiChengActivity extends BaseActivity implements Topbar.onTop
     }
 
     private void initView() {
+        for (int i = 0; i < 12; i++) {
+            dateList.add(i + "月");
+        }
         listData = new ArrayList<>();
         emptyview.bind(mRefreshLayout);
 //        emptyview.showLoading();
-        topbar.setTttleText("工单数")
+        topbar.setTttleText("施工提成")
                 .setBackBtnEnable(true)
                 .onBackBtnClick()
                 .enableRightImageBtn()
@@ -62,6 +89,7 @@ public class ShiGongTiChengActivity extends BaseActivity implements Topbar.onTop
     }
 
     private void setAdapter() {
+
         listData.add("fe");
         listData.add("fe");
         listData.add("fe");
@@ -69,7 +97,7 @@ public class ShiGongTiChengActivity extends BaseActivity implements Topbar.onTop
         listData.add("fe");
         listData.add("fe");
 
-        adapter = new MendianGongdanshuAdapter(mContext, R.layout.list_item_gongdanshu_item, listData);
+        adapter = new MendianGongdanshuAdapter(mContext, R.layout.list_shigongticheng_item, listData);
         lvProduct.setAdapter(adapter);
         lvProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -77,6 +105,7 @@ public class ShiGongTiChengActivity extends BaseActivity implements Topbar.onTop
             }
         });
     }
+
 
     @Override
     protected void onDestroy() {
@@ -159,6 +188,28 @@ public class ShiGongTiChengActivity extends BaseActivity implements Topbar.onTop
             return false;
         }
     }
+
+    @OnClick({R.id.li_month})
+    public void UiOnclick(View view) {
+        switch (view.getId()) {
+            case R.id.li_month:
+                pvOptions = new OptionsPickerView.Builder(this, new OptionsPickerView.OnOptionsSelectListener() {
+                    @Override
+                    public void onOptionsSelect(int options1, int option2, int options3, View v) {
+                        Toast.makeText(mContext, dateList.get(options1).toString(), 2).show();
+                    }
+                }).setOutSideCancelable(true)//点击外部dismiss default true
+                        .setCyclic(true, false, false)//循环与否
+                        .setSubmitColor(Color.BLACK)//确定按钮文字颜色
+                        .setCancelColor(Color.BLACK)//取消按钮文字颜色
+                        .setSelectOptions(1, 0, 0)  //设置默认选中项
+                        .build();
+                pvOptions.setPicker(dateList);
+                pvOptions.show();
+                break;
+        }
+    }
+
 
     @Override
     public void onTobbarViewClick(View v) {

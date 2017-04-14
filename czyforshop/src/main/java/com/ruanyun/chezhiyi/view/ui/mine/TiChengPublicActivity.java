@@ -5,13 +5,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.base.BaseActivity;
-import com.ruanyun.chezhiyi.commonlib.view.adapter.MendianGongdanshuAdapter;
 import com.ruanyun.chezhiyi.commonlib.view.adapter.TiChenPublicAdapter;
 import com.ruanyun.chezhiyi.commonlib.view.widget.RYEmptyView;
 import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
@@ -21,6 +21,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 import cn.bingoogolapple.refreshlayout.BGARefreshViewHolder;
@@ -38,6 +39,10 @@ public class TiChengPublicActivity extends BaseActivity implements Topbar.onTopb
     RYEmptyView emptyview;
     @BindView(R.id.refreshlayout)
     BGARefreshLayout mRefreshLayout;
+    @BindView(R.id.iv_left)
+    ImageView ivLeft;
+    @BindView(R.id.iv_right)
+    ImageView ivRight;
 
     private TiChenPublicAdapter adapter;
     private List<String> listData;
@@ -170,25 +175,17 @@ public class TiChengPublicActivity extends BaseActivity implements Topbar.onTopb
         }
     }
 
-    //    @OnClick({R.id.li_month})
+    @OnClick({R.id.iv_left, R.id.iv_right})
     public void UiOnclick(View view) {
         switch (view.getId()) {
-            case R.id.li_month:
-                pvOptions = new OptionsPickerView.Builder(this, new OptionsPickerView.OnOptionsSelectListener() {
-                    @Override
-                    public void onOptionsSelect(int options1, int option2, int options3, View v) {
-                        Toast.makeText(mContext, dateList.get(options1).toString(), 2).show();
-                    }
-                }).setOutSideCancelable(true)//点击外部dismiss default true
-                        .setCyclic(true, false, false)//循环与否
-                        .setSubmitColor(Color.BLACK)//确定按钮文字颜色
-                        .setCancelColor(Color.BLACK)//取消按钮文字颜色
-                        .setSelectOptions(1, 0, 0)  //设置默认选中项
-                        .build();
-                pvOptions.setPicker(dateList);
-                pvOptions.show();
+            case R.id.iv_left:
+
+                break;
+            case R.id.iv_right:
+
                 break;
         }
+
     }
 
 

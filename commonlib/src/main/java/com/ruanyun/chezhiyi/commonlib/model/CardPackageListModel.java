@@ -28,6 +28,7 @@ public class CardPackageListModel {
      */
 
     private String createTime;
+    private String packageOprice;
     private BigDecimal packageCommMoney;
     private int packageCommRatio;
     private int packageCommission;
@@ -145,10 +146,19 @@ public class CardPackageListModel {
         this.goodsList = goodsList;
     }
 
+    public String getPackageOprice() {
+        return packageOprice;
+    }
+
+    public void setPackageOprice(String packageOprice) {
+        this.packageOprice = packageOprice;
+    }
+
     @Override
     public String toString() {
         return "CardPackageListModel{" +
                 "createTime='" + createTime + '\'' +
+                ", packageOprice='" + packageOprice + '\'' +
                 ", packageCommMoney=" + packageCommMoney +
                 ", packageCommRatio=" + packageCommRatio +
                 ", packageCommission=" + packageCommission +

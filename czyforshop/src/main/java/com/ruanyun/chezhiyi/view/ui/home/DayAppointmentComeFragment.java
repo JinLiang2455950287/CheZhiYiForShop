@@ -19,6 +19,7 @@ import com.ruanyun.chezhiyi.commonlib.base.ResultBase;
 import com.ruanyun.chezhiyi.commonlib.model.AppointmentInfo;
 import com.ruanyun.chezhiyi.commonlib.model.params.BookingListParams;
 import com.ruanyun.chezhiyi.commonlib.util.C;
+import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.view.adapter.DayAppointmentCommentAdapter;
 
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class DayAppointmentComeFragment extends RefreshBaseFragment {
     @BindView(R.id.list)
     ListView list;
 
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mContentView = inflater.inflate(R.layout.fragment_comment_appointment, container, false);
         isFirstIn = true;
@@ -59,9 +61,9 @@ public class DayAppointmentComeFragment extends RefreshBaseFragment {
         refreshWithLoading();
         adapter = new DayAppointmentCommentAdapter(mContext, R.layout.list_dangtian_item, appointmentInfo, DayAppointmentCommentAdapter.STATUS_UNFINISH);
         list.setAdapter(adapter);
-        Drawable drawable = new ColorDrawable(getResources().getColor(R.color.color_gray_line));
-        list.setDivider(drawable);
-        list.setDividerHeight(1);
+//        Drawable drawable = new ColorDrawable(getResources().getColor(R.color.color_gray_line));
+//        list.setDivider(drawable);
+//        list.setDividerHeight(4);
         //设置未到店预约个数
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -85,11 +87,20 @@ public class DayAppointmentComeFragment extends RefreshBaseFragment {
 
     @Override
     public void onRefreshResult(PageInfoBase result, String tag) {
+        LogX.e("当天预约未到店", result.getResult().size() + "");
+        TextView tvnumber = (TextView) getActivity().findViewById(R.id.tv_numindex);
+        if (result != null && result.getResult().size() > 0) {
+            tvnumber.setVisibility(View.VISIBLE);
+            tvnumber.setText(result.getResult().size() + "");
+        } else {
+            tvnumber.setVisibility(View.GONE);
+        }
         adapter.setData(result.getResult());
     }
 
     @Override
     public void onLoadMoreResult(PageInfoBase result, String tag) {
+        LogX.e("当天预约 未到店", result.toString());
         adapter.addData(result.getResult());
     }
 

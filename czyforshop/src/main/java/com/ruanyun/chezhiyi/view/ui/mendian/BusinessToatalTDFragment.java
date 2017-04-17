@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.base.BaseFragment;
 import com.ruanyun.chezhiyi.commonlib.util.C;
+import com.ruanyun.chezhiyi.commonlib.util.LogX;
 
 /**
  * 2017/4/12
@@ -29,7 +30,8 @@ public class BusinessToatalTDFragment extends BaseFragment implements SwipeRefre
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mContentView = inflater.inflate(R.layout.fragment_business_toatal_td, container, false);
         workOrderStatusString = getArguments().getString(C.IntentKey.WORK_ORDER_STATUS_STRING);
-        Toast.makeText(mContext, workOrderStatusString, 2).show();
+
+
         initRefreshView();
         initView();
         return mContentView;
@@ -57,8 +59,14 @@ public class BusinessToatalTDFragment extends BaseFragment implements SwipeRefre
 
     @Override
     public void onRefresh() {
+        if (workOrderStatusString.equals("2")) {
+            Toast.makeText(mContext, "当日", 2).show();
+            LogX.e("营业统计","当日");
+        } else {
+            LogX.e("营业统计","当月");
+        }
         try {
-            Thread.sleep(3000);
+            Thread.sleep(1000);
             if (refreshlayout != null) {
                 refreshlayout.setRefreshing(false);
             }

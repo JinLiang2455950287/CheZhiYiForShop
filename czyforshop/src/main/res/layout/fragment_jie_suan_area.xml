@@ -19,7 +19,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:divider="@null"
-            android:dividerHeight="10px"
+            android:dividerHeight="10dp"
             android:scrollbarStyle="outsideOverlay" />
     </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
 

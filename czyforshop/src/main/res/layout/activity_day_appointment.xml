@@ -1,30 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:background="@color/white">
 
     <!--当天预约-->
     <include layout="@layout/layout_topbar" />
-
-    <!--<android.support.design.widget.TabLayout-->
-    <!--android:id="@+id/tab_title"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="40dp"-->
-    <!--android:background="@color/bg_white"-->
-    <!--android:isScrollContainer="true"-->
-    <!--app:tabIndicatorColor="@color/theme_color_default"-->
-    <!--app:tabMode="fixed"-->
-    <!--app:tabSelectedTextColor="@color/theme_color_default"-->
-    <!--app:tabTextAppearance="@style/caselib_tabtext_style"-->
-    <!--app:tabTextColor="@color/text_black" />-->
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_title"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_below="@+id/topbar"
         android:background="@color/bg_white"
         android:isScrollContainer="true"
         app:tabIndicatorColor="@color/theme_color_default"
@@ -33,14 +21,25 @@
         app:tabTextAppearance="@style/caselib_tabtext_style"
         app:tabTextColor="@color/text_black" />
 
+    <TextView
+        android:id="@+id/tv_numindex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/topbar"
+        android:layout_marginLeft="151dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/circle_theme_color"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/white"
+        android:visibility="gone" />
+
     <android.support.v4.view.ViewPager
         android:id="@+id/content_panle"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tab_title"
         android:layout_weight="1" />
-    <!--<FrameLayout-->
-    <!--android:id="@+id/frag_container"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="0dp"-->
-    <!--android:layout_weight="1" />-->
-</LinearLayout>
+
+</RelativeLayout>

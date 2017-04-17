@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/linearlayout_bg_gray"
     android:orientation="vertical">
-`+
+    `+
 
     <cn.bingoogolapple.refreshlayout.BGARefreshLayout
         android:id="@+id/refreshlayout"

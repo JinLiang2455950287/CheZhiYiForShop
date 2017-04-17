@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:background="@drawable/item_selector_default">
+    android:layout_height="wrap_content"
+    android:background="@drawable/item_selector_default"
+    android:orientation="horizontal">
 
-    <View
-        style="@style/divider_horizontal"
-        android:layout_alignParentTop="true" />
 
     <View
         android:layout_width="10dp"
@@ -16,14 +14,15 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="85dp"
+        android:layout_height="80dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="10dp"
-        android:background="@drawable/item_selector_default"
-        android:descendantFocusability="blocksDescendants"
-        android:orientation="horizontal">
+        android:background="@drawable/item_selector_default">
+
+        <View
+            style="@style/divider_horizontal"
+            android:layout_alignParentTop="true" />
 
         <com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView
             android:id="@+id/head_picCir"
@@ -94,10 +93,10 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/gray_arrow_right" />
 
+        <View
+            style="@style/divider_horizontal"
+            android:layout_alignParentBottom="true" />
+
     </RelativeLayout>
 
-    <View
-        style="@style/divider_horizontal"
-        android:layout_alignParentBottom="true" />
-
-</RelativeLayout>
+</LinearLayout>

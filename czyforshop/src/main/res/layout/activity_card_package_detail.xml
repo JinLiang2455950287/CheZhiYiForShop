@@ -232,10 +232,10 @@
             </LinearLayout>
 
             <!--<View-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="1px"-->
-                <!--android:layout_marginBottom="20px"-->
-                <!--android:background="@color/gray_border" />-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1px"-->
+            <!--android:layout_marginBottom="20px"-->
+            <!--android:background="@color/gray_border" />-->
 
         </LinearLayout>
     </ScrollView>

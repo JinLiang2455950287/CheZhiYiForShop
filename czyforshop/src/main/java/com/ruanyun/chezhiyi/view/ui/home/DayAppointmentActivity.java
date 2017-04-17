@@ -8,10 +8,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.TextView;
 
 import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.base.AutoLayoutActivity;
-import com.ruanyun.chezhiyi.commonlib.model.Tab;
 import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
 
 import java.util.ArrayList;
@@ -33,6 +33,8 @@ public class DayAppointmentActivity extends AutoLayoutActivity implements Topbar
     DayAppointmentGoFragment dayAppointmentGoFragment;//已接待
     @BindView(R.id.content_panle)
     ViewPager contentPanle;
+    @BindView(R.id.tv_numindex)
+    TextView tvNumindex;
     private ArrayList<Fragment> tabs = new ArrayList<>();
 
     @Override

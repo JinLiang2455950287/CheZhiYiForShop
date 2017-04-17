@@ -20,7 +20,6 @@ import java.util.List;
  */
 public class CardPackageListAdapter extends CommonAdapter<CardPackageListModel> {
 
-
     public CardPackageListAdapter(Context context, int layoutId, List<CardPackageListModel> datas) {
         super(context, layoutId, datas);
     }
@@ -29,13 +28,11 @@ public class CardPackageListAdapter extends CommonAdapter<CardPackageListModel> 
         mDatas = datas;
     }
 
-
     @Override
     protected void convert(ViewHolder holder, final CardPackageListModel item, final int position) {
         AutoUtils.auto(holder.getConvertView());
         LogX.e("卡套餐", item.toString());
         holder.setText(R.id.tv_title, item.getPackageName());
-        holder.setText(R.id.tv_subtitle, "[价值" + item.getPackagePrice() + "元]" + item.getPackageName());
         holder.setText(R.id.tv_price, "¥ " + item.getPackagePrice());
         TextView tvorrgionprice = holder.getView(R.id.tv_orrgionprice);
         TextView tvPurchase = holder.getView(R.id.tv_purchase);

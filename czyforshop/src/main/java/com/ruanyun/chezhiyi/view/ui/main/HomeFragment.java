@@ -62,6 +62,7 @@ import com.ruanyun.chezhiyi.commonlib.view.ui.common.WebViewActivity;
 import com.ruanyun.chezhiyi.commonlib.view.widget.RollableTextView;
 import com.ruanyun.chezhiyi.commonlib.view.widget.lazyviewpager.LazyViewPager;
 import com.ruanyun.chezhiyi.commonlib.view.widget.lazyviewpager.LazyViewPagerAdapter;
+import com.ruanyun.chezhiyi.view.ui.TiXing.TiXingActivity;
 import com.ruanyun.chezhiyi.view.ui.home.AppointMentDealActivity;
 import com.ruanyun.chezhiyi.view.ui.home.DayAppointmentActivity;
 import com.ruanyun.chezhiyi.view.ui.home.HomeFunctionView;
@@ -545,10 +546,11 @@ public class HomeFragment extends /*Refresh*/BaseFragment implements StoreInfoMv
                 }
                 break;
             case R.id.home_wake://消息提醒
-                Intent intent = new Intent(mContext, SystemRemindActivity.class);
-                intent.putExtra(C.IntentKey.TOPBAR_TITLE, "消息提醒");
-                intent.putExtra(C.IntentKey.SYSTEM_TYPE, SystemRemindActivity.SYSTEM_MSG);
+                Intent intent = new Intent(mContext, TiXingActivity.class);
                 showActivity(intent);
+//                Intent intent = new Intent(mContext, SystemRemindActivity.class);
+//                intent.putExtra(C.IntentKey.TOPBAR_TITLE, "消息提醒");
+//                intent.putExtra(C.IntentKey.SYSTEM_TYPE, SystemRemindActivity.SYSTEM_MSG);
                 break;
             case R.id.rl_all_project:
                 onFunctionClick((String) view.getTag());

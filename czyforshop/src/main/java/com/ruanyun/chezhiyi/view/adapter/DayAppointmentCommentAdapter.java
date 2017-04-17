@@ -46,25 +46,26 @@ public class DayAppointmentCommentAdapter extends CommonAdapter<AppointmentInfo>
     @Override
     protected void convert(ViewHolder viewHolder, AppointmentInfo item, int position) {
         AutoUtils.auto(viewHolder.getConvertView());
-        //未到店
+        LogX.e("当天预约", item.toString());
+//        //未到店
         if (STATUS_UNFINISH.equals(status)) {
             //预计到店字体为灰色
-            viewHolder.setText(R.id.tv_time, mContext.getString(R.string.arrive_time, StringUtil.getTimeFromDate(item.getPredictShopTime())));
+            viewHolder.setText(R.id.tv_detail, mContext.getString(R.string.arrive_time, StringUtil.getTimeFromDate(item.getPredictShopTime())));
         } else if (STATUS_RECEPTED.equals(status)) { //已接待
             //到店字体为灰色
-            viewHolder.setText(R.id.tv_time, StringUtil.getTimeFromDate(item.getPredictShopTime() + "到店"));
+            viewHolder.setText(R.id.tv_detail, StringUtil.getTimeFromDate(item.getPredictShopTime() + "到店"));
         }
 
-        ImageView im_photo = viewHolder.getView(R.id.head_picCir);
+        CircleImageView im_photo = viewHolder.getView(R.id.head_picCir);
         ImageUtil.loadImage(mContext, FileUtil.getFileUrl(item.getUser().getUserPhoto()), im_photo, R.drawable.default_imge_middle);
         LogX.e("已到店", FileUtil.getFileUrl(item.getUser().getUserPhoto()));
 
         //用户UserNum
-        viewHolder.setText(R.id.tv_user_name, item.getUser() == null ? "" : item.getUser().getNickName());
-
-        //服务标签流
-        FlowLayout labelFlowLayout = viewHolder.getView(R.id.labelflow_appointment_item);
-        getLableFromeProjectJson(item.getProjectNum(), labelFlowLayout);
+        viewHolder.setText(R.id.tv_name, item.getUser() == null ? "" : item.getUser().getNickName());
+//
+//        //服务标签流
+//        FlowLayout labelFlowLayout = viewHolder.getView(R.id.labelflow_appointment_item);
+//        getLableFromeProjectJson(item.getProjectNum(), labelFlowLayout);
 
     }
 

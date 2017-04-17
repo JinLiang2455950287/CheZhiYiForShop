@@ -1,16 +1,20 @@
 package com.ruanyun.chezhiyi.view.ui.home;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.RelativeLayout;
 
 import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.base.AutoLayoutActivity;
-import com.ruanyun.chezhiyi.commonlib.view.widget.TopTabButton;
+import com.ruanyun.chezhiyi.commonlib.model.Tab;
 import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
-import com.zhy.autolayout.AutoRelativeLayout;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,9 +27,13 @@ public class DayAppointmentActivity extends AutoLayoutActivity implements Topbar
 
     @BindView(R.id.topbar)
     Topbar topbar;
-    TopTabButton topTabButton;
+    @BindView(R.id.tab_title)
+    TabLayout tabTitle;
     DayAppointmentComeFragment dayAppointmentComeFragment;//未到店
     DayAppointmentGoFragment dayAppointmentGoFragment;//已接待
+    @BindView(R.id.content_panle)
+    ViewPager contentPanle;
+    private ArrayList<Fragment> tabs = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle bundle) {
@@ -37,32 +45,51 @@ public class DayAppointmentActivity extends AutoLayoutActivity implements Topbar
     }
 
     private void init() {
-        dayAppointmentComeFragment = new DayAppointmentComeFragment();
-        dayAppointmentGoFragment = new DayAppointmentGoFragment();
-        topTabButton = getViewFromLayout(R.layout.layout_toptabbar, topbar, false);
-        topTabButton.setRightText("已接待");
-        topTabButton.setLeftText("未到店");
-        topTabButton.setLeftTabStatus(true);
-        topTabButton.onLeftTabClick(this, "onLeftTabClick");
-        topTabButton.onRightTabClick(this, "onRightTabClick");
-        topbar.getTvTitle().setVisibility(View.GONE);
-        topbar.addViewToTopbar(topTabButton, (AutoRelativeLayout.LayoutParams) topTabButton.getLayoutParams())
+        topbar.setTttleText("当天预约")
                 .setBackBtnEnable(true)
                 .onBackBtnClick()
                 .setTopbarClickListener(this);
-        //默认加载第一个fragment
-        showFragmentAtIndex(1);
+        dayAppointmentComeFragment = new DayAppointmentComeFragment();
+        dayAppointmentGoFragment = new DayAppointmentGoFragment();
+        tabTitle.addTab(tabTitle.newTab().setText("未到店"));
+        tabs.add(dayAppointmentComeFragment);
+        tabTitle.addTab(tabTitle.newTab().setText("已到店"));
+        tabs.add(dayAppointmentGoFragment);
+        contentPanle.setOffscreenPageLimit(2);
+        contentPanle.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                return tabs.get(position);
+            }
+
+            @Override
+            public int getCount() {
+                return tabs.size();
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                if (position == 0) {
+                    return "未到店";
+                }
+                return "已到店";
+            }
+
+        });
+        tabTitle.setupWithViewPager(contentPanle);
+        setSelecteViewPage(0);
+
     }
 
-    //点击未到店按钮
-    public void onLeftTabClick() {
-        showFragmentAtIndex(1);
+    /**
+     * 选中viewpage Item 项
+     *
+     * @param item
+     */
+    public void setSelecteViewPage(int item) {
+        contentPanle.setCurrentItem(item);
     }
 
-    //点击已接待按钮
-    public void onRightTabClick() {
-        showFragmentAtIndex(2);
-    }
 
     @Override
     public void onTobbarViewClick(View v) {
@@ -74,12 +101,13 @@ public class DayAppointmentActivity extends AutoLayoutActivity implements Topbar
 
     /**
      * 显示指定的fragment
+     *
      * @param index
      */
     protected void showFragmentAtIndex(int index) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        switch (index){
+        switch (index) {
             case 1:
                 //判断fragment是否已加载
                 if (!dayAppointmentComeFragment.isAdded()) {

@@ -35,12 +35,9 @@ public class DayAppointmentGoFragment extends RefreshBaseFragment {
 
     BookingListParams params = new BookingListParams();
     DayAppointmentCommentAdapter adapter;
-    @BindView(R.id.tv_appointment_count)
-    TextView tvAppointmentCount;
+
     @BindView(R.id.list)
     ListView list;
-    @BindView(R.id.linearLayout_appointment_count)
-    LinearLayout linearLayoutAppointmentCount;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mContentView = inflater.inflate(R.layout.fragment_comment_appointment, container, false);
@@ -57,10 +54,9 @@ public class DayAppointmentGoFragment extends RefreshBaseFragment {
     }
 
     public void initView() {
-        linearLayoutAppointmentCount.setVisibility(View.GONE);
         initRefreshLayout();
-        refreshWithLoading();
-        adapter = new DayAppointmentCommentAdapter(mContext, R.layout.list_item_day_appointment, new ArrayList<AppointmentInfo>(), DayAppointmentCommentAdapter.STATUS_RECEPTED);
+        refreshWithLoading();// list_item_day_appointment
+        adapter = new DayAppointmentCommentAdapter(mContext, R.layout.list_dangtian_item, new ArrayList<AppointmentInfo>(), DayAppointmentCommentAdapter.STATUS_RECEPTED);
 //        Drawable drawable=new ColorDrawable(getResources().getColor(R.color.color_gray_line));
 //        list.setDivider(drawable);
 //        list.setDividerHeight(1);

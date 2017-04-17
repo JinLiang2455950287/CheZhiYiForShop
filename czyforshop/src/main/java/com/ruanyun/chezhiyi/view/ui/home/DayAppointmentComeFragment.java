@@ -32,13 +32,11 @@ import retrofit2.Call;
  * 未进店
  * Created by msq on 2016/9/26.
  */
-public class DayAppointmentComeFragment extends RefreshBaseFragment{
+public class DayAppointmentComeFragment extends RefreshBaseFragment {
 
     List<AppointmentInfo> appointmentInfo = new ArrayList<>();
     BookingListParams params = new BookingListParams();
     DayAppointmentCommentAdapter adapter;
-    @BindView(R.id.tv_appointment_count)
-    TextView tvAppointmentCount;
     @BindView(R.id.list)
     ListView list;
 
@@ -56,13 +54,12 @@ public class DayAppointmentComeFragment extends RefreshBaseFragment{
         super.onViewCreated(view, savedInstanceState);
     }
 
-    public void initView(){
+    public void initView() {
         initRefreshLayout();
         refreshWithLoading();
-        setReserveTextCount(0);
-        adapter = new DayAppointmentCommentAdapter(mContext,R.layout.list_item_day_appointment,appointmentInfo,DayAppointmentCommentAdapter.STATUS_UNFINISH);
+        adapter = new DayAppointmentCommentAdapter(mContext, R.layout.list_dangtian_item, appointmentInfo, DayAppointmentCommentAdapter.STATUS_UNFINISH);
         list.setAdapter(adapter);
-        Drawable drawable=new ColorDrawable(getResources().getColor(R.color.color_gray_line));
+        Drawable drawable = new ColorDrawable(getResources().getColor(R.color.color_gray_line));
         list.setDivider(drawable);
         list.setDividerHeight(1);
         //设置未到店预约个数
@@ -70,28 +67,24 @@ public class DayAppointmentComeFragment extends RefreshBaseFragment{
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 AppointmentInfo appointmentInfo = adapter.getItem(i);
-                Intent intent = new Intent(mContext,BookingDetailsNotRecrptionActivity.class);
+                Intent intent = new Intent(mContext, BookingDetailsNotRecrptionActivity.class);
                 intent.putExtra(C.IntentKey.BOOKING_MAKENUM, appointmentInfo.getMakeNum());
                 showActivity(intent);
             }
         });
     }
 
-    private void setReserveTextCount(int count){
-        tvAppointmentCount.setText(getString(R.string.reserve_cout,count));
-    }
 
     @Override
     public Call loadData() {
         params.setPageNum(currentPage);
         params.setMakeStatusString("3");//未到店
-        Call<ResultBase<PageInfoBase<AppointmentInfo>>> call = app.getApiService().getBookingList(app.getCurrentUserNum(),params);
+        Call<ResultBase<PageInfoBase<AppointmentInfo>>> call = app.getApiService().getBookingList(app.getCurrentUserNum(), params);
         return call;
     }
 
     @Override
     public void onRefreshResult(PageInfoBase result, String tag) {
-        setReserveTextCount(result.getTotalCount());
         adapter.setData(result.getResult());
     }
 

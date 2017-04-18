@@ -10,6 +10,7 @@ import com.ruanyun.chezhiyi.commonlib.model.OrderGoodsInfo;
 import com.ruanyun.chezhiyi.commonlib.model.WorkOrderDxdInfo;
 import com.ruanyun.chezhiyi.commonlib.model.WorkOrderInfo;
 import com.ruanyun.chezhiyi.commonlib.model.WorkOrderRecordInfo;
+import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.zhy.adapter.abslistview.ViewHolder;
 import com.zhy.adapter.abslistview.base.ItemViewDelegate;
 import com.zhy.autolayout.utils.AutoUtils;
@@ -43,10 +44,11 @@ public class InsteadOrderParentDelagate implements ItemViewDelegate<OrderGoodsIn
         holder.setText(R.id.tv_workorder_number, TextUtils.isEmpty(item.getWorkOrderNum()) ? "" :
                 "NO. " + item.getWorkOrderNum());//工单编号
         TextView tvstatus = holder.getView(R.id.tv_service_state);
-        if (item.getGoodsNum().equals("7")) {
-            tvstatus.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context,R.drawable.daixiadan_service),null,null,null);
+        LogX.e("代下单管理父数据", item.getGoodsNum() + "");
+        if (item.getGoodsNum().equals("9")) {
+            tvstatus.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context, R.drawable.daixiadan_finsh), null, null, null);
         } else {
-            tvstatus.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context,R.drawable.daixiadan_finsh),null,null,null);
+            tvstatus.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context, R.drawable.daixiadan_service), null, null, null);
         }
         tvstatus.setText(getWorkorderState(item.getGoodsNum()));//当前item.getGoodsNum()为工单状态
     }

@@ -233,6 +233,11 @@ public final class C {
         public static final String URL_TICHENG_INFO = "app/external/{userNum}/js_report_detail";
 
         /**
+         * 施工/销售 提成app/external/${userNum}/js_report_detail?month=${year}'+obj.value+'&type=${type}
+         */
+        public static final String URL_TICHENG_DETAILLIST = "app/external/{userNum}/js_report_detail";
+
+        /**
          * 施工/销售list 提成
          */
         public static final String URL_TICHENG_LIST = "app/external/{userNum}/getAjaxCommission";

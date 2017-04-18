@@ -12,6 +12,9 @@ import android.widget.Toast;
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.base.BaseActivity;
+import com.ruanyun.chezhiyi.commonlib.model.TiChengListModel;
+import com.ruanyun.chezhiyi.commonlib.presenter.TiChengDetailListPresenter;
+import com.ruanyun.chezhiyi.commonlib.view.TiChengDetailListView;
 import com.ruanyun.chezhiyi.commonlib.view.adapter.TiChenPublicAdapter;
 import com.ruanyun.chezhiyi.commonlib.view.widget.RYEmptyView;
 import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
@@ -30,7 +33,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshViewHolder;
  * 提成详情
  * Created by jin on 2017/4/14.
  */
-public class TiChengPublicActivity extends BaseActivity implements Topbar.onTopbarClickListener, BGARefreshLayout.BGARefreshLayoutDelegate {
+public class TiChengPublicActivity extends BaseActivity implements Topbar.onTopbarClickListener, TiChengDetailListView, BGARefreshLayout.BGARefreshLayoutDelegate {
     @BindView(R.id.topbar)
     Topbar topbar;
     @BindView(R.id.list)
@@ -50,12 +53,14 @@ public class TiChengPublicActivity extends BaseActivity implements Topbar.onTopb
     private OptionsPickerView pvOptions;
 
     List dateList = new ArrayList<>();
+    private TiChengDetailListPresenter tiChengDetailListPresenter = new TiChengDetailListPresenter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ti_cheng_public);
         ButterKnife.bind(this);
+        tiChengDetailListPresenter.attachView(this);
         initRefreshLayout(mRefreshLayout);
         initView();
         setAdapter();
@@ -67,12 +72,13 @@ public class TiChengPublicActivity extends BaseActivity implements Topbar.onTopb
         }
         listData = new ArrayList<>();
         emptyview.bind(mRefreshLayout);
-//        emptyview.showLoading();
+        emptyview.showLoading();
         String titlename = getIntent().getStringExtra("titleName");
         topbar.setTttleText(titlename)
                 .setBackBtnEnable(true)
                 .onBackBtnClick()
                 .setTopbarClickListener(this);
+//        tiChengDetailListPresenter.getTiChengDetailList(app.getApiService().forgetPassword());
     }
 
     private void setAdapter() {
@@ -96,6 +102,7 @@ public class TiChengPublicActivity extends BaseActivity implements Topbar.onTopb
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        tiChengDetailListPresenter.detachView();
     }
 
     private void initRefreshLayout(BGARefreshLayout refreshLayout) {
@@ -195,5 +202,20 @@ public class TiChengPublicActivity extends BaseActivity implements Topbar.onTopb
         if (id == R.id.img_btn_left) {
             finish();
         }
+    }
+
+    @Override
+    public void getTiChengListSuccess(List<TiChengListModel> resultBase) {
+
+    }
+
+    @Override
+    public void dismissListLoadingView() {
+
+    }
+
+    @Override
+    public void cancelTiChengListErr() {
+
     }
 }

@@ -338,6 +338,12 @@ public interface ApiService {
     @POST(C.ApiUrl.URL_TICHENG_LIST)
     Call<ResultBase<List<TiChengListModel>>> getTiChengList(@Path("userNum") String userNum, @Query("pageNum") int pageNum, @Query("commissionType") int commissionType, @Query("month") String month);
 
+    /**
+     * 施工/销售详情 提成
+     */
+    @POST(C.ApiUrl.URL_TICHENG_INFO)
+    Call<ResultBase> getTiChengDetailList(@Path("userNum") String userNum, @Query("month") String month, @Query("type") int type);
+
 
     /**
      * 限时促销列表

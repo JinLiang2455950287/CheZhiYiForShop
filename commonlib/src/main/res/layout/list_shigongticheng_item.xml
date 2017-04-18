@@ -69,16 +69,17 @@
                 android:layout_height="0.8dp"
                 android:layout_below="@+id/tv_car_number"
                 android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/graw_gap_line" />
 
             <TextView
-                android:id="@+id/tv_await_time_or_money"
+                android:id="@+id/tv_await_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/line"
                 android:drawableLeft="@drawable/gongdan_alarm2"
                 android:drawablePadding="5dp"
+                android:layout_marginTop="5dp"
                 android:gravity="center_vertical"
                 android:text="2017-03-10 09:12"
                 android:textColor="@color/text_comment_gray"
@@ -86,28 +87,17 @@
 
 
             <TextView
-                android:id="@+id/tv_await_total_money"
+                android:id="@+id/tv_await_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/line"
                 android:layout_marginRight="5dp"
                 android:gravity="center_vertical"
+                android:layout_marginTop="5dp"
                 android:text="提成: ¥5.00"
                 android:textColor="@color/text_comment_gray"
                 android:textSize="@dimen/text_size_xsmall" />
-
-            <!--<TextView-->
-            <!--android:id="@+id/tv_take_order"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:layout_marginRight="20px"-->
-            <!--android:background="@drawable/gray_arrow_right"-->
-            <!--android:gravity="center"-->
-            <!--android:textColor="@color/text_comment_gray"-->
-            <!--android:textSize="@dimen/text_size_small" />-->
 
         </RelativeLayout>
 

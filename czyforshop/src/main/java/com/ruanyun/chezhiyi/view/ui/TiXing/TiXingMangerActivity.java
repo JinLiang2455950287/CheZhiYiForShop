@@ -48,13 +48,13 @@ public class TiXingMangerActivity extends BaseActivity implements Topbar.onTopba
                 .setBackBtnEnable(true)
                 .onBackBtnClick()
                 .setTopbarClickListener(this);
-        setFragment();
+        setFragment(waitType);
     }
 
-    public void setFragment() {
+    public void setFragment(String type) {
         tiXingFragment = new TiXingFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("type", "1");
+        bundle.putString("type", type);
         tiXingFragment.setArguments(bundle);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fl_managerActivity, tiXingFragment);

@@ -11,8 +11,9 @@ import android.widget.Toast;
 
 import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.base.BaseFragment;
-import com.ruanyun.chezhiyi.commonlib.util.C;
-import com.ruanyun.chezhiyi.commonlib.view.adapter.MenDianGoodsListAdapter;
+import com.ruanyun.chezhiyi.commonlib.util.CommentUtils;
+import com.ruanyun.chezhiyi.commonlib.util.LogX;
+import com.ruanyun.chezhiyi.commonlib.view.adapter.WakeAdapter;
 import com.ruanyun.chezhiyi.commonlib.view.widget.RYEmptyView;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class TiXingFragment extends BaseFragment implements BGARefreshLayout.BGA
     private ListView lvProduct;
     private BGARefreshLayout mRefreshLayout;
     private RYEmptyView emptyview;
-    private MenDianGoodsListAdapter adapter;
+    private WakeAdapter adapter;
     private List<String> listData;
     String type;
 
@@ -41,6 +42,8 @@ public class TiXingFragment extends BaseFragment implements BGARefreshLayout.BGA
         mContentView = inflater.inflate(R.layout.fragment_ti_xing, container, false);
         initView();
         type = getArguments().getString("type");
+        CommentUtils.wakeType = type;
+        LogX.e("提醒", type);
         return mContentView;
     }
 
@@ -55,10 +58,8 @@ public class TiXingFragment extends BaseFragment implements BGARefreshLayout.BGA
     }
 
     private void setAdapter() {
-
         listData.add("few");
-
-        adapter = new MenDianGoodsListAdapter(mContext, R.layout.list_dangtian_item, listData);
+        adapter = new WakeAdapter(mContext, R.layout.list_wake_item, listData);
         lvProduct.setAdapter(adapter);
         lvProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -78,6 +79,7 @@ public class TiXingFragment extends BaseFragment implements BGARefreshLayout.BGA
 
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
+        LogX.e("提醒", type);
         // 在这里加载最新数据
         if (true) {
             // 如果网络可用，则加载网络数据
@@ -141,7 +143,6 @@ public class TiXingFragment extends BaseFragment implements BGARefreshLayout.BGA
 
         }
     }
-
 
     @Override
     public void onDestroyView() {

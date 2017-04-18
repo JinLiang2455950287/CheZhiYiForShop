@@ -327,6 +327,19 @@ public interface ApiService {
     Call<ResultBase<CardPackageDetailInfo>> getCardPackegInfo(@Path("userNum") String userNum, @Query("packageNum") String packageNum);
 
     /**
+     * 施工/销售 提成
+     */
+    @POST(C.ApiUrl.URL_TICHENG_INFO)
+    Call<TiChengInfoModel> getTiChengInfo(@Path("userNum") String userNum, @Query("month") String month, @Query("type") int type);
+
+    /**
+     * 施工/销售list 提成
+     */
+    @POST(C.ApiUrl.URL_TICHENG_LIST)
+    Call<ResultBase<List<TiChengListModel>>> getTiChengList(@Path("userNum") String userNum, @Query("pageNum") int pageNum, @Query("commissionType") int commissionType, @Query("month") String month);
+
+
+    /**
      * 限时促销列表
      */
     @POST(C.ApiUrl.URL_PROMOTION_LIST)

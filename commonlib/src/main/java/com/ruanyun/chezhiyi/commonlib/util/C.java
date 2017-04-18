@@ -228,6 +228,16 @@ public final class C {
         public static final String URL_CARDPACKEG_INFO = "app/{userNum}/package/info";
 
         /**
+         * 施工/销售 提成
+         */
+        public static final String URL_TICHENG_INFO = "app/external/{userNum}/js_report_detail";
+
+        /**
+         * 施工/销售list 提成
+         */
+        public static final String URL_TICHENG_LIST = "app/external/{userNum}/getAjaxCommission";
+
+        /**
          * 1.12.2众筹列表
          **/
         public static final String URL_CROWD_FUNDING_LIST = "app/{userNum}/goods/crowd/list";

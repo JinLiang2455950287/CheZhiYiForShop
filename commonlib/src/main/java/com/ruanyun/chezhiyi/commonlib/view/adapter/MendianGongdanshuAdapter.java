@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ruanyun.chezhiyi.commonlib.R;
+import com.ruanyun.chezhiyi.commonlib.model.TiChengListModel;
 import com.ruanyun.chezhiyi.commonlib.model.TuiKuanInfo;
 import com.ruanyun.chezhiyi.commonlib.model.WorkBayInfo;
 import com.ruanyun.chezhiyi.commonlib.util.DbHelper;
@@ -25,19 +26,19 @@ import java.util.List;
  * 工单数Adapter
  * Created by jl on 2017/4/13
  */
-public class MendianGongdanshuAdapter extends CommonAdapter<String> {
+public class MendianGongdanshuAdapter extends CommonAdapter<TiChengListModel> {
 
-    public MendianGongdanshuAdapter(Context context, int layoutId, List<String> datas) {
+    public MendianGongdanshuAdapter(Context context, int layoutId, List<TiChengListModel> datas) {
         super(context, layoutId, datas);
     }
 
-    public void setDatas(List<String> datas) {
+    public void setDatas(List<TiChengListModel> datas) {
         mDatas = datas;
         notifyDataSetChanged();
     }
 
     @Override
-    protected void convert(ViewHolder holder, String item, int position) {
+    protected void convert(ViewHolder holder, TiChengListModel item, int position) {
         AutoUtils.auto(holder.getConvertView());
 
 //        LabelFlowLayout labelFlowLayout = holder.getView(R.id.service_project);

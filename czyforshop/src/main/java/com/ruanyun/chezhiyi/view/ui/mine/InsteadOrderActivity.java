@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.base.AutoLayoutActivity;
 import com.ruanyun.chezhiyi.commonlib.model.Tab;
@@ -56,9 +57,9 @@ public class InsteadOrderActivity extends AutoLayoutActivity implements Topbar.o
 
     private void initData() {
         tabTitles = new ArrayList<Tab>();
-        tabTitles.add(new Tab("全部",ALL));
-        tabTitles.add(new Tab("服务中",UNDERWAY));
-        tabTitles.add(new Tab("已结束",END));
+        tabTitles.add(new Tab("全部", ALL));
+        tabTitles.add(new Tab("服务中", UNDERWAY));
+        tabTitles.add(new Tab("已结束", END));
 
         for (Tab info : tabTitles) {
             tabTitle.addTab(tabTitle.newTab().setText(info.getTabNum()));
@@ -80,6 +81,7 @@ public class InsteadOrderActivity extends AutoLayoutActivity implements Topbar.o
             finish();
         }
     }
+
     /**
      * 滑动 ViewPager Adapter
      */

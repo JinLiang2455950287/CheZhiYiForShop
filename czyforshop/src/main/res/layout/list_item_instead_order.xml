@@ -9,7 +9,7 @@
         android:layout_width="230px"
         android:layout_height="230px"
         android:layout_marginBottom="27px"
-        android:layout_marginLeft="27px"
+        android:layout_marginLeft="10dp"
         android:layout_marginRight="35px"
         android:layout_marginTop="27px"
         android:src="@drawable/default_img" />

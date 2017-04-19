@@ -36,4 +36,13 @@ public class CarBookingInfo {
     public void setMakeInfo(AppointmentInfo makeInfo) {
         this.makeInfo = makeInfo;
     }
+
+    @Override
+    public String toString() {
+        return "CarBookingInfo{" +
+                "carInfo=" + carInfo +
+                ", customerUser=" + customerUser +
+                ", makeInfo=" + makeInfo +
+                '}';
+    }
 }

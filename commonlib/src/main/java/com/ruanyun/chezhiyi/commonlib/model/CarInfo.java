@@ -215,4 +215,31 @@ public class CarInfo implements CompressImageInfoGetter{
     public String requestPramsName() {
         return carAllName;
     }
+
+    @Override
+    public String toString() {
+        return "CarInfo{" +
+                "carNum='" + carNum + '\'' +
+                ", carModelNum='" + carModelNum + '\'' +
+                ", plateNumber='" + plateNumber + '\'' +
+                ", color=" + color +
+                ", frameNumber='" + frameNumber + '\'' +
+                ", engineNumber='" + engineNumber + '\'' +
+                ", registerDate='" + registerDate + '\'' +
+                ", picPath='" + picPath + '\'' +
+                ", obverseSidePhoto='" + obverseSidePhoto + '\'' +
+                ", otherSidePhoto='" + otherSidePhoto + '\'' +
+                ", userNum='" + userNum + '\'' +
+                ", carShortName='" + carShortName + '\'' +
+                ", carAllName='" + carAllName + '\'' +
+                ", storeNum='" + storeNum + '\'' +
+                ", carMileage=" + carMileage +
+                ", isAdd=" + isAdd +
+                ", editStatus=" + editStatus +
+                ", carBandName='" + carBandName + '\'' +
+                ", carName='" + carName + '\'' +
+                ", insuranceStart='" + insuranceStart + '\'' +
+                ", maintenanceMileage=" + maintenanceMileage +
+                '}';
+    }
 }

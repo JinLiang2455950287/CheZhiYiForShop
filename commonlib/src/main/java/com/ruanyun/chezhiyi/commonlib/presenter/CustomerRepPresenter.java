@@ -1,4 +1,5 @@
 package com.ruanyun.chezhiyi.commonlib.presenter;
+
 import android.support.annotation.NonNull;
 
 import com.ruanyun.chezhiyi.commonlib.App;
@@ -13,9 +14,12 @@ import com.ruanyun.chezhiyi.commonlib.model.WorkBayInfo;
 import com.ruanyun.chezhiyi.commonlib.model.WorkOrderInfo;
 import com.ruanyun.chezhiyi.commonlib.model.params.NotSpendingServiceParams;
 import com.ruanyun.chezhiyi.commonlib.util.DbHelper;
+import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.view.CustomerRepMvpView;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import retrofit2.Call;
 
 /**
@@ -43,7 +47,10 @@ public class CustomerRepPresenter implements Presenter<CustomerRepMvpView> {
     public void onCancel() {
 
     }
-    /**  获取车主已购服务参数实体类 **/
+
+    /**
+     * 获取车主已购服务参数实体类
+     **/
     NotSpendingServiceParams notSpendingServiceParams = new NotSpendingServiceParams();
 
     /**
@@ -52,7 +59,7 @@ public class CustomerRepPresenter implements Presenter<CustomerRepMvpView> {
      * @author zhangsan
      * @date 16/10/10 上午9:34
      */
-    public void getBaughtGoods(String carOwnerNum, final String projectNum,final int postion) {
+    public void getBaughtGoods(String carOwnerNum, final String projectNum, final int postion) {
         if (customerRepMvpView != null)
             customerRepMvpView.showLoadingView("正在获取商品信息...");
         notSpendingServiceParams.setCustomerUserNum(carOwnerNum);
@@ -61,7 +68,7 @@ public class CustomerRepPresenter implements Presenter<CustomerRepMvpView> {
             @Override
             public void onSuccess(Call call, ResultBase<List<OrderGoodsInfo>> listResultBase) {
                 if (customerRepMvpView != null)
-                    customerRepMvpView.onNotSpendingServiceResult(projectNum,getUiModelFromGoods(listResultBase.getObj()), postion);
+                    customerRepMvpView.onNotSpendingServiceResult(projectNum, getUiModelFromGoods(listResultBase.getObj()), postion);
             }
 
             @Override
@@ -88,26 +95,26 @@ public class CustomerRepPresenter implements Presenter<CustomerRepMvpView> {
      * @author zhangsan
      * @date 16/10/9 下午5:21
      */
-    public void getFreeWorkStation(final String projectNum,final int postion) {
+    public void getFreeWorkStation(final String projectNum, final int postion) {
         if (customerRepMvpView != null)
             customerRepMvpView.showLoadingView("正在空闲工位...");
         App.getInstance().getApiService().getWorkOrderGongWei(currentUserNum, projectNum).enqueue(new ResponseCallback<ResultBase<List<WorkBayInfo>>>() {
             @Override
             public void onSuccess(Call call, ResultBase<List<WorkBayInfo>> listResultBase) {
                 if (customerRepMvpView != null)
-                    customerRepMvpView.onFreeWorkbayResult(projectNum,listResultBase.getObj(),postion);
+                    customerRepMvpView.onFreeWorkbayResult(projectNum, listResultBase.getObj(), postion);
             }
 
             @Override
             public void onError(Call call, ResultBase<List<WorkBayInfo>> listResultBase, int errorCode) {
                 if (customerRepMvpView != null)
-                    customerRepMvpView.onFreeWorkbayResult(projectNum,new ArrayList<WorkBayInfo>(),postion);
+                    customerRepMvpView.onFreeWorkbayResult(projectNum, new ArrayList<WorkBayInfo>(), postion);
             }
 
             @Override
             public void onFail(Call call, String msg) {
                 if (customerRepMvpView != null)
-                    customerRepMvpView.onFreeWorkbayResult(projectNum,new ArrayList<WorkBayInfo>(),postion);
+                    customerRepMvpView.onFreeWorkbayResult(projectNum, new ArrayList<WorkBayInfo>(), postion);
             }
 
             @Override
@@ -125,26 +132,26 @@ public class CustomerRepPresenter implements Presenter<CustomerRepMvpView> {
      * @author zhangsan
      * @date 16/10/9 下午5:12
      */
-    public void getFreeTechnian(final String projectNum,final int postion) {
+    public void getFreeTechnian(final String projectNum, final int postion) {
         if (customerRepMvpView != null)
             customerRepMvpView.showLoadingView("正在空闲技师...");
         App.getInstance().getApiService().getLeisureTechnician(currentUserNum, projectNum).enqueue(new ResponseCallback<ResultBase<List<User>>>() {
             @Override
             public void onSuccess(Call call, ResultBase<List<User>> result) {
                 if (customerRepMvpView != null)
-                    customerRepMvpView.onFreeTechnicanResult(projectNum,result.getObj(),postion);
+                    customerRepMvpView.onFreeTechnicanResult(projectNum, result.getObj(), postion);
             }
 
             @Override
             public void onError(Call call, ResultBase<List<User>> result, int errorCode) {
                 if (customerRepMvpView != null)
-                    customerRepMvpView.onFreeTechnicanResult(projectNum,new ArrayList<User>(),postion);
+                    customerRepMvpView.onFreeTechnicanResult(projectNum, new ArrayList<User>(), postion);
             }
 
             @Override
             public void onFail(Call call, String msg) {
                 if (customerRepMvpView != null)
-                    customerRepMvpView.onFreeTechnicanResult(projectNum,new ArrayList<User>(),postion);
+                    customerRepMvpView.onFreeTechnicanResult(projectNum, new ArrayList<User>(), postion);
             }
 
             @Override
@@ -167,7 +174,8 @@ public class CustomerRepPresenter implements Presenter<CustomerRepMvpView> {
         App.getInstance().getApiService().scanLicenseGetBookingInfo(currentUserNum, carPlateNum).enqueue(new ResponseCallback<ResultBase<CarBookingInfo>>() {
             @Override
             public void onSuccess(Call call, ResultBase<CarBookingInfo> result) {
-                if (customerRepMvpView != null){
+                if (customerRepMvpView != null) {
+                    LogX.e("服务标签info", result.getObj().toString());
                     customerRepMvpView.onScanCarBookingSuccess(result.getObj());
                 }
             }
@@ -198,6 +206,7 @@ public class CustomerRepPresenter implements Presenter<CustomerRepMvpView> {
 
     /**
      * 保存车辆里程数
+     *
      * @param resultBaseCall
      */
     public void saveCarMileage(Call<ResultBase> resultBaseCall) {
@@ -207,7 +216,7 @@ public class CustomerRepPresenter implements Presenter<CustomerRepMvpView> {
         this.resultBaseCall.enqueue(new ResponseCallback<ResultBase>() {
             @Override
             public void onSuccess(Call call, ResultBase result) {
-                if (customerRepMvpView != null){
+                if (customerRepMvpView != null) {
                     customerRepMvpView.saveCarMileageSuccess();
 //                    customerRepMvpView.showToast(result.getMsg());
                 }
@@ -223,14 +232,14 @@ public class CustomerRepPresenter implements Presenter<CustomerRepMvpView> {
 
             @Override
             public void onFail(Call call, String msg) {
-                if (customerRepMvpView != null){
+                if (customerRepMvpView != null) {
 //                    customerRepMvpView.onScanCarBookingFail();
                 }
             }
 
             @Override
             public void onResult() {
-                if (customerRepMvpView != null){
+                if (customerRepMvpView != null) {
                     customerRepMvpView.disMissLoadingView();
                 }
             }
@@ -239,6 +248,7 @@ public class CustomerRepPresenter implements Presenter<CustomerRepMvpView> {
 
     /**
      * 提交服务工单
+     *
      * @param workOrderJson
      */
     public void submitWorkOrder(String workOrderJson) {
@@ -274,34 +284,34 @@ public class CustomerRepPresenter implements Presenter<CustomerRepMvpView> {
     }
 
     /**
-      * 从新选的服务商品获取一级服务项item
-      *@author zhangsan
-      *@date   16/10/17 上午9:23
-      */
-    public CustomerRepUiModel getUIModelFromProduct(@NonNull ProductInfo productInfo,int tab){
-        CustomerRepUiModel customerRepUiModel=new CustomerRepUiModel();
+     * 从新选的服务商品获取一级服务项item
+     *
+     * @author zhangsan
+     * @date 16/10/17 上午9:23
+     */
+    public CustomerRepUiModel getUIModelFromProduct(@NonNull ProductInfo productInfo, int tab) {
+        CustomerRepUiModel customerRepUiModel = new CustomerRepUiModel();
         customerRepUiModel.setItemType(CustomerRepUiModel.TYPE_PROJECT_TYPE);
         customerRepUiModel.setItemNum(productInfo.getProjectParent());
         customerRepUiModel.parentNum = productInfo.getProjectParent();
         customerRepUiModel.setItemName(getProjectNameByNum(productInfo.getProjectParent()));
         customerRepUiModel.setSelected(true);
         customerRepUiModel.setSelecTab(tab);
-        customerRepUiModel.isNewItem=true;
-         return customerRepUiModel;
+        customerRepUiModel.isNewItem = true;
+        return customerRepUiModel;
     }
 
-    private String getProjectNameByNum(String projectParentNum){
+    private String getProjectNameByNum(String projectParentNum) {
         return DbHelper.getInstance().getServiceTypeName(projectParentNum);
     }
-
 
 
     /**
      * @author zhangsan根据工单服务json 获取列表一级数据
      * @date 16/10/10 下午3:10
      */
-    public List<CustomerRepUiModel> getUiModelFromWorkOrder(List<WorkOrderInfo> workOrderInfos,int defaultTab) {
-       // List<ProjectType> projectTypes = new Gson().fromJson(jsonString, new TypeToken<List<ProjectType>>() {
+    public List<CustomerRepUiModel> getUiModelFromWorkOrder(List<WorkOrderInfo> workOrderInfos, int defaultTab) {
+        // List<ProjectType> projectTypes = new Gson().fromJson(jsonString, new TypeToken<List<ProjectType>>() {
         //}.getSelectPosition());
         List<CustomerRepUiModel> customerRepUiModels = new ArrayList<CustomerRepUiModel>();
         for (int i = 0, size = workOrderInfos.size(); i < size; i++) {
@@ -309,52 +319,58 @@ public class CustomerRepPresenter implements Presenter<CustomerRepMvpView> {
             customerRepUiModel.setItemType(CustomerRepUiModel.TYPE_PROJECT_TYPE);
             customerRepUiModel.setItemName(workOrderInfos.get(i).getProjectName());
             customerRepUiModel.setItemNum(workOrderInfos.get(i).getProjectNum());
-            customerRepUiModel.relativeBean=workOrderInfos.get(i);
+            customerRepUiModel.relativeBean = workOrderInfos.get(i);
             customerRepUiModel.setSelecTab(defaultTab);
             customerRepUiModels.add(customerRepUiModel);
         }
         return customerRepUiModels;
     }
-     /**
-       * 从技师实体类获取uimodel
-       *@author zhangsan
-       *@date   16/10/11 下午2:11
-       */
-    public List<CustomerRepUiModel> getUiModelFromTechnianUser(List<User> technicians,String projectNum) {
+
+    /**
+     * 从技师实体类获取uimodel
+     *
+     * @author zhangsan
+     * @date 16/10/11 下午2:11
+     */
+    public List<CustomerRepUiModel> getUiModelFromTechnianUser(List<User> technicians, String projectNum) {
         List<CustomerRepUiModel> customerRepUiModels = new ArrayList<CustomerRepUiModel>();
         for (int i = 0, size = technicians.size(); i < size; i++) {
             CustomerRepUiModel customerRepUiModel = new CustomerRepUiModel();
             customerRepUiModel.setItemNum(projectNum);
             customerRepUiModel.setItemName(technicians.get(i).getNickName());
             customerRepUiModel.setItemType(CustomerRepUiModel.TYPE_TECHNICIAN);
-            customerRepUiModel.relativeBean=technicians.get(i);
+            customerRepUiModel.relativeBean = technicians.get(i);
             customerRepUiModels.add(customerRepUiModel);
 
         }
         return customerRepUiModels;
     }
-   /**
+
+    /**
      * 从工位信息获取UImodel
-     *@author zhangsan
-     *@date   16/10/11 下午2:11
+     *
+     * @author zhangsan
+     * @date 16/10/11 下午2:11
      */
 
-    public List<CustomerRepUiModel> getUiModelFromWorkBay(List<WorkBayInfo> workBayInfos,String projectNum) {
+    public List<CustomerRepUiModel> getUiModelFromWorkBay(List<WorkBayInfo> workBayInfos, String projectNum) {
         List<CustomerRepUiModel> customerRepUiModels = new ArrayList<CustomerRepUiModel>();
         for (int i = 0, size = workBayInfos.size(); i < size; i++) {
             CustomerRepUiModel customerRepUiModel = new CustomerRepUiModel();
             customerRepUiModel.setItemType(CustomerRepUiModel.TYPE_WORK_STATION);
             customerRepUiModel.setItemName(workBayInfos.get(i).getWorkbayName());
             customerRepUiModel.setItemNum(projectNum);
-            customerRepUiModel.relativeBean=workBayInfos.get(i);
+            customerRepUiModel.relativeBean = workBayInfos.get(i);
             customerRepUiModels.add(customerRepUiModel);
         }
         return customerRepUiModels;
     }
-   /**
+
+    /**
      * 从已购商品获取UI实体类
-     *@author zhangsan
-     *@date   16/10/11 下午2:09
+     *
+     * @author zhangsan
+     * @date 16/10/11 下午2:09
      */
     public List<CustomerRepUiModel> getUiModelFromGoods(List<OrderGoodsInfo> goods) {
         List<CustomerRepUiModel> customerRepUiModels = new ArrayList<CustomerRepUiModel>();
@@ -364,7 +380,7 @@ public class CustomerRepPresenter implements Presenter<CustomerRepMvpView> {
             customerRepUiModel.setItemName(goods.get(i).getGoodsName());
             customerRepUiModel.setItemNum(goods.get(i).getGoodsNum());
             customerRepUiModel.parentNum = goods.get(i).getProjectParent();
-            customerRepUiModel.relativeBean=goods.get(i);
+            customerRepUiModel.relativeBean = goods.get(i);
             customerRepUiModels.add(customerRepUiModel);
         }
         return customerRepUiModels;
@@ -380,8 +396,8 @@ public class CustomerRepPresenter implements Presenter<CustomerRepMvpView> {
             customerRepUiModel.parentNum = productInfos.get(i).getProjectParent();
             customerRepUiModel.setCount(productInfos.get(i).getGoodsCount());
             customerRepUiModel.setSelected(true);//新添加商品默认为选中
-            customerRepUiModel.isNewItem=true;
-            customerRepUiModel.relativeBean=productInfos.get(i);
+            customerRepUiModel.isNewItem = true;
+            customerRepUiModel.relativeBean = productInfos.get(i);
             customerRepUiModels.add(customerRepUiModel);
         }
         return customerRepUiModels;

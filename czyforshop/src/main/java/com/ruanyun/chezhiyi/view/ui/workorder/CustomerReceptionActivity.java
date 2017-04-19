@@ -26,6 +26,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.base.AutoLayoutActivity;
 import com.ruanyun.chezhiyi.commonlib.model.AppointmentInfo;
@@ -33,6 +34,7 @@ import com.ruanyun.chezhiyi.commonlib.model.CarBookingInfo;
 import com.ruanyun.chezhiyi.commonlib.model.CustomerRepUiModel;
 import com.ruanyun.chezhiyi.commonlib.model.Event;
 import com.ruanyun.chezhiyi.commonlib.model.ProductInfo;
+import com.ruanyun.chezhiyi.commonlib.model.ProjectType;
 import com.ruanyun.chezhiyi.commonlib.model.User;
 import com.ruanyun.chezhiyi.commonlib.model.WorkBayInfo;
 import com.ruanyun.chezhiyi.commonlib.model.WorkOrderInfo;
@@ -301,7 +303,11 @@ public class CustomerReceptionActivity extends AutoLayoutActivity implements Top
                     .load(FileUtil.getFileUrl(carBookingInfo.getCarInfo().getPicPath()))
                     .error(R.drawable.default_imge_small)
                     .into(imgCarPhoto);
-            creatServiceLables(carBookingInfo.getMakeInfo().getWorkOrderInfoList());
+            List<ProjectType> projectTypes = new Gson().fromJson(carBookingInfo.getMakeInfo().getProjectNum(), new TypeToken<List<ProjectType>>() {
+            }.getType());
+            LogX.e("根据预约工单服务项初始化服务标签", carBookingInfo.getMakeInfo().getProjectNum());
+            LogX.e("根据预约工单服务项初始化服务标签", projectTypes.toString());
+            creatServiceLables(projectTypes);
             adapter.buidBaughtGoods(carBookingInfo.getMakeInfo().getWorkOrderInfoList());
         }
     }
@@ -313,7 +319,8 @@ public class CustomerReceptionActivity extends AutoLayoutActivity implements Top
      * @date 16/10/19 下午2:31
      */
     @SuppressWarnings("ResourceType")
-    private void creatServiceLables(List<WorkOrderInfo> workOrderInfos) {
+    private void creatServiceLables(List<ProjectType> projectTypes) {
+        LogX.e("服务标签", projectTypes.toString());
         lablesService.removeAllViews();
         // ViewGroup.LayoutParams source = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup
         //      .LayoutParams.WRAP_CONTENT);
@@ -321,7 +328,7 @@ public class CustomerReceptionActivity extends AutoLayoutActivity implements Top
         // lp.leftMargin=8;
         // lp.topMargin=8;
         lp.setMargins(10, 10, 0, 0);
-        for (WorkOrderInfo info : workOrderInfos) {
+        for (ProjectType info : projectTypes) {
             TextView view = new TextView(mContext);
             view.setText(info.getProjectName());
             view.setTextColor(Color.WHITE);
@@ -506,6 +513,7 @@ public class CustomerReceptionActivity extends AutoLayoutActivity implements Top
      */
     @Override
     public void onScanCarBookingSuccess(CarBookingInfo carBookingInfo) {
+        LogX.e("服务标签", carBookingInfo.toString());
         this.carBookingInfo = carBookingInfo;
         updateView();
         AppointmentInfo makeInfo = carBookingInfo.getMakeInfo();

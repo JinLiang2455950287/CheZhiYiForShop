@@ -351,4 +351,6 @@ public class User implements Parcelable {
         @Override
         public User[] newArray(int size) {return new User[size];}
     };
+
+
 }

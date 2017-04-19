@@ -31,10 +31,10 @@
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:imeOptions="actionSend"
+                    android:lines="1"
                     android:maxLength="7"
                     android:paddingLeft="43px"
                     android:paddingRight="43px"
-                    android:lines="1"
                     android:text=""
                     android:textColor="@color/text_black"
                     android:textSize="@dimen/text_size_xsmall" />
@@ -112,9 +112,9 @@
                     android:drawablePadding="20px"
                     android:drawableRight="@drawable/em_right_arrow_icon"
                     android:gravity="right"
+                    android:lines="1"
                     android:paddingLeft="43px"
                     android:paddingRight="43px"
-                    android:lines="1"
                     android:text="" />
             </LinearLayout>
 

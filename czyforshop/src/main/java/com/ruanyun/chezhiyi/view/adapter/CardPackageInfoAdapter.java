@@ -41,7 +41,7 @@ public class CardPackageInfoAdapter extends CommonAdapter<GoodsListBean> {
         if (goodsListBean.getGoodsCount().equals("")) {
             tvpurchase.setText("不限次");
         } else {
-            tvpurchase.setText("×" + goodsListBean.getGoodsCount());
+            tvpurchase.setText("/" + goodsListBean.getGoodsCount());
         }
 
         ImageUtil.loadImage(mContext, FileUtil.getImageUrl(goodsListBean.getMainPhoto()), ivImage, R.drawable.default_imge_middle);

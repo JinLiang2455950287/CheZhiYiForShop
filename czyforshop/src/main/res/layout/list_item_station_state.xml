@@ -46,12 +46,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_station_name"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="25px"
             android:layout_toRightOf="@+id/tv_service_item"
             android:background="@drawable/gongdan_carnumber_selector"
             android:gravity="center_vertical"
             android:paddingBottom="6px"
-            android:layout_marginLeft="5dp"
             android:paddingTop="6px"
             android:text="皖A66666"
             android:textColor="@color/bg_tangerine"
@@ -75,11 +75,11 @@
             android:id="@+id/labelflow_technician"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/text_technician"
             android:layout_marginLeft="5dp"
-            android:textSize="@dimen/text_size_small"
-            android:layout_toEndOf="@+id/text_technician"
-            android:layout_toRightOf="@+id/text_technician" />
+            android:layout_marginTop="25px"
+            android:layout_below="@+id/tv_station_name"
+            android:layout_toRightOf="@+id/text_technician"
+            android:textSize="@dimen/text_size_small" />
 
         <TextView
             android:id="@+id/tv_leisure_state"

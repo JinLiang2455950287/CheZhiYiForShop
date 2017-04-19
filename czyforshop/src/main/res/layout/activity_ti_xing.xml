@@ -17,11 +17,11 @@
         android:id="@+id/wait_project"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40px"
-        android:layout_marginRight="20px"
         android:background="@color/white"
         android:orientation="horizontal"
         android:paddingBottom="30px"
+        android:paddingLeft="40px"
+        android:paddingRight="20px"
         android:paddingTop="30px">
 
         <TextView
@@ -60,11 +60,11 @@
         android:id="@+id/wait_huiyuan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40px"
-        android:layout_marginRight="20px"
         android:background="@color/white"
         android:orientation="horizontal"
         android:paddingBottom="30px"
+        android:paddingLeft="40px"
+        android:paddingRight="20px"
         android:paddingTop="30px">
 
         <TextView
@@ -103,11 +103,11 @@
         android:id="@+id/wait_birthday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40px"
-        android:layout_marginRight="20px"
         android:background="@color/white"
         android:orientation="horizontal"
         android:paddingBottom="30px"
+        android:paddingLeft="40px"
+        android:paddingRight="20px"
         android:paddingTop="30px">
 
         <TextView
@@ -146,11 +146,11 @@
         android:id="@+id/wait_remain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40px"
-        android:layout_marginRight="20px"
         android:background="@color/white"
         android:orientation="horizontal"
         android:paddingBottom="30px"
+        android:paddingLeft="40px"
+        android:paddingRight="20px"
         android:paddingTop="30px">
 
         <TextView

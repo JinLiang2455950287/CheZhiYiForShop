@@ -152,7 +152,7 @@ public class CustomerReceptionActivity extends AutoLayoutActivity implements Top
                         upkeep = data.getStringExtra(C.IntentKey.UPDATE_NICKNAME);
                         if (!TextUtils.isEmpty(upkeep)) {
                             params = new CarMileageParams();
-                            params.setCarAllName(edtCarnumInput.getText().toString());
+                            params.setCarAllName(edtCarnumInput.getText().toString().trim());
                             params.setCarMileage(upkeep);
                             presenter.saveCarMileage(app.getApiService().saveCarMileage(app.getCurrentUserNum(), params));
                         }
@@ -246,7 +246,7 @@ public class CustomerReceptionActivity extends AutoLayoutActivity implements Top
             /*获取开单界面传过来的车牌号码*/
         plateNumber = getIntent().getStringExtra("plateNumber");
         edtCarnumInput.setText(plateNumber);
-        String cph = plateNumber.toString().toUpperCase();
+        String cph = plateNumber.toUpperCase();
         if (StringUtil.isCarNum(cph) && textWatcherEnable) {
             carNumber = cph;
             presenter.getScanCustomerInfo(carNumber);

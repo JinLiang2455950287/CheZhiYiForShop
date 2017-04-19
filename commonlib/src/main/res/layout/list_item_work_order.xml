@@ -1,200 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  android:layout_width="match_parent"
-			  android:layout_height="wrap_content"
-			  android:background="@color/white"
-			  android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
 
-	<!--我的预约item-->
-	<LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:background="@color/white"
-		android:orientation="horizontal">
+    <View style="@style/divider_horizontal" />
+    <!--我的预约item-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
 
-		<TextView
-			android:id="@+id/tv_order_number"
-			style="@style/text_black_style"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:paddingBottom="45px"
-			android:paddingLeft="25px"
-			android:paddingTop="45px"
-			android:textColor="@color/black"
-			android:text=""/>
+        <TextView
+            android:id="@+id/tv_order_number"
+            style="@style/text_black_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingBottom="45px"
+            android:paddingLeft="25px"
+            android:paddingTop="45px"
+            android:text=""
+            android:textColor="@color/black" />
 
-		<TextView
-			android:id="@+id/tv_state"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:paddingBottom="45px"
-			android:paddingLeft="27px"
-			android:paddingRight="27px"
-			android:paddingTop="45px"
-			android:text="已取消"
-			android:textColor="@color/theme_color_default"
-			android:textSize="@dimen/text_size_xsmall"/>
-	</LinearLayout>
+        <TextView
+            android:id="@+id/tv_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="45px"
+            android:paddingLeft="27px"
+            android:paddingRight="27px"
+            android:paddingTop="45px"
+            android:text="已取消"
+            android:textColor="@color/theme_color_default"
+            android:textSize="@dimen/text_size_xsmall" />
+    </LinearLayout>
 
-	<View style="@style/divider_horizontal" />
+    <View style="@style/divider_horizontal" />
 
-	<!--项目-->
-	<LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="248px"
-		android:orientation="horizontal">
+    <!--项目-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="248px"
+        android:orientation="horizontal">
 
-		<LinearLayout
-			android:layout_width="0px"
-			android:layout_weight="1"
-			android:paddingLeft="40px"
-			android:paddingRight="40px"
-			android:layout_height="match_parent"
-			android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingLeft="40px"
+            android:paddingRight="40px">
 
-			<TextView
-				android:layout_width="match_parent"
-				android:layout_height="0px"
-				android:layout_weight="1"
-				android:text="服务项目"
-				android:textColor="@color/text_booking_gray"
-				android:gravity="bottom|center_horizontal"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="1"
+                android:gravity="bottom|center_horizontal"
+                android:text="服务项目"
+                android:textColor="@color/text_booking_gray" />
 
-			<TextView
-				android:id="@+id/tv_service_project"
-				android:layout_width="match_parent"
-				android:layout_height="147px"
-				android:textSize="@dimen/text_size_xmiddle"
-				android:textColor="@color/progressbar_bg_selected"
-				android:gravity="center"
-				android:singleLine="true"
-				android:ellipsize="end"
-				android:text="美容"/>
-		</LinearLayout>
+            <TextView
+                android:id="@+id/tv_service_project"
+                android:layout_width="match_parent"
+                android:layout_height="147px"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="美容"
+                android:textColor="@color/progressbar_bg_selected"
+                android:textSize="@dimen/text_size_xmiddle" />
+        </LinearLayout>
 
-		<View
-			android:layout_width="1px"
-			android:layout_height="87px"
-			android:layout_marginTop="87px"
-			android:layout_marginBottom="74px"
-			android:background="@color/text_comment_gray"/>
+        <View
+            android:layout_width="1px"
+            android:layout_height="87px"
+            android:layout_marginBottom="74px"
+            android:layout_marginTop="87px"
+            android:background="@color/text_comment_gray" />
 
-		<LinearLayout
-			android:layout_width="0px"
-			android:layout_weight="1"
-			android:paddingLeft="40px"
-			android:paddingRight="40px"
-			android:layout_height="match_parent"
-			android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingLeft="40px"
+            android:paddingRight="40px">
 
-			<TextView
-				android:layout_width="match_parent"
-				android:layout_height="0px"
-				android:layout_weight="1"
-				android:text="服务工位"
-				android:textColor="@color/text_booking_gray"
-				android:gravity="bottom|center_horizontal"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="1"
+                android:gravity="bottom|center_horizontal"
+                android:text="服务工位"
+                android:textColor="@color/text_booking_gray" />
 
-			<TextView
-				android:id="@+id/tv_service_position"
-				android:layout_width="match_parent"
-				android:layout_height="147px"
-				android:textSize="@dimen/text_size_xmiddle"
-				android:textColor="@color/progressbar_bg_selected"
-				android:gravity="center"
-				android:text="1号"/>
-		</LinearLayout>
+            <TextView
+                android:id="@+id/tv_service_position"
+                android:layout_width="match_parent"
+                android:layout_height="147px"
+                android:gravity="center"
+                android:text="1号"
+                android:textColor="@color/progressbar_bg_selected"
+                android:textSize="@dimen/text_size_xmiddle" />
+        </LinearLayout>
 
-		<View
-			android:layout_width="1px"
-			android:layout_height="87px"
-			android:layout_marginTop="87px"
-			android:layout_marginBottom="74px"
-			android:background="@color/text_comment_gray"/>
+        <View
+            android:layout_width="1px"
+            android:layout_height="87px"
+            android:layout_marginBottom="74px"
+            android:layout_marginTop="87px"
+            android:background="@color/text_comment_gray" />
 
-		<LinearLayout
-			android:layout_width="0px"
-			android:layout_weight="1"
-			android:paddingLeft="40px"
-			android:paddingRight="40px"
-			android:layout_height="match_parent"
-			android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingLeft="40px"
+            android:paddingRight="40px">
 
-			<TextView
-				android:id="@+id/tv_service_user"
-				android:layout_width="match_parent"
-				android:layout_height="0px"
-				android:layout_weight="1"
-				android:text="服务客户"
-				android:textColor="@color/text_booking_gray"
-				android:gravity="bottom|center_horizontal"/>
+            <TextView
+                android:id="@+id/tv_service_user"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="1"
+                android:gravity="bottom|center_horizontal"
+                android:text="服务客户"
+                android:textColor="@color/text_booking_gray" />
 
-			<TextView
-				android:id="@+id/tv_service_customer"
-				android:layout_width="match_parent"
-				android:layout_height="147px"
-				android:textSize="@dimen/text_size_xmiddle"
-				android:textColor="@color/progressbar_bg_selected"
-				android:gravity="center"
-				android:text="呵呵"/>
-		</LinearLayout>
+            <TextView
+                android:id="@+id/tv_service_customer"
+                android:layout_width="match_parent"
+                android:layout_height="147px"
+                android:gravity="center"
+                android:text="呵呵"
+                android:textColor="@color/progressbar_bg_selected"
+                android:textSize="@dimen/text_size_xmiddle" />
+        </LinearLayout>
 
-	</LinearLayout>
+    </LinearLayout>
 
-	<!-- 协助技师 -->
-	<LinearLayout
-		android:id="@+id/ll_work_person"
-		android:layout_width="match_parent"
-		android:layout_height="122px"
-		android:orientation="vertical"
-		android:visibility="gone">
+    <!-- 协助技师 -->
+    <LinearLayout
+        android:id="@+id/ll_work_person"
+        android:layout_width="match_parent"
+        android:layout_height="122px"
+        android:orientation="vertical"
+        android:visibility="gone">
 
-		<View style="@style/divider_horizontal"
-			android:layout_marginLeft="20px"
-			android:layout_marginRight="20px"/>
+        <View
+            style="@style/divider_horizontal"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px" />
 
-		<TextView
-			android:id="@+id/tv_remarks"
-			style="@style/text_black_style"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:ellipsize="end"
-			android:gravity="center_vertical|right"
-			android:textColor="@color/text_booking_gray"
-			android:paddingLeft="28px"
-			android:paddingRight="25px"
-			android:singleLine="true"
-			android:text=""/>
-	</LinearLayout>
+        <TextView
+            android:id="@+id/tv_remarks"
+            style="@style/text_black_style"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="end"
+            android:gravity="center_vertical|right"
+            android:paddingLeft="28px"
+            android:paddingRight="25px"
+            android:singleLine="true"
+            android:text=""
+            android:textColor="@color/text_booking_gray" />
+    </LinearLayout>
 
-	<!-- 价格  -->
-	<LinearLayout
-		android:id="@+id/ll_all_price"
-		android:layout_width="match_parent"
-		android:layout_height="147px"
-		android:visibility="gone"
-		android:orientation="vertical" >
+    <!-- 价格  -->
+    <LinearLayout
+        android:id="@+id/ll_all_price"
+        android:layout_width="match_parent"
+        android:layout_height="147px"
+        android:orientation="vertical"
+        android:visibility="gone">
 
-		<View style="@style/divider_horizontal" />
+        <View style="@style/divider_horizontal" />
 
-		<TextView
-			android:id="@+id/tv_price"
-			style="@style/text_black_style"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:ellipsize="end"
-			android:gravity="center_vertical"
-			android:paddingLeft="28px"
-			android:paddingRight="25px"
-			android:singleLine="true"
-			android:text=""/>
-	</LinearLayout>
+        <TextView
+            android:id="@+id/tv_price"
+            style="@style/text_black_style"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:paddingLeft="28px"
+            android:paddingRight="25px"
+            android:singleLine="true"
+            android:text="" />
+    </LinearLayout>
 
-	<View style="@style/divider_horizontal" />
+    <View style="@style/divider_horizontal" />
 
-	<View
-		android:layout_width="match_parent"
-		android:layout_height="25px"
-		android:background="@color/bg_white"/>
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="25px"-->
+    <!--android:background="@color/bg_white"/>-->
 </LinearLayout>

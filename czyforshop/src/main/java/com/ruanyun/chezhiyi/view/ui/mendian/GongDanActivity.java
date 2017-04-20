@@ -53,7 +53,7 @@ import com.ruanyun.chezhiyi.R;
  * jin
  * 工单统计
  */
-public class GongDanActivity extends BaseActivity implements Topbar.onTopbarClickListener, HuiYuanGongDanTongJiView, BGARefreshLayout.BGARefreshLayoutDelegate, SwipeRefreshLayout.OnRefreshListener {
+public class GongDanActivity extends BaseActivity implements Topbar.onTopbarClickListener, HuiYuanGongDanTongJiView, BGARefreshLayout.BGARefreshLayoutDelegate {
     @BindView(R.id.topbar)
     Topbar topbar;
     @BindView(R.id.list)
@@ -69,9 +69,10 @@ public class GongDanActivity extends BaseActivity implements Topbar.onTopbarClic
     private SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM");
     private String startdate, enddate;
     private HuiYuanGongDanPresenter huiYuanGongDanPresenter = new HuiYuanGongDanPresenter();
-    private String tempTime, starttime, endtime;
+    private String tempTime;
     private AlertDialog builder;
-
+    private TextView startTime, endTime;
+    private boolean isStartTime = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,43 +129,11 @@ public class GongDanActivity extends BaseActivity implements Topbar.onTopbarClic
         mRefreshLayout.setRefreshViewHolder(refreshViewHolder);
     }
 
-    @Override
-    public void onRefresh() {
-        huiYuanGongDanPresenter.getGongDanTongJiInfo(app.getApiService().getMenDianGongDan(app.getCurrentUserNum(), "", ""));
-    }
 
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
         // 在这里加载更多数据，或者更具产品需求实现上拉刷新也可以
-
-        if (true) {
-            // 如果网络可用，则异步加载网络数据，并返回 true，显示正在加载更多
-            new AsyncTask<Void, Void, Void>() {
-
-                @Override
-                protected Void doInBackground(Void... params) {
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    return null;
-                }
-
-                @Override
-                protected void onPostExecute(Void aVoid) {
-                    // 加载完毕后在 UI 线程结束加载更多
-                    mRefreshLayout.endLoadingMore();
-//                    mAdapter.addDatas(DataEngine.loadMoreData());
-                }
-            }.execute();
-
-
-        } else {
-            // 网络不可用，返回 false，不显示正在加载更多
-            Toast.makeText(this, "网络不可用", Toast.LENGTH_SHORT).show();
-
-        }
+        huiYuanGongDanPresenter.getGongDanTongJiInfo(app.getApiService().getMenDianGongDan(app.getCurrentUserNum(), startdate, enddate));
     }
 
     @Override
@@ -225,9 +194,9 @@ public class GongDanActivity extends BaseActivity implements Topbar.onTopbarClic
 
 
         TextView tvcofirm = (TextView) view.findViewById(R.id.bt_confirm);
-        final TextView startTime = (TextView) view.findViewById(R.id.tv_startTime);
+        startTime = (TextView) view.findViewById(R.id.tv_startTime);
         startTime.setText(startdate);
-        final TextView endTime = (TextView) view.findViewById(R.id.tv_endTime);
+        endTime = (TextView) view.findViewById(R.id.tv_endTime);
         endTime.setText(enddate);
         TextView startTimebtn = (TextView) view.findViewById(R.id.tv_startTimebtn);
         TextView endTimebtn = (TextView) view.findViewById(R.id.tv_endTimebtn);
@@ -246,22 +215,23 @@ public class GongDanActivity extends BaseActivity implements Topbar.onTopbarClic
         startTimebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                starttime = initDatePicker();
-                startTime.setText(starttime);
+                initDatePicker();
+                isStartTime = true;
             }
         });
 
         endTimebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                endtime = initDatePicker();
-                endTime.setText(endtime);
+                initDatePicker();
+                isStartTime = false;
             }
         });
+
         tvcofirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                huiYuanGongDanPresenter.getGongDanTongJiInfo(app.getApiService().getMenDianGongDan(app.getCurrentUserNum(), starttime, endtime));
+                huiYuanGongDanPresenter.getGongDanTongJiInfo(app.getApiService().getMenDianGongDan(app.getCurrentUserNum(), startTime.getText().toString(), endTime.getText().toString()));
                 builder.dismiss();
             }
         });
@@ -275,7 +245,7 @@ public class GongDanActivity extends BaseActivity implements Topbar.onTopbarClic
     }
 
     @SuppressWarnings("ResourceType")
-    private String initDatePicker() {
+    private void initDatePicker() {
         Calendar c = Calendar.getInstance();
         // 直接创建一个DatePickerDialog对话框实例，并将它显示出来
         new DatePickerDialog(GongDanActivity.this, AlertDialog.THEME_HOLO_LIGHT,
@@ -286,17 +256,21 @@ public class GongDanActivity extends BaseActivity implements Topbar.onTopbarClic
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
                         tempTime = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
-                        Toast.makeText(mContext, year + "-" + (monthOfYear + 1) + "-" + dayOfMonth, 2).show();
+                        if (isStartTime) {
+                            startTime.setText(tempTime);
+                        } else {
+                            endTime.setText(tempTime);
+                        }
                     }
                 }
                 // 设置初始日期
                 , c.get(Calendar.YEAR), c.get(Calendar.MONTH),
                 c.get(Calendar.DAY_OF_MONTH)).show();
-        return tempTime;
     }
 
     @Override
     public void getGongDanSuccess(MenDianGongDanInfo menDianGongDanInfo) {
+        mRefreshLayout.endRefreshing();
         emptyview.loadSuccuss();
         LogX.e("工单统计", menDianGongDanInfo.getResult().toString());
         if (menDianGongDanInfo.getResult().size() > 0) {

@@ -41,7 +41,7 @@ public class MenDianGoodsListAdapter extends CommonAdapter<MenDianServiceGoodsIn
 //        List<ProjectType> projectTypes = new Gson().fromJson(item.getProjectNum(), new TypeToken<List<ProjectType>>() {
 //        }.getType());
         holder.setText(R.id.tv_name, item.getGoodsName());
-//        holder.setText(R.id.tv_saleount,"销量："+ item.getSaleCount());
+//        holder.setText(R.id.tv_salecount,"销量："+ item.getSaleCount());
         holder.setText(R.id.tv_price, "售价：¥"+ item.getSaleAmount());
 
         //处理按钮的回掉

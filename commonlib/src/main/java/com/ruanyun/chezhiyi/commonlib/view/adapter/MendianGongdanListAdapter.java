@@ -3,6 +3,7 @@ package com.ruanyun.chezhiyi.commonlib.view.adapter;
 import android.content.Context;
 
 import com.ruanyun.chezhiyi.commonlib.R;
+import com.ruanyun.chezhiyi.commonlib.model.MenDianGongDanInfo;
 import com.ruanyun.chezhiyi.commonlib.model.TuiKuanInfo;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
@@ -14,19 +15,19 @@ import java.util.List;
  * 门店工单Adapter
  * Created by hdl on 2017/4/12
  */
-public class MendianGongdanListAdapter extends CommonAdapter<String> {
+public class MendianGongdanListAdapter extends CommonAdapter<MenDianGongDanInfo.ResultBean> {
 
 
-    public MendianGongdanListAdapter(Context context, int layoutId, List<String> datas) {
+    public MendianGongdanListAdapter(Context context, int layoutId, List<MenDianGongDanInfo.ResultBean> datas) {
         super(context, layoutId, datas);
     }
 
-    public void setData(List<String> datas) {
+    public void setData(List<MenDianGongDanInfo.ResultBean> datas) {
         mDatas = datas;
     }
 
     @Override
-    protected void convert(ViewHolder holder, final String item, final int position) {
+    protected void convert(ViewHolder holder, final MenDianGongDanInfo.ResultBean item, final int position) {
         AutoUtils.auto(holder.getConvertView());
 //        ImageUtil.loadImage(mContext, FileUtil.getImageUrl(item.getUserPhoto()),
 //                (ImageView) holder.getView(R.id.iv_product_photo), R.drawable.default_img);
@@ -37,9 +38,9 @@ public class MendianGongdanListAdapter extends CommonAdapter<String> {
 //        TextView tvPrice = holder.getView(R.id.tv_price);
 //        tvPrice.setText(spStr);//销售价
 //
-//        holder.setText(R.id.tv_name, item.getUserName());
-//        holder.setText(R.id.tv_number, item.getOrderNum());
-//        holder.setText(R.id.tv_money, item.getRefundPrice() + "");
+        holder.setText(R.id.tv_time, item.getCreateTime());
+        holder.setText(R.id.tv_count, "工单数：" + item.getHyCount());
+        holder.setText(R.id.tv_money, "营业额：¥" + item.getAmount());
 //        holder.setText(R.id.tv_time, item.getRefundTime());
 //        holder.setText(R.id.tv_goods, item.getRefundReason());
 //        holder.setText(R.id.tv_detail, item.getRefundRemark());

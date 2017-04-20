@@ -12,20 +12,21 @@ import android.widget.Toast;
 
 import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.base.BaseFragment;
-import com.ruanyun.chezhiyi.commonlib.model.YuYueItemBean;
-import com.ruanyun.chezhiyi.commonlib.presenter.AppointMentPresenter;
+import com.ruanyun.chezhiyi.commonlib.base.ResultBase;
+import com.ruanyun.chezhiyi.commonlib.model.MenDianServiceGoodsInfo;
+import com.ruanyun.chezhiyi.commonlib.presenter.HuiYuanServicePresenter;
 import com.ruanyun.chezhiyi.commonlib.util.C;
+import com.ruanyun.chezhiyi.commonlib.util.LogX;
+import com.ruanyun.chezhiyi.commonlib.view.HuiYuanServiceGoodTongJiView;
 import com.ruanyun.chezhiyi.commonlib.view.adapter.MenDianGoodsListAdapter;
-import com.ruanyun.chezhiyi.commonlib.view.adapter.YuyueListAdapter;
 import com.ruanyun.chezhiyi.commonlib.view.widget.RYEmptyView;
-import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 import cn.bingoogolapple.refreshlayout.BGARefreshViewHolder;
@@ -35,27 +36,29 @@ import cn.bingoogolapple.refreshlayout.BGARefreshViewHolder;
  * jin
  * 服务商品统计 当日/当月
  */
-public class ServiceGoodsFragment extends BaseFragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
+public class ServiceGoodsFragment extends BaseFragment implements HuiYuanServiceGoodTongJiView, BGARefreshLayout.BGARefreshLayoutDelegate {
     private ListView lvProduct;
     private BGARefreshLayout mRefreshLayout;
     private RYEmptyView emptyview;
     private MenDianGoodsListAdapter adapter;
-    private List<String> listData;
-    String type;
+    private List<MenDianServiceGoodsInfo.ResultBean> listData;
+    private HuiYuanServicePresenter huiYuanServicePresenter = new HuiYuanServicePresenter();
+    private SimpleDateFormat sDateFormatend = new SimpleDateFormat("yyyy-MM-dd");
+    private SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM");
+    private String startdate, enddate;
+    private String workOrderStatusString;
 
-    public ServiceGoodsFragment() {
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mContentView = inflater.inflate(R.layout.fragment_service_goods, container, false);
+        workOrderStatusString = getArguments().getString(C.IntentKey.WORK_ORDER_STATUS_STRING);
         initView();
-        type = getArguments().getString(C.IntentKey.WORK_ORDER_STATUS_STRING);
         return mContentView;
     }
 
     private void initView() {
+        huiYuanServicePresenter.attachView(this);
         lvProduct = (ListView) mContentView.findViewById(R.id.list);
         mRefreshLayout = (BGARefreshLayout) mContentView.findViewById(R.id.refreshlayout);
         emptyview = (RYEmptyView) mContentView.findViewById(R.id.emptyview);
@@ -63,17 +66,17 @@ public class ServiceGoodsFragment extends BaseFragment implements BGARefreshLayo
         emptyview.bind(mRefreshLayout);
         listData = new ArrayList<>();
         setAdapter();
+        startdate = sDateFormat.format(new Date()) + "-01";
+        enddate = sDateFormatend.format(new Date());
+        LogX.e("日期", startdate + ";" + enddate);
+        if (workOrderStatusString.equals("day")) {
+            huiYuanServicePresenter.getServiceGoodsInfo(app.getApiService().getServiceGoods(app.getCurrentUserNum(), enddate, ""));
+        } else {
+            huiYuanServicePresenter.getServiceGoodsInfo(app.getApiService().getServiceGoods(app.getCurrentUserNum(), startdate, enddate));
+        }
     }
 
     private void setAdapter() {
-//        if (type.equals("2")) {
-//            listData.add("few");
-//            listData.add("few");
-//        } else {
-//            listData.clear();
-            listData.add("few");
-//        }
-
         adapter = new MenDianGoodsListAdapter(mContext, R.layout.list_item_gongdan_servicegoods, listData);
         lvProduct.setAdapter(adapter);
         lvProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -95,33 +98,12 @@ public class ServiceGoodsFragment extends BaseFragment implements BGARefreshLayo
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
         // 在这里加载最新数据
-        if (true) {
-            // 如果网络可用，则加载网络数据
-            new AsyncTask<Void, Void, Void>() {
-
-                @Override
-                protected Void doInBackground(Void... params) {
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    return null;
-                }
-
-                @Override
-                protected void onPostExecute(Void aVoid) {
-                    // 加载完毕后在 UI 线程结束下拉刷新
-                    mRefreshLayout.endRefreshing();
-//                    mDatas.addAll(0, DataEngine.loadNewData());
-//                    mAdapter.setDatas(mDatas);
-                }
-            }.execute();
+        if (workOrderStatusString.equals("day")) {
+            huiYuanServicePresenter.getServiceGoodsInfo(app.getApiService().getServiceGoods(app.getCurrentUserNum(), enddate, ""));
         } else {
-            // 网络不可用，结束下拉刷新
-            Toast.makeText(getActivity(), "网络不可用", Toast.LENGTH_SHORT).show();
-            mRefreshLayout.endRefreshing();
+            huiYuanServicePresenter.getServiceGoodsInfo(app.getApiService().getServiceGoods(app.getCurrentUserNum(), startdate, enddate));
         }
+
     }
 
     @Override
@@ -162,5 +144,23 @@ public class ServiceGoodsFragment extends BaseFragment implements BGARefreshLayo
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        huiYuanServicePresenter.detachView();
+    }
+
+    @Override
+    public void getServiceGoodsSuccess(MenDianServiceGoodsInfo resultBase) {
+        mRefreshLayout.endRefreshing();
+        LogX.e("服务商品Activity", resultBase.getResult().toString());
+        if (resultBase.getResult().size() > 0) {
+            listData.clear();
+            listData = resultBase.getResult();
+            adapter.setData(listData);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void cancelServiceGoodsTiChengErr() {
+
     }
 }

@@ -344,6 +344,32 @@ public interface ApiService {
     @POST(C.ApiUrl.URL_TICHENG_INFO)
     Call<ResultBase> getTiChengDetailList(@Path("userNum") String userNum, @Query("month") String month, @Query("type") int type);
 
+    /**
+     * 门店统计 会员统计
+     */
+    @POST(C.ApiUrl.URL_MENGDIAN_HUIYUAN)
+    Call<ResultBase<MenDianHuiYuanInfo>> getMenDianHuiYuan(@Path("userNum") String userNum, @Query("startDate") String startDate, @Query("reportDate") String reportDate);
+
+    /**
+     * 门店统计 工单统计
+     */
+    @POST(C.ApiUrl.URL_MENGDIAN_GONGDAN)
+    Call<ResultBase<MenDianGongDanInfo>> getMenDianGongDan(@Path("userNum") String userNum, @Query("startDate") String startDate, @Query("reportDate") String reportDate);
+
+
+    /**
+     * 门店统计 营业额统计
+     */
+    @POST(C.ApiUrl.URL_MENGDIAN_YINYEE)
+    Call<ResultBase<MenDianYinYeEInfo>> getMenDianYinYeE(@Path("userNum") String userNum, @Query("startDate") String startDate, @Query("reportDate") String reportDate, @Query("appType") int appType);
+
+
+    /**
+     * 门店统计 服务商品
+     */
+    @POST(C.ApiUrl.URL_MENGDIAN_SERVICEGOODS)
+    Call<ResultBase<MenDianServiceGoodsInfo>> getServiceGoods(@Path("userNum") String userNum, @Query("startDate") String startDate, @Query("reportDate") String reportDate);
+
 
     /**
      * 限时促销列表

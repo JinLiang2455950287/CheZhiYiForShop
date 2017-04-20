@@ -1,6 +1,8 @@
 package com.ruanyun.chezhiyi.view.ui.mendian;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -9,16 +11,15 @@ import android.view.View;
 
 import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.base.AutoLayoutActivity;
-import com.ruanyun.chezhiyi.commonlib.base.BaseActivity;
 import com.ruanyun.chezhiyi.commonlib.model.Tab;
 import com.ruanyun.chezhiyi.commonlib.util.C;
 import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 /**
  * 2017/4/12
  * jin
@@ -33,9 +34,10 @@ public class MemberCountActivity extends AutoLayoutActivity implements Topbar.on
     @BindView(R.id.content_panle)
     ViewPager contentPanle;
     String[] clientTabName = {"当日", "本月"};
-    String[] clientTabType = {"2", "3"};
+    String[] clientTabType = {"day", "month"};
     private ArrayList<Tab> tabTitles = new ArrayList<Tab>();
     private ArrayList<Fragment> tabs = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +48,13 @@ public class MemberCountActivity extends AutoLayoutActivity implements Topbar.on
         initTab();
     }
 
+
     private void initView() {
-        topbar.setTttleText("营业额统计")
+        topbar.setTttleText("会员统计")
                 .setBackBtnEnable(true)
                 .onBackBtnClick()
                 .setTopbarClickListener(this);
+
     }
 
     private void initTab() {
@@ -111,7 +115,7 @@ public class MemberCountActivity extends AutoLayoutActivity implements Topbar.on
     @Override
     public void onTobbarViewClick(View v) {
         int viewId = v.getId();
-        if (viewId == com.ruanyun.chezhiyi.commonlib.R.id.img_btn_left) {
+        if (viewId == R.id.img_btn_left) {
             finish();
         }
     }

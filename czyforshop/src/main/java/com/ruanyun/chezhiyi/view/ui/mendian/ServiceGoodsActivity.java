@@ -34,7 +34,7 @@ public class ServiceGoodsActivity extends AutoLayoutActivity implements Topbar.o
     @BindView(R.id.content_panle)
     ViewPager contentPanle;
     String[] clientTabName = {"当日", "本月"};
-    String[] clientTabType = {"2", "3"};
+    String[] clientTabType = {"day", "month"};
     private ArrayList<Tab> tabTitles = new ArrayList<Tab>();
     private ArrayList<Fragment> tabs = new ArrayList<>();
 
@@ -58,11 +58,11 @@ public class ServiceGoodsActivity extends AutoLayoutActivity implements Topbar.o
         setTabTitles(clientTabName, clientTabType);
         for (Tab info : tabTitles) {
             tabTitle.addTab(tabTitle.newTab().setText(info.getTabNum()));
-            ServiceGoodsFragment serviceGoodsFragment = new ServiceGoodsFragment();
+            ServiceGoodsFragment memberCountFragment = new ServiceGoodsFragment();
             Bundle bundle = new Bundle();
             bundle.putString(C.IntentKey.WORK_ORDER_STATUS_STRING, info.getType());
-            serviceGoodsFragment.setArguments(bundle);
-            tabs.add(serviceGoodsFragment);
+            memberCountFragment.setArguments(bundle);
+            tabs.add(memberCountFragment);
         }
         contentPanle.setOffscreenPageLimit(2);
         contentPanle.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {

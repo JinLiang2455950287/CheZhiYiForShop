@@ -233,7 +233,27 @@ public final class C {
         public static final String URL_TICHENG_INFO = "app/external/{userNum}/js_report_detail";
 
         /**
-         * 施工/销售 提成app/external/${userNum}/js_report_detail?month=${year}'+obj.value+'&type=${type}
+         * 门店统计 会员统计
+         */
+        public static final String URL_MENGDIAN_HUIYUAN = "app/{userNum}/report/user";
+
+        /**
+         * 门店统计 工单统计
+         */
+        public static final String URL_MENGDIAN_GONGDAN = "app/{userNum}/report/work";
+
+        /**
+         * 门店统计 营业额统计
+         */
+        public static final String URL_MENGDIAN_YINYEE = "app/{userNum}/report/business";
+
+        /**
+         * 门店统计 服务商品
+         */
+        public static final String URL_MENGDIAN_SERVICEGOODS = "app/{userNum}/report/goods";
+
+        /**
+         * 施工/销售 提成
          */
         public static final String URL_TICHENG_DETAILLIST = "app/external/{userNum}/js_report_detail";
 

@@ -67,12 +67,12 @@ public class ShopCollectActivity extends AutoLayoutActivity implements Topbar.on
                 Intent intent3 = new Intent(mContext, MemberCountActivity.class);
                 showActivity(intent3);
                 break;
-            case R.id.new_User://新增用户
+            case R.id.new_User://工单统计
 //                toWebView(String.format(FileUtil.getFileUrl(C.ApiUrl.WEB_URL_JS_REPORT_XZKH), app.getCurrentUserNum()), WebViewActivity.XZYH);
                 Intent intent5 = new Intent(mContext, GongDanActivity.class);
                 showActivity(intent5);
                 break;
-            case R.id.sale_good://销售商品
+            case R.id.sale_good://服务商品
 //                toWebView(String.format(FileUtil.getFileUrl(C.ApiUrl.WEB_URL_JS_REPORT_XSSP), app.getCurrentUserNum()), WebViewActivity.XSSP);
                 Intent intent4 = new Intent(mContext, ServiceGoodsActivity.class);
                 showActivity(intent4);

@@ -77,7 +77,7 @@
             android:background="@drawable/corner_rectangle_green_shape2"
             android:gravity="center"
             android:lines="1"
-            android:text="立即使用"
+            android:text="立即查看"
             android:textColor="@color/theme_color_default" />
 
     </RelativeLayout>

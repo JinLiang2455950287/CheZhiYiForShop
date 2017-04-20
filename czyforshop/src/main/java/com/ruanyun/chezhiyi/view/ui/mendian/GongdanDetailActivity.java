@@ -67,7 +67,7 @@ public class GongdanDetailActivity extends BaseActivity implements Topbar.onTopb
         listData.add("fe");
         listData.add("fe");
 
-        adapter = new MendianGongdanListAdapter(mContext, R.layout.list_item_gongdan_detail_item, listData);
+//        adapter = new MendianGongdanListAdapter(mContext, R.layout.list_item_gongdan_detail_item, listData);
         lvProduct.setAdapter(adapter);
         lvProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

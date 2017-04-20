@@ -33,7 +33,7 @@ public class BusinessTotalActivity extends AutoLayoutActivity implements Topbar.
     @BindView(R.id.content_panle)
     ViewPager contentPanle;
     String[] clientTabName = {"当日", "本月"};
-    String[] clientTabType = {"2", "3"};
+    String[] clientTabType = {"day", "month"};
     private ArrayList<Tab> tabTitles = new ArrayList<Tab>();
     private ArrayList<Fragment> tabs = new ArrayList<>();
 

@@ -23,12 +23,11 @@
             android:layout_alignParentTop="true" />
 
         <TextView
-            android:id="@+id/tv_car_number"
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="80px"
-            android:layout_alignLeft="@+id/tv_user_name"
-            android:layout_alignStart="@+id/tv_user_name"
             android:layout_below="@+id/view2"
+            android:layout_marginLeft="20dp"
             android:drawableLeft="@drawable/gongdian_repair"
             android:drawablePadding="10px"
             android:gravity="center_vertical"
@@ -37,29 +36,29 @@
             android:textSize="@dimen/text_size_middle" />
 
         <TextView
-            android:id="@+id/tv_user_name"
+            android:id="@+id/tv_saleount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_car_number"
-            android:layout_marginLeft="42px"
+            android:layout_below="@+id/tv_name"
+            android:layout_marginLeft="20dp"
             android:layout_marginRight="30px"
             android:layout_marginTop="10px"
             android:layout_toRightOf="@+id/iv_car_photo"
             android:gravity="center_vertical"
-            android:text="销量:30"
+            android:text="销量:0"
             android:textColor="@color/text_booking_gray"
-            android:textSize="@dimen/text_size_xsmall" />
+            android:textSize="@dimen/text_size_small" />
 
         <TextView
-            android:id="@+id/tv_await_time_or_money"
+            android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_car_number"
+            android:layout_below="@+id/tv_name"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10px"
-            android:layout_toRightOf="@+id/tv_user_name"
+            android:layout_toRightOf="@+id/tv_saleount"
             android:gravity="center_vertical"
-            android:text="售价：¥112.0"
+            android:text="售价：¥0"
             android:textColor="@color/text_comment_gray"
             android:textSize="@dimen/text_size_small" />
 

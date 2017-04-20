@@ -9,7 +9,6 @@ import com.ruanyun.chezhiyi.commonlib.model.TiChengInfoModel;
 
 public interface TiChengView {
     void getTiChengSuccess(TiChengInfoModel tiChengInfoModel);
-    ;
 
     void cancelTiChengErr();
 }

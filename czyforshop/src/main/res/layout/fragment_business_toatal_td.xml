@@ -47,7 +47,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="¥ 1200.00"
+                        android:text="¥ 0"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
@@ -72,10 +72,11 @@
                         android:text="工单金额" />
 
                     <TextView
+                        android:id="@+id/tv_gongdanMoney"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="¥ 1200.00"
+                        android:text="¥ 0"
                         android:textColor="@color/black" />/>
 
 
@@ -111,10 +112,11 @@
                         android:text="商城销售" />
 
                     <TextView
+                        android:id="@+id/tv_shangcheng"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="¥ 1200.00"
+                        android:text="¥ 0"
                         android:textColor="@color/black" />/>
 
                 </LinearLayout>
@@ -139,10 +141,11 @@
                         android:text="订单退款" />
 
                     <TextView
+                        android:id="@+id/tv_repay"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="¥ 1200.00"
+                        android:text="¥0"
                         android:textColor="@color/black" />/>
 
                 </LinearLayout>
@@ -200,13 +203,14 @@
                     android:drawableLeft="@drawable/mendian_huiyuanyue"
                     android:drawablePadding="5dp"
                     android:gravity="center_vertical"
-                    android:text="会员余额" />
+                    android:text="会员卡支付" />
 
                 <TextView
+                    android:id="@+id/tv_huiyuanreain"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
-                    android:text="¥ 1200.00"
+                    android:text="¥ 0"
                     android:textColor="@color/gray_border" />
             </LinearLayout>
 
@@ -233,10 +237,11 @@
                     android:text="现金支付" />
 
                 <TextView
+                    android:id="@+id/tv_cashpay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
-                    android:text="¥ 1200.00"
+                    android:text="¥ 0"
                     android:textColor="@color/gray_border" />
             </LinearLayout>
 
@@ -263,10 +268,11 @@
                     android:text="微信支付" />
 
                 <TextView
+                    android:id="@+id/tv_weixinpay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
-                    android:text="¥ 1200.00"
+                    android:text="¥ 0"
                     android:textColor="@color/gray_border" />
             </LinearLayout>
 
@@ -293,10 +299,11 @@
                     android:text="支付宝支付" />
 
                 <TextView
+                    android:id="@+id/tv_zhifubaopay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
-                    android:text="¥ 1200.00"
+                    android:text="¥ 0"
                     android:textColor="@color/gray_border" />
             </LinearLayout>
 

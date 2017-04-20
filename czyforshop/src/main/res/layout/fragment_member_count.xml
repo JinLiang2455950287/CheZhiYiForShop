@@ -43,10 +43,11 @@
                         android:text="会员充值次数" />
 
                     <TextView
+                        android:id="@+id/tv_chongCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="¥ 1200.00"
+                        android:text="0次"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
@@ -71,10 +72,11 @@
                         android:text="充值金额" />
 
                     <TextView
+                        android:id="@+id/tv_chongMoney"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="¥ 1200.00"
+                        android:text="¥ 0"
                         android:textColor="@color/black" />/>
 
 
@@ -110,10 +112,11 @@
                         android:text="余额消费" />
 
                     <TextView
+                        android:id="@+id/tv_reaminConsume"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="¥ 1200.00"
+                        android:text="¥ 0"
                         android:textColor="@color/black" />/>
 
                 </LinearLayout>
@@ -138,10 +141,11 @@
                         android:text="剩余金额" />
 
                     <TextView
+                        android:id="@+id/tv_remainmoney"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="¥ 1200.00"
+                        android:text="¥ 0"
                         android:textColor="@color/black" />/>
 
                 </LinearLayout>
@@ -176,10 +180,11 @@
                         android:text="会员办卡" />
 
                     <TextView
+                        android:id="@+id/tv_banka"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="¥ 1200.00"
+                        android:text="0次"
                         android:textColor="@color/black" />/>
 
                 </LinearLayout>
@@ -204,10 +209,11 @@
                         android:text="办卡金额" />
 
                     <TextView
+                        android:id="@+id/tv_bankaMoney"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="¥ 1200.00"
+                        android:text="¥ 0"
                         android:textColor="@color/black" />/>
 
                 </LinearLayout>

@@ -3,6 +3,7 @@ package com.ruanyun.chezhiyi.view.ui.mendian;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -109,7 +110,9 @@ public class GongDanActivity extends BaseActivity implements Topbar.onTopbarClic
         lvProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                showActivity(GongdanDetailActivity.class);
+                Intent intent=new Intent(GongDanActivity.this,GongdanDetailActivity.class);
+               intent.putExtra("time",listData.get(position).getCreateTime());
+                startActivity(intent);
             }
         });
     }

@@ -9,11 +9,19 @@ import android.widget.Toast;
 
 import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.base.BaseActivity;
+import com.ruanyun.chezhiyi.commonlib.base.ResultBase;
+import com.ruanyun.chezhiyi.commonlib.model.MenDianGongDanDetailInfo;
+import com.ruanyun.chezhiyi.commonlib.presenter.HuiYuanGongDanDetailPresenter;
+import com.ruanyun.chezhiyi.commonlib.util.LogX;
+import com.ruanyun.chezhiyi.commonlib.view.HuiYuanGongDanDetailView;
+import com.ruanyun.chezhiyi.commonlib.view.adapter.MendianGongdanDetailListAdapter;
 import com.ruanyun.chezhiyi.commonlib.view.adapter.MendianGongdanListAdapter;
 import com.ruanyun.chezhiyi.commonlib.view.widget.RYEmptyView;
 import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -27,7 +35,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshViewHolder;
  * jin
  * 工单详细 当日/当月
  */
-public class GongdanDetailActivity extends BaseActivity implements Topbar.onTopbarClickListener, BGARefreshLayout.BGARefreshLayoutDelegate {
+public class GongdanDetailActivity extends BaseActivity implements Topbar.onTopbarClickListener, HuiYuanGongDanDetailView, BGARefreshLayout.BGARefreshLayoutDelegate {
     @BindView(R.id.topbar)
     Topbar topbar;
     @BindView(R.id.list)
@@ -36,23 +44,30 @@ public class GongdanDetailActivity extends BaseActivity implements Topbar.onTopb
     RYEmptyView emptyview;
     @BindView(R.id.refreshlayout)
     BGARefreshLayout mRefreshLayout;
-    private MendianGongdanListAdapter adapter;
-    private List<String> listData;
+    private MendianGongdanDetailListAdapter adapter;
+    private List<MenDianGongDanDetailInfo.ResultBean> listData;
+    private HuiYuanGongDanDetailPresenter huiYuanGongDanDetailPresenter = new HuiYuanGongDanDetailPresenter();
+    private String time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gong_dan);
         ButterKnife.bind(this);
+        huiYuanGongDanDetailPresenter.attachView(this);
         initRefreshLayout(mRefreshLayout);
         initView();
         setAdapter();
+
+        time = getIntent().getStringExtra("time");
+        LogX.e("time", time);
+        huiYuanGongDanDetailPresenter.getGongDanTongJiDtailInfo(app.getApiService().getGongDanDetailInfo(app.getCurrentUserNum(), time, time));
     }
 
     private void initView() {
         listData = new ArrayList<>();
         emptyview.bind(mRefreshLayout);
-//        emptyview.showLoading();
+        emptyview.showLoading();
         topbar.setTttleText("工单明细")
                 .setBackBtnEnable(true)
                 .onBackBtnClick()
@@ -60,14 +75,8 @@ public class GongdanDetailActivity extends BaseActivity implements Topbar.onTopb
     }
 
     private void setAdapter() {
-        listData.add("fe");
-        listData.add("fe");
-        listData.add("fe");
-        listData.add("fe");
-        listData.add("fe");
-        listData.add("fe");
 
-//        adapter = new MendianGongdanListAdapter(mContext, R.layout.list_item_gongdan_detail_item, listData);
+        adapter = new MendianGongdanDetailListAdapter(mContext, R.layout.list_item_gongdan_detail_item, listData);
         lvProduct.setAdapter(adapter);
         lvProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -79,6 +88,7 @@ public class GongdanDetailActivity extends BaseActivity implements Topbar.onTopb
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        huiYuanGongDanDetailPresenter.detachView();
     }
 
     private void initRefreshLayout(BGARefreshLayout refreshLayout) {
@@ -164,5 +174,16 @@ public class GongdanDetailActivity extends BaseActivity implements Topbar.onTopb
         if (id == com.ruanyun.chezhiyi.commonlib.R.id.img_btn_left) {
             finish();
         }
+    }
+
+
+    @Override
+    public void getGongDanDetailSuccess(MenDianGongDanDetailInfo menDianGongDanDetailInfo) {
+
+    }
+
+    @Override
+    public void cancelGongDanTiDetailChengErr() {
+
     }
 }

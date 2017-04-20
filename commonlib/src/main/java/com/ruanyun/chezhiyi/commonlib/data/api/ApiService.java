@@ -356,6 +356,12 @@ public interface ApiService {
     @POST(C.ApiUrl.URL_MENGDIAN_GONGDAN)
     Call<ResultBase<MenDianGongDanInfo>> getMenDianGongDan(@Path("userNum") String userNum, @Query("startDate") String startDate, @Query("reportDate") String reportDate);
 
+    /**
+     * 门店统计 服务Detail商品
+     */
+    @POST(C.ApiUrl.URL_MENGDIAN_GONGDANDETAIL)
+    Call<ResultBase<MenDianGongDanDetailInfo>> getGongDanDetailInfo(@Path("userNum") String userNum, @Query("startDate") String startDate, @Query("reportDate") String reportDate);
+
 
     /**
      * 门店统计 营业额统计

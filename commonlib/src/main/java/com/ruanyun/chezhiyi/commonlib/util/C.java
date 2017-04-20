@@ -243,6 +243,11 @@ public final class C {
         public static final String URL_MENGDIAN_GONGDAN = "app/{userNum}/report/work";
 
         /**
+         * 门店统计 工单detail统计
+         */
+        public static final String URL_MENGDIAN_GONGDANDETAIL = "app/{userNum}/report/work/detail";
+
+        /**
          * 门店统计 营业额统计
          */
         public static final String URL_MENGDIAN_YINYEE = "app/{userNum}/report/business";

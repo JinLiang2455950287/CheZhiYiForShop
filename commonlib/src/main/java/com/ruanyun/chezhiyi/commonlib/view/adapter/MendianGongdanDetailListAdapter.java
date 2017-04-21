@@ -1,11 +1,14 @@
 package com.ruanyun.chezhiyi.commonlib.view.adapter;
 
 import android.content.Context;
+import android.widget.ImageView;
 
 import com.ruanyun.chezhiyi.commonlib.R;
 import com.ruanyun.chezhiyi.commonlib.model.MenDianGongDanDetailInfo;
 import com.ruanyun.chezhiyi.commonlib.model.MenDianGongDanInfo;
 import com.ruanyun.chezhiyi.commonlib.model.TuiKuanInfo;
+import com.ruanyun.chezhiyi.commonlib.util.FileUtil;
+import com.ruanyun.chezhiyi.commonlib.util.ImageUtil;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
 import com.zhy.autolayout.utils.AutoUtils;
@@ -30,29 +33,20 @@ public class MendianGongdanDetailListAdapter extends CommonAdapter<MenDianGongDa
     @Override
     protected void convert(ViewHolder holder, final MenDianGongDanDetailInfo.ResultBean item, final int position) {
         AutoUtils.auto(holder.getConvertView());
-//        ImageUtil.loadImage(mContext, FileUtil.getImageUrl(item.getUserPhoto()),
-//                (ImageView) holder.getView(R.id.iv_product_photo), R.drawable.default_img);
-
+//        ImageUtil.loadImage(mContext, FileUtil.getImageUrl(item.getUser().getUserPhoto()),
+//                (ImageView) holder.getView(R.id.cir_picture), R.drawable.default_img);
+//
 //        String price = "¥" + item.getSalePrice();
 //        SpannableString spStr = new SpannableString(price);
 //        spStr.setSpan(new RelativeSizeSpan(0.7f), 0, 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
 //        TextView tvPrice = holder.getView(R.id.tv_price);
 //        tvPrice.setText(spStr);//销售价
 //
-//        holder.setText(R.id.tv_time, item.getCreateTime());
-//        holder.setText(R.id.tv_count, "工单数：" + item.getHyCount());
-//        holder.setText(R.id.tv_money, "营业额：¥" + item.getAmount());
-//        holder.setText(R.id.tv_time, item.getRefundTime());
-//        holder.setText(R.id.tv_goods, item.getRefundReason());
-//        holder.setText(R.id.tv_detail, item.getRefundRemark());
-//        TextView tvPurchase = holder.getView(R.id.tv_purchase);
-//        TextView refalse_btn = holder.getView(R.id.refalse_btn);
-//        TextView dealwith_btn = holder.getView(R.id.dealwith_btn);
-//        if (C.OrderType.ORDER_TYPE_CP.equals(item.getGoodsType())) {
-//            tvPurchase.setText("立即购买");
-//        } else {
-//            tvPurchase.setText("立即抢购");
-//        }
+        holder.setText(R.id.tv_car_number, item.getService_plate_number());
+        holder.setText(R.id.tv_user_name, item.getService_user_name());
+        holder.setText(R.id.tv_time, item.getCreate_time());
+        holder.setText(R.id.labelflow_service_item, item.getProject_name());
+
 //        dealwith_btn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

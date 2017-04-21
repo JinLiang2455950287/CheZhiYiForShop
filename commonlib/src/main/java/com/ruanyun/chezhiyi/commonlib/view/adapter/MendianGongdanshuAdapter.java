@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ruanyun.chezhiyi.commonlib.R;
+import com.ruanyun.chezhiyi.commonlib.model.MyGongDanInfo;
 import com.ruanyun.chezhiyi.commonlib.model.TiChengListModel;
 import com.ruanyun.chezhiyi.commonlib.model.TuiKuanInfo;
 import com.ruanyun.chezhiyi.commonlib.model.WorkBayInfo;
@@ -26,21 +27,24 @@ import java.util.List;
  * 工单数Adapter
  * Created by jl on 2017/4/13
  */
-public class MendianGongdanshuAdapter extends CommonAdapter<TiChengListModel> {
+public class MendianGongdanshuAdapter extends CommonAdapter<MyGongDanInfo.ResultBean> {
 
-    public MendianGongdanshuAdapter(Context context, int layoutId, List<TiChengListModel> datas) {
+    public MendianGongdanshuAdapter(Context context, int layoutId, List<MyGongDanInfo.ResultBean> datas) {
         super(context, layoutId, datas);
     }
 
-    public void setDatas(List<TiChengListModel> datas) {
+    public void setDatas(List<MyGongDanInfo.ResultBean> datas) {
         mDatas = datas;
         notifyDataSetChanged();
     }
 
     @Override
-    protected void convert(ViewHolder holder, TiChengListModel item, int position) {
+    protected void convert(ViewHolder holder, MyGongDanInfo.ResultBean item, int position) {
         AutoUtils.auto(holder.getConvertView());
-
+        holder.setText(R.id.tv_name, item.getService_user_name());
+        holder.setText(R.id.tv_car_number, item.getService_plate_number());
+        holder.setText(R.id.tv_time, item.getCreate_time());
+        holder.setText(R.id.service_project, item.getProject_name());
 //        LabelFlowLayout labelFlowLayout = holder.getView(R.id.service_project);
 //        //标签控件
 //        labelFlowLayout.removeAllViews();

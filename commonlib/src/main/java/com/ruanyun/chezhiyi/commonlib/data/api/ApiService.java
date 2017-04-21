@@ -345,6 +345,12 @@ public interface ApiService {
     Call<ResultBase> getTiChengDetailList(@Path("userNum") String userNum, @Query("month") String month, @Query("type") int type);
 
     /**
+     * 我的模块 工单list 提成
+     */
+    @POST(C.ApiUrl.URL_MENGDIAN_GONGDANDETAIL)
+    Call<ResultBase<MyGongDanInfo>> getMyGongDanList(@Path("userNum") String userNum, @Query("startDate") String startDate, @Query("reportDate") String reportDate, @Query("CreateUserNum") String CreateUserNum);
+
+    /**
      * 门店统计 会员统计
      */
     @POST(C.ApiUrl.URL_MENGDIAN_HUIYUAN)
@@ -357,7 +363,7 @@ public interface ApiService {
     Call<ResultBase<MenDianGongDanInfo>> getMenDianGongDan(@Path("userNum") String userNum, @Query("startDate") String startDate, @Query("reportDate") String reportDate);
 
     /**
-     * 门店统计 服务Detail商品
+     * 门店统计 工单Detail商品
      */
     @POST(C.ApiUrl.URL_MENGDIAN_GONGDANDETAIL)
     Call<ResultBase<MenDianGongDanDetailInfo>> getGongDanDetailInfo(@Path("userNum") String userNum, @Query("startDate") String startDate, @Query("reportDate") String reportDate);

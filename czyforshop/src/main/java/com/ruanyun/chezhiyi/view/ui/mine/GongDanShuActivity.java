@@ -13,12 +13,15 @@ import android.widget.Toast;
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.base.BaseActivity;
+import com.ruanyun.chezhiyi.commonlib.base.ResultBase;
+import com.ruanyun.chezhiyi.commonlib.model.MyGongDanInfo;
 import com.ruanyun.chezhiyi.commonlib.model.TiChengInfoModel;
 import com.ruanyun.chezhiyi.commonlib.model.TiChengListModel;
-import com.ruanyun.chezhiyi.commonlib.presenter.TiChengListPresenter;
+import com.ruanyun.chezhiyi.commonlib.presenter.MyGongDanPresenter;
 import com.ruanyun.chezhiyi.commonlib.presenter.TiChengPresenter;
 import com.ruanyun.chezhiyi.commonlib.util.AppUtility;
 import com.ruanyun.chezhiyi.commonlib.util.LogX;
+import com.ruanyun.chezhiyi.commonlib.view.MyGongDanTongJiView;
 import com.ruanyun.chezhiyi.commonlib.view.TiChengListView;
 import com.ruanyun.chezhiyi.commonlib.view.TiChengView;
 import com.ruanyun.chezhiyi.commonlib.view.adapter.MendianGongdanshuAdapter;
@@ -41,7 +44,8 @@ import cn.bingoogolapple.refreshlayout.BGARefreshViewHolder;
  * 工单数
  * Created by jin on 2017/4/13.
  */
-public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarClickListener, TiChengView, TiChengListView, BGARefreshLayout.BGARefreshLayoutDelegate {
+public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarClickListener, TiChengView, MyGongDanTongJiView,
+        BGARefreshLayout.BGARefreshLayoutDelegate {
     @BindView(R.id.topbar)
     Topbar topbar;
     @BindView(R.id.list)
@@ -61,14 +65,13 @@ public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarC
     @BindView(R.id.tv_increase)
     TextView tvIncrease;
     private MendianGongdanshuAdapter adapter;
-    private List<TiChengListModel> listData;
+    private List<MyGongDanInfo.ResultBean> listData;
     //条件选择器
     private OptionsPickerView pvOptions;
 
-    //    List<String> dateList = Arrays.asList(getResources().getStringArray(R.array.month));
     List<String> dateList = new ArrayList<>();
     private TiChengPresenter tiChengPresenter = new TiChengPresenter();
-    private TiChengListPresenter tiChengListPresenter = new TiChengListPresenter();//列表
+    private MyGongDanPresenter myGongDanPresenter = new MyGongDanPresenter();//列表
     private SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMM");
     private String date;
 
@@ -78,7 +81,7 @@ public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarC
         setContentView(R.layout.activity_gongdan_shu);
         ButterKnife.bind(this);
         tiChengPresenter.attachView(this);
-        tiChengListPresenter.attachView(this);
+        myGongDanPresenter.attachView(this);
         initRefreshLayout(mRefreshLayout);
         initView();
         setAdapter();
@@ -98,7 +101,7 @@ public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarC
         }
         listData = new ArrayList<>();
         emptyview.bind(mRefreshLayout);
-//        emptyview.showLoading();
+        emptyview.showLoading();
         topbar.setTttleText("工单数")
                 .setBackBtnEnable(true)
                 .onBackBtnClick()
@@ -106,7 +109,7 @@ public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarC
                 .onRightImgBtnClick()
                 .setTopbarClickListener(this);
         tiChengPresenter.getTiChengInfo(app.getApiService().getTiChengInfo(app.getCurrentUserNum(), date, 3)); //1:销售提成 2：施工提成
-        tiChengListPresenter.getTiChengList(app.getApiService().getTiChengList(app.getCurrentUserNum(), 1, 3, date));
+        myGongDanPresenter.getGongDanMyTongJiInfo(app.getApiService().getMyGongDanList(app.getCurrentUserNum(), date, date, app.getCurrentUserNum()));
     }
 
     private void setAdapter() {
@@ -124,7 +127,7 @@ public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarC
     protected void onDestroy() {
         super.onDestroy();
         tiChengPresenter.detachView();
-        tiChengListPresenter.detachView();
+        myGongDanPresenter.detachView();
     }
 
     private void initRefreshLayout(BGARefreshLayout refreshLayout) {
@@ -139,35 +142,8 @@ public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarC
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
         // 在这里加载更多数据，或者更具产品需求实现上拉刷新也可以
-
-        if (true) {
-            // 如果网络可用，则异步加载网络数据，并返回 true，显示正在加载更多
-            new AsyncTask<Void, Void, Void>() {
-
-                @Override
-                protected Void doInBackground(Void... params) {
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    return null;
-                }
-
-                @Override
-                protected void onPostExecute(Void aVoid) {
-                    // 加载完毕后在 UI 线程结束加载更多
-                    mRefreshLayout.endLoadingMore();
-//                    mAdapter.addDatas(DataEngine.loadMoreData());
-                }
-            }.execute();
-
-
-        } else {
-            // 网络不可用，返回 false，不显示正在加载更多
-            Toast.makeText(this, "网络不可用", Toast.LENGTH_SHORT).show();
-
-        }
+        tiChengPresenter.getTiChengInfo(app.getApiService().getTiChengInfo(app.getCurrentUserNum(), date, 3)); //1:销售提成 2：施工提成
+        myGongDanPresenter.getGongDanMyTongJiInfo(app.getApiService().getMyGongDanList(app.getCurrentUserNum(), date, date, app.getCurrentUserNum()));
     }
 
     @Override
@@ -215,7 +191,7 @@ public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarC
                         tvMonth.setText(dateList.get(options1) + "月");
                         emptyview.showLoading();
                         date = date.substring(0, 4) + dateList.get(options1);
-                        tiChengListPresenter.getTiChengList(app.getApiService().getTiChengList(app.getCurrentUserNum(), 1, 3, date));
+                        myGongDanPresenter.getGongDanMyTongJiInfo(app.getApiService().getMyGongDanList(app.getCurrentUserNum(), date, date, date));
                         tiChengPresenter.getTiChengInfo(app.getApiService().getTiChengInfo(app.getCurrentUserNum(), date, 3)); //1:销售提成 2：施工提成
                     }
                 }).setOutSideCancelable(true)//点击外部dismiss default true
@@ -241,6 +217,8 @@ public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarC
     @Override
     public void getTiChengSuccess(TiChengInfoModel tiChengInfoModel) {
         LogX.e("工单数getDataSuccess", tiChengInfoModel.toString());
+        emptyview.loadSuccuss();
+        mRefreshLayout.endRefreshing();
         if (tiChengInfoModel.getMap() == null) {
             AppUtility.showToastMsg("未查到相关数据");
             tvCount.setText("¥ 0");
@@ -257,23 +235,17 @@ public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarC
     }
 
     @Override
-    public void getTiChengListSuccess(List<TiChengListModel> resultBase) {
-        listData.clear();
-        listData = resultBase;
-        adapter.setDatas(listData);
-        adapter.notifyDataSetChanged();
-        mRefreshLayout.endRefreshing();
-        emptyview.loadSuccuss();
-        LogX.e("工单数", listData.toString());
+    public void getGongDanSuccess(MyGongDanInfo ResultBase) {
+        LogX.e("工单Mypersenter", ResultBase.getResult().toString());
+        if (ResultBase.getResult().size() > 0) {
+            listData = ResultBase.getResult();
+            adapter.setDatas(listData);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
-    public void dismissListLoadingView() {
-
-    }
-
-    @Override
-    public void cancelTiChengListErr() {
+    public void cancelGongDanTiChengErr() {
 
     }
 }

@@ -233,6 +233,16 @@ public final class C {
         public static final String URL_TICHENG_INFO = "app/external/{userNum}/js_report_detail";
 
         /**
+         * 施工/销售 按年查询提成
+         */
+        public static final String URL_TICHENG_YEAR = "app/{userNum}/report/commission/yy";
+
+        /**
+         * 施工/销售 按年查询提成List2
+         */
+        public static final String URL_TICHENG_YEAR2 = "app/{userNum}/report/commission/mm";
+
+        /**
          * 门店统计 会员统计
          */
         public static final String URL_MENGDIAN_HUIYUAN = "app/{userNum}/report/user";

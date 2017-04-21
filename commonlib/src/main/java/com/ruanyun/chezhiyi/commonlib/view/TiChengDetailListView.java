@@ -1,5 +1,6 @@
 package com.ruanyun.chezhiyi.commonlib.view;
 
+import com.ruanyun.chezhiyi.commonlib.base.ResultBase;
 import com.ruanyun.chezhiyi.commonlib.model.TiChengListModel;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  */
 
 public interface TiChengDetailListView {
-    void getTiChengListSuccess(List<TiChengListModel> resultBase);
+    void getTiChengListSuccess(ResultBase resultBase);
 
     void dismissListLoadingView();
 

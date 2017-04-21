@@ -30,6 +30,7 @@ import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -72,8 +73,12 @@ public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarC
     List<String> dateList = new ArrayList<>();
     private TiChengPresenter tiChengPresenter = new TiChengPresenter();
     private MyGongDanPresenter myGongDanPresenter = new MyGongDanPresenter();//列表
-    private SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMM");
-    private String date;
+
+    private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    private SimpleDateFormat format2 = new SimpleDateFormat("yyyyMM");
+
+    private String date, endDay;
+    private Calendar c = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,10 +93,13 @@ public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarC
     }
 
     private void initView() {
-        date = sDateFormat.format(new Date());
-        LogX.e("工单数", date);
+        date = format2.format(new Date());
+        //获取当前月最后一天
+        c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
+        endDay = format.format(c.getTime());
+
         tvYear.setText(date.substring(0, 4) + "年");
-        tvMonth.setText(date.substring(4, date.length()) + "月");
+        tvMonth.setText(date.substring(4, 6) + "月");
         for (int i = 0; i < 12; i++) {
             if (i <= 9) {
                 dateList.add("0" + i);
@@ -109,7 +117,7 @@ public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarC
                 .onRightImgBtnClick()
                 .setTopbarClickListener(this);
         tiChengPresenter.getTiChengInfo(app.getApiService().getTiChengInfo(app.getCurrentUserNum(), date, 3)); //1:销售提成 2：施工提成
-        myGongDanPresenter.getGongDanMyTongJiInfo(app.getApiService().getMyGongDanList(app.getCurrentUserNum(), date, date, app.getCurrentUserNum()));
+        myGongDanPresenter.getGongDanMyTongJiInfo(app.getApiService().getMyGongDanList(app.getCurrentUserNum(), date, endDay, app.getCurrentUserNum()));
     }
 
     private void setAdapter() {
@@ -221,11 +229,11 @@ public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarC
         mRefreshLayout.endRefreshing();
         if (tiChengInfoModel.getMap() == null) {
             AppUtility.showToastMsg("未查到相关数据");
-            tvCount.setText("¥ 0");
+            tvCount.setText(" 0");
             tvIncrease.setText("0");
             return;
         }
-        tvCount.setText("¥" + tiChengInfoModel.getMap().getCommonNumber());
+        tvCount.setText(tiChengInfoModel.getMap().getCommonNumber() + "");
         tvIncrease.setText(tiChengInfoModel.getMap().getCommonPercent());
     }
 

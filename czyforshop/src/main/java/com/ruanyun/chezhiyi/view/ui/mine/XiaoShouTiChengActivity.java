@@ -214,7 +214,7 @@ public class XiaoShouTiChengActivity extends BaseActivity implements Topbar.onTo
             finish();
         } else if (id == R.id.img_btn_right) {
             Intent intent = new Intent(this, TiChengPublicActivity.class);
-            intent.putExtra("titleName", "销售提成");
+            intent.putExtra("titleName", "1");
             startActivity(intent);
         }
     }

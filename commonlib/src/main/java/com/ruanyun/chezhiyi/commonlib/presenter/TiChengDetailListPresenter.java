@@ -21,25 +21,25 @@ import retrofit2.Response;
 public class TiChengDetailListPresenter implements Presenter<TiChengDetailListView> {
     private TiChengDetailListView tiChengDetailListView;
 
-    private Call<ResultBase<List<TiChengListModel>>> call;
+    private Call<ResultBase> call;
 
     @Override
     public void attachView(TiChengDetailListView mvpView) {
         this.tiChengDetailListView = mvpView;
     }
 
-    public void getTiChengList(Call<ResultBase<List<TiChengListModel>>> call) {
+    public void getTiChengYearList(Call<ResultBase> call) {
         this.call = call;
-        call.enqueue(new Callback<ResultBase<List<TiChengListModel>>>() {
+        call.enqueue(new Callback<ResultBase>() {
             @Override
-            public void onResponse(Call<ResultBase<List<TiChengListModel>>> call, Response<ResultBase<List<TiChengListModel>>> response) {
-                LogX.e("提成listpersenter", response.body().getObj().toString());
-//                tiChengDetailListView.getTiChengListSuccess(response.body().getObj());
+            public void onResponse(Call<ResultBase> call, Response<ResultBase> response) {
+                LogX.e("提成Yearlistpersenter", response.body().getObj().toString());
+                tiChengDetailListView.getTiChengListSuccess(response.body());
             }
 
             @Override
-            public void onFailure(Call<ResultBase<List<TiChengListModel>>> call, Throwable t) {
-                LogX.e("提成listpersenteronError", t.toString() + "");
+            public void onFailure(Call<ResultBase> call, Throwable t) {
+                LogX.e("提成YearlistpersenteronError", t.toString() + "");
             }
         });
     }

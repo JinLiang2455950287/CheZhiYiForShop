@@ -212,7 +212,7 @@ public class ShiGongTiChengActivity extends BaseActivity implements Topbar.onTop
             finish();
         } else if (id == R.id.img_btn_right) {
             Intent intent = new Intent(this, TiChengPublicActivity.class);
-            intent.putExtra("titleName", "施工提成");
+            intent.putExtra("titleName", "2");
             startActivity(intent);
         }
     }

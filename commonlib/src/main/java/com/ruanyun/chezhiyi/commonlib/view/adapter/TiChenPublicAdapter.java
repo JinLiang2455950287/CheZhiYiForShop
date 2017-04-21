@@ -2,6 +2,8 @@ package com.ruanyun.chezhiyi.commonlib.view.adapter;
 
 import android.content.Context;
 
+import com.ruanyun.chezhiyi.commonlib.R;
+import com.ruanyun.chezhiyi.commonlib.model.TiChengListPublicInfo;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
 import com.zhy.autolayout.utils.AutoUtils;
@@ -12,20 +14,22 @@ import java.util.List;
  * 提成Adapter
  * Created by jl on 2017/4/14
  */
-public class TiChenPublicAdapter extends CommonAdapter<String> {
+public class TiChenPublicAdapter extends CommonAdapter<TiChengListPublicInfo.ResultBean> {
 
-    public TiChenPublicAdapter(Context context, int layoutId, List<String> datas) {
+    public TiChenPublicAdapter(Context context, int layoutId, List<TiChengListPublicInfo.ResultBean> datas) {
         super(context, layoutId, datas);
     }
 
-    public void setDatas(List<String> datas) {
+    public void setDatas(List<TiChengListPublicInfo.ResultBean> datas) {
         mDatas = datas;
         notifyDataSetChanged();
     }
 
     @Override
-    protected void convert(ViewHolder holder, String item, int position) {
+    protected void convert(ViewHolder holder, TiChengListPublicInfo.ResultBean item, int position) {
         AutoUtils.auto(holder.getConvertView());
+        holder.setText(R.id.tv_time, item.getReportDate());
+        holder.setText(R.id.tv_money, "¥" + item.getAmount());
 
 //        LabelFlowLayout labelFlowLayout = holder.getView(R.id.service_project);
 //        //标签控件

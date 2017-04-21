@@ -21,6 +21,7 @@
             android:background="@color/theme_color_default" />
 
         <TextView
+            android:id="@+id/tv_time"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
@@ -31,12 +32,13 @@
             android:text="2016年01月" />
 
         <TextView
+            android:id="@+id/tv_money"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_marginRight="10dp"
             android:gravity="center_vertical"
-            android:text="¥17788.00"
+            android:text="¥ 0"
             android:textColor="@color/theme_color_default" />
     </LinearLayout>
 

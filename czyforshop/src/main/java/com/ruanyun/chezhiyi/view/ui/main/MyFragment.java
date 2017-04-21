@@ -266,7 +266,7 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
             tv_my_type.setText(allLabels.get(0).toString());
         }
         if (allLabels.size() > 1) {
-            flowView.setText(allLabels.get(1).toString());
+            flowView.setText(allLabels.get(1).toString() + " ");
         }
         nickname.setText(app.getUser().getPersonalNote());
     }

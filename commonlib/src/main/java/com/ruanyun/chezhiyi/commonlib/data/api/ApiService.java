@@ -345,10 +345,23 @@ public interface ApiService {
     Call<ResultBase> getTiChengDetailList(@Path("userNum") String userNum, @Query("month") String month, @Query("type") int type);
 
     /**
+     * 施工/销售 按年查询
+     */
+    @POST(C.ApiUrl.URL_TICHENG_YEAR)
+    Call<ResultBase> getTiChengDetailYearList(@Path("userNum") String userNum, @Query("startDate") String startDate, @Query("reportDate") String reportDate, @Query("createUserNum") String CreateUserNum, @Query("appType") int appType);
+
+
+    /**
+     * 施工/销售 按年查询List
+     */
+    @POST(C.ApiUrl.URL_TICHENG_YEAR2)
+    Call<ResultBase<TiChengListPublicInfo>> getTiChengDetailYearList2(@Path("userNum") String userNum, @Query("startDate") String startDate, @Query("reportDate") String reportDate, @Query("createUserNum") String CreateUserNum, @Query("appType") int appType);
+
+    /**
      * 我的模块 工单list 提成
      */
     @POST(C.ApiUrl.URL_MENGDIAN_GONGDANDETAIL)
-    Call<ResultBase<MyGongDanInfo>> getMyGongDanList(@Path("userNum") String userNum, @Query("startDate") String startDate, @Query("reportDate") String reportDate, @Query("CreateUserNum") String CreateUserNum);
+    Call<ResultBase<MyGongDanInfo>> getMyGongDanList(@Path("userNum") String userNum, @Query("startDate") String startDate, @Query("reportDate") String reportDate, @Query("createUserNum") String CreateUserNum);
 
     /**
      * 门店统计 会员统计

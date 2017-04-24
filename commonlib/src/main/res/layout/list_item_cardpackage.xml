@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:id="@+id/iv_product_photo"
-        android:layout_width="130dp"
+        android:layout_width="150dp"
         android:layout_height="match_parent"
         android:background="@drawable/cardpackage_left_icon"
         android:gravity="center"

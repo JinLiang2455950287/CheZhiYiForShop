@@ -62,6 +62,7 @@ public class BusinessToatalTDFragment extends BaseFragment implements HuiYuanYin
         return mContentView;
     }
 
+
     private void initView() {
         tvBanka = (TextView) mContentView.findViewById(R.id.tv_banka);
         tvGongdanMoney = (TextView) mContentView.findViewById(R.id.tv_zhifubaopay);
@@ -71,6 +72,9 @@ public class BusinessToatalTDFragment extends BaseFragment implements HuiYuanYin
         tvCashpay = (TextView) mContentView.findViewById(R.id.tv_huiyuanreain);
         tvWeixinpay = (TextView) mContentView.findViewById(R.id.tv_cashpay);
         tvZhifubaopay = (TextView) mContentView.findViewById(R.id.tv_weixinpay);
+        //手动调用,通知系统去测量
+        refreshlayout.measure(0,0);
+        refreshlayout.setRefreshing(true);
     }
 
     /**
@@ -112,11 +116,18 @@ public class BusinessToatalTDFragment extends BaseFragment implements HuiYuanYin
     @Override
     public void getYinYeESuccess(MenDianYinYeEInfo menDianYinYeEInfo) {
         LogX.e("营业额persenter", menDianYinYeEInfo.toString());
-        refreshlayout.setRefreshing(false);
+//        app.loadingDialogHelper.dissMiss();
+        if (refreshlayout.isRefreshing()) {
+            refreshlayout.setRefreshing(false);
+        }
 
-        if (menDianYinYeEInfo != null) {
+
+        if (menDianYinYeEInfo != null)
+
+        {
             upDataUi(menDianYinYeEInfo);
         }
+
     }
 
     @Override

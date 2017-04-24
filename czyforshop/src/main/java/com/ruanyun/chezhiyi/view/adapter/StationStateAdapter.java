@@ -59,7 +59,7 @@ public class StationStateAdapter extends CommonAdapter<WorkBayInfo> {
         TextView tvCarNumber = holder.getView(R.id.tv_car_number);
         TextView textTechnician = holder.getView(R.id.text_technician);
         TextView tvLeisureState = holder.getView(R.id.tv_leisure_state);//空闲时显示
-        LabelFlowLayout labelFlowLayout = holder.getView(R.id.labelflow_technician);
+        TextView labelFlowLayout = holder.getView(R.id.labelflow_technician);
 //        icon_gongdan_repair
 
         //        drawable = ContextCompat.getDrawable(mContext, R.drawable.check_station_busy);
@@ -81,25 +81,27 @@ public class StationStateAdapter extends CommonAdapter<WorkBayInfo> {
                 tvCarNumber.setText("未上牌");
             } else tvCarNumber.setText(item.getServicePlateNumber());
             textTechnician.setText("【技师】");
-            //标签控件
-            labelFlowLayout.removeAllViews();
-            ViewGroup.LayoutParams source = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            ViewGroup.MarginLayoutParams lp = new ViewGroup.MarginLayoutParams(source);
-            lp.leftMargin = 5;
-            lp.rightMargin = 5;
-            lp.topMargin = 5;
-            lp.bottomMargin = 5;
-            for (int i = 0; i < 1; i++) {
-                TextView view = new TextView(mContext);
-                view.setText(item.getUser() == null ? "" : item.getUser().getNickName());
-                view.setTextColor(Color.rgb(255, 151, 114));
-//                view.setTextColor(Color.WHITE);
-                view.setTextSize(TypedValue.COMPLEX_UNIT_PX, 40);
-                view.setBackgroundResource(R.drawable.shape_text_station_label_new);
-                view.setLayoutParams(lp);
-                AutoUtils.auto(view);
-                labelFlowLayout.addView(view);
-            }
+
+            labelFlowLayout.setText(item.getUser() == null ? "" : item.getUser().getNickName());
+//            //标签控件
+//            labelFlowLayout.removeAllViews();
+//            ViewGroup.LayoutParams source = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//            ViewGroup.MarginLayoutParams lp = new ViewGroup.MarginLayoutParams(source);
+//            lp.leftMargin = 5;
+//            lp.rightMargin = 5;
+//            lp.topMargin = 5;
+//            lp.bottomMargin = 5;
+//            for (int i = 0; i < 1; i++) {
+//                TextView view = new TextView(mContext);
+//                view.setText(item.getUser() == null ? "" : item.getUser().getNickName());
+//                view.setTextColor(Color.rgb(255, 151, 114));
+////                view.setTextColor(Color.WHITE);
+//                view.setTextSize(TypedValue.COMPLEX_UNIT_PX, 40);
+//                view.setBackgroundResource(R.drawable.shape_text_station_label_new);
+//                view.setLayoutParams(lp);
+//                AutoUtils.auto(view);
+//                labelFlowLayout.addView(view);
+//            }
         } else {//空闲中
             tvStationState.setText("空\n闲\n中");
             tvStationState.setCompoundDrawablesWithIntrinsicBounds(null, ContextCompat.getDrawable(mContext, R.drawable.icon_gongwei_free), null, null);

@@ -148,6 +148,7 @@
             android:layout_marginTop="10px"
             android:background="@drawable/corner_rectangle_green_strok"
             android:gravity="center"
+            android:textColor="@color/bg_white"
             android:text="预约处理" />
 
     </LinearLayout>

@@ -66,8 +66,8 @@ public class MainActivity extends MainBaseActivity implements TopMenuPopupWindow
     //ClientContactListFragment hxContactListFragment;
 
     AuthServiceHelp authServiceHelp;
-    String[] permissions = {Manifest.permission.READ_PHONE_STATE,Manifest.permission.CAMERA,
-            Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.WRITE_SETTINGS};
+    String[] permissions = {Manifest.permission.READ_PHONE_STATE, Manifest.permission.CAMERA,
+            Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_SETTINGS, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
 
     @Override
@@ -89,7 +89,7 @@ public class MainActivity extends MainBaseActivity implements TopMenuPopupWindow
             }
         };
 
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             PermissionsManager.getInstance().requestPermissionsIfNecessaryForResult(this, permissions, new PermissionsResultAction() {
 
                 @Override
@@ -102,7 +102,7 @@ public class MainActivity extends MainBaseActivity implements TopMenuPopupWindow
 
                 }
             });
-        }else {
+        } else {
             authServiceHelp.start();
         }
     }
@@ -120,7 +120,7 @@ public class MainActivity extends MainBaseActivity implements TopMenuPopupWindow
 
     private void init() {
         topbar = getView(R.id.topbar);
-        topTabButton = getViewFromLayout(R.layout.layout_toptabbar,topbar,false);
+        topTabButton = getViewFromLayout(R.layout.layout_toptabbar, topbar, false);
         topTabButton.setRightText("通讯录");
         topTabButton.setLeftText("消息");
         topTabButton.setRightTabStatus(true);//
@@ -136,7 +136,7 @@ public class MainActivity extends MainBaseActivity implements TopMenuPopupWindow
         topMenuPopupWindow.setMenuClickListener(this);
         //        conversationListFragment = new ConversationListFragment();
         //        hxContactListFragment = new HxContactListFragment();
-       // statusbarTint(topbar);
+        // statusbarTint(topbar);
 
         fragments.add(new HomeFragment());
         fragments.add(/*hxContactListFragment*/new HxContactListFragment());
@@ -167,14 +167,14 @@ public class MainActivity extends MainBaseActivity implements TopMenuPopupWindow
     protected void onDestroy() {
         super.onDestroy();
         AppUtility.fixInputMethodManagerLeak(this);
-        if (authServiceHelp!= null)
-        authServiceHelp.clear();
+        if (authServiceHelp != null)
+            authServiceHelp.clear();
     }
 
     @Override
     public void menuMsgClick() {
-        Intent intent=new Intent(mContext, PickContactActivity.class);
-        intent.putExtra(C.IntentKey.PICK_CONTACT_PAGE_TYPE,PickContactActivity.TYPE_NEW_GROUP);
+        Intent intent = new Intent(mContext, PickContactActivity.class);
+        intent.putExtra(C.IntentKey.PICK_CONTACT_PAGE_TYPE, PickContactActivity.TYPE_NEW_GROUP);
         showActivity(intent);
     }
 
@@ -233,7 +233,7 @@ public class MainActivity extends MainBaseActivity implements TopMenuPopupWindow
     @Override
     protected void onTabClick(int index) {
         super.onTabClick(index);
-        topbar.setVisibility(index == 2 ? View.VISIBLE: View.GONE);
+        topbar.setVisibility(index == 2 ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -244,8 +244,8 @@ public class MainActivity extends MainBaseActivity implements TopMenuPopupWindow
 
 
     @Override
-    public void onRequestPermissionsResult ( int requestCode, @NonNull String[] permissions,
-                                             @NonNull int[] grantResults){
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         PermissionsManager.getInstance().notifyPermissionsChange(permissions, grantResults);
     }
 

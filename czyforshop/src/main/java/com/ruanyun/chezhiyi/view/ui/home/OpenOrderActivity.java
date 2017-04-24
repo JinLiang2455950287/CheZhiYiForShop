@@ -179,7 +179,8 @@ public class OpenOrderActivity extends AutoLayoutActivity implements View.OnFocu
             public void onClick(View view) {
                 if (haopai != null) {
                     if (haopai.length() == 7) {
-                        Intent intent = new Intent(OpenOrderActivity.this, CustomerReceptionActivity.class);
+//                        Intent intent = new Intent(OpenOrderActivity.this, CustomerReceptionActivity.class);
+                        Intent intent = new Intent(OpenOrderActivity.this, QuickOpenOrderActivity.class);
                         intent.putExtra("plateNumber", haopai.toString());
                         startActivity(intent);
                         finish();

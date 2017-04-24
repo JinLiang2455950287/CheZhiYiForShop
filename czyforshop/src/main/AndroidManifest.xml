@@ -524,7 +524,8 @@
         <activity android:name=".view.ui.mine.XiaoShouTiChengActivity" />
         <activity android:name=".view.ui.mine.TiChengPublicActivity" />
         <activity android:name=".view.ui.TiXing.TiXingActivity" />
-        <activity android:name=".view.ui.TiXing.TiXingMangerActivity"></activity>
+        <activity android:name=".view.ui.TiXing.TiXingMangerActivity" />
+        <activity android:name=".view.ui.home.QuickOpenOrderActivity"></activity>
     </application>
 
 </manifest>

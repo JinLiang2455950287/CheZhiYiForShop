@@ -3,26 +3,18 @@ package com.ruanyun.chezhiyi.view.ui.home;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
 import android.text.TextUtils;
-import android.text.style.ForegroundColorSpan;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ruanyun.chezhiyi.R;
@@ -42,12 +34,10 @@ import com.ruanyun.chezhiyi.commonlib.util.AppUtility;
 import com.ruanyun.chezhiyi.commonlib.util.C;
 import com.ruanyun.chezhiyi.commonlib.util.DbHelper;
 import com.ruanyun.chezhiyi.commonlib.util.DefaultItemAnimator;
-import com.ruanyun.chezhiyi.commonlib.util.FileUtil;
 import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.util.StringUtil;
 import com.ruanyun.chezhiyi.commonlib.view.CustomerRepMvpView;
-import com.ruanyun.chezhiyi.commonlib.view.ui.common.UpdateNickNameActivity;
-import com.ruanyun.chezhiyi.commonlib.view.widget.CleanableEditText;
+import com.ruanyun.chezhiyi.commonlib.view.widget.CustomExpandableListView;
 import com.ruanyun.chezhiyi.commonlib.view.widget.FlowLayout;
 import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
 import com.ruanyun.chezhiyi.view.adapter.CustomerRepAdapter;
@@ -64,8 +54,8 @@ import de.greenrobot.event.Subscribe;
 
 import static com.ruanyun.chezhiyi.R.id.edt_carnum_input;
 
-public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar.onTopbarClickListener,
-        CustomerRepMvpView, ChooseServiceTab.onTabClickListener, TextView.OnEditorActionListener {
+public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar.onTopbarClickListener, CustomerRepMvpView,
+        ChooseServiceTab.onTabClickListener {
     public static final int REQ_REC_PLATENUM = 32434;//获取车牌扫描结果
     public static final int REQ_ADD_GOODS = 234234;//添加商品
     public static final int REQ_ADD_SERVICE = 2343;//添加服务大项
@@ -78,8 +68,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
     @BindView(R.id.topbar)
     Topbar topbar;
     @BindView(R.id.edt_appointe_phone)
-    CleanableEditText edtAppointePhone;
-
+    TextView edtAppointePhone;
     @BindView(R.id.ry_choice_server)
     RecyclerView ryChoiceServer;
     @BindView(R.id.bt_submit)
@@ -102,10 +91,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
     TextView tvRemarks;
     @BindView(R.id.ll_appoint_info)
     LinearLayout llAppointInfo;
-    @BindView(R.id.tv_upkeep)
-    TextView tvUpkeep;
-    @BindView(R.id.ll_upkeep)
-    LinearLayout llUpkeep;
+
 
     private CarBookingInfo carBookingInfo;//当前预约客户信息
     private CustomerRepPresenter presenter = new CustomerRepPresenter();
@@ -118,6 +104,15 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
     private String carNumber;// 当前的车牌号
     private String plateNumber;
     private boolean textWatcherEnable = true;
+
+    //View
+    private CustomExpandableListView expandableListView;
+
+    //Model：定义的数据
+    private List<String> groups = new ArrayList<>();
+    private List<String> group = new ArrayList<>();
+    private List<List<String>> childs = new ArrayList<List<String>>();
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -163,8 +158,114 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
         presenter.attachView(this);
         registerBus();
         serviceTypeCount = DbHelper.getInstance().getServiceTypeCount();
+        initExpandListView();
+    }
+
+    private void initExpandListView() {
+        for (int i = 0; i < 3; i++) {
+            groups.add("维修" + i);
+        }
+        for (int i = 0; i < 3; i++) {
+            group.add("维修" + i);
+            for (int j = 0; j < 3; j++) {
+                childs.add(group);
+            }
+        }
+        expandableListView = (CustomExpandableListView) findViewById(R.id.expandableListView);
+        expandableListView.setGroupIndicator(null);
+        expandableListView.setAdapter(new MyExpandableListView());
 
     }
+
+    //为ExpandableListView自定义适配器
+    class MyExpandableListView extends BaseExpandableListAdapter {
+
+        //返回一级列表的个数
+        @Override
+        public int getGroupCount() {
+            return groups.size();
+        }
+
+        //返回每个二级列表的个数
+        @Override
+        public int getChildrenCount(int groupPosition) { //参数groupPosition表示第几个一级列表
+            return childs.get(groupPosition).size();
+        }
+
+        //返回一级列表的单个item（返回的是对象）
+        @Override
+        public Object getGroup(int groupPosition) {
+            return groups.get(groupPosition);
+        }
+
+        //返回二级列表中的单个item（返回的是对象）
+        @Override
+        public Object getChild(int groupPosition, int childPosition) {
+            return childs.get(groupPosition).get(childPosition);
+        }
+
+        @Override
+        public long getGroupId(int groupPosition) {
+            return groupPosition;
+        }
+
+        @Override
+        public long getChildId(int groupPosition, int childPosition) {
+            return childPosition;
+        }
+
+        //每个item的id是否是固定？一般为true
+        @Override
+        public boolean hasStableIds() {
+            return true;
+        }
+
+        //【重要】填充一级列表
+        @Override
+        public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(R.layout.item_group, null);
+            } else {
+
+            }
+            TextView tv_group = (TextView) convertView.findViewById(R.id.tv_group_title);
+            TextView tv_group_pai = (TextView) convertView.findViewById(R.id.tv_group_pai);
+            tv_group_pai.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showActivity(OperOrderPaidanActivity.class);
+                }
+            });
+            tv_group.setText(groups.get(groupPosition));
+            return convertView;
+        }
+
+        //【重要】填充二级列表
+        @Override
+        public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(R.layout.item_child, null);
+            }
+
+
+            TextView tv_child = (TextView) convertView.findViewById(R.id.tv_child);
+
+            tv_child.setText(childs.get(groupPosition).get(childPosition));
+
+            return convertView;
+        }
+
+        //二级列表中的item是否能够被选中？可以改为true
+        @Override
+        public boolean isChildSelectable(int groupPosition, int childPosition) {
+            return true;
+        }
+
+
+    }
+
 
     @Override
     protected void onDestroy() {
@@ -229,7 +330,6 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                 .setBackBtnEnable(true)
                 .onBackBtnClick()
                 .setTopbarClickListener(this);
-        edtCarnumInput.setOnEditorActionListener(this);
             /*获取开单界面传过来的车牌号码*/
         plateNumber = getIntent().getStringExtra("plateNumber");
         edtCarnumInput.setText(plateNumber);
@@ -262,16 +362,18 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
         } else if (carBookingInfo.getMakeInfo() != null) {
             if (AppUtility.isNotEmpty(carBookingInfo.getMakeInfo().getMakeNum()))
                 llAppointInfo.setVisibility(View.VISIBLE);
-            tvCostomerInfo.setText("客户信息");
+            tvCostomerInfo.setText("详情");
             tvCostomerInfo.setVisibility(View.VISIBLE);
             tvRemarks.setText(carBookingInfo.getMakeInfo().getRemark());
             tvArriveTime.setText(carBookingInfo.getMakeInfo().getPredictShopTime());
             edtAppointePhone.setText(carBookingInfo.getCustomerUser().getLoginName());
-            List<ProjectType> projectTypes = new Gson().fromJson(carBookingInfo.getMakeInfo().getProjectNum(), new TypeToken<List<ProjectType>>() {
-            }.getType());
-            LogX.e("根据预约工单服务项初始化服务标签", carBookingInfo.getMakeInfo().getProjectNum());
-            LogX.e("根据预约工单服务项初始化服务标签", projectTypes.toString());
-            creatServiceLables(projectTypes);
+            if (AppUtility.isNotEmpty(carBookingInfo.getMakeInfo().getMakeNum())) {
+                List<ProjectType> projectTypes = new Gson().fromJson(carBookingInfo.getMakeInfo().getProjectNum(), new TypeToken<List<ProjectType>>() {
+                }.getType());
+                LogX.e("根据预约工单服务项初始化服务标签", carBookingInfo.getMakeInfo().getProjectNum());
+                LogX.e("根据预约工单服务项初始化服务标签", projectTypes.toString());
+                creatServiceLables(projectTypes);
+            }
             adapter.buidBaughtGoods(carBookingInfo.getMakeInfo().getWorkOrderInfoList());
         }
     }
@@ -324,10 +426,6 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
      * @date 16/11/2 下午2:03
      */
     private void submitWorkOrder() {
-       /* if (null == carBookingInfo || null == carBookingInfo.getMakeInfo()) {
-            showToast("请完善服务信息!");
-            return;
-        }*/
         workOrderSubmitInfo.makeNum = carBookingInfo != null && carBookingInfo.getMakeInfo() != null ? carBookingInfo.getMakeInfo().getMakeNum() : "";//预约编号
         workOrderSubmitInfo.remark = edtWriteMark.getText().toString();//服务备注字段
         workOrderSubmitInfo.carAllName = TextUtils.isEmpty(edtCarnumInput.getText().toString()) ? "" : edtCarnumInput.getText().toString().toUpperCase();//号牌字段
@@ -405,7 +503,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
             adapter.notifyItemRangeRemoved(relataedPostion + 1, removeCount);
     }
 
-    @OnClick({R.id.tv_costomer_info, R.id.bt_submit, R.id.rl_add_server, R.id.img_btn_scan, R.id.ll_upkeep, R.id.edt_carnum_input})
+    @OnClick({R.id.tv_costomer_info, R.id.bt_submit, R.id.rl_add_server, R.id.rl_add_server2, R.id.img_btn_scan, R.id.edt_carnum_input})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_costomer_info://客户信息
@@ -416,27 +514,18 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
             case R.id.bt_submit://提交工单
                 submitWorkOrder();
                 break;
-            case R.id.rl_add_server://添加服务大项
+            case R.id.rl_add_server://添加商品
                 Intent intent = new Intent(mContext, AddServiceGoodsActivity.class);
                 intent.putStringArrayListExtra(C.IntentKey.PROJECT_NUMS, adapter.getCurrentProjectNums());
+
                 showActivity(intent);
+                break;
+            case R.id.rl_add_server2://添加商品2
+                Intent intent2 = new Intent(mContext, AddServiceGoodsActivity2.class);
+                showActivity(intent2);
                 break;
             case R.id.img_btn_scan://车牌扫描
                 showVideoRecPlateNum();
-                break;
-            case R.id.ll_upkeep://保养里程数
-                String carNum = edtCarnumInput.getText().toString();
-                carNum = carNum.toUpperCase();
-                if (TextUtils.isEmpty(carNum)) {
-                    AppUtility.showToastMsg("请先输入车牌号！");
-                    return;
-                } else if (!StringUtil.isCarNum(carNum)) {
-                    AppUtility.showToastMsg("车牌号不合法");
-                    return;
-                }
-                Intent i = new Intent(mContext, UpdateNickNameActivity.class);
-                i.putExtra(C.IntentKey.TOPBAR_TITLE, UpdateNickNameActivity.STRING_UPKEEP);
-                startActivityForResult(i, REQ_ADD_UPKEEP);
                 break;
             case R.id.edt_carnum_input://点击号牌返回号牌输入界面
                 skipActivity(OpenOrderActivity.class);
@@ -569,7 +658,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
      */
     @Override
     public void saveCarMileageSuccess() {
-        tvUpkeep.setText(upkeep);
+//        tvUpkeep.setText(upkeep);
     }
 
 
@@ -599,22 +688,5 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                 customerRepUiModel.setSelecTab(tabType);
         }
     }
-
-    /**
-     * 输入框输入法监听回调
-     *
-     * @author zhangsan
-     * @date 16/11/4 下午2:18
-     */
-    @Override
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if (actionId == EditorInfo.IME_ACTION_SEND) {//按下输入法发送
-            if (!TextUtils.isEmpty(edtCarnumInput.getText().toString())) {
-                presenter.getScanCustomerInfo(edtCarnumInput.getText().toString());
-            }
-        }
-        return false;
-    }
-
 
 }

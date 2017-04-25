@@ -127,4 +127,23 @@ public class WorkBayInfo {
     public void setUser(User user) {
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return "WorkBayInfo{" +
+                "workbayInfoId=" + workbayInfoId +
+                ", workbayInfoNum='" + workbayInfoNum + '\'' +
+                ", workbayName='" + workbayName + '\'' +
+                ", workbayStatus=" + workbayStatus +
+                ", projectNum='" + projectNum + '\'' +
+                ", projectName='" + projectName + '\'' +
+                ", storeNum='" + storeNum + '\'' +
+                ", userNum='" + userNum + '\'' +
+                ", createTime='" + createTime + '\'' +
+                ", servicePlateNumber='" + servicePlateNumber + '\'' +
+                ", leadingUserNum='" + leadingUserNum + '\'' +
+                ", user=" + user +
+                ", workOrderNum='" + workOrderNum + '\'' +
+                '}';
+    }
 }

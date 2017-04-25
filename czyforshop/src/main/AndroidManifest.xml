@@ -525,7 +525,19 @@
         <activity android:name=".view.ui.mine.TiChengPublicActivity" />
         <activity android:name=".view.ui.TiXing.TiXingActivity" />
         <activity android:name=".view.ui.TiXing.TiXingMangerActivity" />
-        <activity android:name=".view.ui.home.QuickOpenOrderActivity"></activity>
+        <activity android:name=".view.ui.home.QuickOpenOrderActivity" />
+
+        <!-- 快捷开单 -->
+        <activity
+            android:name=".view.ui.home.OperOrderPaidanActivity"
+            android:label="@string/title_activity_oper_order_paidan"
+            android:theme="@style/AppTheme"/>
+
+        <!-- 快捷开单添加服务商品界面 -->
+        <activity
+            android:name=".view.ui.home.AddServiceGoodsActivity2"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

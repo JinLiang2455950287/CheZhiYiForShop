@@ -397,4 +397,7 @@
         <item name="android:layout_height">match_parent</item>
     </style>
 
+    <style name="CustomCheckboxGrayTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkboxselector</item>
+    </style>
 </resources>

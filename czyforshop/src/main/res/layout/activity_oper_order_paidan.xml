@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_topbar" />
+
+    <View
+        style="@style/divider_horizontal"
+        android:layout_marginTop="10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:background="@color/theme_color_default" />
+
+        <TextView
+            style="@style/text_default"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/kaidan_yuangong"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:text="员工"
+            android:textColor="@color/theme_color_default"
+            android:textSize="@dimen/text_size_middle" />
+
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_yuangong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp" />
+
+    <View
+        style="@style/divider_horizontal"
+        android:layout_marginTop="10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:background="@color/theme_color_default" />
+
+        <TextView
+            style="@style/text_default"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/kaidan_gongwei"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:text="工位"
+            android:textColor="@color/theme_color_default"
+            android:textSize="@dimen/text_size_middle" />
+
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_gongwei"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp" />
+</LinearLayout>

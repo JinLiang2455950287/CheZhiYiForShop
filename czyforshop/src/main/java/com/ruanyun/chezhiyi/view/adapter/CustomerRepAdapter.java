@@ -40,15 +40,11 @@ import java.util.List;
 public class CustomerRepAdapter extends MultiItemTypeAdapter<CustomerRepUiModel> {
 
     private ChooseServiceTab.onTabClickListener tabclickListener;
-    //  private SparseArray<CustomerRepUiModel> uiModeListCache = new SparseArray<>();
     /**
      * 已购商品缓存
      **/
     private HashMap<String, List<CustomerRepUiModel>> selectGoodsCache = new HashMap<>();
-    /**
-     * 新增商品缓存
-     */
-    // private HashMap<String, List<CustomerRepUiModel>> newGoodsCache = new HashMap<>();
+
     /**
      * 选中工位或技师缓存
      **/
@@ -59,7 +55,6 @@ public class CustomerRepAdapter extends MultiItemTypeAdapter<CustomerRepUiModel>
      **/
     private CustomerRepUiModel tabUIModel, addServiceUIModel, emptyViewUIModel;
     private CustomerAddNewServiceDelegate addNewServiceDelegate = new CustomerAddNewServiceDelegate();
-    //private CustomerRepProjectTypeDelegate ta=new CustomerRepProjectTypeDelegate();
     private CustomerRepSelTechDelegate selTechDelegate = new CustomerRepSelTechDelegate();
     private CustomerSelWorkStationDelegate selWorkStationDelegate = new CustomerSelWorkStationDelegate();
 
@@ -369,32 +364,6 @@ public class CustomerRepAdapter extends MultiItemTypeAdapter<CustomerRepUiModel>
         String s = "";
         switch (tabType) {
             case ChooseServiceTab.TAB_GOODS:        //selectGoodsCache.get(projectNum) != null &&
-//========================================= 获取第一个商品明显示  START  ==========================================
-//                CustomerRepUiModel goodsModels = null/* = selectGoodsCache.get(projectNum).isEmpty() ? null : selectGoodsCache.get(projectNum).get(0)*/;
-//                if (!selectGoodsCache.get(projectNum).isEmpty()) {  // 当前服务项已选商品不为空
-//                    for (CustomerRepUiModel projectNumItem : selectGoodsCache.get(projectNum)) {
-//                        if (projectNumItem.isSelected()) {
-//                            goodsModels = projectNumItem;
-//                            break;
-//                        }
-//                    }
-//                }
-//
-//                if (goodsModels != null) {
-//                    if (goodsModels.relativeBean instanceof ProductInfo) {
-//                        ProductInfo productInfo = (ProductInfo) goodsModels.relativeBean;
-//                        s = productInfo.getGoodsName();
-//                    } else {
-//                        OrderGoodsInfo info = (OrderGoodsInfo) goodsModels.relativeBean;
-//                        s = info.getGoodsName();
-//                    }
-//                    model.selectedGoods = s;
-//                    model.setSelDescription();
-//                } else {
-//                    model.selectedGoods = "";
-//                    model.setSelDescription();
-//                }
-//=======================  获取第一个商品明显示  END  ==========================================================
 
 //======================= 获取所有的商品名的拼接  START  ==========================================================
                 List<CustomerRepUiModel> customerRepUiModels = new ArrayList<>();
@@ -657,11 +626,11 @@ public class CustomerRepAdapter extends MultiItemTypeAdapter<CustomerRepUiModel>
         public void convert(final ViewHolder holder, final CustomerRepUiModel customerRepUiModel, final int position) {
             AutoUtils.auto(holder.getConvertView());
             holder.setText(R.id.tv_project_name, customerRepUiModel.getItemName());
-            ImageView imgStatus = holder.getView(R.id.img_sel_status);
+//            ImageView imgStatus = holder.getView(R.id.img_sel_status);
             holder.setText(R.id.tv_describe, customerRepUiModel.getDescription());
             final ImageView imgServiceSel = holder.getView(R.id.img_service_sel);
             imgServiceSel.setSelected(customerRepUiModel.isServiceSelected());
-            imgStatus.setSelected(customerRepUiModel.isSelected());
+//            imgStatus.setSelected(customerRepUiModel.isSelected());
             imgServiceSel.setOnClickListener(new NoDoubleClicksListener() {
                 @Override
                 public void noDoubleClick(View v) {
@@ -669,31 +638,31 @@ public class CustomerRepAdapter extends MultiItemTypeAdapter<CustomerRepUiModel>
                     imgServiceSel.setSelected(customerRepUiModel.isServiceSelected());
                 }
             });
-            holder.getView(R.id.rl_root).setOnClickListener(new NoDoubleClicksListener() {
-                @Override
-                public void noDoubleClick(View v) {
-                    // int index = getIndexOfExpandItems(position);//获取上一个展开标签位置
-                    customerRepUiModel.setSelected(!customerRepUiModel.isSelected());
-                    notifyItemChanged(position);
-                    if (!customerRepUiModel.isSelected()) {//收起
-                        removeExpandItems(customerRepUiModel.getItemNum());
-                        notifyDataSetChanged();
-                    } else {//展开
-                        int removeCount = removeExpandItems(customerRepUiModel.getItemNum());//移除所有展开内容 并获取移除数量
-                        if (removeCount > 0) {
-                            //FIXME 改为notifyitemrangeremove 更好
-                            notifyDataSetChanged();
-                        }
-                        int index = mDatas.indexOf(customerRepUiModel);//索引校验
-                        if (position == index) {
-                            inserChangeTabAtPostion(customerRepUiModel.getSelecTab(), position + 1, customerRepUiModel.getItemNum());
-                        } else if (index != -1) {
-                            inserChangeTabAtPostion(customerRepUiModel.getSelecTab(), index + 1, customerRepUiModel.getItemNum());
-                        }
-                    }
-
-                }
-            });
+//            holder.getView(R.id.rl_root).setOnClickListener(new NoDoubleClicksListener() {
+//                @Override
+//                public void noDoubleClick(View v) {
+//                    // int index = getIndexOfExpandItems(position);//获取上一个展开标签位置
+//                    customerRepUiModel.setSelected(!customerRepUiModel.isSelected());
+//                    notifyItemChanged(position);
+//                    if (!customerRepUiModel.isSelected()) {//收起
+//                        removeExpandItems(customerRepUiModel.getItemNum());
+//                        notifyDataSetChanged();
+//                    } else {//展开
+//                        int removeCount = removeExpandItems(customerRepUiModel.getItemNum());//移除所有展开内容 并获取移除数量
+//                        if (removeCount > 0) {
+//                            //FIXME 改为notifyitemrangeremove 更好
+//                            notifyDataSetChanged();
+//                        }
+//                        int index = mDatas.indexOf(customerRepUiModel);//索引校验
+//                        if (position == index) {
+//                            inserChangeTabAtPostion(customerRepUiModel.getSelecTab(), position + 1, customerRepUiModel.getItemNum());
+//                        } else if (index != -1) {
+//                            inserChangeTabAtPostion(customerRepUiModel.getSelecTab(), index + 1, customerRepUiModel.getItemNum());
+//                        }
+//                    }
+//
+//                }
+//            });
 
         }
     }
@@ -835,13 +804,13 @@ public class CustomerRepAdapter extends MultiItemTypeAdapter<CustomerRepUiModel>
         public void convert(ViewHolder holder, final CustomerRepUiModel customerRepUiModel, final int position) {
             AutoUtils.auto(holder.getConvertView());
             holder.setText(R.id.tv_item_name, customerRepUiModel.getItemName());
-            ImageView imgStatus = holder.getView(R.id.img_sel_status);
+//            ImageView imgStatus = holder.getView(R.id.img_sel_status);
             if (clickPositon == position) {
                 customerRepUiModel.setSelected(true);
             } else {
                 customerRepUiModel.setSelected(false);
             }
-            imgStatus.setSelected(customerRepUiModel.isSelected());
+//            imgStatus.setSelected(customerRepUiModel.isSelected());
             holder.getConvertView().setOnClickListener(new NoDoubleClicksListener() {
                 @Override
                 public void noDoubleClick(View v) {
@@ -869,8 +838,8 @@ public class CustomerRepAdapter extends MultiItemTypeAdapter<CustomerRepUiModel>
     private boolean hasBeSelected(String userNum) {
         for (String s : selectTechnicianCache.keySet()) {
             User relativeBean = (User) selectTechnicianCache.get(s).relativeBean;
-            if ( relativeBean.getUserNum().equals(userNum)) {
-                AppUtility.showToastMsg(relativeBean.getNickName()+"在其他服务中已选择过");
+            if (relativeBean.getUserNum().equals(userNum)) {
+                AppUtility.showToastMsg(relativeBean.getNickName() + "在其他服务中已选择过");
                 return true;
             }
         }
@@ -900,13 +869,13 @@ public class CustomerRepAdapter extends MultiItemTypeAdapter<CustomerRepUiModel>
         public void convert(ViewHolder holder, final CustomerRepUiModel customerRepUiModel, final int position) {
             AutoUtils.auto(holder.getConvertView());
             holder.setText(R.id.tv_item_name, customerRepUiModel.getItemName());
-            ImageView imgStatus = holder.getView(R.id.img_sel_status);
+//            ImageView imgStatus = holder.getView(R.id.img_sel_status);
             if (clickPositon == position) {
                 customerRepUiModel.setSelected(true);
             } else {
                 customerRepUiModel.setSelected(false);
             }
-            imgStatus.setSelected(customerRepUiModel.isSelected());
+//            imgStatus.setSelected(customerRepUiModel.isSelected());
             holder.getConvertView().setOnClickListener(new NoDoubleClicksListener() {
                 @Override
                 public void noDoubleClick(View v) {
@@ -949,8 +918,8 @@ public class CustomerRepAdapter extends MultiItemTypeAdapter<CustomerRepUiModel>
         @Override
         public void convert(ViewHolder holder, final CustomerRepUiModel customerRepUiModel, final int position) {
             AutoUtils.auto(holder.getConvertView());
-            ImageView imgSelStatus = holder.getView(R.id.img_sel_status);
-            imgSelStatus.setSelected(customerRepUiModel.isSelected());
+//            ImageView imgSelStatus = holder.getView(R.id.img_sel_status);
+//            imgSelStatus.setSelected(customerRepUiModel.isSelected());
             holder.setText(R.id.tv_count, "×" + Integer.toString(customerRepUiModel.getCount()));
             holder.setText(R.id.tv_goods_name, customerRepUiModel.getItemName());
             if (customerRepUiModel.getIsOverdue() == 1) { //商品已过期
@@ -969,41 +938,6 @@ public class CustomerRepAdapter extends MultiItemTypeAdapter<CustomerRepUiModel>
                     }
                 });
             }
-            /*holder.setOnClickListener(R.id.tv_goods_name, new NoDoubleClicksListener() {
-                @Override
-                public void noDoubleClick(View v) {
-                    //商品的点击事件
-                    if (customerRepUiModel.relativeBean instanceof OrderGoodsInfo) {
-                        OrderGoodsInfo goodsInfo = (OrderGoodsInfo) customerRepUiModel.relativeBean;
-                        AppUtility.showGoodsWebView(
-                                (goodsInfo.getAmount() == null || goodsInfo.getAmount().equals(""))
-                                        ? 0 : goodsInfo.getAmount().doubleValue(),
-                                App.getInstance().getCurrentUserNum(),
-                                goodsInfo.getGoodsNum(),
-                                goodsInfo.getGoodsType(),
-                                goodsInfo.getGoodsNum(),
-                                App.getInstance().getCurrentUserNum(),
-                                mContext,
-                                goodsInfo.getGoodsName(),
-                                goodsInfo.getProjectParent(),
-                                goodsInfo.getMainPhoto(), "2",
-                                goodsInfo.getViceTitle() );
-                    } else if (customerRepUiModel.relativeBean instanceof ProductInfo) {
-                        ProductInfo productInfo = (ProductInfo) customerRepUiModel.relativeBean;
-                        AppUtility.showGoodsWebView(
-                                productInfo.getSalePrice(),
-                                App.getInstance().getCurrentUserNum(),
-                                productInfo.getGoodsNum(),
-                                productInfo.getGoodsType(),
-                                productInfo.getGoodsNum(),
-                                App.getInstance().getCurrentUserNum(),
-                                mContext,
-                                productInfo.getGoodsName(),
-                                productInfo.getProjectParent(),
-                                productInfo.getMainPhoto(), "2", productInfo.getViceTitle() );
-                    }
-                }
-            });*/
         }
     }
 }

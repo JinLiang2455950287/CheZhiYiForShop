@@ -559,6 +559,7 @@ public interface ApiService {
     @POST(C.ApiUrl.URL_SCAN_LICENSE_GET_BOOKING_INFO)
     Call<ResultBase<CarBookingInfo>> scanLicenseGetBookingInfo(@Path("userNum") String userNum, @Query("carAllName") String carAllName);
 
+
     /**
      * 获取空闲工位
      **/

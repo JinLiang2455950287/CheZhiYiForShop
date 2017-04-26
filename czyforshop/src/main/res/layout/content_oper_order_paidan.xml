@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.ruanyun.chezhiyi.view.ui.home.OperOrderPaidanActivity"
-    tools:showIn="@layout/activity_oper_order_paidan">
+    tools:context="com.ruanyun.chezhiyi.view.ui.home.OperOrderPaiGongActivity"
+    tools:showIn="@layout/activity_oper_order_gong">
 
 </android.support.constraint.ConstraintLayout>

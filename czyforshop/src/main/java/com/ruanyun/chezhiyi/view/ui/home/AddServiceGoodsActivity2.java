@@ -1,6 +1,6 @@
 package com.ruanyun.chezhiyi.view.ui.home;
 
-import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,15 +13,17 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
+
 import com.google.gson.Gson;
 import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.base.PageInfoBase;
 import com.ruanyun.chezhiyi.commonlib.base.RefreshBaseActivity;
 import com.ruanyun.chezhiyi.commonlib.base.ResultBase;
 import com.ruanyun.chezhiyi.commonlib.model.Event;
+import com.ruanyun.chezhiyi.commonlib.model.OrderGoodsInfo;
 import com.ruanyun.chezhiyi.commonlib.model.ProductInfo;
 import com.ruanyun.chezhiyi.commonlib.model.ProjectType;
-import com.ruanyun.chezhiyi.commonlib.model.params.InsteadOrderParams;
+import com.ruanyun.chezhiyi.commonlib.model.WorkOrderInfo;
 import com.ruanyun.chezhiyi.commonlib.model.params.ProductGroupPurchaseParams;
 import com.ruanyun.chezhiyi.commonlib.model.params.WorkOrderSubmitInfo;
 import com.ruanyun.chezhiyi.commonlib.presenter.InsteadOrderPresenter;
@@ -35,8 +37,9 @@ import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
 import com.ruanyun.chezhiyi.view.adapter.AddServiceGoodsAdapter;
 import com.ruanyun.chezhiyi.view.ui.workorder.CustomerReceptionActivity;
 
+
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -81,10 +84,11 @@ public class AddServiceGoodsActivity2 extends RefreshBaseActivity implements Top
 
     private String workOrderNum;//订单编号代下单时使用
     InsteadOrderPresenter presenter = new InsteadOrderPresenter();
-    /**
-     * 代下单传参
-     */
-    InsteadOrderParams insteadOrderPparams = new InsteadOrderParams();
+    //回传
+//    private KaijieOpenOrderGoods kaijieOpenOrderGoods = new KaijieOpenOrderGoods();
+    private String projectNum = "004000000000000";
+    public HashMap<String, List<OrderGoodsInfo>> childs = new HashMap<>();
+    private List<ProductInfo> productInfoHuiChuanList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle bundle) {
@@ -116,15 +120,13 @@ public class AddServiceGoodsActivity2 extends RefreshBaseActivity implements Top
     }
 
     /**
-     * AddServiceGoodsAdapter 64
-     * AddServiceGoodsAdapter 71
-     *
      * @param event
      */
     @Subscribe(threadMode = ThreadMode.MainThread)
     public void alterProductInfoCount(Event<ProductInfo> event) {
         if (event != null && event.key.equals(C.EventKey.COUNT_PRODUCTINFO)) {
             ProductInfo productInfo = event.value;
+            productInfoHuiChuanList.add(event.value);
             for (ProductInfo info : mProductList) {
                 if (info.getGoodsNum().equals(productInfo.getGoodsNum())) {
                     info.setGoodsCount(productInfo.getGoodsCount());
@@ -132,6 +134,7 @@ public class AddServiceGoodsActivity2 extends RefreshBaseActivity implements Top
                 }
             }
             notifyFiltrateData(query.getText());
+            LogX.e("服务产品", productInfo.getGoodsCount() + productInfo.toString());
         }
     }
 
@@ -191,6 +194,8 @@ public class AddServiceGoodsActivity2 extends RefreshBaseActivity implements Top
             params.setProjectParent(projectType.getProjectNum());
         } else {
             stairprojectTypes = DbHelper.getInstance().getSeviceTypes();//获取工单服务和技师技能数据结构一级
+//            kaijieOpenOrderGoods.setProjectTypeList(stairprojectTypes);
+//            LogX.e("返回get", kaijieOpenOrderGoods.toString());
 //            filterProjectList();
             topbar.onTopbarViewClick(topbar.getTvTitle());
             if (stairprojectTypes != null && stairprojectTypes.size() > 0) {
@@ -199,11 +204,14 @@ public class AddServiceGoodsActivity2 extends RefreshBaseActivity implements Top
                     params.setProjectParent(stairprojectTypes.get(0).getProjectNum());
                 }
             }
+            LogX.e("服务工单", stairprojectTypes.toString());
             popWindow = new ServiceSelectPopWindow(mContext, getView(R.id.topbar), stairprojectTypes, selectedProjectType);
             popWindow.setOnPopupClickListener(this);
             setTitleDrawable(R.drawable.icon_arrow_white_down, false);
         }
         params.setGoodsTypeString(params.WORKORDER_ADD_GOODS);
+
+
     }
 
     private void initAdapter() {
@@ -231,25 +239,6 @@ public class AddServiceGoodsActivity2 extends RefreshBaseActivity implements Top
         });
     }
 
-    /**
-     * 过滤已选服务大项目
-     *
-     * @author zhangsan
-     * @date 16/10/19 下午3:53
-     */
-    private void filterProjectList() {
-        ArrayList<String> projectNums = getIntent().getStringArrayListExtra(C.IntentKey.PROJECT_NUMS);
-
-        for (int i = 0, size = projectNums.size(); i < size; i++) {
-            Iterator<ProjectType> iterator = stairprojectTypes.iterator();
-            while (iterator.hasNext()) {
-                if (iterator.next().getProjectNum().equals(projectNums.get(i))) {
-                    iterator.remove();
-                }
-            }
-        }
-        stairprojectTypes.size();
-    }
 
     /**
      * 刷新筛选数据
@@ -286,20 +275,27 @@ public class AddServiceGoodsActivity2 extends RefreshBaseActivity implements Top
                 }
                 break;
             case R.id.tv_title_right:
-                if (isAddGoods) {
-                    LogX.e("代下单", "isAddGoods");
-                    if (workOrderNum == null) {//添加服务商品
-                        addServiceGoods(CustomerReceptionActivity.REQ_ADD_GOODS);
-                        LogX.e("代下单", "添加服务商品");
-                    } else {//代下单
-                        saveInsteadOrder();
-                        LogX.e("代下单", "//代下单");
-                    }
-                } else {//添加服务项目
-                    addServiceProject();
-                    LogX.e("代下单", "添加服务项目");
-                }
-                break;
+//                if (isAddGoods) {
+
+                Intent intent = new Intent();
+                String jsonProject = new Gson().toJson(productInfoHuiChuan);
+                intent.putExtra("1522", jsonProject);
+                LogX.e("返回setResult", jsonProject);
+                setResult(1522, intent);
+                finish();
+//                    LogX.e("代下单", "isAddGoods");
+//                    if (workOrderNum == null) {//添加服务商品
+//                        addServiceGoods(CustomerReceptionActivity.REQ_ADD_GOODS);
+//                        LogX.e("代下单", "添加服务商品");
+//                    } else {//代下单
+////                        saveInsteadOrder();
+//                        LogX.e("代下单", "//代下单");
+//                    }
+//                } else {//添加服务项目
+//                    addServiceProject();
+//                    LogX.e("代下单", "添加服务项目");
+//                }
+//                break;
         }
     }
 
@@ -321,21 +317,6 @@ public class AddServiceGoodsActivity2 extends RefreshBaseActivity implements Top
         finish();
     }
 
-    /**
-     * 代下单
-     */
-    private void saveInsteadOrder() {
-        insteadOrderPparams.setWorkOrderNum(workOrderNum);
-        String JsonStr = getProductInfoListJsonStr();
-        LogX.d("retrofit", "====代下单========\n" + JsonStr);
-        if (JsonStr == null) {
-            AppUtility.showToastMsg("请选择商品");
-            return;
-        }
-        insteadOrderPparams.setResultJosnString(JsonStr);
-
-        presenter.setInsteadOrderMvpView(app.getApiService().insteadOrder(app.getCurrentUserNum(), insteadOrderPparams));
-    }
 
     /**
      * 将添加的产品转成商品集合json
@@ -397,6 +378,7 @@ public class AddServiceGoodsActivity2 extends RefreshBaseActivity implements Top
      */
     @Override
     public void onItemClick(int position) {
+        LogX.e("服务工单", position + "");
         if (position == -1) {
             popwindowInvisible();
         } else {
@@ -429,11 +411,6 @@ public class AddServiceGoodsActivity2 extends RefreshBaseActivity implements Top
         //AppUtility.showToastMsg("下单成功");
         setResult(RESULT_OK);
         finish();
-    }
-
-    @Override
-    public Context getContext() {
-        return mContext;
     }
 
     @Override

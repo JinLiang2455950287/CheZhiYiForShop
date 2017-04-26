@@ -529,7 +529,7 @@
 
         <!-- 快捷开单 -->
         <activity
-            android:name=".view.ui.home.OperOrderPaidanActivity"
+            android:name=".view.ui.home.OperOrderPaiGongActivity"
             android:label="@string/title_activity_oper_order_paidan"
             android:theme="@style/AppTheme"/>
 

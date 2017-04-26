@@ -3,8 +3,6 @@ package com.ruanyun.chezhiyi.view.ui.home;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,17 +21,19 @@ import com.ruanyun.chezhiyi.commonlib.model.AppointmentInfo;
 import com.ruanyun.chezhiyi.commonlib.model.CarBookingInfo;
 import com.ruanyun.chezhiyi.commonlib.model.CustomerRepUiModel;
 import com.ruanyun.chezhiyi.commonlib.model.Event;
+import com.ruanyun.chezhiyi.commonlib.model.KaijieOpenOrderGoods;
+import com.ruanyun.chezhiyi.commonlib.model.OrderGoodsInfo;
 import com.ruanyun.chezhiyi.commonlib.model.ProductInfo;
 import com.ruanyun.chezhiyi.commonlib.model.ProjectType;
 import com.ruanyun.chezhiyi.commonlib.model.User;
 import com.ruanyun.chezhiyi.commonlib.model.WorkBayInfo;
+import com.ruanyun.chezhiyi.commonlib.model.WorkOrderInfo;
 import com.ruanyun.chezhiyi.commonlib.model.params.CarMileageParams;
 import com.ruanyun.chezhiyi.commonlib.model.params.WorkOrderSubmitInfo;
 import com.ruanyun.chezhiyi.commonlib.presenter.CustomerRepPresenter;
 import com.ruanyun.chezhiyi.commonlib.util.AppUtility;
 import com.ruanyun.chezhiyi.commonlib.util.C;
 import com.ruanyun.chezhiyi.commonlib.util.DbHelper;
-import com.ruanyun.chezhiyi.commonlib.util.DefaultItemAnimator;
 import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.util.StringUtil;
 import com.ruanyun.chezhiyi.commonlib.view.CustomerRepMvpView;
@@ -45,20 +45,20 @@ import com.ruanyun.chezhiyi.view.widget.ChooseServiceTab;
 import com.wintone.demo.plateid.MemoryCameraActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.greenrobot.event.Subscribe;
+import de.greenrobot.event.ThreadMode;
 
 import static com.ruanyun.chezhiyi.R.id.edt_carnum_input;
 
-public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar.onTopbarClickListener, CustomerRepMvpView,
-        ChooseServiceTab.onTabClickListener {
+public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar.onTopbarClickListener, CustomerRepMvpView {
     public static final int REQ_REC_PLATENUM = 32434;//获取车牌扫描结果
-    public static final int REQ_ADD_GOODS = 234234;//添加商品
-    public static final int REQ_ADD_SERVICE = 2343;//添加服务大项
     public static final int REQ_ADD_UPKEEP = 2345;//添加里程数
     public static final String WORK_ORDER_GOODS_LIST = "workOrderGoodsList";
     public static final String LEADING_USER_NUM_IS_EMPTY = "leading_user_num_is_empty";
@@ -69,8 +69,6 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
     Topbar topbar;
     @BindView(R.id.edt_appointe_phone)
     TextView edtAppointePhone;
-    @BindView(R.id.ry_choice_server)
-    RecyclerView ryChoiceServer;
     @BindView(R.id.bt_submit)
     Button btSubmit;
     @BindView(edt_carnum_input)
@@ -79,8 +77,6 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
     TextView tvCostomerInfo;
     @BindView(R.id.edt_write_mark)
     EditText edtWriteMark;
-    @BindView(R.id.rl_add_server)
-    TextView rlAddServer;
     @BindView(R.id.img_btn_scan)
     ImageButton imgBtnScan;
     @BindView(R.id.tv_arrive_time)
@@ -95,7 +91,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
 
     private CarBookingInfo carBookingInfo;//当前预约客户信息
     private CustomerRepPresenter presenter = new CustomerRepPresenter();
-    private CustomerRepAdapter adapter;
+    //    private CustomerRepAdapter adapter;
     private List<CustomerRepUiModel> workOrderUiList = new ArrayList<>();
     private WorkOrderSubmitInfo workOrderSubmitInfo = new WorkOrderSubmitInfo();
     private int serviceTypeCount = 0;//服务分类数量
@@ -109,10 +105,10 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
     private CustomExpandableListView expandableListView;
 
     //Model：定义的数据
-    private List<String> groups = new ArrayList<>();
-    private List<String> group = new ArrayList<>();
-    private List<List<String>> childs = new ArrayList<List<String>>();
-
+    private List<WorkOrderInfo> groups = new ArrayList<>();
+    public Map<String, List<OrderGoodsInfo>> childs = new HashMap<>();
+    //    private KaijieOpenOrderGoods kaijieOpenOrderGoods = new KaijieOpenOrderGoods();
+    private MyExpandableListView myExpandableAdapter;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -146,7 +142,12 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                 case REQ_REC_PLATENUM://车牌识别页面返回 没有扫码
                     textWatcherEnable = true;
             }
+
         }
+        if (requestCode == 1522) {
+            
+        }
+
     }
 
     @Override
@@ -159,170 +160,6 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
         registerBus();
         serviceTypeCount = DbHelper.getInstance().getServiceTypeCount();
         initExpandListView();
-    }
-
-    private void initExpandListView() {
-        for (int i = 0; i < 3; i++) {
-            groups.add("维修" + i);
-        }
-        for (int i = 0; i < 3; i++) {
-            group.add("维修" + i);
-            for (int j = 0; j < 3; j++) {
-                childs.add(group);
-            }
-        }
-        expandableListView = (CustomExpandableListView) findViewById(R.id.expandableListView);
-        expandableListView.setGroupIndicator(null);
-        expandableListView.setAdapter(new MyExpandableListView());
-
-    }
-
-    //为ExpandableListView自定义适配器
-    class MyExpandableListView extends BaseExpandableListAdapter {
-
-        //返回一级列表的个数
-        @Override
-        public int getGroupCount() {
-            return groups.size();
-        }
-
-        //返回每个二级列表的个数
-        @Override
-        public int getChildrenCount(int groupPosition) { //参数groupPosition表示第几个一级列表
-            return childs.get(groupPosition).size();
-        }
-
-        //返回一级列表的单个item（返回的是对象）
-        @Override
-        public Object getGroup(int groupPosition) {
-            return groups.get(groupPosition);
-        }
-
-        //返回二级列表中的单个item（返回的是对象）
-        @Override
-        public Object getChild(int groupPosition, int childPosition) {
-            return childs.get(groupPosition).get(childPosition);
-        }
-
-        @Override
-        public long getGroupId(int groupPosition) {
-            return groupPosition;
-        }
-
-        @Override
-        public long getChildId(int groupPosition, int childPosition) {
-            return childPosition;
-        }
-
-        //每个item的id是否是固定？一般为true
-        @Override
-        public boolean hasStableIds() {
-            return true;
-        }
-
-        //【重要】填充一级列表
-        @Override
-        public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-
-            if (convertView == null) {
-                convertView = getLayoutInflater().inflate(R.layout.item_group, null);
-            } else {
-
-            }
-            TextView tv_group = (TextView) convertView.findViewById(R.id.tv_group_title);
-            TextView tv_group_pai = (TextView) convertView.findViewById(R.id.tv_group_pai);
-            tv_group_pai.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showActivity(OperOrderPaidanActivity.class);
-                }
-            });
-            tv_group.setText(groups.get(groupPosition));
-            return convertView;
-        }
-
-        //【重要】填充二级列表
-        @Override
-        public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-
-            if (convertView == null) {
-                convertView = getLayoutInflater().inflate(R.layout.item_child, null);
-            }
-
-
-            TextView tv_child = (TextView) convertView.findViewById(R.id.tv_child);
-
-            tv_child.setText(childs.get(groupPosition).get(childPosition));
-
-            return convertView;
-        }
-
-        //二级列表中的item是否能够被选中？可以改为true
-        @Override
-        public boolean isChildSelectable(int groupPosition, int childPosition) {
-            return true;
-        }
-
-
-    }
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unRegisterBus();
-    }
-
-    /**
-     * 选择服务商品结果回调
-     * post 在 addserviceActivity
-     *
-     * @author zhangsan
-     * @date 16/10/19 上午9:40
-     */
-    @Subscribe
-    public void onSelcectServiceReulst(Event<List<ProductInfo>> event) {
-        if (event.key.equals(C.EventKey.ADD_PROJECT)) {
-            List<ProductInfo> productInfos = event.value;
-            if (productInfos.size() > 0) {
-                if (event.keyInt == REQ_ADD_GOODS) {//服务大项添加商品
-                    List<CustomerRepUiModel> cachedGoodsList = adapter.getGoodsListByProjectType(productInfos.get(0).getProjectParent());
-                    List<CustomerRepUiModel> selectGoodsList = presenter.getUiModelFromProducts(productInfos);
-                    if (cachedGoodsList == null) {
-                        cachedGoodsList = new ArrayList<>();
-                    }
-//                    如果缓存中的商品数是0
-                    if (cachedGoodsList.isEmpty()) {
-                        int firstGoodsIndex = adapter.getFirstIndexOfType(CustomerRepUiModel.EMPTY_TYPE_GOODS);
-                        clearLastTabItems(firstGoodsIndex - 1);
-                    } else {
-                        int firstGoodsIndex = adapter.getFirstIndexOfType(CustomerRepUiModel.TYPE_GOODS);
-                        clearLastTabItems(firstGoodsIndex - 1);
-                    }
-                    cachedGoodsList.addAll(selectGoodsList);
-                    int postion = adapter.getFirstIndexOfExpandItem();
-                    workOrderUiList.addAll(postion + 1, cachedGoodsList);
-                    workOrderUiList.add(postion + 1 + cachedGoodsList.size(), adapter.getAddServiceUIModel(productInfos.get(0).getProjectParent()));
-                    adapter.notifyItemRangeInserted(postion + 1, cachedGoodsList.size() + 1);
-                    adapter.onItemeSelect(productInfos.get(0).getProjectParent(), ChooseServiceTab.TAB_GOODS);
-                } else {//添加服务大项
-                    ProductInfo productInfo = productInfos.get(0);
-                    int removeCount = adapter.removeExpandItems(productInfo.getProjectParent());//移除所有展开内容 并获取移除数量
-                    if (removeCount > 0) {
-                        adapter.notifyDataSetChanged();
-                    }
-                    List<CustomerRepUiModel> selectGoodsList = presenter.getUiModelFromProducts(productInfos);
-                    workOrderUiList.add(presenter.getUIModelFromProduct(productInfos.get(0), ChooseServiceTab.TAB_GOODS));
-                    adapter.putGoodsListIntoCache(productInfo.getProjectParent(), selectGoodsList);
-                    adapter.notifyItemInserted(workOrderUiList.size() - 1);
-                    adapter.inserChangeTabAtPostion(ChooseServiceTab.TAB_GOODS, workOrderUiList.size(), productInfo.getProjectParent());
-                    if (adapter.getServiceTypeItemCount() >= serviceTypeCount) {
-                        rlAddServer.setVisibility(View.GONE);
-                    }
-                    adapter.onItemeSelect(productInfo.getProjectParent(), ChooseServiceTab.TAB_GOODS);
-                }
-            }
-        }
     }
 
     private void initView() {
@@ -338,13 +175,120 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
             carNumber = cph;
             presenter.getScanCustomerInfo(carNumber);
         }
-        adapter = new CustomerRepAdapter(mContext, workOrderUiList);
-        // adapter.setOnProjectTypeClick(this);
-        ryChoiceServer.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-        ryChoiceServer.setItemAnimator(new DefaultItemAnimator());
-        ryChoiceServer.setAdapter(adapter);
-        adapter.setTabclickListener(this);
 
+    }
+
+    private void initExpandListView() {
+        expandableListView = (CustomExpandableListView) findViewById(R.id.expandableListView);
+        myExpandableAdapter = new MyExpandableListView();
+        expandableListView.setGroupIndicator(null);
+        expandableListView.setAdapter(myExpandableAdapter);
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MainThread)
+    public void getProductInfoCount(Event<KaijieOpenOrderGoods> event) {
+        if (event != null && event.key.equals("KuaiJieKaiDan")) {
+            LogX.e("KuaiJieKaiDan", event.value.toString());
+        }
+    }
+
+    //为ExpandableListView自定义适配器
+    class MyExpandableListView extends BaseExpandableListAdapter {
+
+        //返回一级列表的个数
+        @Override
+        public int getGroupCount() {
+            return groups.size();
+        }
+
+        //返回每个二级列表的个数 List<Map<String,List<ProductInfo>>>
+        @Override
+        public int getChildrenCount(int groupPosition) { //参数groupPosition表示第几个一级列表
+            return childs.get(groups.get(groupPosition).getProjectNum()).size();
+        }
+
+        //返回一级列表的单个item（返回的是对象）
+        @Override
+        public Object getGroup(int groupPosition) {
+            return groups.get(groupPosition);
+        }
+
+        //返回二级列表中的单个item（返回的是对象）List<Map<String,List<ProductInfo>>>
+        @Override
+        public Object getChild(int groupPosition, int childPosition) {
+            return childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition);
+        }
+
+        @Override
+        public long getGroupId(int groupPosition) {
+            return groupPosition;
+        }
+
+        @Override
+        public long getChildId(int groupPosition, int childPosition) {   //List<Map<String,List<ProductInfo>>>
+            return childPosition;
+        }
+
+        //每个item的id是否是固定？一般为true
+        @Override
+        public boolean hasStableIds() {
+            return true;
+        }
+
+        //【重要】填充一级列表
+        @Override
+        public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(R.layout.item_group, null);
+            } else {
+
+            }
+            TextView tv_group = (TextView) convertView.findViewById(R.id.tv_group_title);
+            TextView tv_group_pai = (TextView) convertView.findViewById(R.id.tv_group_pai);
+            tv_group_pai.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(QuickOpenOrderActivity.this, OperOrderPaiGongActivity.class);
+                    intent.putExtra("projectNumber", groups.get(groupPosition).getProjectNum() + "");
+                    startActivity(intent);
+                }
+            });
+
+            tv_group.setText(groups.get(groupPosition).getProjectName() + "");
+
+            return convertView;
+        }
+
+        //【重要】填充二级列表
+        @Override
+        public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(R.layout.item_child, null);
+            }
+
+            TextView tv_child = (TextView) convertView.findViewById(R.id.tv_child);
+            TextView tv_child_detail = (TextView) convertView.findViewById(R.id.tv_child_detail);
+            tv_child.setText(childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getGoodsName());
+            tv_child_detail.setText("¥ " + childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getAmount() + "×1");
+            return convertView;
+        }
+
+        //二级列表中的item是否能够被选中？可以改为true
+        @Override
+        public boolean isChildSelectable(int groupPosition, int childPosition) {
+            return true;
+        }
+
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unRegisterBus();
     }
 
     /**
@@ -374,7 +318,6 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                 LogX.e("根据预约工单服务项初始化服务标签", projectTypes.toString());
                 creatServiceLables(projectTypes);
             }
-            adapter.buidBaughtGoods(carBookingInfo.getMakeInfo().getWorkOrderInfoList());
         }
     }
 
@@ -430,7 +373,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
         workOrderSubmitInfo.remark = edtWriteMark.getText().toString();//服务备注字段
         workOrderSubmitInfo.carAllName = TextUtils.isEmpty(edtCarnumInput.getText().toString()) ? "" : edtCarnumInput.getText().toString().toUpperCase();//号牌字段
         workOrderSubmitInfo.customerUserNum = carBookingInfo != null && carBookingInfo.getCustomerUser() != null ? carBookingInfo.getCustomerUser().getUserNum() : "";//司机编号
-        workOrderSubmitInfo.workOrderList = adapter.buildWorkOrderParams();
+
         workOrderSubmitInfo.phone = edtAppointePhone.getText().toString();
         if (workOrderSubmitInfo.workOrderList.isEmpty()) {
             showToast("至少选择一个服务项");
@@ -496,14 +439,10 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
      * @date 16/10/24 下午6:02
      */
     private void clearLastTabItems(int relataedPostion) {
-        //如果是empty 添加服务商品  直接 return
-//        if (relataedPostion < 0) return;
-        int removeCount = adapter.removeItemsExceptTab();
-        if (removeCount > 0)
-            adapter.notifyItemRangeRemoved(relataedPostion + 1, removeCount);
+
     }
 
-    @OnClick({R.id.tv_costomer_info, R.id.bt_submit, R.id.rl_add_server, R.id.rl_add_server2, R.id.img_btn_scan, R.id.edt_carnum_input})
+    @OnClick({R.id.tv_costomer_info, R.id.bt_submit, R.id.rl_add_server2, R.id.img_btn_scan, R.id.edt_carnum_input})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_costomer_info://客户信息
@@ -514,15 +453,14 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
             case R.id.bt_submit://提交工单
                 submitWorkOrder();
                 break;
-            case R.id.rl_add_server://添加商品
-                Intent intent = new Intent(mContext, AddServiceGoodsActivity.class);
-                intent.putStringArrayListExtra(C.IntentKey.PROJECT_NUMS, adapter.getCurrentProjectNums());
-
-                showActivity(intent);
-                break;
             case R.id.rl_add_server2://添加商品2
+//                Intent intent = new Intent(mContext, AddServiceGoodsActivity.class);
+//                intent.putStringArrayListExtra(C.IntentKey.PROJECT_NUMS, adapter.getCurrentProjectNums());
+//                showActivity(intent);
                 Intent intent2 = new Intent(mContext, AddServiceGoodsActivity2.class);
-                showActivity(intent2);
+
+
+                startActivityForResult(intent2, 1522);
                 break;
             case R.id.img_btn_scan://车牌扫描
                 showVideoRecPlateNum();
@@ -560,6 +498,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
 
     /**
      * 扫描车牌后获取预约和客户信息回调
+     * 获取服务项目
      *
      * @author zhangsan
      * @date 16/11/4 下午2:24
@@ -573,8 +512,14 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
         if (makeInfo != null) {
             workOrderUiList.clear();
             workOrderUiList.addAll(presenter.getUiModelFromWorkOrder(makeInfo.getWorkOrderInfoList(), ChooseServiceTab.TAB_WORK_STATION));
-            adapter.notifyDataSetChanged();
         }
+        groups = carBookingInfo.getMakeInfo().getWorkOrderInfoList();
+        LogX.e("服务项目groups", groups.toString());
+        for (int i = 0; i < groups.size(); i++) {
+            childs.put(groups.get(i).getProjectNum(), groups.get(i).getOrderGoodsDetailList());
+        }
+        LogX.e("服务项目child", childs.toString());
+        myExpandableAdapter.notifyDataSetChanged();
     }
 
 
@@ -583,7 +528,6 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
         this.carBookingInfo = null;
         updateView();
         workOrderUiList.clear();
-        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -602,10 +546,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
         clearLastTabItems(relataedPostion);
         if (!goodsInfos.isEmpty()) {
             workOrderUiList.addAll(relataedPostion + 1, goodsInfos);
-            workOrderUiList.add(relataedPostion + 1 + goodsInfos.size(), adapter.getAddServiceUIModel(projectNum));
-            adapter.notifyItemRangeInserted(relataedPostion + 1, goodsInfos.size() + 1);
         } else {
-            adapter.inserEmptyItemAtPostion(relataedPostion + 1, ChooseServiceTab.TAB_GOODS, projectNum);
         }
     }
 
@@ -614,12 +555,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
     public void onFreeWorkbayResult(String projectNum, List<WorkBayInfo> workBayInfos, int relataedPostion) {
         clearLastTabItems(relataedPostion);
         if (!workBayInfos.isEmpty()) {
-            adapter.setWorkOrderSelection(-1);
             workOrderUiList.addAll(relataedPostion + 1, presenter.getUiModelFromWorkBay(workBayInfos, projectNum));
-            adapter.notifyItemRangeInserted(relataedPostion + 1, workBayInfos.size());
-            adapter.indexOfSecletModel(projectNum, ChooseServiceTab.TAB_WORK_STATION);
-        } else {
-            adapter.inserEmptyItemAtPostion(relataedPostion + 1, ChooseServiceTab.TAB_WORK_STATION, projectNum);
         }
     }
 
@@ -633,12 +569,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
     public void onFreeTechnicanResult(String projectNum, List<User> result, int relataedPostion) {
         clearLastTabItems(relataedPostion);
         if (!result.isEmpty()) {
-            adapter.setTechnicianSelection(-1);//重置显示选中项
             workOrderUiList.addAll(relataedPostion + 1, presenter.getUiModelFromTechnianUser(result, projectNum));
-            adapter.notifyItemRangeInserted(relataedPostion + 1, result.size());
-            adapter.indexOfSecletModel(projectNum, ChooseServiceTab.TAB_TECHNICIAN);
-        } else {
-            adapter.inserEmptyItemAtPostion(relataedPostion + 1, ChooseServiceTab.TAB_TECHNICIAN, projectNum);
         }
     }
 
@@ -658,35 +589,6 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
      */
     @Override
     public void saveCarMileageSuccess() {
-//        tvUpkeep.setText(upkeep);
-    }
-
-
-    /**
-     * 列表切换标签点击回调
-     *
-     * @author zhangsan
-     * @date 16/10/12 下午2:16
-     */
-    @Override
-    public void onTabClick(int tabType, int relataedPostion, String relatedProjectNum) {
-        switch (tabType) {
-            case ChooseServiceTab.TAB_GOODS://选择服务商品
-                //presenter.getBaughtGoods(carBookingInfo.getCustomerUser().getUserNum(), relatedProjectNum, relataedPostion);
-                onNotSpendingServiceResult(relatedProjectNum, adapter.getGoodsListByProjectType(relatedProjectNum), relataedPostion);
-                break;
-            case ChooseServiceTab.TAB_TECHNICIAN://选择技师
-                presenter.getFreeTechnian(relatedProjectNum, relataedPostion);
-                break;
-            case ChooseServiceTab.TAB_WORK_STATION://选择工位
-                presenter.getFreeWorkStation(relatedProjectNum, relataedPostion);
-                break;
-        }
-        if (relataedPostion > 0 && relataedPostion < workOrderUiList.size()) {
-            CustomerRepUiModel customerRepUiModel = workOrderUiList.get(relataedPostion - 1);
-            if (customerRepUiModel.getItemType() == CustomerRepUiModel.TYPE_PROJECT_TYPE)
-                customerRepUiModel.setSelecTab(tabType);
-        }
     }
 
 }

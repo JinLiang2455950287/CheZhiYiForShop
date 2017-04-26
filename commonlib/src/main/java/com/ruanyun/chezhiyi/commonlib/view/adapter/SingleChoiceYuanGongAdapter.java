@@ -1,7 +1,6 @@
 package com.ruanyun.chezhiyi.commonlib.view.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +9,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.ruanyun.chezhiyi.commonlib.R;
+import com.ruanyun.chezhiyi.commonlib.model.User;
 
 import java.util.List;
 
@@ -18,22 +18,22 @@ import java.util.List;
  * 员工/工位选择
  */
 
-public class SingleChoiceAdapter extends RecyclerView.Adapter<SingleChoiceAdapter.InternalViewHolder> {
+public class SingleChoiceYuanGongAdapter extends RecyclerView.Adapter<SingleChoiceYuanGongAdapter.InternalViewHolder> {
     private final LayoutInflater layoutInflater;
-    private List<String> data;
+    private List<User> data;
     /**
      * 默认为-1，没有选择任何item
      */
     private int currentCheckedItemPosition;
     OnItemClickListener onItemClickListener;
 
-    public SingleChoiceAdapter(Context context, List<String> data) {
+    public SingleChoiceYuanGongAdapter(Context context, List<User> data) {
         layoutInflater = LayoutInflater.from(context);
         this.data = data;
         currentCheckedItemPosition = -1;
     }
 
-    public String getItem(int position) {
+    public User getItem(int position) {
         return data.get(position);
     }
 
@@ -58,7 +58,7 @@ public class SingleChoiceAdapter extends RecyclerView.Adapter<SingleChoiceAdapte
         } else {
             holder.radioButton.setChecked(false);
         }
-        holder.textView.setText(getItem(position));
+        holder.textView.setText(getItem(position).getNickName());
     }
 
     @Override
@@ -82,6 +82,10 @@ public class SingleChoiceAdapter extends RecyclerView.Adapter<SingleChoiceAdapte
     public void check(int position) {
         setDefaultCheckedItemPosition(position);
         notifyDataSetChanged();
+    }
+
+    public void setData(List<User> newData) {
+        data = newData;
     }
 
 

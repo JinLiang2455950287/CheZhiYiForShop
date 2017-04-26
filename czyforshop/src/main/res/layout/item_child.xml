@@ -26,7 +26,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="10dp"
         android:gravity="center_vertical"
-        android:text="¥ 230×1" />
+        android:text="¥ 0×1" />
 
     <View
         android:id="@+id/view_line_bottom"

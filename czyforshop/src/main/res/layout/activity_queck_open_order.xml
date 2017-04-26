@@ -130,9 +130,6 @@
 
             <View style="@style/divider_horizontal" />
 
-            <View
-                style="@style/divider_horizontal"
-                android:layout_marginTop="10dp" />
             <!--预约客户信息-->
             <LinearLayout
                 android:id="@+id/ll_appoint_info"
@@ -279,17 +276,6 @@
                     android:textSize="@dimen/text_size_middle" />
 
                 <TextView
-                    android:id="@+id/rl_add_server"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:drawablePadding="5dp"
-                    android:drawableRight="@drawable/icon_add_new_pro"
-                    android:gravity="center"
-                    android:text="添加商品"
-                    android:textColor="@color/blue_text"
-                    android:textSize="@dimen/text_size_xsmall" />
-                <TextView
                     android:id="@+id/rl_add_server2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -314,18 +300,12 @@
                 android:divider="@color/transparent" />
 
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/ry_choice_server"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/corner_rectangle_gray_no_corner"
                 android:orientation="horizontal">
 

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -21,6 +20,7 @@ import com.ruanyun.chezhiyi.commonlib.model.AppointmentInfo;
 import com.ruanyun.chezhiyi.commonlib.model.CarBookingInfo;
 import com.ruanyun.chezhiyi.commonlib.model.CustomerRepUiModel;
 import com.ruanyun.chezhiyi.commonlib.model.Event;
+import com.ruanyun.chezhiyi.commonlib.model.GongWeiJiShiBean;
 import com.ruanyun.chezhiyi.commonlib.model.KaijieOpenOrderGoods;
 import com.ruanyun.chezhiyi.commonlib.model.OrderGoodsInfo;
 import com.ruanyun.chezhiyi.commonlib.model.ProductInfo;
@@ -112,6 +112,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
     public Map<String, List<OrderGoodsInfo>> childs = new HashMap<>();
     private MyExpandableListPaiGongAdapter myExpandableAdapter;
     private List<ProductInfo> productInfoHuiChuanList = new ArrayList<>();
+    private GongWeiJiShiBean gongWeiJiShiBean = new GongWeiJiShiBean();
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -139,6 +140,8 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                         }
                     }
                     break;
+
+
             }
         } else if (resultCode == RESULT_FIRST_USER) {
             switch (requestCode) {
@@ -147,6 +150,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
             }
 
         }
+
         if (requestCode == 1522) {
             ProductInfo infoTemp = new ProductInfo();//传过来的商品bean
             OrderGoodsInfo goodsInfoTemp = new OrderGoodsInfo();//本地的商品bean
@@ -211,8 +215,22 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
             myExpandableAdapter.setData(groups, childs);
             myExpandableAdapter.notifyDataSetChanged();
 
-
             LogX.e("1522MapNew", groups.size() + "==" + childs.size() + "==" + groups.toString() + "==" + childs.toString());
+        }
+
+        if (requestCode == 1544) {    // /*工位/技师*/
+            gongWeiJiShiBean = (GongWeiJiShiBean) data.getParcelableExtra("gongWeiJiShiBean");
+            LogX.e("1544", gongWeiJiShiBean + "projectNumber");
+            for (int i = 0; i < groups.size(); i++) {
+                if (groups.get(i).getProjectNum().equals(gongWeiJiShiBean.getProjectNumber())) {
+                    groups.get(i).setRemark("技师：" + gongWeiJiShiBean.getJishiname() + " 工位：" + gongWeiJiShiBean.getGongweiname());
+                    LogX.e("15444", "message ：" + "技师：" + gongWeiJiShiBean.getJishiname() + " 工位：" + gongWeiJiShiBean.getGongweiname());
+                }
+            }
+            LogX.e("15444set", groups.toString() + "groups");
+            myExpandableAdapter.setData(groups, childs);
+            myExpandableAdapter.notifyDataSetChanged();
+
         }
 
     }
@@ -576,6 +594,6 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
     public void onProductBuyItemClick(String project) {
         Intent intent = new Intent(mContext, OperOrderPaiGongActivity.class);
         intent.putExtra("projectNumber", project);
-        mContext.startActivity(intent);
+        startActivityForResult(intent, 1544);
     }
 }

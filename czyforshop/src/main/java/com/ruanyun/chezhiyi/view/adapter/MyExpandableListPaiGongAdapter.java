@@ -87,6 +87,7 @@ public class MyExpandableListPaiGongAdapter extends BaseExpandableListAdapter {
         }
         TextView tv_group = (TextView) convertView.findViewById(R.id.tv_group_title);
         TextView tv_group_pai = (TextView) convertView.findViewById(R.id.tv_group_pai);
+        TextView tv_group_detail = (TextView) convertView.findViewById(R.id.tv_group_detail);
         tv_group_pai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,7 +96,8 @@ public class MyExpandableListPaiGongAdapter extends BaseExpandableListAdapter {
         });
 
         tv_group.setText(groups.get(groupPosition).getProjectName() + "");
-
+        tv_group_detail.setText(groups.get(groupPosition).getRemark());
+        LogX.e("1544Adapter", groups.get(groupPosition).toString());
         return convertView;
     }
 

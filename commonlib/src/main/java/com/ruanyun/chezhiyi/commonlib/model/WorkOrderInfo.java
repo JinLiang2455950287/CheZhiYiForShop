@@ -11,6 +11,7 @@ import java.util.List;
  * Created by hdl on 2016/9/20.
  */
 public class WorkOrderInfo implements Parcelable {
+    private String workbayInfoNum;
     private int workOrderId;            //主键
     private String workOrderNum;        //工单编号
     private int workOrderStatus;        // 工单状态(1工单等待确认 2已确认，等待进店 3等待施工 4即将开始施工 5施工中 6施工结束，质检中 7返修中，质检不合格 8等待结算，质检合格 9完成结算)
@@ -113,6 +114,14 @@ public class WorkOrderInfo implements Parcelable {
 
     public void setWorkOrderNum(String workOrderNum) {
         this.workOrderNum = workOrderNum;
+    }
+
+    public String getWorkbayInfoNum() {
+        return workbayInfoNum;
+    }
+
+    public void setWorkbayInfoNum(String workbayInfoNum) {
+        this.workbayInfoNum = workbayInfoNum;
     }
 
     public int getWorkOrderStatus() {
@@ -351,6 +360,7 @@ public class WorkOrderInfo implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.workOrderId);
         dest.writeString(this.workOrderNum);
+        dest.writeString(this.workbayInfoNum);
         dest.writeInt(this.workOrderStatus);
         dest.writeString(this.storeNum);
         dest.writeString(this.projectNum);
@@ -387,6 +397,7 @@ public class WorkOrderInfo implements Parcelable {
     protected WorkOrderInfo(Parcel in) {
         this.workOrderId = in.readInt();
         this.workOrderNum = in.readString();
+        this.workbayInfoNum = in.readString();
         this.workOrderStatus = in.readInt();
         this.storeNum = in.readString();
         this.projectNum = in.readString();
@@ -437,6 +448,7 @@ public class WorkOrderInfo implements Parcelable {
         return "WorkOrderInfo{" +
                 "workOrderId=" + workOrderId +
                 ", workOrderNum='" + workOrderNum + '\'' +
+                ", workbayInfoNum='" + workbayInfoNum + '\'' +
                 ", workOrderStatus=" + workOrderStatus +
                 ", storeNum='" + storeNum + '\'' +
                 ", projectNum='" + projectNum + '\'' +

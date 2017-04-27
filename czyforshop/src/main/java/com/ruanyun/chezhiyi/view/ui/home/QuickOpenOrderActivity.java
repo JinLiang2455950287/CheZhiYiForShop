@@ -95,7 +95,10 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
     private CustomerRepPresenter presenter = new CustomerRepPresenter();
     //    private CustomerRepAdapter adapter;
     private List<CustomerRepUiModel> workOrderUiList = new ArrayList<>();
-    private WorkOrderSubmitInfo workOrderSubmitInfo = new WorkOrderSubmitInfo();
+    //    private WorkOrderSubmitInfo workOrderSubmitInfo = new WorkOrderSubmitInfo();//提交表单的实体类
+    //    private List<WorkOrderSubmitInfo.WorkOrderListInfo> workOrderList = new ArrayList<>();//提交表单的List
+    //    public WorkOrderSubmitInfo.WorkOrderListInfo workOrderList = new WorkOrderSubmitInfo.WorkOrderListInfo();//服务商品列表
+//    public WorkOrderSubmitInfo.WorkOrderGoods workOrderGoods = new WorkOrderSubmitInfo.WorkOrderGoods();//服务商品
     private int serviceTypeCount = 0;//服务分类数量
     private CarMileageParams params;// 修改最新里程数 参数
     private String upkeep;//  修改最新里程数
@@ -109,6 +112,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
 
     //Model：定义的数据
     private List<WorkOrderInfo> groups = new ArrayList<>();
+    //    private List<OrderGoodsInfo> childsListsubTemp = new ArrayList<>();
     public Map<String, List<OrderGoodsInfo>> childs = new HashMap<>();
     private MyExpandableListPaiGongAdapter myExpandableAdapter;
     private List<ProductInfo> productInfoHuiChuanList = new ArrayList<>();
@@ -223,6 +227,10 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
             LogX.e("1544", gongWeiJiShiBean + "projectNumber");
             for (int i = 0; i < groups.size(); i++) {
                 if (groups.get(i).getProjectNum().equals(gongWeiJiShiBean.getProjectNumber())) {
+                    groups.get(i).setLeadingUserName(gongWeiJiShiBean.getJishiname());
+                    groups.get(i).setLeadingUserNum(gongWeiJiShiBean.getJishiid());
+                    groups.get(i).setWorkbayName(gongWeiJiShiBean.getGongweiname());
+                    groups.get(i).setWorkbayInfoNum(gongWeiJiShiBean.getGongweiid());
                     groups.get(i).setRemark("技师：" + gongWeiJiShiBean.getJishiname() + " 工位：" + gongWeiJiShiBean.getGongweiname());
                     LogX.e("15444", "message ：" + "技师：" + gongWeiJiShiBean.getJishiname() + " 工位：" + gongWeiJiShiBean.getGongweiname());
                 }
@@ -242,7 +250,6 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
         ButterKnife.bind(this);
         initView();
         presenter.attachView(this);
-        registerBus();
         serviceTypeCount = DbHelper.getInstance().getServiceTypeCount();
         initExpandListView();
     }
@@ -271,13 +278,6 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
         myExpandableAdapter.setPaiGongClickListener(this);
         expandableListView.setAdapter(myExpandableAdapter);
 
-    }
-
-    @Subscribe(threadMode = ThreadMode.MainThread)
-    public void getProductInfoCount(Event<KaijieOpenOrderGoods> event) {
-        if (event != null && event.key.equals("KuaiJieKaiDan")) {
-            LogX.e("KuaiJieKaiDan", event.value.toString());
-        }
     }
 
 
@@ -360,83 +360,65 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
 
     /**
      * 提交工单信息
-     *
-     * @author zhangsan
-     * @date 16/11/2 下午2:03
      */
     private void submitWorkOrder() {
+        WorkOrderSubmitInfo workOrderSubmitInfo = new WorkOrderSubmitInfo();//提交表单的实体类
         workOrderSubmitInfo.makeNum = carBookingInfo != null && carBookingInfo.getMakeInfo() != null ? carBookingInfo.getMakeInfo().getMakeNum() : "";//预约编号
         workOrderSubmitInfo.remark = edtWriteMark.getText().toString();//服务备注字段
         workOrderSubmitInfo.carAllName = TextUtils.isEmpty(edtCarnumInput.getText().toString()) ? "" : edtCarnumInput.getText().toString().toUpperCase();//号牌字段
         workOrderSubmitInfo.customerUserNum = carBookingInfo != null && carBookingInfo.getCustomerUser() != null ? carBookingInfo.getCustomerUser().getUserNum() : "";//司机编号
-
         workOrderSubmitInfo.phone = edtAppointePhone.getText().toString();
-        if (workOrderSubmitInfo.workOrderList.isEmpty()) {
-            showToast("至少选择一个服务项");
-            return;
-        }
-        String canSubmit = isCanSubmit();
-        if (canSubmit.equals(LEADING_USER_NUM_IS_EMPTY)) {
-            AppUtility.showToastMsg(DbHelper.getInstance().getServiceTypeName(workOrderListInfo.projectNum) + " 服务技师不能为空");
-            return;
-        } else if (canSubmit.equals(WORKBAY_INFO_NUM_ISEMPTY)) {
-            AppUtility.showToastMsg(DbHelper.getInstance().getServiceTypeName(workOrderListInfo.projectNum) + " 工位不能为空");
-            return;
-        } else if (canSubmit.equals(WORK_ORDER_GOODS_LIST)) {   // 商品不能为 空
-            AppUtility.showToastMsg(DbHelper.getInstance().getServiceTypeName(workOrderListInfo.projectNum) + " 商品不能为空");
-            return;
-        }
+
         if (!StringUtil.isCarNum(workOrderSubmitInfo.carAllName)) {
             AppUtility.showToastMsg("车牌号不合法");
             return;
         }
-        String paramsResult = new Gson().toJson(workOrderSubmitInfo);
-        LogX.d("retrofit", "==商品===" + paramsResult);
-        presenter.submitWorkOrder(paramsResult);
-    }
 
-    /**
-     * 记录不正确的工单信息
-     */
-    private WorkOrderSubmitInfo.WorkOrderListInfo workOrderListInfo;//记录不正确的工单信息
-
-    /**
-     * 检查同一工单  技师 和 工位 是否同时存在
-     * <p>
-     * #  LEADING_USER_NUM_IS_EMPTY   -  服务技师是空的
-     * #  WORKBAY_INFO_NUM_ISEMPTY  -  服务工位是空的
-     * #  WORK_ORDER_GOODS_LIST  -  服务商品是空的}
-     *
-     * @return
-     */
-    private String isCanSubmit() {
-        String canSubmit = CANSUBMIT;
-        // 遍历工单列表  只要存在 只有技师， 或者只有工位的情况  不允许提交
-        for (int i = 0; i < workOrderSubmitInfo.workOrderList.size(); i++) {
-            workOrderListInfo = workOrderSubmitInfo.workOrderList.get(i);
-            if ((workOrderListInfo.leadingUserNum.isEmpty() && !workOrderListInfo.workbayInfoNum.isEmpty())) {
-                canSubmit = LEADING_USER_NUM_IS_EMPTY;
-                break;
-            } else if (!workOrderListInfo.leadingUserNum.isEmpty() && workOrderListInfo.workbayInfoNum.isEmpty()) {
-                canSubmit = WORKBAY_INFO_NUM_ISEMPTY;
-                break;
-            } else if (workOrderListInfo.workOrderGoodsList.isEmpty()) {
-                canSubmit = WORK_ORDER_GOODS_LIST;
-                break;
+        WorkOrderSubmitInfo.WorkOrderListInfo workOrderinfo;//服务商品列表
+        WorkOrderSubmitInfo.WorkOrderGoods workOrderGoods;//服务商品
+        List<WorkOrderSubmitInfo.WorkOrderGoods> workOrderGoodsList = new ArrayList<>();
+        List<OrderGoodsInfo> childsListsubTemp = new ArrayList<>();
+        List<WorkOrderSubmitInfo.WorkOrderListInfo> workOrderList = new ArrayList<>();//提交表单的List
+        for (int i = 0; i < groups.size(); i++) {
+            WorkOrderInfo WorkOrderInfo = groups.get(i);
+            childsListsubTemp = childs.get(WorkOrderInfo.getProjectNum());
+            for (int j = 0; j < childsListsubTemp.size(); j++) {
+                workOrderGoods = new WorkOrderSubmitInfo.WorkOrderGoods();
+                OrderGoodsInfo orderGoodsInfo = childsListsubTemp.get(j);
+                workOrderGoods.goodsName = orderGoodsInfo.getGoodsName();
+                workOrderGoods.goodsNum = orderGoodsInfo.getGoodsNum();
+                workOrderGoods.goodsTotalCount = orderGoodsInfo.getGoodsCount();
+                workOrderGoods.mainPhoto = "";
+                workOrderGoods.sgtcAmount = "";
+                workOrderGoods.singlePrice = orderGoodsInfo.getAmount() + "";
+                workOrderGoods.xstcAmount = "";
+                workOrderGoodsList.add(workOrderGoods);
             }
+            if (workOrderGoodsList.size() > 0) {
+                workOrderinfo = new WorkOrderSubmitInfo.WorkOrderListInfo();
+                workOrderinfo.leadingUserName = WorkOrderInfo.getLeadingUserName();
+                workOrderinfo.leadingUserName = WorkOrderInfo.getLeadingUserName();
+                workOrderinfo.leadingUserNum = WorkOrderInfo.getLeadingUserNum();
+                workOrderinfo.projectNum = WorkOrderInfo.getProjectNum();
+                workOrderinfo.workOrderNum = "测试";
+                workOrderinfo.workbayInfoNum = WorkOrderInfo.getWorkbayInfoNum();
+                workOrderinfo.workbayName = WorkOrderInfo.getWorkbayName();
+                workOrderinfo.workOrderGoodsList = workOrderGoodsList;
+                workOrderList.add(workOrderinfo);
+            }
+
         }
-        return canSubmit;
+
+        if (workOrderList.size() <= 0) {
+            showToast("至少选择一个服务项");
+            return;
+        }
+        workOrderSubmitInfo.workOrderList = workOrderList;
+        String paramsResult = new Gson().toJson(workOrderSubmitInfo);
+        LogX.e("retrofit3", paramsResult);
+//        presenter.submitWorkOrder(paramsResult);
     }
 
-    /**
-     * 清空上个tab加载的数据
-     *
-     * @author zhangsan
-     * @date 16/10/24 下午6:02
-     */
-    private void clearLastTabItems(int relataedPostion) {
-
-    }
 
     @OnClick({R.id.tv_costomer_info, R.id.bt_submit, R.id.rl_add_server2, R.id.img_btn_scan, R.id.edt_carnum_input})
     public void onClick(View view) {
@@ -454,8 +436,6 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
 //                intent.putStringArrayListExtra(C.IntentKey.PROJECT_NUMS, adapter.getCurrentProjectNums());
 //                showActivity(intent);
                 Intent intent2 = new Intent(mContext, AddServiceGoodsActivity2.class);
-
-
                 startActivityForResult(intent2, 1522);
                 break;
             case R.id.img_btn_scan://车牌扫描
@@ -541,20 +521,12 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
      */
     @Override
     public void onNotSpendingServiceResult(String projectNum, List<CustomerRepUiModel> goodsInfos, int relataedPostion) {
-        clearLastTabItems(relataedPostion);
-        if (!goodsInfos.isEmpty()) {
-            workOrderUiList.addAll(relataedPostion + 1, goodsInfos);
-        } else {
-        }
     }
 
     //relataedPostion 切换标签所在的position
     @Override
     public void onFreeWorkbayResult(String projectNum, List<WorkBayInfo> workBayInfos, int relataedPostion) {
-        clearLastTabItems(relataedPostion);
-        if (!workBayInfos.isEmpty()) {
-            workOrderUiList.addAll(relataedPostion + 1, presenter.getUiModelFromWorkBay(workBayInfos, projectNum));
-        }
+
     }
 
     /**
@@ -565,10 +537,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
      */
     @Override
     public void onFreeTechnicanResult(String projectNum, List<User> result, int relataedPostion) {
-        clearLastTabItems(relataedPostion);
-        if (!result.isEmpty()) {
-            workOrderUiList.addAll(relataedPostion + 1, presenter.getUiModelFromTechnianUser(result, projectNum));
-        }
+
     }
 
     /**

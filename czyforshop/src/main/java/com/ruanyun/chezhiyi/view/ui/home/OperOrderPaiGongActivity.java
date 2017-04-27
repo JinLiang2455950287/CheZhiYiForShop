@@ -59,7 +59,7 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
         ButterKnife.bind(this);
         initView();
         initRecyclerView();
-
+        showLoading("加载中..");
     }
 
     private void initView() {
@@ -161,6 +161,7 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
         gongWeiJiShiBean.setJishiname(jishiList.get(0).getNickName());
         adapterYuanGong.setData(jiShi);
         adapterYuanGong.notifyDataSetChanged();
+        dissMissLoading();
     }
 
     @Override

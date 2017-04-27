@@ -33,6 +33,7 @@ import com.ruanyun.chezhiyi.commonlib.model.params.WorkOrderSubmitInfo;
 import com.ruanyun.chezhiyi.commonlib.presenter.CustomerRepPresenter;
 import com.ruanyun.chezhiyi.commonlib.util.AppUtility;
 import com.ruanyun.chezhiyi.commonlib.util.C;
+import com.ruanyun.chezhiyi.commonlib.util.CloseKeyBoard;
 import com.ruanyun.chezhiyi.commonlib.util.DbHelper;
 import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.util.StringUtil;
@@ -40,10 +41,11 @@ import com.ruanyun.chezhiyi.commonlib.view.CustomerRepMvpView;
 import com.ruanyun.chezhiyi.commonlib.view.widget.CustomExpandableListView;
 import com.ruanyun.chezhiyi.commonlib.view.widget.FlowLayout;
 import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
-import com.ruanyun.chezhiyi.view.adapter.CustomerRepAdapter;
+import com.ruanyun.chezhiyi.view.adapter.MyExpandableListPaiGongAdapter;
 import com.ruanyun.chezhiyi.view.widget.ChooseServiceTab;
 import com.wintone.demo.plateid.MemoryCameraActivity;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,7 +59,7 @@ import de.greenrobot.event.ThreadMode;
 
 import static com.ruanyun.chezhiyi.R.id.edt_carnum_input;
 
-public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar.onTopbarClickListener, CustomerRepMvpView {
+public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar.onTopbarClickListener, CustomerRepMvpView, MyExpandableListPaiGongAdapter.OnPaiGongClickListener {
     public static final int REQ_REC_PLATENUM = 32434;//获取车牌扫描结果
     public static final int REQ_ADD_UPKEEP = 2345;//添加里程数
     public static final String WORK_ORDER_GOODS_LIST = "workOrderGoodsList";
@@ -100,6 +102,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
     private String carNumber;// 当前的车牌号
     private String plateNumber;
     private boolean textWatcherEnable = true;
+    private boolean flag = false;
 
     //View
     private CustomExpandableListView expandableListView;
@@ -107,8 +110,8 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
     //Model：定义的数据
     private List<WorkOrderInfo> groups = new ArrayList<>();
     public Map<String, List<OrderGoodsInfo>> childs = new HashMap<>();
-    //    private KaijieOpenOrderGoods kaijieOpenOrderGoods = new KaijieOpenOrderGoods();
-    private MyExpandableListView myExpandableAdapter;
+    private MyExpandableListPaiGongAdapter myExpandableAdapter;
+    private List<ProductInfo> productInfoHuiChuanList = new ArrayList<>();
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -145,7 +148,71 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
 
         }
         if (requestCode == 1522) {
-            
+            ProductInfo infoTemp = new ProductInfo();//传过来的商品bean
+            OrderGoodsInfo goodsInfoTemp = new OrderGoodsInfo();//本地的商品bean
+            WorkOrderInfo workOrderInfoTemp = new WorkOrderInfo();//本地的商品一级目录bean
+            List<OrderGoodsInfo> childsListTemp = new ArrayList<>();//本地的商品bean集合
+            productInfoHuiChuanList.clear();
+            productInfoHuiChuanList = (ArrayList<ProductInfo>) data.getSerializableExtra("1522");
+            LogX.e("1522getAll", productInfoHuiChuanList.size() + ";" + productInfoHuiChuanList.toString());
+
+            for (int i = 0; i < productInfoHuiChuanList.size(); i++) {
+                infoTemp = productInfoHuiChuanList.get(i);
+                LogX.e("1522getitemProjectNumber", infoTemp.getProjectNum());
+                if (childs.get(infoTemp.getProjectNum()) != null) {      //判断是否添加过的项目
+                    childsListTemp = childs.get(infoTemp.getProjectNum());
+                    LogX.e("1522getitem", childsListTemp.toString());
+                    goodsInfoTemp = new OrderGoodsInfo();
+                    goodsInfoTemp.setGoodsName(infoTemp.getGoodsName());
+                    goodsInfoTemp.setGoodsCount(infoTemp.getGoodsCount());
+                    goodsInfoTemp.setGoodsNum(infoTemp.getGoodsNum());
+                    goodsInfoTemp.setAmount(new BigDecimal(infoTemp.getSalePrice()));
+                    childsListTemp.add(goodsInfoTemp);
+
+                } else {
+                    goodsInfoTemp.setGoodsName(infoTemp.getGoodsName());
+                    goodsInfoTemp.setGoodsCount(infoTemp.getGoodsCount());
+                    goodsInfoTemp.setGoodsNum(infoTemp.getGoodsNum());
+                    goodsInfoTemp.setAmount(new BigDecimal(infoTemp.getSalePrice()));
+                    childsListTemp.add(goodsInfoTemp);
+                    childs.put(productInfoHuiChuanList.get(i).getProjectNum(), childsListTemp);
+
+                    //一级目录
+                    if (infoTemp.getProjectNum().equals("004000000000000")) {
+                        workOrderInfoTemp.setProjectName("机修");
+                    } else if (infoTemp.getProjectNum().equals("002000000000000")) {
+                        workOrderInfoTemp.setProjectName("常规");
+                    } else if (infoTemp.getProjectNum().equals("003000000000000")) {
+                        workOrderInfoTemp.setProjectName("保养");
+                    } else if (infoTemp.getProjectNum().equals("005000000000000")) {
+                        workOrderInfoTemp.setProjectName("美容");
+                    } else if (infoTemp.getProjectNum().equals("006000000000000")) {
+                        workOrderInfoTemp.setProjectName("轮胎");
+                    }
+                    workOrderInfoTemp.setProjectNum(infoTemp.getProjectNum());
+                    groups.add(workOrderInfoTemp);
+                }
+            }
+
+            for (Map.Entry<String, List<OrderGoodsInfo>> entry : childs.entrySet()) {
+                String key = entry.getKey();
+                List<OrderGoodsInfo> listTemp = childs.get(key);
+                for (int i = 0; i < listTemp.size() - 1; i++) {
+                    for (int j = i + 1; j < listTemp.size(); j++) {
+                        if (listTemp.get(i).getGoodsNum().equals(listTemp.get(j).getGoodsNum())) {
+                            listTemp.get(i).setGoodsCount(listTemp.get(i).getGoodsCount() + listTemp.get(j).getGoodsCount());
+                            listTemp.remove(j);
+                        }
+                    }
+
+                }
+            }
+
+            myExpandableAdapter.setData(groups, childs);
+            myExpandableAdapter.notifyDataSetChanged();
+
+
+            LogX.e("1522MapNew", groups.size() + "==" + childs.size() + "==" + groups.toString() + "==" + childs.toString());
         }
 
     }
@@ -175,13 +242,15 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
             carNumber = cph;
             presenter.getScanCustomerInfo(carNumber);
         }
+        CloseKeyBoard.hideSoftInput(mContext, edtWriteMark);
 
     }
 
     private void initExpandListView() {
         expandableListView = (CustomExpandableListView) findViewById(R.id.expandableListView);
-        myExpandableAdapter = new MyExpandableListView();
+        myExpandableAdapter = new MyExpandableListPaiGongAdapter(mContext, groups, childs);
         expandableListView.setGroupIndicator(null);
+        myExpandableAdapter.setPaiGongClickListener(this);
         expandableListView.setAdapter(myExpandableAdapter);
 
     }
@@ -193,97 +262,6 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
         }
     }
 
-    //为ExpandableListView自定义适配器
-    class MyExpandableListView extends BaseExpandableListAdapter {
-
-        //返回一级列表的个数
-        @Override
-        public int getGroupCount() {
-            return groups.size();
-        }
-
-        //返回每个二级列表的个数 List<Map<String,List<ProductInfo>>>
-        @Override
-        public int getChildrenCount(int groupPosition) { //参数groupPosition表示第几个一级列表
-            return childs.get(groups.get(groupPosition).getProjectNum()).size();
-        }
-
-        //返回一级列表的单个item（返回的是对象）
-        @Override
-        public Object getGroup(int groupPosition) {
-            return groups.get(groupPosition);
-        }
-
-        //返回二级列表中的单个item（返回的是对象）List<Map<String,List<ProductInfo>>>
-        @Override
-        public Object getChild(int groupPosition, int childPosition) {
-            return childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition);
-        }
-
-        @Override
-        public long getGroupId(int groupPosition) {
-            return groupPosition;
-        }
-
-        @Override
-        public long getChildId(int groupPosition, int childPosition) {   //List<Map<String,List<ProductInfo>>>
-            return childPosition;
-        }
-
-        //每个item的id是否是固定？一般为true
-        @Override
-        public boolean hasStableIds() {
-            return true;
-        }
-
-        //【重要】填充一级列表
-        @Override
-        public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-
-            if (convertView == null) {
-                convertView = getLayoutInflater().inflate(R.layout.item_group, null);
-            } else {
-
-            }
-            TextView tv_group = (TextView) convertView.findViewById(R.id.tv_group_title);
-            TextView tv_group_pai = (TextView) convertView.findViewById(R.id.tv_group_pai);
-            tv_group_pai.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(QuickOpenOrderActivity.this, OperOrderPaiGongActivity.class);
-                    intent.putExtra("projectNumber", groups.get(groupPosition).getProjectNum() + "");
-                    startActivity(intent);
-                }
-            });
-
-            tv_group.setText(groups.get(groupPosition).getProjectName() + "");
-
-            return convertView;
-        }
-
-        //【重要】填充二级列表
-        @Override
-        public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-
-            if (convertView == null) {
-                convertView = getLayoutInflater().inflate(R.layout.item_child, null);
-            }
-
-            TextView tv_child = (TextView) convertView.findViewById(R.id.tv_child);
-            TextView tv_child_detail = (TextView) convertView.findViewById(R.id.tv_child_detail);
-            tv_child.setText(childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getGoodsName());
-            tv_child_detail.setText("¥ " + childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getAmount() + "×1");
-            return convertView;
-        }
-
-        //二级列表中的item是否能够被选中？可以改为true
-        @Override
-        public boolean isChildSelectable(int groupPosition, int childPosition) {
-            return true;
-        }
-
-
-    }
 
     @Override
     protected void onDestroy() {
@@ -519,6 +497,8 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
             childs.put(groups.get(i).getProjectNum(), groups.get(i).getOrderGoodsDetailList());
         }
         LogX.e("服务项目child", childs.toString());
+        LogX.e("1522Map", childs.size() + "==" + childs.toString());
+        myExpandableAdapter.setData(groups, childs);
         myExpandableAdapter.notifyDataSetChanged();
     }
 
@@ -591,4 +571,11 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
     public void saveCarMileageSuccess() {
     }
 
+    /*派工按钮*/
+    @Override
+    public void onProductBuyItemClick(String project) {
+        Intent intent = new Intent(mContext, OperOrderPaiGongActivity.class);
+        intent.putExtra("projectNumber", project);
+        mContext.startActivity(intent);
+    }
 }

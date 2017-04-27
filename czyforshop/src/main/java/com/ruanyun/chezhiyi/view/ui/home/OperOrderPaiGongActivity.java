@@ -25,6 +25,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Description ：添加工位或技师
+ * <p/>
+ * Created by hdl on 2017/4/27.
+ */
+
+
 public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onTopbarClickListener, KaiDanGongweiView, KaiDanJiShiView {
 
     @BindView(R.id.topbar)
@@ -55,7 +62,10 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
         kaiDanYuanGongPresenter.attachView(this);
         topbar.setTttleText("派工")
                 .setBackBtnEnable(true)
+                .setRightText("确认")
+                .addViewToTopbar(topbar.getTvTitleRight(), topbar.getLayoutParamsImgRight())
                 .onBackBtnClick()
+                .onRightTextClick()
                 .setTopbarClickListener(this);
         String projectNumber = getIntent().getStringExtra("projectNumber");
         kaiDanGongweiPresenter.getKaiDanGongWeiInfo(app.getApiService().getWorkOrderGongWei(app.getCurrentUserNum(), projectNumber));
@@ -102,6 +112,9 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
         switch (v.getId()) {
             case R.id.img_btn_left:
                 finish();
+                break;
+            case R.id.tv_title_right:
+
                 break;
         }
     }

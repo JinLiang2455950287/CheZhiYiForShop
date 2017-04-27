@@ -23,7 +23,6 @@ import com.ruanyun.chezhiyi.commonlib.model.Event;
 import com.ruanyun.chezhiyi.commonlib.model.OrderGoodsInfo;
 import com.ruanyun.chezhiyi.commonlib.model.ProductInfo;
 import com.ruanyun.chezhiyi.commonlib.model.ProjectType;
-import com.ruanyun.chezhiyi.commonlib.model.WorkOrderInfo;
 import com.ruanyun.chezhiyi.commonlib.model.params.ProductGroupPurchaseParams;
 import com.ruanyun.chezhiyi.commonlib.model.params.WorkOrderSubmitInfo;
 import com.ruanyun.chezhiyi.commonlib.presenter.InsteadOrderPresenter;
@@ -38,6 +37,7 @@ import com.ruanyun.chezhiyi.view.adapter.AddServiceGoodsAdapter;
 import com.ruanyun.chezhiyi.view.ui.workorder.CustomerReceptionActivity;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -124,9 +124,28 @@ public class AddServiceGoodsActivity2 extends RefreshBaseActivity implements Top
      */
     @Subscribe(threadMode = ThreadMode.MainThread)
     public void alterProductInfoCount(Event<ProductInfo> event) {
+        ProductInfo productInfoTemp = null;
         if (event != null && event.key.equals(C.EventKey.COUNT_PRODUCTINFO)) {
             ProductInfo productInfo = event.value;
-            productInfoHuiChuanList.add(event.value);
+
+            for (int i = 0; i < productInfoHuiChuanList.size(); i++) {
+                productInfoTemp = productInfoHuiChuanList.get(i);
+                if (productInfoTemp.getGoodsNum().equals(productInfo.getGoodsNum())) {
+                    productInfoTemp.setGoodsCount(productInfoTemp.getGoodsCount());
+                    productInfoTemp = null;
+                    break;
+                } else {
+                    productInfoTemp = productInfoHuiChuanList.get(i);
+                }
+            }
+
+            if (productInfoTemp != null) {
+                productInfoHuiChuanList.add(productInfo);
+            }
+            if (productInfoHuiChuanList.size() == 0) {
+                productInfoHuiChuanList.add(productInfo);
+            }
+
             for (ProductInfo info : mProductList) {
                 if (info.getGoodsNum().equals(productInfo.getGoodsNum())) {
                     info.setGoodsCount(productInfo.getGoodsCount());
@@ -134,7 +153,9 @@ public class AddServiceGoodsActivity2 extends RefreshBaseActivity implements Top
                 }
             }
             notifyFiltrateData(query.getText());
-            LogX.e("服务产品", productInfo.getGoodsCount() + productInfo.toString());
+
+            LogX.e("1522productInfoTemp", productInfoTemp.toString());
+            LogX.e("1522回传", productInfo.getGoodsCount() + ";" + productInfoHuiChuanList.size() + ";" + productInfoHuiChuanList.toString());
         }
     }
 
@@ -278,9 +299,8 @@ public class AddServiceGoodsActivity2 extends RefreshBaseActivity implements Top
 //                if (isAddGoods) {
 
                 Intent intent = new Intent();
-                String jsonProject = new Gson().toJson(productInfoHuiChuan);
-                intent.putExtra("1522", jsonProject);
-                LogX.e("返回setResult", jsonProject);
+
+                intent.putExtra("1522", (Serializable) productInfoHuiChuanList);
                 setResult(1522, intent);
                 finish();
 //                    LogX.e("代下单", "isAddGoods");

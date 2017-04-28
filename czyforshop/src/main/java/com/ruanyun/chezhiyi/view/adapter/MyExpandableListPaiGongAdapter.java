@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.ruanyun.chezhiyi.R;
@@ -96,14 +98,16 @@ public class MyExpandableListPaiGongAdapter extends BaseExpandableListAdapter {
         });
 
         tv_group.setText(groups.get(groupPosition).getProjectName() + "");
-        tv_group_detail.setText(groups.get(groupPosition).getRemark());
+        if (groups.get(groupPosition).getRemark() != null) {
+            tv_group_detail.setText(groups.get(groupPosition).getRemark());
+        }
         LogX.e("1544Adapter", groups.get(groupPosition).toString());
         return convertView;
     }
 
     //【重要】填充二级列表
     @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_child, null);
@@ -111,6 +115,15 @@ public class MyExpandableListPaiGongAdapter extends BaseExpandableListAdapter {
 
         TextView tv_child = (TextView) convertView.findViewById(R.id.tv_child);
         TextView tv_child_detail = (TextView) convertView.findViewById(R.id.tv_child_detail);
+        CheckBox cb_service = (CheckBox) convertView.findViewById(R.id.cb_service);
+        cb_service.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).setService(true);
+                LogX.e("是否选择", childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).isService() + childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).toString());
+            }
+        });
+
         tv_child.setText(childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getGoodsName());
         int goodsCount = childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getGoodsCount();
 //        LogX.e("152数量", goodsCount + "erw");

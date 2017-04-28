@@ -144,15 +144,12 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                         }
                     }
                     break;
-
-
             }
         } else if (resultCode == RESULT_FIRST_USER) {
             switch (requestCode) {
                 case REQ_REC_PLATENUM://车牌识别页面返回 没有扫码
                     textWatcherEnable = true;
             }
-
         }
 
         if (requestCode == 1522) {
@@ -238,16 +235,19 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
         if (requestCode == 1544) {    // /*工位/技师*/
             gongWeiJiShiBean = (GongWeiJiShiBean) data.getParcelableExtra("gongWeiJiShiBean");
             LogX.e("1544", gongWeiJiShiBean + "projectNumber");
-            for (int i = 0; i < groups.size(); i++) {
-                if (groups.get(i).getProjectNum().equals(gongWeiJiShiBean.getProjectNumber())) {
-                    groups.get(i).setLeadingUserName(gongWeiJiShiBean.getJishiname());
-                    groups.get(i).setLeadingUserNum(gongWeiJiShiBean.getJishiid());
-                    groups.get(i).setWorkbayName(gongWeiJiShiBean.getGongweiname());
-                    groups.get(i).setWorkbayInfoNum(gongWeiJiShiBean.getGongweiid());
-                    groups.get(i).setRemark("技师：" + gongWeiJiShiBean.getJishiname() + " 工位：" + gongWeiJiShiBean.getGongweiname());
-                    LogX.e("15444", "message ：" + "技师：" + gongWeiJiShiBean.getJishiname() + " 工位：" + gongWeiJiShiBean.getGongweiname());
+            if (gongWeiJiShiBean != null) {
+                for (int i = 0; i < groups.size(); i++) {
+                    if (groups.get(i).getProjectNum().equals(gongWeiJiShiBean.getProjectNumber())) {
+                        groups.get(i).setLeadingUserName(gongWeiJiShiBean.getJishiname());
+                        groups.get(i).setLeadingUserNum(gongWeiJiShiBean.getJishiid());
+                        groups.get(i).setWorkbayName(gongWeiJiShiBean.getGongweiname());
+                        groups.get(i).setWorkbayInfoNum(gongWeiJiShiBean.getGongweiid());
+                        groups.get(i).setRemark("技师：" + gongWeiJiShiBean.getJishiname() + " 工位：" + gongWeiJiShiBean.getGongweiname());
+                        LogX.e("15444", "message ：" + "技师：" + gongWeiJiShiBean.getJishiname() + " 工位：" + gongWeiJiShiBean.getGongweiname());
+                    }
                 }
             }
+
             LogX.e("15444set", groups.toString() + "groups");
             myExpandableAdapter.setData(groups, childs);
             myExpandableAdapter.notifyDataSetChanged();
@@ -292,7 +292,6 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
         expandableListView.setAdapter(myExpandableAdapter);
 
     }
-
 
     @Override
     protected void onDestroy() {
@@ -406,7 +405,9 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                 workOrderGoods.sgtcAmount = orderGoodsInfo.getSgtcAmount() + "";
                 workOrderGoods.singlePrice = orderGoodsInfo.getAmount() + "";
                 workOrderGoods.xstcAmount = orderGoodsInfo.getXstcAmount() + "";
-                workOrderGoodsList.add(workOrderGoods);
+                if (orderGoodsInfo.isService()) {
+                    workOrderGoodsList.add(workOrderGoods);
+                }
             }
             if (workOrderGoodsList.size() > 0) {
                 workOrderinfo = new WorkOrderSubmitInfo.WorkOrderListInfo();
@@ -485,7 +486,6 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
         dissMissLoading();
     }
 
-
     /**
      * 扫描车牌后获取预约和客户信息回调
      * 获取服务项目
@@ -513,7 +513,6 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
         myExpandableAdapter.setData(groups, childs);
         myExpandableAdapter.notifyDataSetChanged();
     }
-
 
     @Override
     public void onScanCarBookingFail() {

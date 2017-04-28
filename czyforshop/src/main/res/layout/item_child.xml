@@ -5,10 +5,11 @@
     android:background="@color/white">
 
     <CheckBox
+        android:id="@+id/cb_service"
+        style="@style/CustomCheckboxGrayTheme"
         android:layout_width="wrap_content"
-        android:layout_marginLeft="10dp"
         android:layout_height="40dp"
-        style="@style/CustomCheckboxGrayTheme" />
+        android:layout_marginLeft="10dp" />
 
     <TextView
         android:id="@+id/tv_child"

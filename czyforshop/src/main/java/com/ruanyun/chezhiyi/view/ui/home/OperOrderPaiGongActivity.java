@@ -35,7 +35,6 @@ import butterknife.ButterKnife;
  * Created by hdl on 2017/4/27.
  */
 
-
 public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onTopbarClickListener, KaiDanGongweiView, KaiDanJiShiView {
 
     @BindView(R.id.topbar)
@@ -102,8 +101,10 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
             @Override
             public void onItemClick(View view, int position, long id) {
                 adapterYuanGong.check(position);
-                gongWeiJiShiBean.setJishiname(jiShi.get(position).getNickName().toString());
-
+                if (gongWei.size() > 0) {
+                    gongWeiJiShiBean.setJishiname(jiShi.get(0).getNickName());
+                    gongWeiJiShiBean.setJishiid(jiShi.get(0).getUserNum());
+                }
             }
         });
 
@@ -111,7 +112,10 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
             @Override
             public void onItemClick(View view, int position, long id) {
                 adapterGongWei.check(position);
-                gongWeiJiShiBean.setGongweiname(gongWei.get(position).getWorkbayName().toString());
+                if (jiShi.size() > 0) {
+                    gongWeiJiShiBean.setGongweiname(gongWei.get(0).getWorkbayName());
+                    gongWeiJiShiBean.setGongweiid(gongWei.get(0).getWorkbayInfoNum());
+                }
             }
         });
     }
@@ -122,6 +126,9 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
             case R.id.img_btn_left:
                 Intent intent2 = new Intent();
                 Bundle bundle2 = new Bundle();
+                if (bundle2 == null) {
+
+                }
                 bundle2.putParcelable("gongWeiJiShiBean", gongWeiJiShiBean);
                 intent2.putExtras(bundle2);
                 LogX.e("1544", gongWeiJiShiBean.toString());
@@ -186,8 +193,10 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
     public void getKaiDanJiShiSuccess(List<User> jishiList) {
         LogX.e("技师persenter", jishiList.toString());
         jiShi = jishiList;
-        gongWeiJiShiBean.setJishiname(jishiList.get(0).getNickName());
-        gongWeiJiShiBean.setJishiid(jishiList.get(0).getUserNum());
+        if (jiShi.size() > 0) {
+            gongWeiJiShiBean.setJishiname(jiShi.get(0).getNickName());
+            gongWeiJiShiBean.setJishiid(jiShi.get(0).getUserNum());
+        }
         adapterYuanGong.setData(jiShi);
         adapterYuanGong.notifyDataSetChanged();
         dissMissLoading();

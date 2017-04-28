@@ -4,7 +4,8 @@ import android.os.Parcel;
 
 import java.math.BigDecimal;
 
-/**1.24.2订单信息的商品【团购 秒杀 众筹 产品 优惠卷等有 报名活动 定金等无】
+/**
+ * 1.24.2订单信息的商品【团购 秒杀 众筹 产品 优惠卷等有 报名活动 定金等无】
  * Created by Sxq on 2016/9/19.
  */
 public class OrderGoodsInfo implements /*Parcelable*/IGoodsInfo {
@@ -63,14 +64,23 @@ public class OrderGoodsInfo implements /*Parcelable*/IGoodsInfo {
 
     private int orderStatus;   //	优惠劵的使用状态  大于 2  已使用
 
-    /**是否父类 (代下单管理中使用)*/
+    /**
+     * 是否父类 (代下单管理中使用)
+     */
     private boolean isParent = false;
 
+    /**
+     * 是否选中提交
+     */
+    private boolean isService = false;
+
     private boolean isSelect = false;//多选优惠券选中状态
-    /**抵扣券*/
+    /**
+     * 抵扣券
+     */
     public static final String REBATE_COUPON = "YHQ_01";
 
-//    ================================================================
+    //    ================================================================
     private int couponCount;//优惠卷可用数量【技师端使用】
     private int couponCountAll;//优惠卷总数量【技师端使用】
     private String userCouponNum;//优惠卷编号【技师端使用】
@@ -78,9 +88,13 @@ public class OrderGoodsInfo implements /*Parcelable*/IGoodsInfo {
     public static final String GOODS_TYPE_CP_01 = "CP_01";// 产品
     public static final String GOODS_TYPE_TG_01 = "TG_01"; //团购
     public static final String GOODS_TYPE_TG_02 = "TG_02"; //特殊团购
-    /**   商品数量   */
+    /**
+     * 商品数量
+     */
     private int goodsCount = 0;
-    /**  积分   */
+    /**
+     * 积分
+     */
     private double scoreNumber;
 
     public int getCouponCount() {
@@ -187,6 +201,14 @@ public class OrderGoodsInfo implements /*Parcelable*/IGoodsInfo {
 
     public void setParent(boolean parent) {
         isParent = parent;
+    }
+
+    public boolean isService() {
+        return isService;
+    }
+
+    public void setService(boolean service) {
+        isService = service;
     }
 
     public String getWorkOrderNum() {
@@ -606,11 +628,14 @@ public class OrderGoodsInfo implements /*Parcelable*/IGoodsInfo {
                 ", userNum='" + userNum + '\'' +
                 ", isDaiXiaDan=" + isDaiXiaDan +
                 ", isSelect=" + isSelect +
+                ", isService=" + isService +
                 '}';
     }
 
     @Override
-    public int describeContents() { return 0; }
+    public int describeContents() {
+        return 0;
+    }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
@@ -665,6 +690,7 @@ public class OrderGoodsInfo implements /*Parcelable*/IGoodsInfo {
         dest.writeParcelable(this.goodsInfo, flags);
         dest.writeInt(this.orderStatus);
         dest.writeByte(this.isParent ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.isService ? (byte) 1 : (byte) 0);
         dest.writeByte(this.isSelect ? (byte) 1 : (byte) 0);
         dest.writeInt(this.couponCount);
         dest.writeInt(this.couponCountAll);
@@ -725,6 +751,7 @@ public class OrderGoodsInfo implements /*Parcelable*/IGoodsInfo {
         this.goodsInfo = in.readParcelable(OrderGoodsInfo.class.getClassLoader());
         this.orderStatus = in.readInt();
         this.isParent = in.readByte() != 0;
+        this.isService = in.readByte() != 0;
         this.isSelect = in.readByte() != 0;
         this.couponCount = in.readInt();
         this.couponCountAll = in.readInt();
@@ -735,9 +762,13 @@ public class OrderGoodsInfo implements /*Parcelable*/IGoodsInfo {
 
     public static final Creator<OrderGoodsInfo> CREATOR = new Creator<OrderGoodsInfo>() {
         @Override
-        public OrderGoodsInfo createFromParcel(Parcel source) {return new OrderGoodsInfo(source);}
+        public OrderGoodsInfo createFromParcel(Parcel source) {
+            return new OrderGoodsInfo(source);
+        }
 
         @Override
-        public OrderGoodsInfo[] newArray(int size) {return new OrderGoodsInfo[size];}
+        public OrderGoodsInfo[] newArray(int size) {
+            return new OrderGoodsInfo[size];
+        }
     };
 }

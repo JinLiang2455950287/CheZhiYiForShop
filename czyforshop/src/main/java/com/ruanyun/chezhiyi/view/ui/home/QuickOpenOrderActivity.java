@@ -156,8 +156,8 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
         }
 
         if (requestCode == 1522) {
-            ProductInfo infoTemp = new ProductInfo();//传过来的商品bean
-            OrderGoodsInfo goodsInfoTemp = new OrderGoodsInfo();//本地的商品bean
+            ProductInfo infoTemp;//传过来的商品bean
+            OrderGoodsInfo goodsInfoTemp;//本地的商品bean
             WorkOrderInfo workOrderInfoTemp = new WorkOrderInfo();//本地的商品一级目录bean
             List<OrderGoodsInfo> childsListTemp = new ArrayList<>();//本地的商品bean集合
             productInfoHuiChuanList.clear();
@@ -169,19 +169,30 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                 LogX.e("1522getitemProjectNumber", infoTemp.getProjectNum());
                 if (childs.get(infoTemp.getProjectNum()) != null) {      //判断是否添加过的项目
                     childsListTemp = childs.get(infoTemp.getProjectNum());
-                    LogX.e("1522getitem", childsListTemp.toString());
                     goodsInfoTemp = new OrderGoodsInfo();
                     goodsInfoTemp.setGoodsName(infoTemp.getGoodsName());
-                    goodsInfoTemp.setGoodsCount(infoTemp.getGoodsCount());
                     goodsInfoTemp.setGoodsNum(infoTemp.getGoodsNum());
+                    goodsInfoTemp.setGoodsCount(infoTemp.getGoodsCount());
+                    goodsInfoTemp.setMainPhoto(infoTemp.getMainPhoto());
+                    goodsInfoTemp.setOrderGoodsDetailNum(infoTemp.getProductSpecificat());
+                    goodsInfoTemp.setSgtcAmount(infoTemp.getSgtcje().doubleValue());
                     goodsInfoTemp.setAmount(new BigDecimal(infoTemp.getSalePrice()));
+                    goodsInfoTemp.setXstcAmount(infoTemp.getXstcje().doubleValue());
+                    LogX.e("1522goodsInfoTemp", goodsInfoTemp.toString());
                     childsListTemp.add(goodsInfoTemp);
 
                 } else {
+                    goodsInfoTemp = new OrderGoodsInfo();
                     goodsInfoTemp.setGoodsName(infoTemp.getGoodsName());
-                    goodsInfoTemp.setGoodsCount(infoTemp.getGoodsCount());
                     goodsInfoTemp.setGoodsNum(infoTemp.getGoodsNum());
+                    goodsInfoTemp.setGoodsCount(infoTemp.getGoodsCount());
+                    goodsInfoTemp.setMainPhoto(infoTemp.getMainPhoto());
+                    goodsInfoTemp.setOrderGoodsDetailNum(infoTemp.getProductSpecificat());
+                    goodsInfoTemp.setSgtcAmount(infoTemp.getSgtcje().doubleValue());
                     goodsInfoTemp.setAmount(new BigDecimal(infoTemp.getSalePrice()));
+                    goodsInfoTemp.setXstcAmount(infoTemp.getXstcje().doubleValue());
+                    LogX.e("1522infoTemp", infoTemp.toString());
+                    LogX.e("1522goodsInfoTempNew", goodsInfoTemp.toString());
                     childsListTemp.add(goodsInfoTemp);
                     childs.put(productInfoHuiChuanList.get(i).getProjectNum(), childsListTemp);
 
@@ -201,6 +212,8 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                     groups.add(workOrderInfoTemp);
                 }
             }
+
+            LogX.e("1522MapNew", childs.size() + childs.toString());
 
             for (Map.Entry<String, List<OrderGoodsInfo>> entry : childs.entrySet()) {
                 String key = entry.getKey();
@@ -377,8 +390,9 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
         WorkOrderSubmitInfo.WorkOrderListInfo workOrderinfo;//服务商品列表
         WorkOrderSubmitInfo.WorkOrderGoods workOrderGoods;//服务商品
         List<WorkOrderSubmitInfo.WorkOrderGoods> workOrderGoodsList = new ArrayList<>();
-        List<OrderGoodsInfo> childsListsubTemp = new ArrayList<>();
+        List<OrderGoodsInfo> childsListsubTemp;
         List<WorkOrderSubmitInfo.WorkOrderListInfo> workOrderList = new ArrayList<>();//提交表单的List
+        LogX.e("15444sub", childs.toString() + "childs");
         for (int i = 0; i < groups.size(); i++) {
             WorkOrderInfo WorkOrderInfo = groups.get(i);
             childsListsubTemp = childs.get(WorkOrderInfo.getProjectNum());
@@ -388,10 +402,10 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                 workOrderGoods.goodsName = orderGoodsInfo.getGoodsName();
                 workOrderGoods.goodsNum = orderGoodsInfo.getGoodsNum();
                 workOrderGoods.goodsTotalCount = orderGoodsInfo.getGoodsCount();
-                workOrderGoods.mainPhoto = "";
-                workOrderGoods.sgtcAmount = "";
+                workOrderGoods.mainPhoto = orderGoodsInfo.getMainPhoto();
+                workOrderGoods.sgtcAmount = orderGoodsInfo.getSgtcAmount() + "";
                 workOrderGoods.singlePrice = orderGoodsInfo.getAmount() + "";
-                workOrderGoods.xstcAmount = "";
+                workOrderGoods.xstcAmount = orderGoodsInfo.getXstcAmount() + "";
                 workOrderGoodsList.add(workOrderGoods);
             }
             if (workOrderGoodsList.size() > 0) {
@@ -400,7 +414,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                 workOrderinfo.leadingUserName = WorkOrderInfo.getLeadingUserName();
                 workOrderinfo.leadingUserNum = WorkOrderInfo.getLeadingUserNum();
                 workOrderinfo.projectNum = WorkOrderInfo.getProjectNum();
-                workOrderinfo.workOrderNum = "测试";
+                workOrderinfo.workOrderNum = " ";
                 workOrderinfo.workbayInfoNum = WorkOrderInfo.getWorkbayInfoNum();
                 workOrderinfo.workbayName = WorkOrderInfo.getWorkbayName();
                 workOrderinfo.workOrderGoodsList = workOrderGoodsList;
@@ -416,7 +430,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
         workOrderSubmitInfo.workOrderList = workOrderList;
         String paramsResult = new Gson().toJson(workOrderSubmitInfo);
         LogX.e("retrofit3", paramsResult);
-//        presenter.submitWorkOrder(paramsResult);
+        presenter.submitWorkOrder(paramsResult);
     }
 
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -127,7 +128,7 @@ public class AddServiceGoodsActivity2 extends RefreshBaseActivity implements Top
         ProductInfo productInfoTemp = null;
         if (event != null && event.key.equals(C.EventKey.COUNT_PRODUCTINFO)) {
             ProductInfo productInfo = event.value;
-
+            LogX.e("1522productInfo", productInfo.toString());
             for (int i = 0; i < productInfoHuiChuanList.size(); i++) {
                 productInfoTemp = productInfoHuiChuanList.get(i);
                 if (productInfoTemp.getGoodsNum().equals(productInfo.getGoodsNum())) {
@@ -286,6 +287,9 @@ public class AddServiceGoodsActivity2 extends RefreshBaseActivity implements Top
     public void onTobbarViewClick(View v) {
         switch (v.getId()) {
             case R.id.img_btn_left:
+                Intent intent2 = new Intent();
+                intent2.putExtra("1522", (Serializable) productInfoHuiChuanList);
+                setResult(1522, intent2);
                 finish();
                 break;
             case R.id.tv_topbar_title:
@@ -317,6 +321,21 @@ public class AddServiceGoodsActivity2 extends RefreshBaseActivity implements Top
 //                }
 //                break;
         }
+    }
+
+    /*返回键的监听*/
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            Intent intent2 = new Intent();
+            intent2.putExtra("1522", (Serializable) productInfoHuiChuanList);
+            setResult(1522, intent2);
+            finish();
+            return false;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
+
     }
 
     /**

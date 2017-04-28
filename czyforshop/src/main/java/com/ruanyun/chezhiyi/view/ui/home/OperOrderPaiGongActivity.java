@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -119,6 +120,12 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
     public void onTobbarViewClick(View v) {
         switch (v.getId()) {
             case R.id.img_btn_left:
+                Intent intent2 = new Intent();
+                Bundle bundle2 = new Bundle();
+                bundle2.putParcelable("gongWeiJiShiBean", gongWeiJiShiBean);
+                intent2.putExtras(bundle2);
+                LogX.e("1544", gongWeiJiShiBean.toString());
+                setResult(1544, intent2);
                 finish();
                 break;
             case R.id.tv_title_right:
@@ -133,6 +140,24 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
         }
     }
 
+    /*返回键的监听*/
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            Intent intent = new Intent();
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("gongWeiJiShiBean", gongWeiJiShiBean);
+            intent.putExtras(bundle);
+            LogX.e("1544", gongWeiJiShiBean.toString());
+            setResult(1544, intent);
+            finish();
+            return false;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
+
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -144,7 +169,10 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
     public void getKaiDanSuccess(List<WorkBayInfo> workBayInfo) {
         LogX.e("开单工位", workBayInfo.toString());
         gongWei = workBayInfo;
-        gongWeiJiShiBean.setGongweiname(workBayInfo.get(0).getWorkbayName());
+        if (gongWei.size() > 0) {
+            gongWeiJiShiBean.setGongweiname(gongWei.get(0).getWorkbayName());
+            gongWeiJiShiBean.setGongweiid(gongWei.get(0).getWorkbayInfoNum());
+        }
         adapterGongWei.setData(gongWei);
         adapterGongWei.notifyDataSetChanged();
     }
@@ -159,6 +187,7 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
         LogX.e("技师persenter", jishiList.toString());
         jiShi = jishiList;
         gongWeiJiShiBean.setJishiname(jishiList.get(0).getNickName());
+        gongWeiJiShiBean.setJishiid(jishiList.get(0).getUserNum());
         adapterYuanGong.setData(jiShi);
         adapterYuanGong.notifyDataSetChanged();
         dissMissLoading();

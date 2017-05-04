@@ -59,13 +59,10 @@ import de.greenrobot.event.ThreadMode;
 
 import static com.ruanyun.chezhiyi.R.id.edt_carnum_input;
 
-public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar.onTopbarClickListener, CustomerRepMvpView, MyExpandableListPaiGongAdapter.OnPaiGongClickListener {
+public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar.onTopbarClickListener, CustomerRepMvpView, MyExpandableListPaiGongAdapter.OnPaiGongClickListener
+        , MyExpandableListPaiGongAdapter.OnBuyCountClickListener {
     public static final int REQ_REC_PLATENUM = 32434;//获取车牌扫描结果
     public static final int REQ_ADD_UPKEEP = 2345;//添加里程数
-    public static final String WORK_ORDER_GOODS_LIST = "workOrderGoodsList";
-    public static final String LEADING_USER_NUM_IS_EMPTY = "leading_user_num_is_empty";
-    public static final String WORKBAY_INFO_NUM_ISEMPTY = "workbay_info_num_isempty";
-    public static final String CANSUBMIT = "cansubmit";
 
     @BindView(R.id.topbar)
     Topbar topbar;
@@ -93,30 +90,25 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
 
     private CarBookingInfo carBookingInfo;//当前预约客户信息
     private CustomerRepPresenter presenter = new CustomerRepPresenter();
-    //    private CustomerRepAdapter adapter;
     private List<CustomerRepUiModel> workOrderUiList = new ArrayList<>();
-    //    private WorkOrderSubmitInfo workOrderSubmitInfo = new WorkOrderSubmitInfo();//提交表单的实体类
-    //    private List<WorkOrderSubmitInfo.WorkOrderListInfo> workOrderList = new ArrayList<>();//提交表单的List
-    //    public WorkOrderSubmitInfo.WorkOrderListInfo workOrderList = new WorkOrderSubmitInfo.WorkOrderListInfo();//服务商品列表
-//    public WorkOrderSubmitInfo.WorkOrderGoods workOrderGoods = new WorkOrderSubmitInfo.WorkOrderGoods();//服务商品
+
     private int serviceTypeCount = 0;//服务分类数量
     private CarMileageParams params;// 修改最新里程数 参数
     private String upkeep;//  修改最新里程数
     private String carNumber;// 当前的车牌号
     private String plateNumber;
     private boolean textWatcherEnable = true;
-    private boolean flag = false;
 
     //View
     private CustomExpandableListView expandableListView;
 
     //Model：定义的数据
     private List<WorkOrderInfo> groups = new ArrayList<>();
-    //    private List<OrderGoodsInfo> childsListsubTemp = new ArrayList<>();
     public Map<String, List<OrderGoodsInfo>> childs = new HashMap<>();
     private MyExpandableListPaiGongAdapter myExpandableAdapter;
     private List<ProductInfo> productInfoHuiChuanList = new ArrayList<>();
     private GongWeiJiShiBean gongWeiJiShiBean = new GongWeiJiShiBean();
+    List<ProjectType> stairprojectTypes = new ArrayList<>();//一级工单服务分类集合
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -155,15 +147,15 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
         if (requestCode == 1522) {
             ProductInfo infoTemp;//传过来的商品bean
             OrderGoodsInfo goodsInfoTemp;//本地的商品bean
-            WorkOrderInfo workOrderInfoTemp = new WorkOrderInfo();//本地的商品一级目录bean
-            List<OrderGoodsInfo> childsListTemp = new ArrayList<>();//本地的商品bean集合
+            WorkOrderInfo workOrderInfoTemp;//本地的商品一级目录bean
+            List<OrderGoodsInfo> childsListTemp;//本地的商品bean集合
             productInfoHuiChuanList.clear();
             productInfoHuiChuanList = (ArrayList<ProductInfo>) data.getSerializableExtra("1522");
             LogX.e("1522getAll", productInfoHuiChuanList.size() + ";" + productInfoHuiChuanList.toString());
 
             for (int i = 0; i < productInfoHuiChuanList.size(); i++) {
                 infoTemp = productInfoHuiChuanList.get(i);
-                LogX.e("1522getitemProjectNumber", infoTemp.getProjectNum());
+                LogX.e("1522getiteminfoTemp", infoTemp.getProjectNum());
                 if (childs.get(infoTemp.getProjectNum()) != null) {      //判断是否添加过的项目
                     childsListTemp = childs.get(infoTemp.getProjectNum());
                     goodsInfoTemp = new OrderGoodsInfo();
@@ -174,12 +166,14 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                     goodsInfoTemp.setOrderGoodsDetailNum(infoTemp.getProductSpecificat());
                     goodsInfoTemp.setSgtcAmount(infoTemp.getSgtcje().doubleValue());
                     goodsInfoTemp.setAmount(new BigDecimal(infoTemp.getSalePrice()));
+                    goodsInfoTemp.setIsDaiXiaDan(1);
                     goodsInfoTemp.setXstcAmount(infoTemp.getXstcje().doubleValue());
-                    LogX.e("1522goodsInfoTemp", goodsInfoTemp.toString());
+                    LogX.e("1522goodsInfoTempif", goodsInfoTemp.toString());
                     childsListTemp.add(goodsInfoTemp);
 
                 } else {
                     goodsInfoTemp = new OrderGoodsInfo();
+                    childsListTemp = new ArrayList<>();
                     goodsInfoTemp.setGoodsName(infoTemp.getGoodsName());
                     goodsInfoTemp.setGoodsNum(infoTemp.getGoodsNum());
                     goodsInfoTemp.setGoodsCount(infoTemp.getGoodsCount());
@@ -187,6 +181,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                     goodsInfoTemp.setOrderGoodsDetailNum(infoTemp.getProductSpecificat());
                     goodsInfoTemp.setSgtcAmount(infoTemp.getSgtcje().doubleValue());
                     goodsInfoTemp.setAmount(new BigDecimal(infoTemp.getSalePrice()));
+                    goodsInfoTemp.setIsDaiXiaDan(1);
                     goodsInfoTemp.setXstcAmount(infoTemp.getXstcje().doubleValue());
                     LogX.e("1522infoTemp", infoTemp.toString());
                     LogX.e("1522goodsInfoTempNew", goodsInfoTemp.toString());
@@ -194,6 +189,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                     childs.put(productInfoHuiChuanList.get(i).getProjectNum(), childsListTemp);
 
                     //一级目录
+                    workOrderInfoTemp = new WorkOrderInfo();
                     if (infoTemp.getProjectNum().equals("004000000000000")) {
                         workOrderInfoTemp.setProjectName("机修");
                     } else if (infoTemp.getProjectNum().equals("002000000000000")) {
@@ -206,6 +202,13 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                         workOrderInfoTemp.setProjectName("轮胎");
                     }
                     workOrderInfoTemp.setProjectNum(infoTemp.getProjectNum());
+
+                    for (int j = 0; j < groups.size(); j++) {
+                        String projectNumber = groups.get(j).getProjectNum();
+                        if (workOrderInfoTemp.getProjectNum().equals(projectNumber)) {
+                            workOrderInfoTemp.setIsWorkBbay(groups.get(j).getIsWorkBbay());
+                        }
+                    }
                     groups.add(workOrderInfoTemp);
                 }
             }
@@ -217,12 +220,11 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                 List<OrderGoodsInfo> listTemp = childs.get(key);
                 for (int i = 0; i < listTemp.size() - 1; i++) {
                     for (int j = i + 1; j < listTemp.size(); j++) {
-                        if (listTemp.get(i).getGoodsNum().equals(listTemp.get(j).getGoodsNum())) {
-                            listTemp.get(i).setGoodsCount(listTemp.get(i).getGoodsCount() + listTemp.get(j).getGoodsCount());
+                        if (listTemp.get(i).getIsDaiXiaDan() == 1 && listTemp.get(i).getGoodsNum().equals(listTemp.get(j).getGoodsNum()) && listTemp.get(j).getIsDaiXiaDan() == 1) {
+                            listTemp.get(i).setGoodsCount(listTemp.get(j).getGoodsCount());
                             listTemp.remove(j);
                         }
                     }
-
                 }
             }
 
@@ -234,7 +236,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
 
         if (requestCode == 1544) {    // /*工位/技师*/
             gongWeiJiShiBean = (GongWeiJiShiBean) data.getParcelableExtra("gongWeiJiShiBean");
-            LogX.e("1544", gongWeiJiShiBean + "projectNumber");
+//            LogX.e("1544", gongWeiJiShiBean.toString() + "projectNumber");
             if (gongWeiJiShiBean != null) {
                 for (int i = 0; i < groups.size(); i++) {
                     if (groups.get(i).getProjectNum().equals(gongWeiJiShiBean.getProjectNumber())) {
@@ -242,7 +244,10 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                         groups.get(i).setLeadingUserNum(gongWeiJiShiBean.getJishiid());
                         groups.get(i).setWorkbayName(gongWeiJiShiBean.getGongweiname());
                         groups.get(i).setWorkbayInfoNum(gongWeiJiShiBean.getGongweiid());
-                        groups.get(i).setRemark("技师：" + gongWeiJiShiBean.getJishiname() + " 工位：" + gongWeiJiShiBean.getGongweiname());
+                        if (gongWeiJiShiBean.getGongweiname() != null || gongWeiJiShiBean.getJishiname() != null) {
+                            groups.get(i).setRemark("技师：" + gongWeiJiShiBean.getJishiname() + " 工位：" + gongWeiJiShiBean.getGongweiname());
+                        }
+
                         LogX.e("15444", "message ：" + "技师：" + gongWeiJiShiBean.getJishiname() + " 工位：" + gongWeiJiShiBean.getGongweiname());
                     }
                 }
@@ -264,6 +269,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
         initView();
         presenter.attachView(this);
         serviceTypeCount = DbHelper.getInstance().getServiceTypeCount();
+        stairprojectTypes = DbHelper.getInstance().getSeviceTypes();//获取工单服务和技师技能数据结构一级
         initExpandListView();
     }
 
@@ -289,8 +295,8 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
         myExpandableAdapter = new MyExpandableListPaiGongAdapter(mContext, groups, childs);
         expandableListView.setGroupIndicator(null);
         myExpandableAdapter.setPaiGongClickListener(this);
+        myExpandableAdapter.setOnBuyCountClickListener(this);
         expandableListView.setAdapter(myExpandableAdapter);
-
     }
 
     @Override
@@ -504,6 +510,17 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
             workOrderUiList.addAll(presenter.getUiModelFromWorkOrder(makeInfo.getWorkOrderInfoList(), ChooseServiceTab.TAB_WORK_STATION));
         }
         groups = carBookingInfo.getMakeInfo().getWorkOrderInfoList();
+        if (groups.size() > 0) {
+            for (int i = 0; i < groups.size(); i++) {
+                for (int j = 0; j <stairprojectTypes.size() ; j++) {
+                    if (groups.get(i).getProjectNum().equals(stairprojectTypes.get(j).getProjectNum())) {
+                        groups.get(i).setIsWorkBbay(stairprojectTypes.get(j).getIsWorkBay());
+                    }
+                }
+
+            }
+        }
+
         LogX.e("服务项目groups", groups.toString());
         for (int i = 0; i < groups.size(); i++) {
             childs.put(groups.get(i).getProjectNum(), groups.get(i).getOrderGoodsDetailList());
@@ -573,9 +590,17 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
 
     /*派工按钮*/
     @Override
-    public void onProductBuyItemClick(String project) {
+    public void onProductBuyItemClick(String project, int isWorkBbay) {
+        //isWorkBbay 是否需要工位 1：是 2： 否
         Intent intent = new Intent(mContext, OperOrderPaiGongActivity.class);
         intent.putExtra("projectNumber", project);
+        intent.putExtra("isWorkBay", isWorkBbay);
         startActivityForResult(intent, 1544);
+    }
+
+    /*改变商品数量*/
+    @Override
+    public void onBuyCountItemClick(int count) {
+
     }
 }

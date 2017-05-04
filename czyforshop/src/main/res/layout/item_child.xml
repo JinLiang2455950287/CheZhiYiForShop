@@ -22,17 +22,65 @@
     <TextView
         android:id="@+id/tv_child_detail"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="¥ 0"
+        android:textColor="@color/text_black" />
+
+    <TextView
+        android:id="@+id/tv_child_detailtv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="¥ 0×0"
+        android:textColor="@color/text_black" />
+
+    <LinearLayout
+        android:id="@+id/count_linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="10dp"
         android:gravity="center_vertical"
-        android:text="¥ 0×1" />
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/imbtn_sub"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/order_decrease_noral" />
+
+        <TextView
+            android:id="@+id/tv_child_detail_count"
+            android:layout_width="25dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@color/text_black" />
+
+
+        <ImageButton
+            android:id="@+id/imbtn_add"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/order_increase_noral" />
+    </LinearLayout>
 
     <View
-        android:id="@+id/view_line_bottom"
         style="@style/divider_horizontal"
-        android:layout_alignParentBottom="true" />
+        android:layout_marginTop="40dp" />
 
     <View
         android:layout_width="0.2dp"

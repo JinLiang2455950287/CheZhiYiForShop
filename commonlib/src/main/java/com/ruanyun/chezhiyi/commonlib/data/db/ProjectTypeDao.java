@@ -31,6 +31,7 @@ public class ProjectTypeDao extends AbstractDao<ProjectType, Void> {
         public final static Property ProjectAllName = new Property(4, String.class, "projectAllName", false, "PROJECT_ALL_NAME");
         public final static Property SortNum = new Property(5, int.class, "sortNum", false, "SORT_NUM");
         public final static Property IsMake = new Property(6, int.class, "isMake", false, "IS_MAKE");
+        public final static Property IsWorkBay = new Property(7, int.class, "isWorkBay", false, "IS_WORK_BAY");
     }
 
 
@@ -52,7 +53,8 @@ public class ProjectTypeDao extends AbstractDao<ProjectType, Void> {
                 "\"PARENT_NUM\" TEXT," + // 3: parentNum
                 "\"PROJECT_ALL_NAME\" TEXT," + // 4: projectAllName
                 "\"SORT_NUM\" INTEGER NOT NULL ," + // 5: sortNum
-                "\"IS_MAKE\" INTEGER NOT NULL );"); // 6: isMake
+                "\"IS_MAKE\" INTEGER NOT NULL ," + // 6: isMake
+                "\"IS_WORK_BAY\" INTEGER NOT NULL );"); // 7: isWorkBay
     }
 
     /** Drops the underlying database table. */
@@ -83,6 +85,7 @@ public class ProjectTypeDao extends AbstractDao<ProjectType, Void> {
         }
         stmt.bindLong(6, entity.getSortNum());
         stmt.bindLong(7, entity.getIsMake());
+        stmt.bindLong(8, entity.getIsWorkBay());
     }
 
     @Override
@@ -107,6 +110,7 @@ public class ProjectTypeDao extends AbstractDao<ProjectType, Void> {
         }
         stmt.bindLong(6, entity.getSortNum());
         stmt.bindLong(7, entity.getIsMake());
+        stmt.bindLong(8, entity.getIsWorkBay());
     }
 
     @Override
@@ -123,7 +127,8 @@ public class ProjectTypeDao extends AbstractDao<ProjectType, Void> {
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // parentNum
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // projectAllName
             cursor.getInt(offset + 5), // sortNum
-            cursor.getInt(offset + 6) // isMake
+            cursor.getInt(offset + 6), // isMake
+            cursor.getInt(offset + 7) // isWorkBay
         );
         return entity;
     }
@@ -137,6 +142,7 @@ public class ProjectTypeDao extends AbstractDao<ProjectType, Void> {
         entity.setProjectAllName(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setSortNum(cursor.getInt(offset + 5));
         entity.setIsMake(cursor.getInt(offset + 6));
+        entity.setIsWorkBay(cursor.getInt(offset + 7));
      }
     
     @Override

@@ -155,7 +155,7 @@ public class BeanCacheHelper {
         App.getInstance().getApiService().getProjectType().enqueue(new ResponseCallback<ResultBase<List<ProjectType>>>() {
             @Override
             public void onSuccess(Call call, final ResultBase<List<ProjectType>> projectTypeResult) {
-                LogX.e("=====1.8.7获取工单服务或技师技能", projectTypeResult.getObj().toString());
+                LogX.e("=====1.8.7获取工单服务或技师技能1", projectTypeResult.getObj().toString());
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -167,6 +167,7 @@ public class BeanCacheHelper {
                                         () == rhs.getSortNum() ? 0 : 1;
                             }
                         });
+                        LogX.e("=====1.8.7获取工单服务或技师技能2", projectTypeList.toString());
                         DbHelper.getInstance().inserServiceTypes(projectTypeList);
                         //save(projectTypeResult, C.PrefName.PREF_PROJECTTYPE);
                     }

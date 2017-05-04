@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ruanyun.chezhiyi.R;
@@ -26,6 +28,7 @@ public class MyExpandableListPaiGongAdapter extends BaseExpandableListAdapter {
     private List<WorkOrderInfo> groups;//
     public Map<String, List<OrderGoodsInfo>> childs;//
     private Context mContext;
+    private int countTemp = 0;
 
     public MyExpandableListPaiGongAdapter(Context mContext, List<WorkOrderInfo> groups, Map<String, List<OrderGoodsInfo>> childs) {
         this.groups = groups;
@@ -93,7 +96,7 @@ public class MyExpandableListPaiGongAdapter extends BaseExpandableListAdapter {
         tv_group_pai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onProductBuyClickListener.onProductBuyItemClick(groups.get(groupPosition).getProjectNum());
+                onProductBuyClickListener.onProductBuyItemClick(groups.get(groupPosition).getProjectNum(), groups.get(groupPosition).getIsWorkBbay());
             }
         });
 
@@ -115,7 +118,32 @@ public class MyExpandableListPaiGongAdapter extends BaseExpandableListAdapter {
 
         TextView tv_child = (TextView) convertView.findViewById(R.id.tv_child);
         TextView tv_child_detail = (TextView) convertView.findViewById(R.id.tv_child_detail);
+        TextView tvchilddetailtv = (TextView) convertView.findViewById(R.id.tv_child_detailtv);
         CheckBox cb_service = (CheckBox) convertView.findViewById(R.id.cb_service);
+        final TextView tv_child_detail_count = (TextView) convertView.findViewById(R.id.tv_child_detail_count);
+        ImageButton imbtnSub = (ImageButton) convertView.findViewById(R.id.imbtn_sub);
+        ImageButton imbtnadd = (ImageButton) convertView.findViewById(R.id.imbtn_add);
+
+        tv_child.setText(childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getGoodsName());
+
+        int goodsCount = childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getGoodsCount();
+        LinearLayout countlinearLayout = (LinearLayout) convertView.findViewById(R.id.count_linearLayout);
+
+        LogX.e("开单", childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getIsDaiXiaDan() + "");
+        if (childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getIsDaiXiaDan() != 1) {
+            countlinearLayout.setVisibility(View.GONE);
+            tvchilddetailtv.setVisibility(View.VISIBLE);
+            if (goodsCount == 0) {
+                tvchilddetailtv.setText("¥ " + childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getAmount() + "×1");
+            } else {
+                tvchilddetailtv.setText("¥ " + childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getAmount() + "×1" + goodsCount);
+            }
+
+        } else {
+            countlinearLayout.setVisibility(View.VISIBLE);
+            tvchilddetailtv.setVisibility(View.GONE);
+        }
+
         cb_service.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -124,14 +152,47 @@ public class MyExpandableListPaiGongAdapter extends BaseExpandableListAdapter {
             }
         });
 
-        tv_child.setText(childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getGoodsName());
-        int goodsCount = childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getGoodsCount();
-//        LogX.e("152数量", goodsCount + "erw");
         if (goodsCount == 0) {
-            tv_child_detail.setText("¥ " + childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getAmount() + "×1");
+            tv_child_detail.setText("¥ " + childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getAmount() + "");
+            tv_child_detail_count.setText(goodsCount + "");
         } else {
-            tv_child_detail.setText("¥ " + childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getAmount() + "×" + goodsCount);
+            tv_child_detail.setText("¥ " + childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getAmount() + "");
+            tv_child_detail_count.setText(goodsCount + "");
         }
+
+        countTemp = Integer.valueOf(tv_child_detail_count.getText().toString().trim());
+        if (countTemp <= 0) {//数量为0时
+            imbtnSub.setEnabled(false);
+            imbtnSub.setImageResource(R.drawable.order_minus_disabled);
+        } else {
+            imbtnSub.setEnabled(true);
+            imbtnSub.setImageResource(R.drawable.order_decrease_noral);
+        }
+        imbtnSub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                countTemp = Integer.valueOf(tv_child_detail_count.getText().toString().trim());
+                if (Integer.valueOf(countTemp) > 0) {
+                    countTemp = countTemp - 1;
+                    onBuyCountClickListener.onBuyCountItemClick(countTemp);
+                    childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).setGoodsCount(countTemp);
+                    LogX.e("数量减；", countTemp + ";" + childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getGoodsCount());
+                    notifyDataSetChanged();
+                }
+            }
+        });
+        imbtnadd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                countTemp = Integer.valueOf(tv_child_detail_count.getText().toString().trim());
+                countTemp = countTemp + 1;
+                onBuyCountClickListener.onBuyCountItemClick(countTemp);
+                childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).setGoodsCount(countTemp);
+                LogX.e("数量加；", countTemp + ";" + childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getGoodsCount());
+                notifyDataSetChanged();
+            }
+        });
+
         return convertView;
     }
 
@@ -141,17 +202,26 @@ public class MyExpandableListPaiGongAdapter extends BaseExpandableListAdapter {
         return true;
     }
 
-
     // click callback
     OnPaiGongClickListener onProductBuyClickListener;
 
     public interface OnPaiGongClickListener {
-        void onProductBuyItemClick(String project);
-
+        void onProductBuyItemClick(String project, int isWorkBbay);
     }
 
     public void setPaiGongClickListener(OnPaiGongClickListener onProductBuyClickListener) {
         this.onProductBuyClickListener = onProductBuyClickListener;
+    }
+
+    // 商品数量click callback
+    OnBuyCountClickListener onBuyCountClickListener;
+
+    public interface OnBuyCountClickListener {
+        void onBuyCountItemClick(int count);
+    }
+
+    public void setOnBuyCountClickListener(OnBuyCountClickListener onBuyCountClickListener) {
+        this.onBuyCountClickListener = onBuyCountClickListener;
     }
 
 }

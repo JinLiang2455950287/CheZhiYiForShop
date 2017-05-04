@@ -86,7 +86,6 @@ public class AddServiceGoodsActivity2 extends RefreshBaseActivity implements Top
     private String workOrderNum;//订单编号代下单时使用
     InsteadOrderPresenter presenter = new InsteadOrderPresenter();
     //回传
-//    private KaijieOpenOrderGoods kaijieOpenOrderGoods = new KaijieOpenOrderGoods();
     private String projectNum = "004000000000000";
     public HashMap<String, List<OrderGoodsInfo>> childs = new HashMap<>();
     private List<ProductInfo> productInfoHuiChuanList = new ArrayList<>();
@@ -204,7 +203,7 @@ public class AddServiceGoodsActivity2 extends RefreshBaseActivity implements Top
         projectType = getIntent().getParcelableExtra(C.IntentKey.PROJECTTYPE_INFO);
         workOrderNum = getIntent().getStringExtra(C.IntentKey.WORKORDER_NUM);
         if (projectType != null) isAddGoods = true;//projectType不为空时，为添加服务商品
-        topbar = getView(com.ruanyun.chezhiyi.commonlib.R.id.topbar);
+        topbar = getView(R.id.topbar);
         topbar.setBackBtnEnable(true)
                 .onBackBtnClick()
                 .setRightText("确认")
@@ -216,9 +215,7 @@ public class AddServiceGoodsActivity2 extends RefreshBaseActivity implements Top
             params.setProjectParent(projectType.getProjectNum());
         } else {
             stairprojectTypes = DbHelper.getInstance().getSeviceTypes();//获取工单服务和技师技能数据结构一级
-//            kaijieOpenOrderGoods.setProjectTypeList(stairprojectTypes);
-//            LogX.e("返回get", kaijieOpenOrderGoods.toString());
-//            filterProjectList();
+            LogX.e("返回get", stairprojectTypes.toString());
             topbar.onTopbarViewClick(topbar.getTvTitle());
             if (stairprojectTypes != null && stairprojectTypes.size() > 0) {
                 if (stairprojectTypes.get(0).getProjectName() != null) {

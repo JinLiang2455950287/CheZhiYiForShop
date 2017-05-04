@@ -28,7 +28,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:gravity="center_vertical|right"
-            android:text="技师：朱二哒 工位：综合01" />
+            android:text="技师：未选择 工位：未选择" />
 
         <TextView
             android:id="@+id/tv_group_pai"

@@ -6,7 +6,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import com.ruanyun.chezhiyi.R;
 import com.ruanyun.chezhiyi.commonlib.base.BaseActivity;
@@ -15,6 +14,7 @@ import com.ruanyun.chezhiyi.commonlib.model.User;
 import com.ruanyun.chezhiyi.commonlib.model.WorkBayInfo;
 import com.ruanyun.chezhiyi.commonlib.presenter.KaiDanGongweiPresenter;
 import com.ruanyun.chezhiyi.commonlib.presenter.KaiDanYuanGongPresenter;
+import com.ruanyun.chezhiyi.commonlib.util.AppUtility;
 import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.view.KaiDanGongweiView;
 import com.ruanyun.chezhiyi.commonlib.view.KaiDanJiShiView;
@@ -22,7 +22,6 @@ import com.ruanyun.chezhiyi.commonlib.view.SingleChoiceGongWeiAdapter;
 import com.ruanyun.chezhiyi.commonlib.view.adapter.SingleChoiceYuanGongAdapter;
 import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +50,8 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
     private KaiDanYuanGongPresenter kaiDanYuanGongPresenter = new KaiDanYuanGongPresenter();
     private GongWeiJiShiBean gongWeiJiShiBean = new GongWeiJiShiBean();
     private String projectNumber;
+    private int isWorkBay;
+    private boolean flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,8 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
                 .onRightTextClick()
                 .setTopbarClickListener(this);
         projectNumber = getIntent().getStringExtra("projectNumber");
+        isWorkBay = getIntent().getIntExtra("isWorkBay", 2);    //isWorkBbay 是否需要工位 1：是 2： 否
+        LogX.e("isWorkBay", isWorkBay + ";");
         gongWeiJiShiBean.setProjectNumber(projectNumber);
         kaiDanGongweiPresenter.getKaiDanGongWeiInfo(app.getApiService().getWorkOrderGongWei(app.getCurrentUserNum(), projectNumber));
         kaiDanYuanGongPresenter.getKaiDanJiShiInfo(app.getApiService().getLeisureTechnician(app.getCurrentUserNum(), projectNumber));
@@ -86,8 +89,8 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
         adapterYuanGong = new SingleChoiceYuanGongAdapter(this, jiShi);
         adapterGongWei = new SingleChoiceGongWeiAdapter(this, gongWei);
         // 默认选中第一个item
-        adapterYuanGong.setDefaultCheckedItemPosition(0);
-        adapterGongWei.setDefaultCheckedItemPosition(0);
+//        adapterYuanGong.setDefaultCheckedItemPosition(0);
+//        adapterGongWei.setDefaultCheckedItemPosition(0);
         // 这个方法不能忘，指定显示布局
         recyclerviewYuangong.setLayoutManager(new GridLayoutManager(this, 3));
         recyclerviewGongwei.setLayoutManager(new GridLayoutManager(this, 3));
@@ -101,10 +104,8 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
             @Override
             public void onItemClick(View view, int position, long id) {
                 adapterYuanGong.check(position);
-                if (gongWei.size() > 0) {
-                    gongWeiJiShiBean.setJishiname(jiShi.get(0).getNickName());
-                    gongWeiJiShiBean.setJishiid(jiShi.get(0).getUserNum());
-                }
+                gongWeiJiShiBean.setJishiid(jiShi.get(position).getUserNum());
+                gongWeiJiShiBean.setJishiname(jiShi.get(position).getNickName());
             }
         });
 
@@ -112,10 +113,8 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
             @Override
             public void onItemClick(View view, int position, long id) {
                 adapterGongWei.check(position);
-                if (jiShi.size() > 0) {
-                    gongWeiJiShiBean.setGongweiname(gongWei.get(0).getWorkbayName());
-                    gongWeiJiShiBean.setGongweiid(gongWei.get(0).getWorkbayInfoNum());
-                }
+                gongWeiJiShiBean.setGongweiid(gongWei.get(position).getWorkbayInfoNum());
+                gongWeiJiShiBean.setGongweiname(gongWei.get(position).getWorkbayName());
             }
         });
     }
@@ -131,16 +130,35 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
                 }
                 bundle2.putParcelable("gongWeiJiShiBean", gongWeiJiShiBean);
                 intent2.putExtras(bundle2);
-                LogX.e("1544", gongWeiJiShiBean.toString());
+                LogX.e("1544回传", gongWeiJiShiBean.toString());
                 setResult(1544, intent2);
                 finish();
                 break;
             case R.id.tv_title_right:
                 Intent intent = new Intent();
                 Bundle bundle = new Bundle();
-                bundle.putParcelable("gongWeiJiShiBean", gongWeiJiShiBean);
+                if (isWorkBay == 2) {
+                    if (projectNumber.equals("004000000000000")) {
+                        gongWeiJiShiBean.setGongweiname("机修虚拟工位");
+                    } else if (projectNumber.equals("002000000000000")) {
+                        gongWeiJiShiBean.setGongweiname("常规虚拟工位");
+                    } else if (projectNumber.equals("003000000000000")) {
+                        gongWeiJiShiBean.setGongweiname("保养虚拟工位");
+                    } else if (projectNumber.equals("005000000000000")) {
+                        gongWeiJiShiBean.setGongweiname("美容虚拟工位");
+                    } else if (projectNumber.equals("006000000000000")) {
+                        gongWeiJiShiBean.setGongweiname("轮胎虚拟工位");
+                    }
+                    gongWeiJiShiBean.setGongweiid("0");
+                    bundle.putParcelable("gongWeiJiShiBean", gongWeiJiShiBean);
+                } else {
+                    if (gongWeiJiShiBean.getGongweiname() == null || gongWeiJiShiBean.getGongweiid() == null || gongWeiJiShiBean.getJishiname() == null || gongWeiJiShiBean.getJishiid() == null) {
+                        AppUtility.showToastMsg("工位和员工要同时选择");
+                        return;
+                    }
+                }
                 intent.putExtras(bundle);
-                LogX.e("1544", gongWeiJiShiBean.toString());
+                LogX.e("1544回传", gongWeiJiShiBean.toString());
                 setResult(1544, intent);
                 finish();
                 break;
@@ -176,12 +194,17 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
     public void getKaiDanSuccess(List<WorkBayInfo> workBayInfo) {
         LogX.e("开单工位", workBayInfo.toString());
         gongWei = workBayInfo;
-        if (gongWei.size() > 0) {
-            gongWeiJiShiBean.setGongweiname(gongWei.get(0).getWorkbayName());
-            gongWeiJiShiBean.setGongweiid(gongWei.get(0).getWorkbayInfoNum());
-        }
+//        if (gongWei.size() > 0) {
+//            gongWeiJiShiBean.setGongweiname(gongWei.get(0).getWorkbayName());
+//            gongWeiJiShiBean.setGongweiid(gongWei.get(0).getWorkbayInfoNum());
+//        }
         adapterGongWei.setData(gongWei);
         adapterGongWei.notifyDataSetChanged();
+        if (flag) {
+            dissMissLoading();
+        } else {
+            flag = true;
+        }
     }
 
     @Override
@@ -193,13 +216,17 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
     public void getKaiDanJiShiSuccess(List<User> jishiList) {
         LogX.e("技师persenter", jishiList.toString());
         jiShi = jishiList;
-        if (jiShi.size() > 0) {
-            gongWeiJiShiBean.setJishiname(jiShi.get(0).getNickName());
-            gongWeiJiShiBean.setJishiid(jiShi.get(0).getUserNum());
-        }
+//        if (jiShi.size() > 0) {
+//            gongWeiJiShiBean.setJishiname(jiShi.get(0).getNickName());
+//            gongWeiJiShiBean.setJishiid(jiShi.get(0).getUserNum());
+//        }
         adapterYuanGong.setData(jiShi);
         adapterYuanGong.notifyDataSetChanged();
-        dissMissLoading();
+        if (flag) {
+            dissMissLoading();
+        } else {
+            flag = true;
+        }
     }
 
     @Override

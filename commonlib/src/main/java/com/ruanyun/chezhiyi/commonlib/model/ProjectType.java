@@ -17,21 +17,35 @@ import java.util.List;
  */
 @Entity
 public class ProjectType implements Parcelable {
-    /** 主键 **/
+    /**
+     * 主键
+     **/
     @Unique
-    private  int projectId;
-    /**业务主键  **/
+    private int projectId;
+    /**
+     * 业务主键
+     **/
     @NotNull
-    private  String projectNum;
-    /** 服务名称或技师名称 **/
+    private String projectNum;
+    /**
+     * 服务名称或技师名称
+     **/
     private String projectName;
-    /** 父类编号 与父类的projectNum相同 000000 为一级 **/
+    /**
+     * 父类编号 与父类的projectNum相同 000000 为一级
+     **/
     private String parentNum;
-    /** 工单服务或技师技能父类编号 与父类carModelNum值相同 000000 为一级 **/
+    /**
+     * 工单服务或技师技能父类编号 与父类carModelNum值相同 000000 为一级
+     **/
     private String projectAllName;
-    /** 排序值（升序） **/
+    /**
+     * 排序值（升序）
+     **/
     private int sortNum;
-    /** 是否支持预约 1是2否**/
+    /**
+     * 是否支持预约 1是2否
+     **/
     private int isMake;
     /*预约金额*/
     @Transient
@@ -43,10 +57,12 @@ public class ProjectType implements Parcelable {
     private String projectAllSelectName;// 预约  选中子项的名字  string
 
     @Transient
-    private boolean isSelected=false;
+    private boolean isSelected = false;
 
     @Transient
-    private boolean isParent=false;
+    private boolean isParent = false;
+
+    private int isWorkBay;  //isWorkBbay 是否需要工位 1：是 2： 否
 
 
     public String getProjectAllSelectName() {
@@ -91,12 +107,22 @@ public class ProjectType implements Parcelable {
 //        this.technicianProjectId = technicianProjectId;
 //    }
 
+
+    public int getIsWorkBay() {
+        return isWorkBay;
+    }
+
+    public void setIsWorkBay(int isWorkBay) {
+        this.isWorkBay = isWorkBay;
+    }
+
     @Override
     public String toString() {
         return "ProjectType{" +
                 "projectId=" + projectId +
                 ", projectNum='" + projectNum + '\'' +
                 ", projectName='" + projectName + '\'' +
+                ", isWorkBay='" + isWorkBay + '\'' +
                 ", parentNum='" + parentNum + '\'' +
                 ", projectAllName='" + projectAllName + '\'' +
                 ", sortNum=" + sortNum +
@@ -113,9 +139,9 @@ public class ProjectType implements Parcelable {
         isParent = parent;
     }
 
-    @Generated(hash = 1122313167)
+    @Generated(hash = 1091414451)
     public ProjectType(int projectId, @NotNull String projectNum, String projectName, String parentNum,
-            String projectAllName, int sortNum, int isMake) {
+            String projectAllName, int sortNum, int isMake, int isWorkBay) {
         this.projectId = projectId;
         this.projectNum = projectNum;
         this.projectName = projectName;
@@ -123,6 +149,7 @@ public class ProjectType implements Parcelable {
         this.projectAllName = projectAllName;
         this.sortNum = sortNum;
         this.isMake = isMake;
+        this.isWorkBay = isWorkBay;
     }
 
     @Generated(hash = 807885465)
@@ -200,6 +227,7 @@ public class ProjectType implements Parcelable {
         dest.writeString(this.projectAllName);
         dest.writeInt(this.sortNum);
         dest.writeInt(this.isMake);
+        dest.writeInt(this.isWorkBay);
         dest.writeTypedList(this.childProjectTypeList);
         dest.writeByte(this.isSelected ? (byte) 1 : (byte) 0);
         dest.writeByte(this.isParent ? (byte) 1 : (byte) 0);
@@ -213,6 +241,7 @@ public class ProjectType implements Parcelable {
         this.projectAllName = in.readString();
         this.sortNum = in.readInt();
         this.isMake = in.readInt();
+        this.isWorkBay = in.readInt();
         this.childProjectTypeList = in.createTypedArrayList(ProjectType.CREATOR);
         this.isSelected = in.readByte() != 0;
         this.isParent = in.readByte() != 0;

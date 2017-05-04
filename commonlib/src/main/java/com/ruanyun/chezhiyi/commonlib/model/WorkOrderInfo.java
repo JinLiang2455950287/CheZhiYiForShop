@@ -20,6 +20,7 @@ public class WorkOrderInfo implements Parcelable {
     private String projectName;         //服务一级类名称
     private String servicePlateNumber;      //车牌号
     private String dxdAmount;
+    private int isWorkBbay;  //isWorkBbay 是否需要工位 1：是 2： 否
     /**
      * 车辆图片
      */
@@ -74,6 +75,14 @@ public class WorkOrderInfo implements Parcelable {
 
     public void setDxdAmount(String dxdAmount) {
         this.dxdAmount = dxdAmount;
+    }
+
+    public int getIsWorkBbay() {
+        return isWorkBbay;
+    }
+
+    public void setIsWorkBbay(int isWorkBbay) {
+        this.isWorkBbay = isWorkBbay;
     }
 
     public String getRemark() {
@@ -367,6 +376,7 @@ public class WorkOrderInfo implements Parcelable {
         dest.writeString(this.projectName);
         dest.writeString(this.servicePlateNumber);
         dest.writeString(this.dxdAmount);
+        dest.writeInt(this.isWorkBbay);
         dest.writeString(this.carPicPath);
         dest.writeString(this.remark);
         dest.writeString(this.serviceUserName);
@@ -404,6 +414,7 @@ public class WorkOrderInfo implements Parcelable {
         this.projectName = in.readString();
         this.servicePlateNumber = in.readString();
         this.dxdAmount = in.readString();
+        this.isWorkBbay = in.readInt();
         this.carPicPath = in.readString();
         this.remark = in.readString();
         this.serviceUserName = in.readString();
@@ -455,6 +466,7 @@ public class WorkOrderInfo implements Parcelable {
                 ", projectName='" + projectName + '\'' +
                 ", servicePlateNumber='" + servicePlateNumber + '\'' +
                 ", dxdAmount='" + dxdAmount + '\'' +
+                ", isWorkBbay='" + isWorkBbay + '\'' +
                 ", carPicPath='" + carPicPath + '\'' +
                 ", remark='" + remark + '\'' +
                 ", serviceUserName='" + serviceUserName + '\'' +

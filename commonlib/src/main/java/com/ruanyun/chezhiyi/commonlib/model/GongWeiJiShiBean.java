@@ -58,16 +58,6 @@ public class GongWeiJiShiBean implements Parcelable {
         this.projectNumber = projectNumber;
     }
 
-    @Override
-    public String toString() {
-        return "GongWeiJiShiBean{" +
-                "jishiname='" + jishiname + '\'' +
-                ", gongweiname='" + gongweiname + '\'' +
-                ", jishiid='" + jishiid + '\'' +
-                ", gongweiid='" + gongweiid + '\'' +
-                ", projectNumber='" + projectNumber + '\'' +
-                '}';
-    }
 
     @Override
     public int describeContents() {
@@ -102,4 +92,16 @@ public class GongWeiJiShiBean implements Parcelable {
             return new GongWeiJiShiBean[size];
         }
     };
+
+
+    @Override
+    public String toString() {
+        return "GongWeiJiShiBean{" +
+                "jishiname='" + jishiname + '\'' +
+                ", gongweiname='" + gongweiname + '\'' +
+                ", jishiid='" + jishiid + '\'' +
+                ", gongweiid='" + gongweiid + '\'' +
+                ", projectNumber='" + projectNumber + '\'' +
+                '}';
+    }
 }

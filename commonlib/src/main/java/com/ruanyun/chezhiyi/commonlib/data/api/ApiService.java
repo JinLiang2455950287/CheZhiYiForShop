@@ -588,8 +588,17 @@ public interface ApiService {
      * 提交接待工单(resultJosnString为json格式)
      **/
     @FormUrlEncoded
+
     @POST(C.ApiUrl.URL_SAVE_RECEPTION_WORKORDER)
     Call<ResultBase> saveReceptionWorkorder(@Path("userNum") String userNum, @Field("resultJosnString") String resultJosnString);
+
+    /**
+     * 提交接待工单(resultJosnString为json格式)2
+     **/
+
+    @Multipart
+    @POST(C.ApiUrl.URL_SAVE_RECEPTION_WORKORDER)
+    Call<ResultBase> saveReceptionWorkorder2(@Path("userNum") String userNum,  @PartMap HashMap<String, RequestBody> bodyMap);
 
     /**
      * 工单详情

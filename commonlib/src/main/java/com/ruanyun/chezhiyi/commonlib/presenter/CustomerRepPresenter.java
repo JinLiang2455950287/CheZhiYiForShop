@@ -18,8 +18,10 @@ import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.view.CustomerRepMvpView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
 
 /**
@@ -281,6 +283,40 @@ public class CustomerRepPresenter implements Presenter<CustomerRepMvpView> {
                     customerRepMvpView.disMissLoadingView();
             }
         });
+    }
+
+    /**
+     * 提交服务工单
+     */
+    public void submitWorkOrder2(HashMap<String, RequestBody> caseMapParams) {
+        if (customerRepMvpView != null)
+            App.getInstance().getApiService().saveReceptionWorkorder2(currentUserNum, caseMapParams).enqueue(new ResponseCallback<ResultBase>() {
+                @Override
+                public void onSuccess(Call call, ResultBase resultBase) {
+                    if (customerRepMvpView != null) {
+                        customerRepMvpView.showToast(resultBase.getMsg());
+                        customerRepMvpView.submitWorkOrderSuccess();
+                    }
+                }
+
+                @Override
+                public void onError(Call call, ResultBase resultBase, int errorCode) {
+                    if (customerRepMvpView != null) {
+                        customerRepMvpView.showToast(resultBase.getMsg());
+                    }
+                }
+
+                @Override
+                public void onFail(Call call, String msg) {
+
+                }
+
+                @Override
+                public void onResult() {
+                    if (customerRepMvpView != null)
+                        customerRepMvpView.disMissLoadingView();
+                }
+            });
     }
 
     /**

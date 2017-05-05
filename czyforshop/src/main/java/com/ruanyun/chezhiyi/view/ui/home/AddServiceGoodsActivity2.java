@@ -154,7 +154,7 @@ public class AddServiceGoodsActivity2 extends RefreshBaseActivity implements Top
             }
             notifyFiltrateData(query.getText());
 
-            LogX.e("1522productInfoTemp", productInfoTemp.toString());
+//            LogX.e("1522productInfoTemp", productInfoTemp.toString());
             LogX.e("1522回传", productInfo.getGoodsCount() + ";" + productInfoHuiChuanList.size() + ";" + productInfoHuiChuanList.toString());
         }
     }

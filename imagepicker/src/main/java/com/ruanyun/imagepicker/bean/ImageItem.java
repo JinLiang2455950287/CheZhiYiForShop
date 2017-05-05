@@ -73,4 +73,18 @@ public class ImageItem implements Serializable,CompressImageInfoGetter{
     public String requestPramsName() {
         return paramsName;
     }
+
+    @Override
+    public String toString() {
+        return "ImageItem{" +
+                "path='" + path + '\'' +
+                ", name='" + name + '\'' +
+                ", attachId=" + attachId +
+                ", time=" + time +
+                ", tag='" + tag + '\'' +
+                ", type=" + type +
+                ", isAdd=" + isAdd +
+                ", paramsName='" + paramsName + '\'' +
+                '}';
+    }
 }

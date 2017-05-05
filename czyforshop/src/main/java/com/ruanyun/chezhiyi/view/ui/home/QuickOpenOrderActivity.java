@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ruanyun.chezhiyi.R;
+import com.ruanyun.chezhiyi.commonlib.App;
 import com.ruanyun.chezhiyi.commonlib.base.AutoLayoutActivity;
 import com.ruanyun.chezhiyi.commonlib.model.AppointmentInfo;
 import com.ruanyun.chezhiyi.commonlib.model.CarBookingInfo;
@@ -37,12 +38,17 @@ import com.ruanyun.chezhiyi.commonlib.util.CloseKeyBoard;
 import com.ruanyun.chezhiyi.commonlib.util.DbHelper;
 import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.util.StringUtil;
+import com.ruanyun.chezhiyi.commonlib.util.compressimage.CompressImageTask;
+import com.ruanyun.chezhiyi.commonlib.util.compressimage.CompressTaskCallback;
 import com.ruanyun.chezhiyi.commonlib.view.CustomerRepMvpView;
 import com.ruanyun.chezhiyi.commonlib.view.widget.CustomExpandableListView;
 import com.ruanyun.chezhiyi.commonlib.view.widget.FlowLayout;
 import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
 import com.ruanyun.chezhiyi.view.adapter.MyExpandableListPaiGongAdapter;
 import com.ruanyun.chezhiyi.view.widget.ChooseServiceTab;
+import com.ruanyun.imagepicker.bean.CompressImageInfoGetter;
+import com.ruanyun.imagepicker.bean.ImageItem;
+import com.ruanyun.imagepicker.widget.RYAddPictureView;
 import com.wintone.demo.plateid.MemoryCameraActivity;
 
 import java.math.BigDecimal;
@@ -56,11 +62,13 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.greenrobot.event.Subscribe;
 import de.greenrobot.event.ThreadMode;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 import static com.ruanyun.chezhiyi.R.id.edt_carnum_input;
 
 public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar.onTopbarClickListener, CustomerRepMvpView, MyExpandableListPaiGongAdapter.OnPaiGongClickListener
-        , MyExpandableListPaiGongAdapter.OnBuyCountClickListener {
+        , MyExpandableListPaiGongAdapter.OnBuyCountClickListener, RYAddPictureView.onPickResultChangedListener {
     public static final int REQ_REC_PLATENUM = 32434;//获取车牌扫描结果
     public static final int REQ_ADD_UPKEEP = 2345;//添加里程数
 
@@ -86,7 +94,8 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
     TextView tvRemarks;
     @BindView(R.id.ll_appoint_info)
     LinearLayout llAppointInfo;
-
+    @BindView(R.id.grid_case)
+    RYAddPictureView gridCase;
 
     private CarBookingInfo carBookingInfo;//当前预约客户信息
     private CustomerRepPresenter presenter = new CustomerRepPresenter();
@@ -98,6 +107,8 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
     private String carNumber;// 当前的车牌号
     private String plateNumber;
     private boolean textWatcherEnable = true;
+    //图片
+    private List<ImageItem> addItemList;
 
     //View
     private CustomExpandableListView expandableListView;
@@ -109,6 +120,10 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
     private List<ProductInfo> productInfoHuiChuanList = new ArrayList<>();
     private GongWeiJiShiBean gongWeiJiShiBean = new GongWeiJiShiBean();
     List<ProjectType> stairprojectTypes = new ArrayList<>();//一级工单服务分类集合
+    private int[] delAttachInfoId = null;
+    private int index = 0;
+    private CompressImageTask imageTask;
+    private HashMap<String, RequestBody> caseMapParams = new HashMap<>();
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -137,6 +152,11 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                     }
                     break;
             }
+
+            if (requestCode == gridCase.requestCode) {
+                gridCase.onImageActivityResult();
+            }
+
         } else if (resultCode == RESULT_FIRST_USER) {
             switch (requestCode) {
                 case REQ_REC_PLATENUM://车牌识别页面返回 没有扫码
@@ -144,6 +164,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
             }
         }
 
+        /*添加服务商品*/
         if (requestCode == 1522) {
             ProductInfo infoTemp;//传过来的商品bean
             OrderGoodsInfo goodsInfoTemp;//本地的商品bean
@@ -203,12 +224,6 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                     }
                     workOrderInfoTemp.setProjectNum(infoTemp.getProjectNum());
 
-                    for (int j = 0; j < groups.size(); j++) {
-                        String projectNumber = groups.get(j).getProjectNum();
-                        if (workOrderInfoTemp.getProjectNum().equals(projectNumber)) {
-                            workOrderInfoTemp.setIsWorkBbay(groups.get(j).getIsWorkBbay());
-                        }
-                    }
                     groups.add(workOrderInfoTemp);
                 }
             }
@@ -228,15 +243,25 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                 }
             }
 
+
+            for (int j = 0; j < groups.size(); j++) {
+                String projectNumber = groups.get(j).getProjectNum();
+                for (int i = 0; i < stairprojectTypes.size(); i++) {
+                    if (stairprojectTypes.get(i).getProjectNum().equals(projectNumber)) {
+                        groups.get(j).setIsWorkBbay(stairprojectTypes.get(i).getIsWorkBay());
+                    }
+                }
+            }
+
             myExpandableAdapter.setData(groups, childs);
             myExpandableAdapter.notifyDataSetChanged();
 
             LogX.e("1522MapNew", groups.size() + "==" + childs.size() + "==" + groups.toString() + "==" + childs.toString());
         }
 
-        if (requestCode == 1544) {    // /*工位/技师*/
+       /*工位/技师*/
+        if (requestCode == 1544) {
             gongWeiJiShiBean = (GongWeiJiShiBean) data.getParcelableExtra("gongWeiJiShiBean");
-//            LogX.e("1544", gongWeiJiShiBean.toString() + "projectNumber");
             if (gongWeiJiShiBean != null) {
                 for (int i = 0; i < groups.size(); i++) {
                     if (groups.get(i).getProjectNum().equals(gongWeiJiShiBean.getProjectNumber())) {
@@ -286,8 +311,8 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
             carNumber = cph;
             presenter.getScanCustomerInfo(carNumber);
         }
-        CloseKeyBoard.hideSoftInput(mContext, edtWriteMark);
-
+        gridCase.setOnListeners();
+        gridCase.setSizeLimit(5);
     }
 
     private void initExpandListView() {
@@ -417,13 +442,12 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
             }
             if (workOrderGoodsList.size() > 0) {
                 workOrderinfo = new WorkOrderSubmitInfo.WorkOrderListInfo();
-                workOrderinfo.leadingUserName = WorkOrderInfo.getLeadingUserName();
-                workOrderinfo.leadingUserName = WorkOrderInfo.getLeadingUserName();
-                workOrderinfo.leadingUserNum = WorkOrderInfo.getLeadingUserNum();
+                workOrderinfo.leadingUserName = WorkOrderInfo.getLeadingUserName() != null ? WorkOrderInfo.getLeadingUserName() : "";
+                workOrderinfo.leadingUserNum = WorkOrderInfo.getLeadingUserNum() != null ? WorkOrderInfo.getLeadingUserNum() : "";
                 workOrderinfo.projectNum = WorkOrderInfo.getProjectNum();
                 workOrderinfo.workOrderNum = " ";
-                workOrderinfo.workbayInfoNum = WorkOrderInfo.getWorkbayInfoNum();
-                workOrderinfo.workbayName = WorkOrderInfo.getWorkbayName();
+                workOrderinfo.workbayInfoNum = WorkOrderInfo.getWorkbayInfoNum() != null ? WorkOrderInfo.getWorkbayInfoNum() : "";
+                workOrderinfo.workbayName = WorkOrderInfo.getWorkbayName() != null ? WorkOrderInfo.getWorkbayName() : "";
                 workOrderinfo.workOrderGoodsList = workOrderGoodsList;
                 workOrderList.add(workOrderinfo);
             }
@@ -435,11 +459,31 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
             return;
         }
         workOrderSubmitInfo.workOrderList = workOrderList;
-        String paramsResult = new Gson().toJson(workOrderSubmitInfo);
+        final String paramsResult = new Gson().toJson(workOrderSubmitInfo);
         LogX.e("retrofit3", paramsResult);
-        presenter.submitWorkOrder(paramsResult);
-    }
+        caseMapParams.put("resultJosnString", RequestBody.create(MediaType.parse("text/plain"), paramsResult));
+        showLoading("开单中...");
 
+        //图片
+        addItemList = getLocalPicParams(gridCase.getImageList());
+        if (addItemList.size() > 0) {
+            imageTask = App.getInstance().imageProxyService.getCompressTask("workOrderPic", (CompressImageInfoGetter[]) addItemList.toArray(new ImageItem[0]));
+
+            imageTask.start(new CompressTaskCallback<HashMap<String, RequestBody>>() {
+                @Override
+                public void onCompresComplete(HashMap<String, RequestBody> compressResults) {
+                    caseMapParams.putAll(compressResults);
+                    presenter.submitWorkOrder2(caseMapParams);
+                }
+
+                @Override
+                public void onCompresFail(Throwable throwable) {
+                }
+            });
+        } else {
+            presenter.submitWorkOrder2(caseMapParams);
+        }
+    }
 
     @OnClick({R.id.tv_costomer_info, R.id.bt_submit, R.id.rl_add_server2, R.id.img_btn_scan, R.id.edt_carnum_input})
     public void onClick(View view) {
@@ -512,7 +556,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
         groups = carBookingInfo.getMakeInfo().getWorkOrderInfoList();
         if (groups.size() > 0) {
             for (int i = 0; i < groups.size(); i++) {
-                for (int j = 0; j <stairprojectTypes.size() ; j++) {
+                for (int j = 0; j < stairprojectTypes.size(); j++) {
                     if (groups.get(i).getProjectNum().equals(stairprojectTypes.get(j).getProjectNum())) {
                         groups.get(i).setIsWorkBbay(stairprojectTypes.get(j).getIsWorkBay());
                     }
@@ -579,6 +623,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
     @Override
     public void submitWorkOrderSuccess() {
         finish();
+        addItemList.clear();
     }
 
     /**
@@ -603,4 +648,33 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
     public void onBuyCountItemClick(int count) {
 
     }
+
+    /*图片选择器*/
+    @Override
+    public void onPicDelete(ImageItem item) {
+        if (item.type == ImageItem.TYPE_REMOTE && delAttachInfoId != null) {
+            // TODO: 2016/9/9 添加删除的图片的   id
+            delAttachInfoId[index] = item.attachId;
+            index++;
+        }
+    }
+
+    /**
+     * 获取新增图片
+     *
+     * @param imageList
+     */
+    private List<ImageItem> getLocalPicParams(List<ImageItem> imageList) {
+        List<ImageItem> tempItemList = new ArrayList<>();
+        for (ImageItem item : imageList) {
+            if (item.type == ImageItem.TYPE_LOCAL && !item.isAdd) {
+                // caseMapParams.put("attachInfoPic\"; filename=\"" + item.name, RequestBody.create(MediaType.parse("image/jpeg"), new File(item.path)));
+                // TODO: 2016/12/1   添加图片压缩
+                tempItemList.add(item);
+            }
+        }
+        return tempItemList;
+    }
+
+
 }

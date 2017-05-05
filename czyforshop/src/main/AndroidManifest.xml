@@ -525,13 +525,15 @@
         <activity android:name=".view.ui.mine.TiChengPublicActivity" />
         <activity android:name=".view.ui.TiXing.TiXingActivity" />
         <activity android:name=".view.ui.TiXing.TiXingMangerActivity" />
-        <activity android:name=".view.ui.home.QuickOpenOrderActivity" />
+        <activity
+            android:name=".view.ui.home.QuickOpenOrderActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
         <!-- 快捷开单 -->
         <activity
             android:name=".view.ui.home.OperOrderPaiGongActivity"
             android:label="@string/title_activity_oper_order_paidan"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
 
         <!-- 快捷开单添加服务商品界面 -->
         <activity

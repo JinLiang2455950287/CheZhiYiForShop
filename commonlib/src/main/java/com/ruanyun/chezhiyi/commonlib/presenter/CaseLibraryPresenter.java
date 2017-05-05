@@ -36,7 +36,7 @@ public class CaseLibraryPresenter implements Presenter<CaseLibraryMvpView> {
     public void detachView() {
         caseLibraryMvpView = null;
         if (imageTask != null)
-        imageTask.cancel();
+            imageTask.cancel();
     }
 
     @Override
@@ -48,6 +48,7 @@ public class CaseLibraryPresenter implements Presenter<CaseLibraryMvpView> {
 
     /**
      * 新建  或  修改案例库  有图片的
+     *
      * @param caseMapParams
      * @param addItemList
      */
@@ -55,12 +56,13 @@ public class CaseLibraryPresenter implements Presenter<CaseLibraryMvpView> {
         if (caseLibraryMvpView == null) return;
         caseLibraryMvpView.showLoadingView();
         imageTask = App.getInstance().imageProxyService.getCompressTask("attachInfoPic", (CompressImageInfoGetter[]) addItemList.toArray(new ImageItem[0]));
-        LogX.i("imageTask",   "--------------->"+ imageTask.toString());
+        LogX.i("imageTask", "--------------->" + imageTask.toString());
         imageTask.start(new CompressTaskCallback<HashMap<String, RequestBody>>() {
             @Override
             public void onCompresComplete(HashMap<String, RequestBody> compressResults) {
                 caseMapParams.putAll(compressResults);
                 updateCaseInfo(caseMapParams);
+                LogX.e("图片呀", caseMapParams.toString());
             }
 
             @Override
@@ -72,6 +74,7 @@ public class CaseLibraryPresenter implements Presenter<CaseLibraryMvpView> {
 
     /**
      * 新增  修改  案例库
+     *
      * @param caseMapParams
      */
     public void updateCaseInfo(HashMap<String, RequestBody> caseMapParams) {

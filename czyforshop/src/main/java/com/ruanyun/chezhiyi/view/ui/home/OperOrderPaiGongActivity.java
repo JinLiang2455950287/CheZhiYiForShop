@@ -125,12 +125,10 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
             case R.id.img_btn_left:
                 Intent intent2 = new Intent();
                 Bundle bundle2 = new Bundle();
-                if (bundle2 == null) {
-
-                }
+                gongWeiJiShiBean = null;
                 bundle2.putParcelable("gongWeiJiShiBean", gongWeiJiShiBean);
                 intent2.putExtras(bundle2);
-                LogX.e("1544回传", gongWeiJiShiBean.toString());
+//                LogX.e("1544回传", gongWeiJiShiBean.toString());
                 setResult(1544, intent2);
                 finish();
                 break;
@@ -150,12 +148,17 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
                         gongWeiJiShiBean.setGongweiname("轮胎虚拟工位");
                     }
                     gongWeiJiShiBean.setGongweiid("0");
+                    if (gongWeiJiShiBean.getJishiname() == null && gongWeiJiShiBean.getJishiid() == null) {
+                        AppUtility.showToastMsg("请选择员工");
+                        return;
+                    }
                     bundle.putParcelable("gongWeiJiShiBean", gongWeiJiShiBean);
                 } else {
                     if (gongWeiJiShiBean.getGongweiname() == null || gongWeiJiShiBean.getGongweiid() == null || gongWeiJiShiBean.getJishiname() == null || gongWeiJiShiBean.getJishiid() == null) {
                         AppUtility.showToastMsg("工位和员工要同时选择");
                         return;
                     }
+                    bundle.putParcelable("gongWeiJiShiBean", gongWeiJiShiBean);
                 }
                 intent.putExtras(bundle);
                 LogX.e("1544回传", gongWeiJiShiBean.toString());

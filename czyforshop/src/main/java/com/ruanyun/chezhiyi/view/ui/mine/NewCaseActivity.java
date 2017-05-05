@@ -129,7 +129,7 @@ public class NewCaseActivity extends AutoLayoutActivity
             public void onItemClick(View view, RecyclerView.ViewHolder holder, Object o, int position) {
                 adapter.setSelectPosition(position);
                 adapter.notifyDataSetChanged();
-                libraryType=adapter.getDatas().get(position).getProjectNum();
+                libraryType = adapter.getDatas().get(position).getProjectNum();
             }
 
             @Override
@@ -138,7 +138,7 @@ public class NewCaseActivity extends AutoLayoutActivity
             }
         });
         recyclerView.setAdapter(adapter);
-        if (adapter.getDatas()!=null && adapter.getDatas().size() > 0) {
+        if (adapter.getDatas() != null && adapter.getDatas().size() > 0) {
             if (caseInfo != null)
                 adapter.setSelectPosition(getProjectNumIndex(caseInfo.getLibraryType(), list));
             libraryType = (adapter.getDatas().get(adapter.getSelectPosition())).getProjectNum();
@@ -149,8 +149,8 @@ public class NewCaseActivity extends AutoLayoutActivity
      * 计算选中的支出分类
      */
     private int getProjectNumIndex(String projectNum, List<ProjectType> userTypeList) {
-        for(int i=0;i<userTypeList.size();i++){
-            if(projectNum.equals(userTypeList.get(i).getProjectNum())){
+        for (int i = 0; i < userTypeList.size(); i++) {
+            if (projectNum.equals(userTypeList.get(i).getProjectNum())) {
                 return i;
             }
         }
@@ -159,6 +159,7 @@ public class NewCaseActivity extends AutoLayoutActivity
 
     /**
      * 获取用户的类型
+     *
      * @return
      */
     private List<ProjectType> getUserProjectType() {
@@ -308,6 +309,7 @@ public class NewCaseActivity extends AutoLayoutActivity
 
     /**
      * 获取新增图片
+     *
      * @param imageList
      */
     private List<ImageItem> getLocalPicParams(List<ImageItem> imageList) {
@@ -347,7 +349,6 @@ public class NewCaseActivity extends AutoLayoutActivity
     }
 
 
-
     /**
      * 请求接口的
      */
@@ -363,8 +364,8 @@ public class NewCaseActivity extends AutoLayoutActivity
 
     @Override
     public void showAddOrUpCaseLibSuccessTip(ResultBase resultBase) {
-        EventBus.getDefault().post(new Event<String>(C.EventKey.KEY_REFRESH_LIST,""));// 刷新列表
-        EventBus.getDefault().post(new Event<String>(C.EventKey.KEY_REFRESH_WEB,""));// 刷新详情
+        EventBus.getDefault().post(new Event<String>(C.EventKey.KEY_REFRESH_LIST, ""));// 刷新列表
+        EventBus.getDefault().post(new Event<String>(C.EventKey.KEY_REFRESH_WEB, ""));// 刷新详情
         AppUtility.showToastMsg(resultBase.getMsg());
         finish();
     }

@@ -331,6 +331,16 @@
                     android:maxEms="50" />
             </LinearLayout>
 
+            <com.ruanyun.imagepicker.widget.RYAddPictureView
+                android:id="@+id/grid_case"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:horizontalSpacing="20px"
+                android:numColumns="4"
+                android:padding="20px"
+                android:verticalSpacing="20px"/>
+
 
             <Button
                 android:id="@+id/bt_submit"

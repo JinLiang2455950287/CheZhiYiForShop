@@ -21,6 +21,7 @@ import com.ruanyun.chezhiyi.commonlib.model.OrderGoodsInfo;
 import com.ruanyun.chezhiyi.commonlib.model.WorkOrderInfo;
 import com.ruanyun.chezhiyi.commonlib.util.LogX;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -117,7 +118,7 @@ public class MyExpandableListPaiGongAdapter extends BaseExpandableListAdapter {
         }
 
         TextView tv_child = (TextView) convertView.findViewById(R.id.tv_child);
-        TextView tv_child_detail = (TextView) convertView.findViewById(R.id.tv_child_detail);
+        final TextView tv_child_detail = (TextView) convertView.findViewById(R.id.tv_child_detail);
         TextView tvchilddetailtv = (TextView) convertView.findViewById(R.id.tv_child_detailtv);
         CheckBox cb_service = (CheckBox) convertView.findViewById(R.id.cb_service);
         final TextView tv_child_detail_count = (TextView) convertView.findViewById(R.id.tv_child_detail_count);
@@ -133,6 +134,7 @@ public class MyExpandableListPaiGongAdapter extends BaseExpandableListAdapter {
         if (childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getIsDaiXiaDan() != 1) {
             countlinearLayout.setVisibility(View.GONE);
             tvchilddetailtv.setVisibility(View.VISIBLE);
+            tv_child_detail.setVisibility(View.GONE);
             if (goodsCount == 0) {
                 tvchilddetailtv.setText("¥ " + childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getAmount() + "×1");
             } else {
@@ -147,36 +149,33 @@ public class MyExpandableListPaiGongAdapter extends BaseExpandableListAdapter {
         cb_service.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).setService(true);
+                childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).setService(isChecked);
                 LogX.e("是否选择", childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).isService() + childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).toString());
             }
         });
 
         if (goodsCount == 0) {
-            tv_child_detail.setText("¥ " + childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getAmount() + "");
+            tv_child_detail.setText("¥ 0");
             tv_child_detail_count.setText(goodsCount + "");
         } else {
-            tv_child_detail.setText("¥ " + childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getAmount() + "");
+            tv_child_detail.setText("¥ " + (childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getAmount()).multiply(new BigDecimal(goodsCount)));
             tv_child_detail_count.setText(goodsCount + "");
         }
 
         countTemp = Integer.valueOf(tv_child_detail_count.getText().toString().trim());
-        if (countTemp <= 0) {//数量为0时
-            imbtnSub.setEnabled(false);
-            imbtnSub.setImageResource(R.drawable.order_minus_disabled);
-        } else {
-            imbtnSub.setEnabled(true);
-            imbtnSub.setImageResource(R.drawable.order_decrease_noral);
-        }
+
         imbtnSub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 countTemp = Integer.valueOf(tv_child_detail_count.getText().toString().trim());
-                if (Integer.valueOf(countTemp) > 0) {
+                if (Integer.valueOf(countTemp) > 1) {
                     countTemp = countTemp - 1;
                     onBuyCountClickListener.onBuyCountItemClick(countTemp);
                     childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).setGoodsCount(countTemp);
                     LogX.e("数量减；", countTemp + ";" + childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getGoodsCount());
+                    notifyDataSetChanged();
+                } else {
+                    childs.get(groups.get(groupPosition).getProjectNum()).remove(childPosition);
                     notifyDataSetChanged();
                 }
             }

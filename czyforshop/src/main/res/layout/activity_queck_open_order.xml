@@ -344,7 +344,6 @@
                 android:padding="20px"
                 android:verticalSpacing="20px" />
 
-
             <Button
                 android:id="@+id/bt_submit"
                 android:layout_width="match_parent"

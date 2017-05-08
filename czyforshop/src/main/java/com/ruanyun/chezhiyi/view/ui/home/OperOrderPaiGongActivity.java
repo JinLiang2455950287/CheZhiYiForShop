@@ -3,6 +3,7 @@ package com.ruanyun.chezhiyi.view.ui.home;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
@@ -20,6 +21,8 @@ import com.ruanyun.chezhiyi.commonlib.view.KaiDanGongweiView;
 import com.ruanyun.chezhiyi.commonlib.view.KaiDanJiShiView;
 import com.ruanyun.chezhiyi.commonlib.view.SingleChoiceGongWeiAdapter;
 import com.ruanyun.chezhiyi.commonlib.view.adapter.SingleChoiceYuanGongAdapter;
+import com.ruanyun.chezhiyi.commonlib.view.widget.DividerGridItemDecoration;
+import com.ruanyun.chezhiyi.commonlib.view.widget.RecycleViewDivider;
 import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
 
 import java.util.ArrayList;
@@ -27,6 +30,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 
 /**
  * Description ：添加工位或技师
@@ -96,7 +100,7 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
         recyclerviewGongwei.setLayoutManager(new GridLayoutManager(this, 3));
 
         // 添加分隔线，DividerItemDecoration这个类是系统提供的，在support包中
-//        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
         recyclerviewYuangong.setAdapter(adapterYuanGong);
         recyclerviewGongwei.setAdapter(adapterGongWei);
 
@@ -123,12 +127,12 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
     public void onTobbarViewClick(View v) {
         switch (v.getId()) {
             case R.id.img_btn_left:
-                Intent intent2 = new Intent();
-                Bundle bundle2 = new Bundle();
-                gongWeiJiShiBean = null;
-                bundle2.putParcelable("gongWeiJiShiBean", gongWeiJiShiBean);
-                intent2.putExtras(bundle2);
-                setResult(1544, intent2);
+//                Intent intent2 = new Intent();
+//                Bundle bundle2 = new Bundle();
+//                gongWeiJiShiBean = null;
+//                bundle2.putParcelable("gongWeiJiShiBean", gongWeiJiShiBean);
+//                intent2.putExtras(bundle2);
+//                setResult(1544, intent2);
                 finish();
                 break;
             case R.id.tv_title_right:

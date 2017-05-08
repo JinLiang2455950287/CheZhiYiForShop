@@ -259,25 +259,27 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
 
        /*工位/技师*/
         if (requestCode == 1544) {
-            gongWeiJiShiBean = (GongWeiJiShiBean) data.getParcelableExtra("gongWeiJiShiBean");
-            if (gongWeiJiShiBean != null) {
-                for (int i = 0; i < groups.size(); i++) {
-                    if (groups.get(i).getProjectNum().equals(gongWeiJiShiBean.getProjectNumber())) {
-                        groups.get(i).setLeadingUserName(gongWeiJiShiBean.getJishiname());
-                        groups.get(i).setLeadingUserNum(gongWeiJiShiBean.getJishiid());
-                        groups.get(i).setWorkbayName(gongWeiJiShiBean.getGongweiname());
-                        groups.get(i).setWorkbayInfoNum(gongWeiJiShiBean.getGongweiid());
-                        if (gongWeiJiShiBean.getGongweiname() != null || gongWeiJiShiBean.getJishiname() != null) {
-                            groups.get(i).setRemark("技师：" + gongWeiJiShiBean.getJishiname() + " 工位：" + gongWeiJiShiBean.getGongweiname());
-                        } else {
-                            groups.get(i).setRemark("");
+            if (data != null) {
+                gongWeiJiShiBean = (GongWeiJiShiBean) data.getParcelableExtra("gongWeiJiShiBean");
+                if (gongWeiJiShiBean != null) {
+                    for (int i = 0; i < groups.size(); i++) {
+                        if (groups.get(i).getProjectNum().equals(gongWeiJiShiBean.getProjectNumber())) {
+                            groups.get(i).setLeadingUserName(gongWeiJiShiBean.getJishiname());
+                            groups.get(i).setLeadingUserNum(gongWeiJiShiBean.getJishiid());
+                            groups.get(i).setWorkbayName(gongWeiJiShiBean.getGongweiname());
+                            groups.get(i).setWorkbayInfoNum(gongWeiJiShiBean.getGongweiid());
+                            if (gongWeiJiShiBean.getGongweiname() != null || gongWeiJiShiBean.getJishiname() != null) {
+                                groups.get(i).setRemark("技师：" + gongWeiJiShiBean.getJishiname() + " 工位：" + gongWeiJiShiBean.getGongweiname());
+                            } else {
+                                groups.get(i).setRemark("");
+                            }
                         }
                     }
                 }
+                LogX.e("15444set", groups.toString() + "groups");
+                myExpandableAdapter.setData(groups, childs);
+                myExpandableAdapter.notifyDataSetChanged();
             }
-            LogX.e("15444set", groups.toString() + "groups");
-            myExpandableAdapter.setData(groups, childs);
-            myExpandableAdapter.notifyDataSetChanged();
         }
 
     }

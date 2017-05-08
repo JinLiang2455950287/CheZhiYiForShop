@@ -14,7 +14,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="10dp">
+
+            <View style="@style/divider_horizontal" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -49,7 +52,7 @@
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
-                    android:background="@drawable/top_background"
+                    android:background="@color/theme_color_default"
                     android:src="@drawable/kaidan_scan_white" />
             </LinearLayout>
 
@@ -87,7 +90,7 @@
                     android:id="@+id/tv_costomer_info"
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
-                    android:background="@drawable/top_background"
+                    android:background="@color/theme_color_default"
                     android:gravity="center"
                     android:text="详情"
                     android:textColor="@color/white" />
@@ -339,7 +342,7 @@
                 android:horizontalSpacing="20px"
                 android:numColumns="4"
                 android:padding="20px"
-                android:verticalSpacing="20px"/>
+                android:verticalSpacing="20px" />
 
 
             <Button

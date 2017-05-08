@@ -15,11 +15,17 @@
         android:layout_weight="1"
         android:text="aa" />
 
-    <CheckBox
+    <!--<RadioButton-->
+    <!--android:id="@+id/radioButton"-->
+    <!--style="@style/CustomCheckboxGrayTheme"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginRight="5dp" />-->
+
+    <ImageView
         android:id="@+id/radioButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="5dp"
-        style="@style/CustomCheckboxGrayTheme"
-         />
+        android:src="@drawable/checkbox_normal" />
 </LinearLayout>

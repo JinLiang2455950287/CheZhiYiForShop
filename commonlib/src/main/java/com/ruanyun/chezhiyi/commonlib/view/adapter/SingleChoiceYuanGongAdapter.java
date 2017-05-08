@@ -5,8 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.RadioButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ruanyun.chezhiyi.commonlib.R;
@@ -55,9 +54,11 @@ public class SingleChoiceYuanGongAdapter extends RecyclerView.Adapter<SingleChoi
         });
 
         if (currentCheckedItemPosition == position) {
-            holder.radioButton.setChecked(true);
+//            holder.radioButton.setChecked(true);
+            holder.radioButton.setBackgroundResource(R.drawable.checkbox_pressed);
         } else {
-            holder.radioButton.setChecked(false);
+//            holder.radioButton.setChecked(false);
+            holder.radioButton.setBackgroundResource(R.drawable.checkbox_normal);
         }
         holder.textView.setText(getItem(position).getNickName());
     }
@@ -92,12 +93,12 @@ public class SingleChoiceYuanGongAdapter extends RecyclerView.Adapter<SingleChoi
 
     public class InternalViewHolder extends RecyclerView.ViewHolder {
         public TextView textView;
-        public CheckBox radioButton;
+        public ImageView radioButton;
 
         public InternalViewHolder(View itemView) {
             super(itemView);
             textView = (TextView) itemView.findViewById(R.id.tv_title);
-            radioButton = (CheckBox) itemView.findViewById(R.id.radioButton);
+            radioButton = (ImageView) itemView.findViewById(R.id.radioButton);
         }
     }
 

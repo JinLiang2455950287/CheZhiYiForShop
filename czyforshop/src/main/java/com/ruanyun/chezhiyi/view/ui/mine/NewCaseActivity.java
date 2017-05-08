@@ -236,20 +236,6 @@ public class NewCaseActivity extends AutoLayoutActivity
         }
     }
 
-//    @Override
-//    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//    }
-//
-//    @Override
-//    public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//    }
-//
-//    @Override
-//    public void afterTextChanged(Editable s) {
-//
-//    }
 
     /**
      * 改变数目
@@ -323,14 +309,6 @@ public class NewCaseActivity extends AutoLayoutActivity
         }
         return tempItemList;
     }
-
-//    /**
-//     * 修改保存  或  新建保存  接口
-//     */
-//    private void updateCaseInfo() {
-////
-////        presenter.addAndUpdateCaseLibrary(call);
-//    }
 
     @Override
     public void onPicDelete(ImageItem item) {

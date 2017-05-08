@@ -39,6 +39,19 @@ public class WorkOrderSubmitInfo {
         public String leadingUserName="";
         public String projectNum="";
         public List<WorkOrderGoods> workOrderGoodsList;
+
+        @Override
+        public String toString() {
+            return "WorkOrderListInfo{" +
+                    "workOrderNum='" + workOrderNum + '\'' +
+                    ", workbayInfoNum='" + workbayInfoNum + '\'' +
+                    ", workbayName='" + workbayName + '\'' +
+                    ", leadingUserNum='" + leadingUserNum + '\'' +
+                    ", leadingUserName='" + leadingUserName + '\'' +
+                    ", projectNum='" + projectNum + '\'' +
+                    ", workOrderGoodsList=" + workOrderGoodsList +
+                    '}';
+        }
     }
 
     /**
@@ -73,5 +86,31 @@ public class WorkOrderSubmitInfo {
             this.sgtcAmount = sgtcAmount;
             this.xstcAmount = xstcAmount;
         }
+
+        @Override
+        public String toString() {
+            return "WorkOrderGoods{" +
+                    "goodsNum='" + goodsNum + '\'' +
+                    ", goodsName='" + goodsName + '\'' +
+                    ", orderGoodsDetailNum='" + orderGoodsDetailNum + '\'' +
+                    ", singlePrice='" + singlePrice + '\'' +
+                    ", goodsTotalCount=" + goodsTotalCount +
+                    ", mainPhoto='" + mainPhoto + '\'' +
+                    ", sgtcAmount='" + sgtcAmount + '\'' +
+                    ", xstcAmount='" + xstcAmount + '\'' +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "WorkOrderSubmitInfo{" +
+                "carAllName='" + carAllName + '\'' +
+                ", customerUserNum='" + customerUserNum + '\'' +
+                ", phone='" + phone + '\'' +
+                ", remark='" + remark + '\'' +
+                ", makeNum='" + makeNum + '\'' +
+                ", workOrderList=" + workOrderList +
+                '}';
     }
 }

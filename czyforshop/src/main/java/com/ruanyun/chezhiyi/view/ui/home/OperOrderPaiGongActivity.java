@@ -128,7 +128,6 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
                 gongWeiJiShiBean = null;
                 bundle2.putParcelable("gongWeiJiShiBean", gongWeiJiShiBean);
                 intent2.putExtras(bundle2);
-//                LogX.e("1544回传", gongWeiJiShiBean.toString());
                 setResult(1544, intent2);
                 finish();
                 break;
@@ -154,11 +153,13 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
                     }
                     bundle.putParcelable("gongWeiJiShiBean", gongWeiJiShiBean);
                 } else {
-                    if (gongWeiJiShiBean.getGongweiname() == null || gongWeiJiShiBean.getGongweiid() == null || gongWeiJiShiBean.getJishiname() == null || gongWeiJiShiBean.getJishiid() == null) {
-                        AppUtility.showToastMsg("工位和员工要同时选择");
+                    if ((gongWeiJiShiBean.getGongweiname() == null && gongWeiJiShiBean.getJishiname() == null)
+                            || (gongWeiJiShiBean.getGongweiname() != null && gongWeiJiShiBean.getJishiname() != null)) {
+                        bundle.putParcelable("gongWeiJiShiBean", gongWeiJiShiBean);
+                    } else {
+                        AppUtility.showToastMsg("工位和员工要都要选择或者都不选");
                         return;
                     }
-                    bundle.putParcelable("gongWeiJiShiBean", gongWeiJiShiBean);
                 }
                 intent.putExtras(bundle);
                 LogX.e("1544回传", gongWeiJiShiBean.toString());

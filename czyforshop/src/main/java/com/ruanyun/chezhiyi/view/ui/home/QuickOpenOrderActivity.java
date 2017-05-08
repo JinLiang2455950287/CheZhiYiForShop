@@ -119,7 +119,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
     private MyExpandableListPaiGongAdapter myExpandableAdapter;
     private List<ProductInfo> productInfoHuiChuanList = new ArrayList<>();
     private GongWeiJiShiBean gongWeiJiShiBean = new GongWeiJiShiBean();
-    List<ProjectType> stairprojectTypes = new ArrayList<>();//一级工单服务分类集合
+    private List<ProjectType> stairprojectTypes = new ArrayList<>();//一级工单服务分类集合
     private int[] delAttachInfoId = null;
     private int index = 0;
     private CompressImageTask imageTask;
@@ -228,8 +228,6 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                 }
             }
 
-            LogX.e("1522MapNew", childs.size() + childs.toString());
-
             for (Map.Entry<String, List<OrderGoodsInfo>> entry : childs.entrySet()) {
                 String key = entry.getKey();
                 List<OrderGoodsInfo> listTemp = childs.get(key);
@@ -271,17 +269,15 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                         groups.get(i).setWorkbayInfoNum(gongWeiJiShiBean.getGongweiid());
                         if (gongWeiJiShiBean.getGongweiname() != null || gongWeiJiShiBean.getJishiname() != null) {
                             groups.get(i).setRemark("技师：" + gongWeiJiShiBean.getJishiname() + " 工位：" + gongWeiJiShiBean.getGongweiname());
+                        } else {
+                            groups.get(i).setRemark("");
                         }
-
-                        LogX.e("15444", "message ：" + "技师：" + gongWeiJiShiBean.getJishiname() + " 工位：" + gongWeiJiShiBean.getGongweiname());
                     }
                 }
             }
-
             LogX.e("15444set", groups.toString() + "groups");
             myExpandableAdapter.setData(groups, childs);
             myExpandableAdapter.notifyDataSetChanged();
-
         }
 
     }
@@ -405,6 +401,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
      * 提交工单信息
      */
     private void submitWorkOrder() {
+        LogX.e("是否选择1", childs.toString() + "childs");
         WorkOrderSubmitInfo workOrderSubmitInfo = new WorkOrderSubmitInfo();//提交表单的实体类
         workOrderSubmitInfo.makeNum = carBookingInfo != null && carBookingInfo.getMakeInfo() != null ? carBookingInfo.getMakeInfo().getMakeNum() : "";//预约编号
         workOrderSubmitInfo.remark = edtWriteMark.getText().toString();//服务备注字段
@@ -419,24 +416,25 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
 
         WorkOrderSubmitInfo.WorkOrderListInfo workOrderinfo;//服务商品列表
         WorkOrderSubmitInfo.WorkOrderGoods workOrderGoods;//服务商品
-        List<WorkOrderSubmitInfo.WorkOrderGoods> workOrderGoodsList = new ArrayList<>();
+        List<WorkOrderSubmitInfo.WorkOrderGoods> workOrderGoodsList;
         List<OrderGoodsInfo> childsListsubTemp;
         List<WorkOrderSubmitInfo.WorkOrderListInfo> workOrderList = new ArrayList<>();//提交表单的List
         LogX.e("15444sub", childs.toString() + "childs");
         for (int i = 0; i < groups.size(); i++) {
+            workOrderGoodsList = new ArrayList<>();
             WorkOrderInfo WorkOrderInfo = groups.get(i);
             childsListsubTemp = childs.get(WorkOrderInfo.getProjectNum());
             for (int j = 0; j < childsListsubTemp.size(); j++) {
                 workOrderGoods = new WorkOrderSubmitInfo.WorkOrderGoods();
                 OrderGoodsInfo orderGoodsInfo = childsListsubTemp.get(j);
-                workOrderGoods.goodsName = orderGoodsInfo.getGoodsName();
-                workOrderGoods.goodsNum = orderGoodsInfo.getGoodsNum();
-                workOrderGoods.goodsTotalCount = orderGoodsInfo.getGoodsCount();
-                workOrderGoods.mainPhoto = orderGoodsInfo.getMainPhoto();
-                workOrderGoods.sgtcAmount = orderGoodsInfo.getSgtcAmount() + "";
-                workOrderGoods.singlePrice = orderGoodsInfo.getAmount() + "";
-                workOrderGoods.xstcAmount = orderGoodsInfo.getXstcAmount() + "";
                 if (orderGoodsInfo.isService()) {
+                    workOrderGoods.goodsName = orderGoodsInfo.getGoodsName();
+                    workOrderGoods.goodsNum = orderGoodsInfo.getGoodsNum();
+                    workOrderGoods.goodsTotalCount = orderGoodsInfo.getGoodsCount();
+                    workOrderGoods.mainPhoto = orderGoodsInfo.getMainPhoto();
+                    workOrderGoods.sgtcAmount = orderGoodsInfo.getSgtcAmount() + "";
+                    workOrderGoods.singlePrice = orderGoodsInfo.getAmount() + "";
+                    workOrderGoods.xstcAmount = orderGoodsInfo.getXstcAmount() + "";
                     workOrderGoodsList.add(workOrderGoods);
                 }
             }
@@ -458,14 +456,18 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
             showToast("至少选择一个服务项");
             return;
         }
+        LogX.e("是否选择2", childs.toString() + "childs");
+        LogX.e("是否选择3", workOrderList.toString() + "workOrderList");
         workOrderSubmitInfo.workOrderList = workOrderList;
         final String paramsResult = new Gson().toJson(workOrderSubmitInfo);
         LogX.e("retrofit3", paramsResult);
         caseMapParams.put("resultJosnString", RequestBody.create(MediaType.parse("text/plain"), paramsResult));
         showLoading("开单中...");
 
+
         //图片
         addItemList = getLocalPicParams(gridCase.getImageList());
+        LogX.e("图片", addItemList.size() + ";;" + addItemList.toString());
         if (addItemList.size() > 0) {
             imageTask = App.getInstance().imageProxyService.getCompressTask("workOrderPic", (CompressImageInfoGetter[]) addItemList.toArray(new ImageItem[0]));
 
@@ -646,7 +648,6 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
     /*改变商品数量*/
     @Override
     public void onBuyCountItemClick(int count) {
-
     }
 
     /*图片选择器*/

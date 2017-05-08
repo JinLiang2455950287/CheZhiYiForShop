@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -91,12 +92,12 @@ public class SingleChoiceYuanGongAdapter extends RecyclerView.Adapter<SingleChoi
 
     public class InternalViewHolder extends RecyclerView.ViewHolder {
         public TextView textView;
-        public RadioButton radioButton;
+        public CheckBox radioButton;
 
         public InternalViewHolder(View itemView) {
             super(itemView);
             textView = (TextView) itemView.findViewById(R.id.tv_title);
-            radioButton = (RadioButton) itemView.findViewById(R.id.radioButton);
+            radioButton = (CheckBox) itemView.findViewById(R.id.radioButton);
         }
     }
 

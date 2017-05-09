@@ -14,6 +14,13 @@
         <item name="android:layout_height">0.1dp</item>
     </style>
 
+    <!-- 默认分割线2 -->
+    <style name="divider_horizontal2">
+        <item name="android:background">@color/color_gray_line</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+    </style>
+
     <!-- 垂直分割线-->
     <style name="divide_vertical">
         <item name="android:layout_width">0.1dp</item>

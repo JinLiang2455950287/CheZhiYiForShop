@@ -20,9 +20,9 @@
         android:text="item text" />
 
     <TextView
-        android:id="@+id/tv_child_detail"
+        android:id="@+id/tv_child_price_detail"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:layout_toLeftOf="@+id/count_linearLayout"
@@ -34,7 +34,7 @@
     <TextView
         android:id="@+id/tv_child_detailtv"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="40dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
@@ -80,8 +80,18 @@
     </LinearLayout>
 
     <View
-        style="@style/divider_horizontal"
-        android:layout_marginTop="40dp" />
+        android:id="@+id/view_shixian"
+        style="@style/divider_horizontal2"
+        android:layout_alignParentBottom="true" />
+
+    <View
+        android:id="@+id/view_xuxian"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/xuxian_png"
+        android:visibility="gone"/>
+
 
     <View
         android:layout_width="0.2dp"

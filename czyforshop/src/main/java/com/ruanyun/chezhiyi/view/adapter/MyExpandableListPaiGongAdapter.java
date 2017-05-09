@@ -118,7 +118,7 @@ public class MyExpandableListPaiGongAdapter extends BaseExpandableListAdapter {
         }
 
         TextView tv_child = (TextView) convertView.findViewById(R.id.tv_child);
-        final TextView tv_child_detail = (TextView) convertView.findViewById(R.id.tv_child_detail);
+        final TextView tv_child_detail = (TextView) convertView.findViewById(R.id.tv_child_price_detail);
         TextView tvchilddetailtv = (TextView) convertView.findViewById(R.id.tv_child_detailtv);
         CheckBox cb_service = (CheckBox) convertView.findViewById(R.id.cb_service);
         final TextView tv_child_detail_count = (TextView) convertView.findViewById(R.id.tv_child_detail_count);
@@ -129,6 +129,16 @@ public class MyExpandableListPaiGongAdapter extends BaseExpandableListAdapter {
 
         int goodsCount = childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getGoodsCount();
         LinearLayout countlinearLayout = (LinearLayout) convertView.findViewById(R.id.count_linearLayout);
+
+        View xuxian = (View) convertView.findViewById(R.id.view_xuxian);
+        View shixian = (View) convertView.findViewById(R.id.view_shixian);
+        if (childPosition != childs.get(groups.get(groupPosition).getProjectNum()).size() - 1) {
+            xuxian.setVisibility(View.VISIBLE);
+            shixian.setVisibility(View.GONE);
+        } else {
+            xuxian.setVisibility(View.GONE);
+            shixian.setVisibility(View.VISIBLE);
+        }
 
         LogX.e("开单", childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getIsDaiXiaDan() + "");
         if (childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getIsDaiXiaDan() != 1) {
@@ -144,6 +154,7 @@ public class MyExpandableListPaiGongAdapter extends BaseExpandableListAdapter {
         } else {
             countlinearLayout.setVisibility(View.VISIBLE);
             tvchilddetailtv.setVisibility(View.GONE);
+            tv_child_detail.setVisibility(View.VISIBLE);
         }
 
         cb_service.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

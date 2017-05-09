@@ -64,16 +64,17 @@ public class BusinessToatalTDFragment extends BaseFragment implements HuiYuanYin
 
 
     private void initView() {
+
         tvBanka = (TextView) mContentView.findViewById(R.id.tv_banka);
-        tvGongdanMoney = (TextView) mContentView.findViewById(R.id.tv_zhifubaopay);
-        tvShangcheng = (TextView) mContentView.findViewById(R.id.tv_gongdanMoney);
-        tvRepay = (TextView) mContentView.findViewById(R.id.tv_shangcheng);
-        tvHuiyuanreain = (TextView) mContentView.findViewById(R.id.tv_repay);
-        tvCashpay = (TextView) mContentView.findViewById(R.id.tv_huiyuanreain);
-        tvWeixinpay = (TextView) mContentView.findViewById(R.id.tv_cashpay);
-        tvZhifubaopay = (TextView) mContentView.findViewById(R.id.tv_weixinpay);
+        tvZhifubaopay = (TextView) mContentView.findViewById(R.id.tv_zhifubaopay);
+        tvGongdanMoney = (TextView) mContentView.findViewById(R.id.tv_gongdanMoney);
+        tvShangcheng = (TextView) mContentView.findViewById(R.id.tv_shangcheng);
+        tvRepay = (TextView) mContentView.findViewById(R.id.tv_repay);
+        tvHuiyuanreain = (TextView) mContentView.findViewById(R.id.tv_huiyuanreain);
+        tvCashpay = (TextView) mContentView.findViewById(R.id.tv_cashpay);
+        tvWeixinpay = (TextView) mContentView.findViewById(R.id.tv_weixinpay);
         //手动调用,通知系统去测量
-        refreshlayout.measure(0,0);
+        refreshlayout.measure(0, 0);
         refreshlayout.setRefreshing(true);
     }
 
@@ -121,10 +122,7 @@ public class BusinessToatalTDFragment extends BaseFragment implements HuiYuanYin
             refreshlayout.setRefreshing(false);
         }
 
-
-        if (menDianYinYeEInfo != null)
-
-        {
+        if (menDianYinYeEInfo != null) {
             upDataUi(menDianYinYeEInfo);
         }
 

@@ -20,9 +20,7 @@ import com.ruanyun.chezhiyi.commonlib.base.AutoLayoutActivity;
 import com.ruanyun.chezhiyi.commonlib.model.AppointmentInfo;
 import com.ruanyun.chezhiyi.commonlib.model.CarBookingInfo;
 import com.ruanyun.chezhiyi.commonlib.model.CustomerRepUiModel;
-import com.ruanyun.chezhiyi.commonlib.model.Event;
 import com.ruanyun.chezhiyi.commonlib.model.GongWeiJiShiBean;
-import com.ruanyun.chezhiyi.commonlib.model.KaijieOpenOrderGoods;
 import com.ruanyun.chezhiyi.commonlib.model.OrderGoodsInfo;
 import com.ruanyun.chezhiyi.commonlib.model.ProductInfo;
 import com.ruanyun.chezhiyi.commonlib.model.ProjectType;
@@ -34,7 +32,6 @@ import com.ruanyun.chezhiyi.commonlib.model.params.WorkOrderSubmitInfo;
 import com.ruanyun.chezhiyi.commonlib.presenter.CustomerRepPresenter;
 import com.ruanyun.chezhiyi.commonlib.util.AppUtility;
 import com.ruanyun.chezhiyi.commonlib.util.C;
-import com.ruanyun.chezhiyi.commonlib.util.CloseKeyBoard;
 import com.ruanyun.chezhiyi.commonlib.util.DbHelper;
 import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.util.StringUtil;
@@ -44,7 +41,7 @@ import com.ruanyun.chezhiyi.commonlib.view.CustomerRepMvpView;
 import com.ruanyun.chezhiyi.commonlib.view.widget.CustomExpandableListView;
 import com.ruanyun.chezhiyi.commonlib.view.widget.FlowLayout;
 import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
-import com.ruanyun.chezhiyi.view.adapter.MyExpandableListPaiGongAdapter;
+import com.ruanyun.chezhiyi.view.adapter.MyExpandableListKaiDanAdapter;
 import com.ruanyun.chezhiyi.view.widget.ChooseServiceTab;
 import com.ruanyun.imagepicker.bean.CompressImageInfoGetter;
 import com.ruanyun.imagepicker.bean.ImageItem;
@@ -60,15 +57,19 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import de.greenrobot.event.Subscribe;
-import de.greenrobot.event.ThreadMode;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
 import static com.ruanyun.chezhiyi.R.id.edt_carnum_input;
 
-public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar.onTopbarClickListener, CustomerRepMvpView, MyExpandableListPaiGongAdapter.OnPaiGongClickListener
-        , MyExpandableListPaiGongAdapter.OnBuyCountClickListener, RYAddPictureView.onPickResultChangedListener {
+/**
+ * Description ：快捷开单
+ * <p/>
+ * Created by hdl on 2017/4/27.
+ */
+
+public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar.onTopbarClickListener, CustomerRepMvpView, MyExpandableListKaiDanAdapter.OnPaiGongClickListener
+        , MyExpandableListKaiDanAdapter.OnBuyCountClickListener, RYAddPictureView.onPickResultChangedListener {
     public static final int REQ_REC_PLATENUM = 32434;//获取车牌扫描结果
     public static final int REQ_ADD_UPKEEP = 2345;//添加里程数
 
@@ -116,7 +117,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
     //Model：定义的数据
     private List<WorkOrderInfo> groups = new ArrayList<>();
     public Map<String, List<OrderGoodsInfo>> childs = new HashMap<>();
-    private MyExpandableListPaiGongAdapter myExpandableAdapter;
+    private MyExpandableListKaiDanAdapter myExpandableAdapter;
     private List<ProductInfo> productInfoHuiChuanList = new ArrayList<>();
     private GongWeiJiShiBean gongWeiJiShiBean = new GongWeiJiShiBean();
     private List<ProjectType> stairprojectTypes = new ArrayList<>();//一级工单服务分类集合
@@ -315,7 +316,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
 
     private void initExpandListView() {
         expandableListView = (CustomExpandableListView) findViewById(R.id.expandableListView);
-        myExpandableAdapter = new MyExpandableListPaiGongAdapter(mContext, groups, childs);
+        myExpandableAdapter = new MyExpandableListKaiDanAdapter(mContext, groups, childs);
         expandableListView.setGroupIndicator(null);
         myExpandableAdapter.setPaiGongClickListener(this);
         myExpandableAdapter.setOnBuyCountClickListener(this);
@@ -477,7 +478,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                 @Override
                 public void onCompresComplete(HashMap<String, RequestBody> compressResults) {
                     caseMapParams.putAll(compressResults);
-                    presenter.submitWorkOrder2(caseMapParams);
+//                    presenter.submitWorkOrder2(caseMapParams);
                 }
 
                 @Override
@@ -485,7 +486,8 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                 }
             });
         } else {
-            presenter.submitWorkOrder2(caseMapParams);
+
+//            presenter.submitWorkOrder2(caseMapParams);
         }
     }
 
@@ -635,6 +637,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
      */
     @Override
     public void saveCarMileageSuccess() {
+
     }
 
     /*派工按钮*/

@@ -94,7 +94,10 @@ public class OperOrderPaiGongActivity extends BaseActivity implements Topbar.onT
         adapterGongWei = new SingleChoiceGongWeiAdapter(this, gongWei);
         // 默认选中第一个item
 //        adapterYuanGong.setDefaultCheckedItemPosition(0);
-//        adapterGongWei.setDefaultCheckedItemPosition(0);
+        if (isWorkBay == 2) {
+            adapterGongWei.setDefaultCheckedItemPosition(0);
+        }
+
         // 这个方法不能忘，指定显示布局
         recyclerviewYuangong.setLayoutManager(new GridLayoutManager(this, 3));
         recyclerviewGongwei.setLayoutManager(new GridLayoutManager(this, 3));

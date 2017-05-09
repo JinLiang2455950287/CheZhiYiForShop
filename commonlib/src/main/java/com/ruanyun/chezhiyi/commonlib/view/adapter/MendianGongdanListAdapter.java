@@ -38,7 +38,9 @@ public class MendianGongdanListAdapter extends CommonAdapter<MenDianGongDanInfo.
 //        TextView tvPrice = holder.getView(R.id.tv_price);
 //        tvPrice.setText(spStr);//销售价
 //
-        holder.setText(R.id.tv_time, item.getCreateTime());
+        String time = item.getCreateTime();
+        time = time.split(" ")[0].toString();
+        holder.setText(R.id.tv_time, time);
         holder.setText(R.id.tv_count, "工单数：" + item.getHyCount());
         holder.setText(R.id.tv_money, "营业额：¥" + item.getAmount());
 //        holder.setText(R.id.tv_time, item.getRefundTime());

@@ -82,12 +82,6 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
     CircleImageView circleImageView;
     @BindView(R.id.tv_my_user_name)
     TextView tvMyUserName;
-    //    @BindView(R.id.tv_my_maintenance)
-//    TextView tvMyMaintenance;
-//    @BindView(R.id.tv_my_working_condition)
-//    TextView tvMyWorkingCondition;
-//    @BindView(R.id.tv_my_upkeep)
-//    TextView tvMyUpkeep;
     @BindView(R.id.tv_my_type)
     TextView tv_my_type;
     @BindView(R.id.flow_view)

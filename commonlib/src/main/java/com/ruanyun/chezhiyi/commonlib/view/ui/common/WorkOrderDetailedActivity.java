@@ -431,6 +431,8 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements Hom
     @Override
     public void updateStatusSuccess() {
         getData();//获取工单详情
+        /*质检通过后，改变技师状态*/
+        app.getUser().setWorkStatus(C.WORKSTATE_NOT_BUSY);
     }
 
     @Override

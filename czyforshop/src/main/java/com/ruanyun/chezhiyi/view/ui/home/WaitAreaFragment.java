@@ -40,7 +40,6 @@ public class WaitAreaFragment extends RefreshBaseFragment {
     private ListView lvStation;
     private WaitAreaAdapter mAdapter;//等候区或结算中获取
     private List<WorkOrderInfo> workOrderInfoList = new ArrayList<>();
-    private String paramsStatus;
 
     public WaitAreaFragment() {
     }

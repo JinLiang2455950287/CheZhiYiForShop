@@ -64,7 +64,7 @@ public class WaitAreaActivity extends BaseActivity implements Topbar.onTopbarCli
     @Override
     public void onTobbarViewClick(View v) {
         int id = v.getId();
-        if (id == com.ruanyun.chezhiyi.commonlib.R.id.img_btn_left) {
+        if (id == R.id.img_btn_left) {
             finish();
         }
     }

@@ -125,9 +125,9 @@
                         android:textColor="@color/white"
                         android:textSize="36px" />
 
-                    <!--用户数-->
+                    <!--工单数-->
                     <TextView
-                        android:id="@+id/tv_user_number"
+                        android:id="@+id/tv_gongdan_number"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

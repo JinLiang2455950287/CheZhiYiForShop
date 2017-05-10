@@ -238,12 +238,12 @@ public class TiChengPublicActivity extends BaseActivity implements Topbar.onTopb
         LogX.e("提成Yearlist2persenter", tiChengListPublicInfo.toString());
         emptyview.loadSuccuss();
         mRefreshLayout.endRefreshing();
-        if (tiChengListPublicInfo.getResult().size() > 0) {
+//        if (tiChengListPublicInfo.getResult().size() > 0) {
             listData.clear();
             listData = tiChengListPublicInfo.getResult();
             adapter.setDatas(listData);
             adapter.notifyDataSetChanged();
-        }
+//        }
     }
 
     @Override

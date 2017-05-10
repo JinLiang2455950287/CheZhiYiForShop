@@ -74,6 +74,8 @@ public class GongDanActivity extends BaseActivity implements Topbar.onTopbarClic
     private AlertDialog builder;
     private TextView startTime, endTime;
     private boolean isStartTime = false;
+    Calendar c;
+    private int startYear, startMonth, startDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +90,11 @@ public class GongDanActivity extends BaseActivity implements Topbar.onTopbarClic
 
     private void initView() {
         mCalendar = Calendar.getInstance();
+        /*初始化选择时间*/
+        c = Calendar.getInstance();
+        startYear = c.get(Calendar.YEAR);
+        startMonth = c.get(Calendar.MONTH);
+        startDay = c.get(Calendar.DAY_OF_MONTH);
         listData = new ArrayList<>();
         emptyview.bind(mRefreshLayout);
         emptyview.showLoading();
@@ -110,8 +117,8 @@ public class GongDanActivity extends BaseActivity implements Topbar.onTopbarClic
         lvProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(GongDanActivity.this,GongdanDetailActivity.class);
-               intent.putExtra("time",listData.get(position).getCreateTime());
+                Intent intent = new Intent(GongDanActivity.this, GongdanDetailActivity.class);
+                intent.putExtra("time", listData.get(position).getCreateTime());
                 startActivity(intent);
             }
         });
@@ -218,16 +225,16 @@ public class GongDanActivity extends BaseActivity implements Topbar.onTopbarClic
         startTimebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initDatePicker();
                 isStartTime = true;
+                initDatePicker(isStartTime);
             }
         });
 
         endTimebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initDatePicker();
                 isStartTime = false;
+                initDatePicker(isStartTime);
             }
         });
 
@@ -248,27 +255,40 @@ public class GongDanActivity extends BaseActivity implements Topbar.onTopbarClic
     }
 
     @SuppressWarnings("ResourceType")
-    private void initDatePicker() {
-        Calendar c = Calendar.getInstance();
+    private void initDatePicker(boolean isstarttime) {
         // 直接创建一个DatePickerDialog对话框实例，并将它显示出来
-        new DatePickerDialog(GongDanActivity.this, AlertDialog.THEME_HOLO_LIGHT,
-                // 绑定监听器
-                new DatePickerDialog.OnDateSetListener() {
-
-                    @Override
-                    public void onDateSet(DatePicker view, int year,
-                                          int monthOfYear, int dayOfMonth) {
-                        tempTime = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
-                        if (isStartTime) {
+        if (isstarttime) {
+            new DatePickerDialog(GongDanActivity.this, AlertDialog.THEME_HOLO_LIGHT,
+                    // 绑定监听器
+                    new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+                            tempTime = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
                             startTime.setText(tempTime);
-                        } else {
+                            startYear = year;
+                            startMonth = monthOfYear;
+                            startDay = dayOfMonth;
+                        }
+                    }
+                    // 设置初始日期
+                    , c.get(Calendar.YEAR), c.get(Calendar.MONTH),
+                    c.get(Calendar.DAY_OF_MONTH)).show();
+        } else {
+            new DatePickerDialog(GongDanActivity.this, AlertDialog.THEME_HOLO_LIGHT,
+                    // 绑定监听器
+                    new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int startYear,
+                                              int startMonth, int startDay) {
+                            tempTime = startYear + "-" + (startMonth + 1) + "-" + startDay;
                             endTime.setText(tempTime);
                         }
                     }
-                }
-                // 设置初始日期
-                , c.get(Calendar.YEAR), c.get(Calendar.MONTH),
-                c.get(Calendar.DAY_OF_MONTH)).show();
+                    // 设置初始日期
+                    , startYear, startMonth,
+                    startDay).show();
+        }
     }
 
     @Override

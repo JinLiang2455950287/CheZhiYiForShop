@@ -44,7 +44,8 @@ import cn.bingoogolapple.refreshlayout.BGARefreshViewHolder;
  * 销售提成
  * Created by jin on 2017/4/13.
  */
-public class XiaoShouTiChengActivity extends BaseActivity implements Topbar.onTopbarClickListener, TiChengView, TiChengListView, BGARefreshLayout.BGARefreshLayoutDelegate {
+public class XiaoShouTiChengActivity extends BaseActivity implements Topbar.onTopbarClickListener, TiChengView, TiChengListView,
+        BGARefreshLayout.BGARefreshLayoutDelegate {
     @BindView(R.id.topbar)
     Topbar topbar;
     @BindView(R.id.list)

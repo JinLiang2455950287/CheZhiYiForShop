@@ -35,13 +35,14 @@ public class HuiYuanListAdapter extends CommonAdapter<HuiYuanKuaiChaInfo> {
     protected void convert(ViewHolder holder, final HuiYuanKuaiChaInfo item, final int position) {
         AutoUtils.auto(holder.getConvertView());
         CircleImageView userPhoto = holder.getView(R.id.iv_product_photo);
-        String imageUrl = FileUtil.getImageUrl(FileUtil.getImageUrl(item.getUserPhoto()));
+        String imageUrl = FileUtil.getImageUrl(item.getUserPhoto());
         LogX.e("会员快查", item.toString() + imageUrl);
         ImageUtil.loadImage(mContext, imageUrl.trim(), userPhoto, R.drawable.default_img);
 
         holder.setText(R.id.tv_number, item.getLinkTel());
         holder.setText(R.id.tv_name, item.getNickName());
         holder.setText(R.id.tv_detail, item.getCarAllName());
+        holder.setText(R.id.tv_carclass, item.getCarName());
 //        TextView dealwith_btn = holder.getView(R.id.dealwith_btn);
 
         //处理按钮的回掉

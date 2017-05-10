@@ -41,7 +41,6 @@ import com.ruanyun.chezhiyi.commonlib.view.ui.common.AccountMangermentActivity;
 import com.ruanyun.chezhiyi.commonlib.view.ui.common.CaseLibActivity;
 import com.ruanyun.chezhiyi.commonlib.view.ui.common.MyCaseLibActivity;
 import com.ruanyun.chezhiyi.commonlib.view.ui.common.SystemRemindActivity;
-import com.ruanyun.chezhiyi.commonlib.view.ui.common.WebViewActivity;
 import com.ruanyun.chezhiyi.commonlib.view.ui.common.WorkOrderListActivity;
 import com.ruanyun.chezhiyi.commonlib.view.widget.CircleImageView;
 import com.ruanyun.chezhiyi.view.adapter.ShopMyGridItemDecoration;
@@ -101,8 +100,8 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
     TextView tvSalesCommissions;
     @BindView(R.id.tv_my_user_nickname)
     TextView nickname;
-    @BindView(R.id.tv_user_number)
-    TextView tvUserNumber;
+    @BindView(R.id.tv_gongdan_number)
+    TextView tvGongDanNumber;
     @BindView(R.id.refreshlayout)
     SwipeRefreshLayout refreshlayout;
 
@@ -191,7 +190,7 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
     }
 
     //销售提成/施工提成/用户数跳转
-    @OnClick({R.id.tv_push_money, R.id.tv_sales_commissions, R.id.tv_user_number})
+    @OnClick({R.id.tv_push_money, R.id.tv_sales_commissions, R.id.tv_gongdan_number})
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.tv_push_money) {  //施工提成
@@ -200,7 +199,7 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
         } else if (id == R.id.tv_sales_commissions) {  //销售提成
 //            toWebCount(C.CountType.MARKET, mContext, WebViewActivity.XSTC/*"销售提成"*/);
             showActivity(XiaoShouTiChengActivity.class);
-        } else if (id == R.id.tv_user_number) {  // 用户数
+        } else if (id == R.id.tv_gongdan_number) {  // 工单数
 //            toWebCount(C.CountType.NUMBER, mContext, WebViewActivity.YHS/*"用户数"*/);
             showActivity(GongDanShuActivity.class);
         } else {
@@ -445,7 +444,7 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
         refreshlayout.setRefreshing(false);
         tvPushMoney.setText(getText("施工提成\n¥", new BigDecimal(reportInfo.getSgtcAmount()).setScale(2, BigDecimal.ROUND_HALF_UP).toString()));
         tvSalesCommissions.setText(getText("销售提成\n¥", new BigDecimal(reportInfo.getXstcAmount()).setScale(2, BigDecimal.ROUND_HALF_UP).toString()));
-        tvUserNumber.setText(getText("工单数\n", String.valueOf(reportInfo.getUserCount())));
+        tvGongDanNumber.setText(getText("工单数\n", String.valueOf(reportInfo.getUserCount())));
     }
 
     @Override
@@ -453,7 +452,7 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
         refreshlayout.setRefreshing(false);
         tvPushMoney.setText(getText("施工提成\n¥", "0.00"));
         tvSalesCommissions.setText(getText("销售提成\n¥", "0.00"));
-        tvUserNumber.setText(getText("工单数\n", "0"));
+        tvGongDanNumber.setText(getText("工单数\n", "0"));
     }
 
     @Override

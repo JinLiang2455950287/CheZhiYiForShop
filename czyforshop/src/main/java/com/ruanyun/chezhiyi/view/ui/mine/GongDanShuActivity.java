@@ -75,9 +75,10 @@ public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarC
     private MyGongDanPresenter myGongDanPresenter = new MyGongDanPresenter();//列表
 
     private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    private SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM");
     private SimpleDateFormat format2 = new SimpleDateFormat("yyyyMM");
 
-    private String date, endDay;
+    private String date, startDay, endDay;
     private Calendar c = Calendar.getInstance();
 
     @Override
@@ -97,6 +98,7 @@ public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarC
         //获取当前月最后一天
         c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
         endDay = format.format(c.getTime());
+        startDay = format1.format(c.getTime());
 
         tvYear.setText(date.substring(0, 4) + "年");
         tvMonth.setText(date.substring(4, 6) + "月");
@@ -117,7 +119,7 @@ public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarC
                 .onRightImgBtnClick()
                 .setTopbarClickListener(this);
         tiChengPresenter.getTiChengInfo(app.getApiService().getTiChengInfo(app.getCurrentUserNum(), date, 3)); //1:销售提成 2：施工提成
-        myGongDanPresenter.getGongDanMyTongJiInfo(app.getApiService().getMyGongDanList(app.getCurrentUserNum(), date, endDay, app.getCurrentUserNum()));
+        myGongDanPresenter.getGongDanMyTongJiInfo(app.getApiService().getMyGongDanList(app.getCurrentUserNum(), startDay + "-01", endDay, app.getCurrentUserNum()));
     }
 
     private void setAdapter() {
@@ -198,9 +200,11 @@ public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarC
                         LogX.e("工单数", date.substring(0, 4) + dateList.get(options1));
                         tvMonth.setText(dateList.get(options1) + "月");
                         emptyview.showLoading();
-                        date = date.substring(0, 4) + dateList.get(options1);
-                        myGongDanPresenter.getGongDanMyTongJiInfo(app.getApiService().getMyGongDanList(app.getCurrentUserNum(), date, date, date));
-                        tiChengPresenter.getTiChengInfo(app.getApiService().getTiChengInfo(app.getCurrentUserNum(), date, 3)); //1:销售提成 2：施工提成
+                        tiChengPresenter.getTiChengInfo(app.getApiService().getTiChengInfo(app.getCurrentUserNum(), date.substring(0, 4) + dateList.get(options1), 3)); //1:销售提成 2：施工提成
+//                        date = ;
+                        myGongDanPresenter.getGongDanMyTongJiInfo(app.getApiService().getMyGongDanList(app.getCurrentUserNum(), date.substring(0, 4) + "-" + dateList.get(options1) + "-01",
+                                date.substring(0, 4) + "-" + dateList.get(options1) + "-31", app.getCurrentUserNum()));
+
                     }
                 }).setOutSideCancelable(true)//点击外部dismiss default true
                         .setCyclic(true, false, false)//循环与否
@@ -245,11 +249,11 @@ public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarC
     @Override
     public void getGongDanSuccess(MyGongDanInfo ResultBase) {
         LogX.e("工单Mypersenter", ResultBase.getResult().toString());
-        if (ResultBase.getResult().size() > 0) {
-            listData = ResultBase.getResult();
-            adapter.setDatas(listData);
-            adapter.notifyDataSetChanged();
-        }
+//        if (ResultBase.getResult().size() > 0) {
+        listData = ResultBase.getResult();
+        adapter.setDatas(listData);
+        adapter.notifyDataSetChanged();
+//        }
     }
 
     @Override

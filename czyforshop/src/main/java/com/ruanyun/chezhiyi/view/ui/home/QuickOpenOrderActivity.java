@@ -478,7 +478,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                 @Override
                 public void onCompresComplete(HashMap<String, RequestBody> compressResults) {
                     caseMapParams.putAll(compressResults);
-//                    presenter.submitWorkOrder2(caseMapParams);
+                    presenter.submitWorkOrder2(caseMapParams);
                 }
 
                 @Override
@@ -487,7 +487,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
             });
         } else {
 
-//            presenter.submitWorkOrder2(caseMapParams);
+            presenter.submitWorkOrder2(caseMapParams);
         }
     }
 

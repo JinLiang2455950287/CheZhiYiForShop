@@ -13,6 +13,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -30,6 +31,7 @@ public class MyExpandableListKaiDanAdapter extends BaseExpandableListAdapter {
     public Map<String, List<OrderGoodsInfo>> childs;
     private Context mContext;
     private int countTemp = 0;
+    private boolean isSelect;
 
     public MyExpandableListKaiDanAdapter(Context mContext, List<WorkOrderInfo> groups, Map<String, List<OrderGoodsInfo>> childs) {
         this.groups = groups;
@@ -127,7 +129,7 @@ public class MyExpandableListKaiDanAdapter extends BaseExpandableListAdapter {
             vHolder.tv_child = (TextView) convertView.findViewById(R.id.tv_child);
             vHolder.tv_child_detail = (TextView) convertView.findViewById(R.id.tv_child_price_detail);
             vHolder.tvchilddetailtv = (TextView) convertView.findViewById(R.id.tv_child_detailtv);
-            vHolder.cb_service = (CheckBox) convertView.findViewById(R.id.cb_service);
+            vHolder.cb_service = (ImageView) convertView.findViewById(R.id.cb_service);
             vHolder.tv_child_detail_count = (TextView) convertView.findViewById(R.id.tv_child_detail_count);
             vHolder.imbtnSub = (ImageButton) convertView.findViewById(R.id.imbtn_sub);
             vHolder.imbtnadd = (ImageButton) convertView.findViewById(R.id.imbtn_add);
@@ -140,6 +142,7 @@ public class MyExpandableListKaiDanAdapter extends BaseExpandableListAdapter {
             //当convertView不为空时，通过getTag()得到View
             vHolder = (ChildViewHolder) convertView.getTag();
         }
+
         int goodsCount = childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getGoodsCount();
         vHolder.tv_child.setText(childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getGoodsName());
 
@@ -169,15 +172,24 @@ public class MyExpandableListKaiDanAdapter extends BaseExpandableListAdapter {
         }
 
         if (childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).isService()) {
-            vHolder.cb_service.setChecked(true);
+            vHolder.cb_service.setImageResource(R.drawable.checkbox_pressed);
         } else {
-            vHolder.cb_service.setChecked(false);
+            vHolder.cb_service.setImageResource(R.drawable.checkbox_normal);
         }
-        vHolder.cb_service.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        vHolder.cb_service.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).setService(isChecked);
-                LogX.e("expandlechild是否选择", groupPosition + ";" + childPosition + childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).isService() + childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).toString());
+            public void onClick(View v) {
+                isSelect = childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).isService();
+                if (isSelect) {
+                    childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).setService(false);
+                    vHolder.cb_service.setImageResource(R.drawable.checkbox_normal);
+                } else {
+                    childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).setService(true);
+                    vHolder.cb_service.setImageResource(R.drawable.checkbox_pressed);
+                }
+
+                LogX.e("expandlechild是否=选择", groupPosition + ";" + childPosition + childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).isService() + childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).toString());
             }
         });
 
@@ -241,7 +253,7 @@ public class MyExpandableListKaiDanAdapter extends BaseExpandableListAdapter {
         TextView tv_child;
         TextView tv_child_detail;
         TextView tvchilddetailtv;
-        CheckBox cb_service;
+        ImageView cb_service;
         TextView tv_child_detail_count;
         ImageButton imbtnSub;
         ImageButton imbtnadd;

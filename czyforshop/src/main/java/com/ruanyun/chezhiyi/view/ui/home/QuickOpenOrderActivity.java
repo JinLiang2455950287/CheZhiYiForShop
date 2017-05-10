@@ -71,7 +71,6 @@ import static com.ruanyun.chezhiyi.R.id.edt_carnum_input;
 public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar.onTopbarClickListener, CustomerRepMvpView, MyExpandableListKaiDanAdapter.OnPaiGongClickListener
         , MyExpandableListKaiDanAdapter.OnBuyCountClickListener, RYAddPictureView.onPickResultChangedListener {
     public static final int REQ_REC_PLATENUM = 32434;//获取车牌扫描结果
-    public static final int REQ_ADD_UPKEEP = 2345;//添加里程数
 
     @BindView(R.id.topbar)
     Topbar topbar;
@@ -103,8 +102,6 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
     private List<CustomerRepUiModel> workOrderUiList = new ArrayList<>();
 
     private int serviceTypeCount = 0;//服务分类数量
-    private CarMileageParams params;// 修改最新里程数 参数
-    private String upkeep;//  修改最新里程数
     private String carNumber;// 当前的车牌号
     private String plateNumber;
     private boolean textWatcherEnable = true;
@@ -137,18 +134,6 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                         if (!TextUtils.isEmpty(carNumber)) {
                             edtCarnumInput.setText(carNumber);
                             presenter.getScanCustomerInfo(carNumber);
-                        }
-                    }
-                    break;
-
-                case REQ_ADD_UPKEEP://添加里程数
-                    if (data != null) {
-                        upkeep = data.getStringExtra(C.IntentKey.UPDATE_NICKNAME);
-                        if (!TextUtils.isEmpty(upkeep)) {
-                            params = new CarMileageParams();
-                            params.setCarAllName(edtCarnumInput.getText().toString().trim());
-                            params.setCarMileage(upkeep);
-                            presenter.saveCarMileage(app.getApiService().saveCarMileage(app.getCurrentUserNum(), params));
                         }
                     }
                     break;
@@ -188,6 +173,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                     goodsInfoTemp.setOrderGoodsDetailNum(infoTemp.getProductSpecificat());
                     goodsInfoTemp.setSgtcAmount(infoTemp.getSgtcje().doubleValue());
                     goodsInfoTemp.setAmount(new BigDecimal(infoTemp.getSalePrice()));
+                    goodsInfoTemp.setService(true);
                     goodsInfoTemp.setIsDaiXiaDan(1);
                     goodsInfoTemp.setXstcAmount(infoTemp.getXstcje().doubleValue());
                     LogX.e("1522goodsInfoTempif", goodsInfoTemp.toString());
@@ -204,6 +190,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                     goodsInfoTemp.setSgtcAmount(infoTemp.getSgtcje().doubleValue());
                     goodsInfoTemp.setAmount(new BigDecimal(infoTemp.getSalePrice()));
                     goodsInfoTemp.setIsDaiXiaDan(1);
+                    goodsInfoTemp.setService(true);
                     goodsInfoTemp.setXstcAmount(infoTemp.getXstcje().doubleValue());
                     LogX.e("1522infoTemp", infoTemp.toString());
                     LogX.e("1522goodsInfoTempNew", goodsInfoTemp.toString());
@@ -553,6 +540,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
     public void onScanCarBookingSuccess(CarBookingInfo carBookingInfo) {
         LogX.e("服务标签", carBookingInfo.toString());
         this.carBookingInfo = carBookingInfo;
+
         updateView();
         AppointmentInfo makeInfo = carBookingInfo.getMakeInfo();
         if (makeInfo != null) {

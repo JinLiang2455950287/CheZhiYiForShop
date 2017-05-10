@@ -1,5 +1,7 @@
 package com.ruanyun.chezhiyi.commonlib.model;
 
+import java.math.BigDecimal;
+
 /**
  * Created by czy on 2017/4/6.
  * 获取会员余额
@@ -21,7 +23,7 @@ public class CustomerAccountModel {
      * userNum : sys40830000010909
      */
 
-    private int accountBalance;
+    private BigDecimal accountBalance;
     private String flag1;
     private String flag2;
     private String flag3;
@@ -32,11 +34,11 @@ public class CustomerAccountModel {
     private int userLevel;
     private String userNum;
 
-    public int getAccountBalance() {
+    public BigDecimal getAccountBalance() {
         return accountBalance;
     }
 
-    public void setAccountBalance(int accountBalance) {
+    public void setAccountBalance(BigDecimal accountBalance) {
         this.accountBalance = accountBalance;
     }
 

@@ -249,7 +249,7 @@ public class JieSuanAreaFragment extends RefreshBaseFragment implements JieSuanA
     @Override
     public void getRemainSuccess(CustomerAccountModel customerAccount) {
         LogX.e("获取会员余额", customerAccount.toString());
-        dialogEducation(customerAccount.getAccountBalance());
+        dialogEducation(customerAccount.getAccountBalance().intValue());
     }
 
     @Override

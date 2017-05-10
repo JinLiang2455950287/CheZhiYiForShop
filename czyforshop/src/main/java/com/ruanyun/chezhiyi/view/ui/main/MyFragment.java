@@ -88,8 +88,6 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
 //    TextView tvMyWorkingCondition;
 //    @BindView(R.id.tv_my_upkeep)
 //    TextView tvMyUpkeep;
-    @BindView(R.id.rl_person_info)
-    RelativeLayout rlPersonInfo;
     @BindView(R.id.tv_my_type)
     TextView tv_my_type;
     @BindView(R.id.flow_view)
@@ -383,7 +381,7 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
     /**
      * 跳转 账户管理界面
      */
-    @OnClick(R.id.rl_person_info)
+    @OnClick(R.id.iv_my_user_photo)
     public void onClick() {
         showActivity(AccountMangermentActivity.class);
     }

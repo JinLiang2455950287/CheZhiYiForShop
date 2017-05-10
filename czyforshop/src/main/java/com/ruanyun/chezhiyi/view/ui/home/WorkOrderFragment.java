@@ -32,6 +32,7 @@ import com.ruanyun.chezhiyi.commonlib.model.WorkOrderInfo;
 import com.ruanyun.chezhiyi.commonlib.model.params.MyWorkOrderParams;
 import com.ruanyun.chezhiyi.commonlib.presenter.CustomerAccountPresenter;
 import com.ruanyun.chezhiyi.commonlib.presenter.SubmitWorkOrderPresenter;
+import com.ruanyun.chezhiyi.commonlib.util.AppUtility;
 import com.ruanyun.chezhiyi.commonlib.util.C;
 import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.util.NoDoubleItemClicksListener;
@@ -210,6 +211,7 @@ public class WorkOrderFragment extends RefreshBaseFragment implements AwaitOrCle
 
     @Override
     public void onTakeOrderClick(WorkOrderInfo workOrderInfo, int positionData) {
+        showLoading();
         position = positionData;
         LogX.e("WorkOrderInfo", workOrderInfo.toString());
         workOderInfoitem = workOrderInfo;
@@ -227,7 +229,7 @@ public class WorkOrderFragment extends RefreshBaseFragment implements AwaitOrCle
     }
 
     //结算方式dialog
-    private void dialogEducation(int remainMoney) {
+    private void dialogEducation(double remainMoney) {
 
         final AlertDialog builder = new AlertDialog.Builder(getActivity(), R.style.Dialog).create(); // 先得到构造器
         builder.show();
@@ -295,7 +297,8 @@ public class WorkOrderFragment extends RefreshBaseFragment implements AwaitOrCle
     @Override
     public void getRemainSuccess(CustomerAccountModel customerAccount) {
         LogX.e("获取会员余额", customerAccount.toString());
-        dialogEducation(customerAccount.getAccountBalance());
+        dissMissLoading();
+        dialogEducation(customerAccount.getAccountBalance().doubleValue());
     }
 
     @Override

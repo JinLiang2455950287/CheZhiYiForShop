@@ -4,12 +4,12 @@
     android:layout_height="wrap_content"
     android:background="@color/white">
 
-    <CheckBox
+    <ImageView
         android:id="@+id/cb_service"
-        style="@style/CustomCheckboxGrayTheme"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginLeft="10dp" />
+        android:layout_marginLeft="10dp"
+        android:scaleType="center" />
 
     <TextView
         android:id="@+id/tv_child"
@@ -90,7 +90,7 @@
         android:layout_height="1dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/xuxian_png"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 
     <View

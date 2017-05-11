@@ -56,7 +56,7 @@ public class JieSuanAreaAdapter extends CommonAdapter<WorkOrderInfo> {
         TextView tvAwaitTimeOrMoney = holder.getView(R.id.tv_await_time_or_money);//等候时长或结算金额
         TextView tvTotalMoney = holder.getView(R.id.tv_await_total_money);//应付结算金额
         tvAwaitTimeOrMoney.setText("总计：¥" + item.getTotalAmount());
-        tvTotalMoney.setText("应付金额：¥" + item.getTotalAmount());
+        tvTotalMoney.setText("应付金额：¥" + item.getDxdAmount());
         tvTakeOrder.setVisibility(View.VISIBLE);
 
         tvTakeOrder.setOnClickListener(new View.OnClickListener() {

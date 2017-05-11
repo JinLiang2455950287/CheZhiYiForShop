@@ -25,7 +25,7 @@ public class WorkOrderGoodsAdapter extends CommonAdapter<OrderGoodsInfo> {
     @Override
     protected void convert(ViewHolder viewHolder, OrderGoodsInfo goodsInfo, int position) {
         LogX.e("WorkOrderGoodsAdapter", goodsInfo.toString());
-        viewHolder.setText(R.id.tv_goods_name, goodsInfo.getGoodsName() + "  ×" +goodsInfo.getTotalCount());
+        viewHolder.setText(R.id.tv_goods_name, goodsInfo.getGoodsName() + "  ×" + goodsInfo.getTotalCount());
         if (goodsInfo.getIsDaiXiaDan() == 1) {  // 代下单  显示 （代）
             viewHolder.setVisible(R.id.tv_goods_add, true);
         } else {

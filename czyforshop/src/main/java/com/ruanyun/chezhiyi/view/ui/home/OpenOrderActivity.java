@@ -183,7 +183,6 @@ public class OpenOrderActivity extends AutoLayoutActivity implements View.OnFocu
                         Intent intent = new Intent(OpenOrderActivity.this, QuickOpenOrderActivity.class);
                         intent.putExtra("plateNumber", haopai.toString());
                         startActivity(intent);
-                        finish();
                     } else {
                         Toast.makeText(OpenOrderActivity.this, "输入错误", Toast.LENGTH_SHORT).show();
                     }

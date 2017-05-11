@@ -174,7 +174,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                     goodsInfoTemp.setSgtcAmount(infoTemp.getSgtcje().doubleValue());
                     goodsInfoTemp.setAmount(new BigDecimal(infoTemp.getSalePrice()));
                     goodsInfoTemp.setService(true);
-                    goodsInfoTemp.setIsDaiXiaDan(1);
+                    goodsInfoTemp.setIsDaiXiaDan(2);
                     goodsInfoTemp.setXstcAmount(infoTemp.getXstcje().doubleValue());
                     LogX.e("1522goodsInfoTempif", goodsInfoTemp.toString());
                     childsListTemp.add(goodsInfoTemp);
@@ -189,7 +189,7 @@ public class QuickOpenOrderActivity extends AutoLayoutActivity implements Topbar
                     goodsInfoTemp.setOrderGoodsDetailNum(infoTemp.getProductSpecificat());
                     goodsInfoTemp.setSgtcAmount(infoTemp.getSgtcje().doubleValue());
                     goodsInfoTemp.setAmount(new BigDecimal(infoTemp.getSalePrice()));
-                    goodsInfoTemp.setIsDaiXiaDan(1);
+                    goodsInfoTemp.setIsDaiXiaDan(2);
                     goodsInfoTemp.setService(true);
                     goodsInfoTemp.setXstcAmount(infoTemp.getXstcje().doubleValue());
                     LogX.e("1522infoTemp", infoTemp.toString());

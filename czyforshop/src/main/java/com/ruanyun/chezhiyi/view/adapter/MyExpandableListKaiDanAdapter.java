@@ -160,6 +160,7 @@ public class MyExpandableListKaiDanAdapter extends BaseExpandableListAdapter {
             vHolder.tvchilddetailtv.setVisibility(View.VISIBLE);
             vHolder.tv_child_detail.setVisibility(View.GONE);
             if (goodsCount == 0) {
+                childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).setGoodsCount(1);
                 vHolder.tvchilddetailtv.setText("¥ " + childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getAmount() + "×1");
             } else {
                 vHolder.tvchilddetailtv.setText("¥ " + childs.get(groups.get(groupPosition).getProjectNum()).get(childPosition).getAmount() + "×" + goodsCount);

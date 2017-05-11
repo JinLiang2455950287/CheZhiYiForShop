@@ -108,10 +108,11 @@ public class BusinessToatalTDFragment extends BaseFragment implements HuiYuanYin
         tvGongdanMoney.setText("¥" + menDianYinYeEInfo.getResult().get(0).getWorkAmount());
         tvShangcheng.setText("¥" + menDianYinYeEInfo.getResult().get(0).getSrxmXsAmount());
         tvRepay.setText("¥" + menDianYinYeEInfo.getResult().get(0).getSrxmTkAmount());
-        tvHuiyuanreain.setText("¥" + menDianYinYeEInfo.getResult().get(0).getSrxmTkAmount());
+        tvHuiyuanreain.setText("¥" + menDianYinYeEInfo.getResult().get(0).getSkfsHykAmount());
         tvCashpay.setText("¥" + menDianYinYeEInfo.getResult().get(0).getSkfsXjAmount());
         tvWeixinpay.setText("¥" + menDianYinYeEInfo.getResult().get(0).getSkfsWxAmount());
         tvZhifubaopay.setText("¥" + menDianYinYeEInfo.getResult().get(0).getSkfsZfbAmount());
+
     }
 
     @Override

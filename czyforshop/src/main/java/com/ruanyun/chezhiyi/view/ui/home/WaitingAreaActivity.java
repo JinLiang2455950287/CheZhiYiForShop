@@ -28,6 +28,7 @@ import com.ruanyun.chezhiyi.commonlib.presenter.LeisureStationPresenter;
 import com.ruanyun.chezhiyi.commonlib.util.AppUtility;
 import com.ruanyun.chezhiyi.commonlib.util.C;
 import com.ruanyun.chezhiyi.commonlib.util.ImageUtil;
+import com.ruanyun.chezhiyi.commonlib.util.LogX;
 import com.ruanyun.chezhiyi.commonlib.view.WaitingAreaDetailsMvpView;
 import com.ruanyun.chezhiyi.commonlib.view.ui.common.WorkOrderListActivity;
 import com.ruanyun.chezhiyi.commonlib.view.widget.LabelFlowLayout;
@@ -332,6 +333,7 @@ public class WaitingAreaActivity extends AutoLayoutActivity implements Topbar.on
      */
     @Override
     public void showWorkorderGoodsSuccess(ResultBase<List<OrderGoodsInfo>> workBayInfoResultBase) {
+        LogX.e("获取工单商品成功",workBayInfoResultBase.toString());
         mWorkOrderGoodsList = workBayInfoResultBase.getObj();
         adapter.setDatas(mWorkOrderGoodsList);
         AppUtility.measuredListHeight(lvServiceItem);

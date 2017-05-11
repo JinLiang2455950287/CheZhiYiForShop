@@ -207,7 +207,7 @@
                     android:drawableLeft="@drawable/mendian_huiyuanyue"
                     android:drawablePadding="5dp"
                     android:gravity="center_vertical"
-                    android:text="会员卡支付" />
+                    android:text="余额支付" />
 
                 <TextView
                     android:id="@+id/tv_huiyuanreain"

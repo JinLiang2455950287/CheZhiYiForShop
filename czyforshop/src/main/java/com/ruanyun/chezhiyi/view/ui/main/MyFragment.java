@@ -465,8 +465,40 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
         return spb;
     }
 
+    /*当碎片显示的时候*/
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden) {
+//            User user = app.getUser();
+//            //标签
+//            String workStatus = DbHelper.getInstance().getParentName(user.getWorkStatus(), C
+//                    .ParentCode.WORK_STATUS);
+//            String userLabel = user.getLabelCode();
+//            List<String> allLabels = new ArrayList<>();
+//            allLabels.add(workStatus);
+//            List<String> label = Arrays.asList(userLabel.split(","));
+//            for (int i = 0; i < label.size(); i++) {
+//                allLabels.add(DbHelper.getInstance().getParentName(label.get(i), C.ParentCode.USER_LABEL));
+//            }
+//            tv_my_type.setText(allLabels.get(0).toString());
+        }
+    }
+
     @Override
     public void onRefresh() {
+        User user = app.getUser();
+        //标签
+        String workStatus = DbHelper.getInstance().getParentName(user.getWorkStatus(), C
+                .ParentCode.WORK_STATUS);
+        String userLabel = user.getLabelCode();
+        List<String> allLabels = new ArrayList<>();
+        allLabels.add(workStatus);
+        List<String> label = Arrays.asList(userLabel.split(","));
+        for (int i = 0; i < label.size(); i++) {
+            allLabels.add(DbHelper.getInstance().getParentName(label.get(i), C.ParentCode.USER_LABEL));
+        }
+        tv_my_type.setText(allLabels.get(0).toString());
         getPersonOrder();//获取销售提成，施工提成
     }
 }

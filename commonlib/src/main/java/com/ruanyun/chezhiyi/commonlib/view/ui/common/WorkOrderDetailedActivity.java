@@ -79,6 +79,7 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements Hom
     private View listHeadView;
     private String refuseRemake = "";
     private WorkOrderGoodsAdapter adapter;//商品的集合
+
 //    private HomePerssionPresenter homePerssionPresenter = new HomePerssionPresenter();//权限表
 
     @Override
@@ -430,9 +431,12 @@ public class WorkOrderDetailedActivity extends AutoLayoutActivity implements Hom
      */
     @Override
     public void updateStatusSuccess() {
+        if (updateStatusParams.getWorkOrderStatus().equals(WorkOrderRecordInfo.WORK_ORDER_STATUS_CONFORMITY)) {
+           /*质检通过后，改变技师状态*/
+            app.getUser().setWorkStatus(C.WORKSTATE_NOT_BUSY);
+            LogX.e("========", app.getUser().getWorkStatus());
+        }
         getData();//获取工单详情
-        /*质检通过后，改变技师状态*/
-        app.getUser().setWorkStatus(C.WORKSTATE_NOT_BUSY);
     }
 
     @Override

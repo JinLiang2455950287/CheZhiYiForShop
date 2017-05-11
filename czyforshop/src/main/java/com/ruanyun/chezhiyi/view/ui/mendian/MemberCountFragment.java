@@ -74,7 +74,7 @@ public class MemberCountFragment extends BaseFragment implements HuiYuanTongJiVi
                 com.ruanyun.chezhiyi.commonlib.R.color.holo_orange_light, com.ruanyun.chezhiyi.commonlib.R.color.holo_red_light);
         refreshlayout.setOnRefreshListener(this);
         //手动调用,通知系统去测量
-        refreshlayout.measure(0,0);
+        refreshlayout.measure(0, 0);
         refreshlayout.setRefreshing(true);
     }
 

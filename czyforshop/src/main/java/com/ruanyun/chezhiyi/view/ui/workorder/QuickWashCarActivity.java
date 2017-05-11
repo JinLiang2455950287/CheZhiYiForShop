@@ -18,6 +18,7 @@ import com.ruanyun.chezhiyi.commonlib.model.User;
 import com.ruanyun.chezhiyi.commonlib.model.params.SaveWashCarParams;
 import com.ruanyun.chezhiyi.commonlib.presenter.QuikWashCarPresenter;
 import com.ruanyun.chezhiyi.commonlib.util.AppUtility;
+import com.ruanyun.chezhiyi.commonlib.util.C;
 import com.ruanyun.chezhiyi.commonlib.util.StringUtil;
 import com.ruanyun.chezhiyi.commonlib.view.QuikWashCarMvpView;
 import com.ruanyun.chezhiyi.commonlib.view.widget.Topbar;
@@ -104,7 +105,7 @@ public class QuickWashCarActivity extends AutoLayoutActivity implements Topbar.o
                 .setBackBtnEnable(true)
                 .onBackBtnClick()
                 .setTopbarClickListener(this);
-        chooseTechnicianDialog=new ChooseTechnicianDialog();
+        chooseTechnicianDialog = new ChooseTechnicianDialog();
         chooseTechnicianDialog.setChooseTechinicanResult(this);
 //        edtCarnumInput.setText("皖NRB167");
         edtCarnumInput.setText("");
@@ -124,7 +125,7 @@ public class QuickWashCarActivity extends AutoLayoutActivity implements Topbar.o
                 }
                 break;
             case R.id.tv_choose_technician:
-                chooseTechnicianDialog.showDlg(currentSelcetTechnician,getSupportFragmentManager());
+                chooseTechnicianDialog.showDlg(currentSelcetTechnician, getSupportFragmentManager());
                 break;
             case R.id.bt_submit:
                 sumbit();
@@ -153,11 +154,11 @@ public class QuickWashCarActivity extends AutoLayoutActivity implements Topbar.o
      * @date 16/11/3 下午2:03
      */
     private void sumbit() {
-        if(TextUtils.isEmpty(edtCarnumInput.getText().toString())){
+        if (TextUtils.isEmpty(edtCarnumInput.getText().toString())) {
             showToast("请填写车牌信息");
             return;
         }
-        if(currentSelcetTechnician == null){
+        if (currentSelcetTechnician == null) {
             showToast("请选择技师");
             return;
         }
@@ -166,7 +167,7 @@ public class QuickWashCarActivity extends AutoLayoutActivity implements Topbar.o
             showToast("手机号不合法");
             return;
         }
-        params.setJsUserNum( currentSelcetTechnician.getUserNum() );
+        params.setJsUserNum(currentSelcetTechnician.getUserNum());
         params.setPhone(phone);
         params.setRemark(editServerRemark.getText().toString());
         params.setServicePlateNumber(edtCarnumInput.getText().toString());
@@ -199,11 +200,13 @@ public class QuickWashCarActivity extends AutoLayoutActivity implements Topbar.o
     }
 
     /**
-     * 提交洗车工单成功回调
+     * 提交工单成功回调
      **/
     @Override
     public void submitWashCarSuccess() {
-      finish();
+              /*开单成功后，修改技师状态为繁忙*/
+        app.getUser().setWorkStatus(C.WORKSTATE_BUSY);
+        finish();
     }
 
     /**
@@ -213,7 +216,7 @@ public class QuickWashCarActivity extends AutoLayoutActivity implements Topbar.o
      **/
     @Override
     public void onFreeTechnicanResult(List<User> technicians) {
-       chooseTechnicianDialog.updateList(technicians);
+        chooseTechnicianDialog.updateList(technicians);
     }
 
     /**
@@ -223,13 +226,13 @@ public class QuickWashCarActivity extends AutoLayoutActivity implements Topbar.o
      **/
     @Override
     public void onScanCarBookingResult(CarBookingInfo carBookingInfo) {
-        this.carBookingInfo=carBookingInfo;
-        edtAppointePhone.setText(carBookingInfo.getCustomerUser()==null?"":carBookingInfo.getCustomerUser().getLoginName());
+        this.carBookingInfo = carBookingInfo;
+        edtAppointePhone.setText(carBookingInfo.getCustomerUser() == null ? "" : carBookingInfo.getCustomerUser().getLoginName());
     }
 
     @Override
     public void onChooseTechinicanResult(User user) {
-        this.currentSelcetTechnician=user;
+        this.currentSelcetTechnician = user;
         tvChooseTechnician.setText(user.getNickName());
     }
 

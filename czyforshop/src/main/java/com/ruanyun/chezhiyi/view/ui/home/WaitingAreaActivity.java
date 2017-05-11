@@ -87,7 +87,9 @@ public class WaitingAreaActivity extends AutoLayoutActivity implements Topbar.on
     private LeisureStationPresenter presenter = new LeisureStationPresenter();
     private OrderReceivingParams params = new OrderReceivingParams();//接单Params
     private WaitionAreaServiceGoddsAdapter adapter;//服务项目商品列表
-    /**服务项目商品集合*/
+    /**
+     * 服务项目商品集合
+     */
     private List<OrderGoodsInfo> mWorkOrderGoodsList;
 
     @Override
@@ -124,10 +126,10 @@ public class WaitingAreaActivity extends AutoLayoutActivity implements Topbar.on
         ImageUtil.loadImage(mContext, "url", ivCarPhoto, R.drawable.default_img);
         tvCarNumber.setText(mWorkOrderInfo.getServicePlateNumber());//车牌号
         tvAwaitTimeOrMoney.setText(awaitTime(mWorkOrderInfo.getCreateTime()));//等候时间
-        tvUserName.setText(mWorkOrderInfo.getUser()==null? "": mWorkOrderInfo.getUser().getNickName());//用户姓名
+        tvUserName.setText(mWorkOrderInfo.getUser() == null ? "" : mWorkOrderInfo.getUser().getNickName());//用户姓名
         // TODO: 2016/10/29  客户备注
         tvUserRemark.setVisibility(View.GONE);
-        tvUserRemark.setText("客户备注：" );//客户备注
+        tvUserRemark.setText("客户备注：");//客户备注
         tvWorkorderNumber.setText(mWorkOrderInfo.getWorkOrderNum());
         if (false) {//等技师
             tvServiceGongwei.setText("1号维修工位");
@@ -205,14 +207,14 @@ public class WaitingAreaActivity extends AutoLayoutActivity implements Topbar.on
                 break;
             case R.id.btn_order_receiving:
                 User user = app.getUser();
-                if (user ==null) return;
+                if (user == null) return;
                 if (user.getIsOrder() != 1) {
                     AppUtility.showToastMsg("您没有权限接单");
                     return;
                 }
                 if (TextUtils.isEmpty(user.getWorkStatus())) {
                     return;
-                } else if (user.getWorkStatus().equals(C.WORKSTATE_BUSY) ) {
+                } else if (user.getWorkStatus().equals(C.WORKSTATE_BUSY)) {
                     AppUtility.showToastMsg("工作中技师不可接单");
                     return;
                 }
@@ -243,11 +245,11 @@ public class WaitingAreaActivity extends AutoLayoutActivity implements Topbar.on
      * 接单
      */
     private void orderReceiving() {
-        if(workBayInfo == null){
+        if (workBayInfo == null) {
             AppUtility.showToastMsg("请选择工位");
             return;
         }
-        params.setUserName(app.getUser()==null?"":app.getUser().getNickName());
+        params.setUserName(app.getUser() == null ? "" : app.getUser().getNickName());
         params.setWorkOrderNum(mWorkOrderInfo.getWorkOrderNum());
         params.setWorkbayInfoNum(workBayInfo.getWorkbayInfoNum());
         params.setWorkbayInfoName(workBayInfo.getWorkbayName());
@@ -261,7 +263,7 @@ public class WaitingAreaActivity extends AutoLayoutActivity implements Topbar.on
     private void showPopwindow() {
         popwindow = new WorkLocationPopWindow(mContext, getView(R.id.rl_waiting_area), workLocationList,
                 workbayInfoNum);
-        if (workLocationList!=null&&workLocationList.size() > 0) {
+        if (workLocationList != null && workLocationList.size() > 0) {
             popwindow.setTitle("请选择工位");
         }
         popwindow.setOnPopupClickListener(this);
@@ -289,11 +291,11 @@ public class WaitingAreaActivity extends AutoLayoutActivity implements Topbar.on
         long createTime = AppUtility.date2TimeStamp(createTimeStr, "yyyy-MM-dd HH:mm:ss");
         long currentTime = AppUtility.date2TimeStamp(AppUtility.getCurrentDateAndTime(), "yyyy-MM-dd HH:mm:ss");
         long awaitTime = currentTime - createTime;
-        String str = "已等候："+String.format("%.1f", awaitTime / 1000.0 / 60 / 60)+"H";
+        String str = "已等候：" + String.format("%.1f", awaitTime / 1000.0 / 60 / 60) + "H";
         SpannableString spStr = new SpannableString(str);
-        spStr.setSpan(new RelativeSizeSpan(1.3f),4,str.length()-1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-        spStr.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext,R.color.bg_tangerine))
-                ,4,str.length()-1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        spStr.setSpan(new RelativeSizeSpan(1.3f), 4, str.length() - 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        spStr.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.bg_tangerine))
+                , 4, str.length() - 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         return spStr;
     }
 
@@ -314,6 +316,7 @@ public class WaitingAreaActivity extends AutoLayoutActivity implements Topbar.on
 
     /**
      * 获取空闲工位成功
+     *
      * @param workBayInfoResultBase
      */
     @Override
@@ -324,6 +327,7 @@ public class WaitingAreaActivity extends AutoLayoutActivity implements Topbar.on
 
     /**
      * 获取工单商品成功
+     *
      * @param workBayInfoResultBase
      */
     @Override
@@ -335,10 +339,13 @@ public class WaitingAreaActivity extends AutoLayoutActivity implements Topbar.on
 
     /**
      * 接单成功
+     *
      * @param resultBase
      */
     @Override
     public void showOrderReceivingSuccess(ResultBase resultBase) {
+          /*接单成功后，修改技师状态为繁忙*/
+        app.getUser().setWorkStatus(C.WORKSTATE_BUSY);
         // TODO 跳转到服务工单
         Intent intent = new Intent(mContext, WorkOrderListActivity.class);
         intent.putExtra("item", 1);

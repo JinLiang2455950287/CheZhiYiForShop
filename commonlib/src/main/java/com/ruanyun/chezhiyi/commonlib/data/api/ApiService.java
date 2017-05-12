@@ -361,7 +361,7 @@ public interface ApiService {
      * 我的模块 工单list 提成
      */
     @POST(C.ApiUrl.URL_MENGDIAN_GONGDANDETAIL)
-    Call<ResultBase<MyGongDanInfo>> getMyGongDanList(@Path("userNum") String userNum, @Query("startDate") String startDate, @Query("reportDate") String reportDate, @Query("createUserNum") String CreateUserNum);
+    Call<ResultBase<MyGongDanInfo>> getMyGongDanList(@Path("userNum") String userNum, @Query("startDate") String startDate, @Query("reportDate") String reportDate, @Query("createUserNum") String CreateUserNum, @Query("pageNum") int pageNum);
 
     /**
      * 门店统计 会员统计
@@ -598,7 +598,7 @@ public interface ApiService {
 
     @Multipart
     @POST(C.ApiUrl.URL_SAVE_RECEPTION_WORKORDER)
-    Call<ResultBase> saveReceptionWorkorder2(@Path("userNum") String userNum,  @PartMap HashMap<String, RequestBody> bodyMap);
+    Call<ResultBase> saveReceptionWorkorder2(@Path("userNum") String userNum, @PartMap HashMap<String, RequestBody> bodyMap);
 
     /**
      * 工单详情

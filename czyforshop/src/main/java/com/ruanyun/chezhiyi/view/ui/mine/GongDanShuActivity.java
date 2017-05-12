@@ -78,8 +78,10 @@ public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarC
     private SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM");
     private SimpleDateFormat format2 = new SimpleDateFormat("yyyyMM");
 
-    private String date, startDay, endDay;
+    private String date, startDay, endDay, selectMonth;
     private Calendar c = Calendar.getInstance();
+
+    private int pageNumber = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +101,7 @@ public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarC
         c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
         endDay = format.format(c.getTime());
         startDay = format1.format(c.getTime());
-
+        selectMonth = date.substring(4, 6);
         tvYear.setText(date.substring(0, 4) + "年");
         tvMonth.setText(date.substring(4, 6) + "月");
         for (int i = 0; i < 12; i++) {
@@ -119,7 +121,7 @@ public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarC
                 .onRightImgBtnClick()
                 .setTopbarClickListener(this);
         tiChengPresenter.getTiChengInfo(app.getApiService().getTiChengInfo(app.getCurrentUserNum(), date, 3)); //1:销售提成 2：施工提成
-        myGongDanPresenter.getGongDanMyTongJiInfo(app.getApiService().getMyGongDanList(app.getCurrentUserNum(), startDay + "-01", endDay, app.getCurrentUserNum()));
+        myGongDanPresenter.getGongDanMyTongJiInfo(app.getApiService().getMyGongDanList(app.getCurrentUserNum(), startDay + "-01", endDay, app.getCurrentUserNum(), 1));
     }
 
     private void setAdapter() {
@@ -153,41 +155,17 @@ public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarC
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
         // 在这里加载更多数据，或者更具产品需求实现上拉刷新也可以
         tiChengPresenter.getTiChengInfo(app.getApiService().getTiChengInfo(app.getCurrentUserNum(), date, 3)); //1:销售提成 2：施工提成
-        myGongDanPresenter.getGongDanMyTongJiInfo(app.getApiService().getMyGongDanList(app.getCurrentUserNum(), date, date, app.getCurrentUserNum()));
+        myGongDanPresenter.getGongDanMyTongJiInfo(app.getApiService().getMyGongDanList(app.getCurrentUserNum(), date.substring(0, 4) + "-" + selectMonth + "-01",
+                date.substring(0, 4) + "-" + selectMonth + "-31", app.getCurrentUserNum(), 1));
     }
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         // 在这里加载更多数据，或者更具产品需求实现上拉刷新也可以
+        myGongDanPresenter.getGongDanMyTongJiInfo(app.getApiService().getMyGongDanList(app.getCurrentUserNum(), date.substring(0, 4) + "-" + selectMonth + "-01",
+                date.substring(0, 4) + "-" + selectMonth + "-31", app.getCurrentUserNum(), pageNumber));
+        return true;
 
-        if (true) {
-            // 如果网络可用，则异步加载网络数据，并返回 true，显示正在加载更多
-            new AsyncTask<Void, Void, Void>() {
-
-                @Override
-                protected Void doInBackground(Void... params) {
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    return null;
-                }
-
-                @Override
-                protected void onPostExecute(Void aVoid) {
-                    // 加载完毕后在 UI 线程结束加载更多
-                    mRefreshLayout.endLoadingMore();
-//                    mAdapter.addDatas(DataEngine.loadMoreData());
-                }
-            }.execute();
-
-            return true;
-        } else {
-            // 网络不可用，返回 false，不显示正在加载更多
-            Toast.makeText(this, "网络不可用", Toast.LENGTH_SHORT).show();
-            return false;
-        }
     }
 
     @OnClick({R.id.li_month})
@@ -198,12 +176,13 @@ public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarC
                     @Override
                     public void onOptionsSelect(int options1, int option2, int options3, View v) {
                         LogX.e("工单数", date.substring(0, 4) + dateList.get(options1));
-                        tvMonth.setText(dateList.get(options1) + "月");
+                        selectMonth = dateList.get(options1);
+                        date = date.substring(0, 4) + selectMonth;
+                        tvMonth.setText(selectMonth + "月");
                         emptyview.showLoading();
                         tiChengPresenter.getTiChengInfo(app.getApiService().getTiChengInfo(app.getCurrentUserNum(), date.substring(0, 4) + dateList.get(options1), 3)); //1:销售提成 2：施工提成
-//                        date = ;
-                        myGongDanPresenter.getGongDanMyTongJiInfo(app.getApiService().getMyGongDanList(app.getCurrentUserNum(), date.substring(0, 4) + "-" + dateList.get(options1) + "-01",
-                                date.substring(0, 4) + "-" + dateList.get(options1) + "-31", app.getCurrentUserNum()));
+                        myGongDanPresenter.getGongDanMyTongJiInfo(app.getApiService().getMyGongDanList(app.getCurrentUserNum(), date.substring(0, 4) + "-" + selectMonth + "-01",
+                                date.substring(0, 4) + "-" + selectMonth + "-31", app.getCurrentUserNum(), 1));
 
                     }
                 }).setOutSideCancelable(true)//点击外部dismiss default true
@@ -249,11 +228,18 @@ public class GongDanShuActivity extends BaseActivity implements Topbar.onTopbarC
     @Override
     public void getGongDanSuccess(MyGongDanInfo ResultBase) {
         LogX.e("工单Mypersenter", ResultBase.getResult().toString());
-//        if (ResultBase.getResult().size() > 0) {
-        listData = ResultBase.getResult();
-        adapter.setDatas(listData);
-        adapter.notifyDataSetChanged();
-//        }
+        if (pageNumber == 1) {
+            listData.clear();
+            listData = ResultBase.getResult();
+            adapter.setDatas(listData);
+            adapter.notifyDataSetChanged();
+            mRefreshLayout.endRefreshing();
+        } else {
+            listData.addAll(ResultBase.getResult());
+            mRefreshLayout.endLoadingMore();
+        }
+        ++pageNumber;
+        LogX.e("pageNum", pageNumber + "");
     }
 
     @Override

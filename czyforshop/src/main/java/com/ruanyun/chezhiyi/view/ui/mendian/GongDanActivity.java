@@ -139,7 +139,6 @@ public class GongDanActivity extends BaseActivity implements Topbar.onTopbarClic
         mRefreshLayout.setRefreshViewHolder(refreshViewHolder);
     }
 
-
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
         // 在这里加载更多数据，或者更具产品需求实现上拉刷新也可以

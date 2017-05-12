@@ -78,7 +78,7 @@ public class QualityAreaAdapter extends CommonAdapter<WorkOrderInfo> {
         lp.bottomMargin = 1;
         for (int i = 0; i < 1; i++) {
             TextView view = new TextView(mContext);
-            view.setText(item.getUser() == null ? "" : item.getUser().getNickName());
+            view.setText(item.getProjectName());
             view.setTextColor(Color.rgb(255, 151, 114));
 //                view.setTextColor(Color.WHITE);
             view.setTextSize(TypedValue.COMPLEX_UNIT_PX, 35);

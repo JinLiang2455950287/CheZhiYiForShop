@@ -48,6 +48,7 @@ public class GongdanDetailActivity extends BaseActivity implements Topbar.onTopb
     private List<MenDianGongDanDetailInfo.ResultBean> listData;
     private HuiYuanGongDanDetailPresenter huiYuanGongDanDetailPresenter = new HuiYuanGongDanDetailPresenter();
     private String time;
+    private int pageNum = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,7 @@ public class GongdanDetailActivity extends BaseActivity implements Topbar.onTopb
         setAdapter();
         time = getIntent().getStringExtra("time");
         LogX.e("time", time);
-        huiYuanGongDanDetailPresenter.getGongDanTongJiDtailInfo(app.getApiService().getGongDanDetailInfo(app.getCurrentUserNum(), time, time));
+        huiYuanGongDanDetailPresenter.getGongDanTongJiDtailInfo(app.getApiService().getGongDanDetailInfo(app.getCurrentUserNum(), time, time, 1));
     }
 
     private void initView() {
@@ -102,41 +103,16 @@ public class GongdanDetailActivity extends BaseActivity implements Topbar.onTopb
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
         // 在这里加载更多数据，或者更具产品需求实现上拉刷新也可以
-        huiYuanGongDanDetailPresenter.getGongDanTongJiDtailInfo(app.getApiService().getGongDanDetailInfo(app.getCurrentUserNum(), time, time));
+        pageNum = 1;
+        huiYuanGongDanDetailPresenter.getGongDanTongJiDtailInfo(app.getApiService().getGongDanDetailInfo(app.getCurrentUserNum(), time, time, 1));
     }
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         // 在这里加载更多数据，或者更具产品需求实现上拉刷新也可以
-
-        if (true) {
-            // 如果网络可用，则异步加载网络数据，并返回 true，显示正在加载更多
-            new AsyncTask<Void, Void, Void>() {
-
-                @Override
-                protected Void doInBackground(Void... params) {
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    return null;
-                }
-
-                @Override
-                protected void onPostExecute(Void aVoid) {
-                    // 加载完毕后在 UI 线程结束加载更多
-                    mRefreshLayout.endLoadingMore();
-//                    mAdapter.addDatas(DataEngine.loadMoreData());
-                }
-            }.execute();
-
-            return true;
-        } else {
-            // 网络不可用，返回 false，不显示正在加载更多
-            Toast.makeText(this, "网络不可用", Toast.LENGTH_SHORT).show();
-            return false;
-        }
+        pageNum++;
+        huiYuanGongDanDetailPresenter.getGongDanTongJiDtailInfo(app.getApiService().getGongDanDetailInfo(app.getCurrentUserNum(), time, time, pageNum));
+        return true;
     }
 
     @Override
@@ -153,9 +129,14 @@ public class GongdanDetailActivity extends BaseActivity implements Topbar.onTopb
         LogX.e("工单Detailpersenter", menDianGongDanDetailInfo.toString());
         emptyview.loadSuccuss();
         mRefreshLayout.endLoadingMore();
-        if (menDianGongDanDetailInfo.getResult().size() > 0) {
+        mRefreshLayout.endRefreshing();
+        if (pageNum == 1) {
             listData.clear();
             listData = menDianGongDanDetailInfo.getResult();
+            adapter.setData(listData);
+            adapter.notifyDataSetChanged();
+        } else {
+            listData.addAll(menDianGongDanDetailInfo.getResult());
             adapter.setData(listData);
             adapter.notifyDataSetChanged();
         }

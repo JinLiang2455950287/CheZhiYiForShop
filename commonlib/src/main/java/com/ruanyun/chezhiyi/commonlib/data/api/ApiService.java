@@ -373,13 +373,13 @@ public interface ApiService {
      * 门店统计 工单统计
      */
     @POST(C.ApiUrl.URL_MENGDIAN_GONGDAN)
-    Call<ResultBase<MenDianGongDanInfo>> getMenDianGongDan(@Path("userNum") String userNum, @Query("startDate") String startDate, @Query("reportDate") String reportDate);
+    Call<ResultBase<MenDianGongDanInfo>> getMenDianGongDan(@Path("userNum") String userNum, @Query("startDate") String startDate, @Query("reportDate") String reportDate, @Query("pageNum") int pageNum);
 
     /**
      * 门店统计 工单Detail商品
      */
     @POST(C.ApiUrl.URL_MENGDIAN_GONGDANDETAIL)
-    Call<ResultBase<MenDianGongDanDetailInfo>> getGongDanDetailInfo(@Path("userNum") String userNum, @Query("startDate") String startDate, @Query("reportDate") String reportDate);
+    Call<ResultBase<MenDianGongDanDetailInfo>> getGongDanDetailInfo(@Path("userNum") String userNum, @Query("startDate") String startDate, @Query("reportDate") String reportDate, @Query("pageNum") int pageNum);
 
 
     /**

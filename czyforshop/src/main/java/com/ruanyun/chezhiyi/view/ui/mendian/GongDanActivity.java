@@ -76,6 +76,7 @@ public class GongDanActivity extends BaseActivity implements Topbar.onTopbarClic
     private boolean isStartTime = false;
     Calendar c;
     private int startYear, startMonth, startDay;
+    private int pageNum = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,7 +109,7 @@ public class GongDanActivity extends BaseActivity implements Topbar.onTopbarClic
         startdate = sDateFormat.format(new Date()) + "-01";
         enddate = sDateFormatend.format(new Date());
         LogX.e("日期", startdate + ";" + enddate);
-        huiYuanGongDanPresenter.getGongDanTongJiInfo(app.getApiService().getMenDianGongDan(app.getCurrentUserNum(), startdate, enddate));
+        huiYuanGongDanPresenter.getGongDanTongJiInfo(app.getApiService().getMenDianGongDan(app.getCurrentUserNum(), startdate, enddate, 1));
     }
 
     private void setAdapter() {
@@ -142,41 +143,18 @@ public class GongDanActivity extends BaseActivity implements Topbar.onTopbarClic
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
         // 在这里加载更多数据，或者更具产品需求实现上拉刷新也可以
-        huiYuanGongDanPresenter.getGongDanTongJiInfo(app.getApiService().getMenDianGongDan(app.getCurrentUserNum(), startdate, enddate));
+        pageNum = 1;
+        huiYuanGongDanPresenter.getGongDanTongJiInfo(app.getApiService().getMenDianGongDan(app.getCurrentUserNum(), startdate, enddate, 1));
     }
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         // 在这里加载更多数据，或者更具产品需求实现上拉刷新也可以
+        pageNum++;
+        huiYuanGongDanPresenter.getGongDanTongJiInfo(app.getApiService().getMenDianGongDan(app.getCurrentUserNum(), startdate, enddate, pageNum));
 
-        if (true) {
-            // 如果网络可用，则异步加载网络数据，并返回 true，显示正在加载更多
-            new AsyncTask<Void, Void, Void>() {
+        return true;
 
-                @Override
-                protected Void doInBackground(Void... params) {
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    return null;
-                }
-
-                @Override
-                protected void onPostExecute(Void aVoid) {
-                    // 加载完毕后在 UI 线程结束加载更多
-                    mRefreshLayout.endLoadingMore();
-//                    mAdapter.addDatas(DataEngine.loadMoreData());
-                }
-            }.execute();
-
-            return true;
-        } else {
-            // 网络不可用，返回 false，不显示正在加载更多
-            Toast.makeText(this, "网络不可用", Toast.LENGTH_SHORT).show();
-            return false;
-        }
     }
 
 
@@ -240,7 +218,8 @@ public class GongDanActivity extends BaseActivity implements Topbar.onTopbarClic
         tvcofirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                huiYuanGongDanPresenter.getGongDanTongJiInfo(app.getApiService().getMenDianGongDan(app.getCurrentUserNum(), startTime.getText().toString(), endTime.getText().toString()));
+                pageNum = 1;
+                huiYuanGongDanPresenter.getGongDanTongJiInfo(app.getApiService().getMenDianGongDan(app.getCurrentUserNum(), startTime.getText().toString(), endTime.getText().toString(), 1));
                 builder.dismiss();
             }
         });
@@ -293,14 +272,20 @@ public class GongDanActivity extends BaseActivity implements Topbar.onTopbarClic
     @Override
     public void getGongDanSuccess(MenDianGongDanInfo menDianGongDanInfo) {
         mRefreshLayout.endRefreshing();
+        mRefreshLayout.endLoadingMore();
         emptyview.loadSuccuss();
         LogX.e("工单统计", menDianGongDanInfo.getResult().toString());
-        if (menDianGongDanInfo.getResult().size() > 0) {
+        if (pageNum == 1) {
             listData.clear();
             listData.addAll(menDianGongDanInfo.getResult());
             adapter.setData(listData);
             adapter.notifyDataSetChanged();
+        } else {
+            listData.addAll(menDianGongDanInfo.getResult());
+            adapter.setData(listData);
+            adapter.notifyDataSetChanged();
         }
+
     }
 
     @Override

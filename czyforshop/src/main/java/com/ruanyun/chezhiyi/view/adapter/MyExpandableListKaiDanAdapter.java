@@ -111,8 +111,10 @@ public class MyExpandableListKaiDanAdapter extends BaseExpandableListAdapter {
         gHolder.tv_group.setText(groups.get(groupPosition).getProjectName() + "");
         if (groups.get(groupPosition).getRemark() != null) {
             gHolder.tv_group_detail.setText(groups.get(groupPosition).getRemark());
+        }else {
+            gHolder.tv_group_detail.setText("");
         }
-//        LogX.e("expandlegroup", groups.get(groupPosition).toString());
+        LogX.e("expandlegroup", groups.get(groupPosition).toString());
         return convertView;
     }
 

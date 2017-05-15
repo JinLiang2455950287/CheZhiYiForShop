@@ -112,7 +112,7 @@ public class TiChengPublicActivity extends BaseActivity implements Topbar.onTopb
         c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
         endDay = format.format(c.getTime());
         LogX.e("日期", endDay + "");
-        tiChengDetailListPresenter.getTiChengYearList(app.getApiService().getTiChengDetailYearList(app.getCurrentUserNum(), date + "", date + "",app.getCurrentUserNum(), typePublicTiCheng));
+        tiChengDetailListPresenter.getTiChengYearList(app.getApiService().getTiChengDetailYearList(app.getCurrentUserNum(), date + "", date + "", app.getCurrentUserNum(), typePublicTiCheng));
         tiChengDetailList2Presenter.getTiChengYearList2(app.getApiService().getTiChengDetailYearList2(app.getCurrentUserNum(), date + "", date + "", app.getCurrentUserNum(), typePublicTiCheng));
     }
 
@@ -147,7 +147,7 @@ public class TiChengPublicActivity extends BaseActivity implements Topbar.onTopb
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
         // 在这里加载更多数据，或者更具产品需求实现上拉刷新也可以
-        tiChengDetailListPresenter.getTiChengYearList(app.getApiService().getTiChengDetailYearList(app.getCurrentUserNum(), date + "", date + "",app.getCurrentUserNum(), typePublicTiCheng));
+        tiChengDetailListPresenter.getTiChengYearList(app.getApiService().getTiChengDetailYearList(app.getCurrentUserNum(), date + "", date + "", app.getCurrentUserNum(), typePublicTiCheng));
         tiChengDetailList2Presenter.getTiChengYearList2(app.getApiService().getTiChengDetailYearList2(app.getCurrentUserNum(), date + "", date + "", app.getCurrentUserNum(), typePublicTiCheng));
     }
 
@@ -191,13 +191,13 @@ public class TiChengPublicActivity extends BaseActivity implements Topbar.onTopb
             case R.id.iv_left:
                 emptyview.showLoading();
                 date--;
-                tiChengDetailListPresenter.getTiChengYearList(app.getApiService().getTiChengDetailYearList(app.getCurrentUserNum(), date + "", date + "",app.getCurrentUserNum(), typePublicTiCheng));
+                tiChengDetailListPresenter.getTiChengYearList(app.getApiService().getTiChengDetailYearList(app.getCurrentUserNum(), date + "", date + "", app.getCurrentUserNum(), typePublicTiCheng));
                 tiChengDetailList2Presenter.getTiChengYearList2(app.getApiService().getTiChengDetailYearList2(app.getCurrentUserNum(), date + "", date + "", app.getCurrentUserNum(), typePublicTiCheng));
                 break;
             case R.id.iv_right:
                 date++;
                 emptyview.showLoading();
-                tiChengDetailListPresenter.getTiChengYearList(app.getApiService().getTiChengDetailYearList(app.getCurrentUserNum(), date + "", date + "",app.getCurrentUserNum(), typePublicTiCheng));
+                tiChengDetailListPresenter.getTiChengYearList(app.getApiService().getTiChengDetailYearList(app.getCurrentUserNum(), date + "", date + "", app.getCurrentUserNum(), typePublicTiCheng));
                 tiChengDetailList2Presenter.getTiChengYearList2(app.getApiService().getTiChengDetailYearList2(app.getCurrentUserNum(), date + "", date + "", app.getCurrentUserNum(), typePublicTiCheng));
                 break;
         }
@@ -239,10 +239,10 @@ public class TiChengPublicActivity extends BaseActivity implements Topbar.onTopb
         emptyview.loadSuccuss();
         mRefreshLayout.endRefreshing();
 //        if (tiChengListPublicInfo.getResult().size() > 0) {
-            listData.clear();
-            listData = tiChengListPublicInfo.getResult();
-            adapter.setDatas(listData);
-            adapter.notifyDataSetChanged();
+        listData.clear();
+        listData = tiChengListPublicInfo.getResult();
+        adapter.setDatas(listData);
+        adapter.notifyDataSetChanged();
 //        }
     }
 

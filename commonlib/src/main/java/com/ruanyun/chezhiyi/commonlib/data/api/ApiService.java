@@ -393,7 +393,7 @@ public interface ApiService {
      * 门店统计 服务商品
      */
     @POST(C.ApiUrl.URL_MENGDIAN_SERVICEGOODS)
-    Call<ResultBase<MenDianServiceGoodsInfo>> getServiceGoods(@Path("userNum") String userNum, @Query("startDate") String startDate, @Query("reportDate") String reportDate);
+    Call<ResultBase<MenDianServiceGoodsInfo>> getServiceGoods(@Path("userNum") String userNum, @Query("startDate") String startDate, @Query("reportDate") String reportDate, @Query("pageNum") int pageNum);
 
 
     /**

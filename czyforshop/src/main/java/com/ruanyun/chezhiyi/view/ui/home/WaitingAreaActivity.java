@@ -364,6 +364,7 @@ public class WaitingAreaActivity extends AutoLayoutActivity implements Topbar.on
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
             EventBus.getDefault().postSticky(C.EventKey.UPDATE_WORKER_NUMBER);  //更新界面 工单的数量
+            LogX.e("工单数量","点击了");
             finish();
         }
     }

@@ -47,6 +47,7 @@ public class ServiceGoodsFragment extends BaseFragment implements HuiYuanService
     private SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM");
     private String startdate, enddate;
     private String workOrderStatusString;
+    private int pageNumber = 1;
 
 
     @Override
@@ -70,9 +71,9 @@ public class ServiceGoodsFragment extends BaseFragment implements HuiYuanService
         enddate = sDateFormatend.format(new Date());
         LogX.e("日期", startdate + ";" + enddate);
         if (workOrderStatusString.equals("day")) {
-            huiYuanServicePresenter.getServiceGoodsInfo(app.getApiService().getServiceGoods(app.getCurrentUserNum(), enddate, ""));
+            huiYuanServicePresenter.getServiceGoodsInfo(app.getApiService().getServiceGoods(app.getCurrentUserNum(), enddate, "", 1));
         } else {
-            huiYuanServicePresenter.getServiceGoodsInfo(app.getApiService().getServiceGoods(app.getCurrentUserNum(), startdate, enddate));
+            huiYuanServicePresenter.getServiceGoodsInfo(app.getApiService().getServiceGoods(app.getCurrentUserNum(), startdate, enddate, 1));
         }
     }
 
@@ -98,10 +99,11 @@ public class ServiceGoodsFragment extends BaseFragment implements HuiYuanService
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
         // 在这里加载最新数据
+        pageNumber = 1;
         if (workOrderStatusString.equals("day")) {
-            huiYuanServicePresenter.getServiceGoodsInfo(app.getApiService().getServiceGoods(app.getCurrentUserNum(), enddate, ""));
+            huiYuanServicePresenter.getServiceGoodsInfo(app.getApiService().getServiceGoods(app.getCurrentUserNum(), enddate, "", 1));
         } else {
-            huiYuanServicePresenter.getServiceGoodsInfo(app.getApiService().getServiceGoods(app.getCurrentUserNum(), startdate, enddate));
+            huiYuanServicePresenter.getServiceGoodsInfo(app.getApiService().getServiceGoods(app.getCurrentUserNum(), startdate, enddate, 1));
         }
 
     }
@@ -109,37 +111,14 @@ public class ServiceGoodsFragment extends BaseFragment implements HuiYuanService
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         // 在这里加载更多数据，或者更具产品需求实现上拉刷新也可以
-        if (true) {
-            // 如果网络可用，则异步加载网络数据，并返回 true，显示正在加载更多
-            new AsyncTask<Void, Void, Void>() {
-
-                @Override
-                protected Void doInBackground(Void... params) {
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    return null;
-                }
-
-                @Override
-                protected void onPostExecute(Void aVoid) {
-                    // 加载完毕后在 UI 线程结束加载更多
-                    mRefreshLayout.endLoadingMore();
-//                    mAdapter.addDatas(DataEngine.loadMoreData());
-                }
-            }.execute();
-
-            return true;
+        pageNumber++;
+        if (workOrderStatusString.equals("day")) {
+            huiYuanServicePresenter.getServiceGoodsInfo(app.getApiService().getServiceGoods(app.getCurrentUserNum(), enddate, "", pageNumber));
         } else {
-            // 网络不可用，返回 false，不显示正在加载更多
-            Toast.makeText(getActivity(), "网络不可用", Toast.LENGTH_SHORT).show();
-            return false;
-
+            huiYuanServicePresenter.getServiceGoodsInfo(app.getApiService().getServiceGoods(app.getCurrentUserNum(), startdate, enddate, pageNumber));
         }
+        return true;
     }
-
 
     @Override
     public void onDestroyView() {
@@ -150,10 +129,15 @@ public class ServiceGoodsFragment extends BaseFragment implements HuiYuanService
     @Override
     public void getServiceGoodsSuccess(MenDianServiceGoodsInfo resultBase) {
         mRefreshLayout.endRefreshing();
+        mRefreshLayout.endLoadingMore();
         LogX.e("服务商品Activity", resultBase.getResult().toString());
-        if (resultBase.getResult().size() > 0) {
+        if (pageNumber == 1) {
             listData.clear();
             listData = resultBase.getResult();
+            adapter.setData(listData);
+            adapter.notifyDataSetChanged();
+        } else {
+            listData.addAll(resultBase.getResult());
             adapter.setData(listData);
             adapter.notifyDataSetChanged();
         }

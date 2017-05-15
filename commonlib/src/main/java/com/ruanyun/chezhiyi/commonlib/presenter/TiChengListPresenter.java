@@ -32,8 +32,10 @@ public class TiChengListPresenter implements Presenter<TiChengListView> {
         call.enqueue(new Callback<ResultBase<List<TiChengListModel>>>() {
             @Override
             public void onResponse(Call<ResultBase<List<TiChengListModel>>> call, Response<ResultBase<List<TiChengListModel>>> response) {
-                LogX.e("提成listpersenter", response.body().getObj().toString());
-                tiChengListView.getTiChengListSuccess(response.body().getObj());
+                if (response.body().getObj() == null) {
+                    LogX.e("提成listpersenter", response.body().getObj().toString());
+                    tiChengListView.getTiChengListSuccess(response.body().getObj());
+                }
             }
 
             @Override

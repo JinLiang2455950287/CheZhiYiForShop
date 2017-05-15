@@ -113,7 +113,6 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
         return mContentView;
     }
 
-
     private void setAdapter() {
         GridLayoutManager manager = new GridLayoutManager(getActivity(), 12);
         manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
@@ -133,7 +132,6 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
         //RecyclerView设置Adapter
         functions = DbHelper.getInstance().getHomeIconInfoList(C.ModuleType
                 .MODULE_TYPE_SHOP_MINE);
-        LogX.d(TAG, "find  HomeIconInfo ---> \n" + functions.toString());
         rvAdapter = new ShopMyRecyclerViewAdapter(getActivity(), functions);
         mRecyclerView.setAdapter(rvAdapter);
         rvAdapter.setOnItemClickListener(this);
@@ -159,7 +157,6 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
                 com.ruanyun.chezhiyi.commonlib.R.color.holo_orange_light, com.ruanyun.chezhiyi.commonlib.R.color.holo_red_light);
         refreshlayout.setOnRefreshListener(this);
     }
-
 
     /**
      * 获取销售提成，施工提成
@@ -288,6 +285,7 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
     public void updateUI(String userResult) {
         if (C.EventKey.UPDATE_WORKER_NUMBER.equals(userResult)) {
             getMyListCount();
+            LogX.e("工单数量", "收到啦");
         }
     }
 
@@ -380,11 +378,11 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
         showActivity(AccountMangermentActivity.class);
     }
 
-
     @Override
     public void onDestroy() {
         super.onDestroy();
         unRegisterBus();
+        myPresenter.detachView();
         homeNoticePresenter.detachView();
     }
 
@@ -424,11 +422,6 @@ public class MyFragment extends BaseFragment implements MultiItemTypeAdapter.OnI
         }
     }
 
-
-//    @Override
-//    public void setNoticeInfo(NoticeInfo noticeInfo) {
-//
-//    }
 
     @Override
     public void getReportInfoSuccess(ReportInfo reportInfo) {

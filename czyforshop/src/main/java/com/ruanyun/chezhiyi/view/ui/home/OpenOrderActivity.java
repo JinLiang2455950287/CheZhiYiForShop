@@ -36,11 +36,11 @@ import butterknife.ButterKnife;
 
 import static com.ruanyun.chezhiyi.view.ui.workorder.CustomerReceptionActivity.REQ_REC_PLATENUM;
 
-/*
-* 开单页面 获取 扫描 车牌号码
-* 2017.3.8
-* jin
-* */
+/**
+ * 开单页面 获取 扫描 车牌号码
+ * 2017.3.8
+ * jin
+ */
 
 public class OpenOrderActivity extends AutoLayoutActivity implements View.OnFocusChangeListener, View.OnTouchListener,
         Topbar.onTopbarClickListener {
@@ -127,7 +127,6 @@ public class OpenOrderActivity extends AutoLayoutActivity implements View.OnFocu
         edit4.setOnTouchListener(this);
         edit5.setOnTouchListener(this);
         edit6.setOnTouchListener(this);
-
 
         for (int i = 0; i < mArray.length; i++) {
             final int j = i;
@@ -256,13 +255,17 @@ public class OpenOrderActivity extends AutoLayoutActivity implements View.OnFocu
                 }
             } else if (primaryCode == -3) {// 回退
 
-                Log.i("Tag1111", "onKey currentIndex= " + currentIndex);
                 if (editable != null) {
+
                     //没有输入内容时软键盘重置为省份简称软键盘
                     editable.clear();
 
                     if (currentIndex > 0) {
                         currentIndex = currentIndex - 1;
+                        if (currentIndex == 0 || currentIndex == 1) {
+                            Log.i("Tag1111", "onKey currentIndex= " + currentIndex + ";;" + editable);
+                            mArray[currentIndex].setSelection(mArray[currentIndex].getText().length());
+                        }
                         mArray[currentIndex].setFocusable(true);
                         mArray[currentIndex].requestFocus();
                     }
@@ -406,7 +409,6 @@ public class OpenOrderActivity extends AutoLayoutActivity implements View.OnFocu
         }
         return false;
     }
-
 
     @Override
     public void onTobbarViewClick(View v) {
